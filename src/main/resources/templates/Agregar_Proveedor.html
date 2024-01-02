@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+
+<head th:replace="Plantillas/head :: head"></head>
+
+<body>
+
+    <header th:replace="Plantillas/header :: header"></header> 
+
+    <aside th:replace="Plantillas/sidebar :: sidebar"></aside>
+
+    <main id="main" class="main" style="background-color: #5c5db4;">
+
+        <div class="pagetitle">
+            <h1>Gestion Compras</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                    <li class="breadcrumb-item">Gestión Compras</li>
+                    <li class="breadcrumb-item active">Proveedores</li>
+                    <li class="breadcrumb-item active">Registrar</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section profile">
+            <div class="col-xl-12">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                        data-bs-target="#profile-overview">Registro</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="container-fluid mt-2">
+                                <p class="textoNeon">Registrar Proveedor</p>
+                            </div>
+
+                            <div class="container">
+                                <form th:action="@{/guardar}" th:object="${proveedor}" method="post">
+                                    <div class="card">
+                                        <div class="form-group">
+
+                                            <div class="row my-2">
+                                                <div class="col-6 ">
+                                                    <label>Documento:</label>
+                                                    <input type="text" name="documento" th:field="*{documento}" class="form-control" required>
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <label>Nombres:</label>
+                                                    <input type="text" name="nombres" th:field="*{nombres}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row my-2">
+                                                <div class="col-6 ">
+                                                    <label>Apellidos:</label>
+                                                    <input type="text" name="apellidos" th:field="*{apellidos}" class="form-control" required>
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <label>Telefono:</label>
+                                                    <input type="text" name="telefono" th:field="*{telefono}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row my-2">
+                                                <div class="col-6 ">
+                                                    <label>Email:</label>
+                                                    <input type="email" name="email" th:field="*{email}" class="form-control" required>
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <label>Direccion:</label>
+                                                    <input type="adrees" name="direccion" th:field="*{direccion}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="box-footer">
+                                        <div class="row my-2">
+                                            <div class="d-grid gap-2 col-6">
+                                                <button class="btn btn-success">Guardar</button>
+                                            </div>
+                                            <div class="d-grid gap-2 col-6">
+                                                <a class="btn btn-danger" href="/compras">Cancelar</a>
+                                            </div>
+                                        </div>
+                                            </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+            </div>
+            </div>
+        </section>
+
+        <div th:replace="Plantillas/footer :: scripts"></div>
+
+    </main><!-- End #main -->
+</body>
+</html>
