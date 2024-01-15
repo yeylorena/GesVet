@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+
+<head th:replace="Plantillas/administrador :: head"></head>
+
+<body>
+
+    <header th:replace="Plantillas/administrador :: header"></header> 
+
+    <aside th:replace="Plantillas/administrador :: sidebar"></aside>
+
+    <main id="main" class="main" style="background-color: #5c5db4;">
+
+        <div class="pagetitle">
+            <h1>Gestion Productos y Servicios</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                    <li class="breadcrumb-item">Productos y Servicios</li>
+                    <li class="breadcrumb-item active">Ver todos</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section profile">
+            <div class="col-xl-12">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                        data-bs-target="#profile-overview">Ver Todos</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="container-fluid mt-2">
+                                <p class="textoNeon">Productos y Servicios</p>
+                            </div>
+
+                           <div class="row mt-5">
+                                   
+                                    <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}">
+                                        <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
+                                            <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
+                                                alt="..." style="height: 180px;">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center">Alimentos</h5>
+                                                <p class="card-text text-center" th:text="${producto.nombre}"> </p>
+                                                <p class="card-stock text-center">Disponible</p>
+                                                <div class="text-center">
+                                                    <a href="#" class="btn btn-primary btn-sm">
+                                                        Ver productos</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+            </div>
+            </div>
+        </section>
+
+        <div th:replace="Plantillas/administrador :: scripts"></div>
+
+    </main><!-- End #main -->
+</body>
+</html>

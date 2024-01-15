@@ -327,26 +327,38 @@ function agregarCarrito() {
 })();
 
 //Función eliminar proveedor
-function eliminarProv() {
-  Swal.fire({
-    title: "Eliminar proveedor",
-    text: "¿Está seguro de eliminarlo?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "¡Si, eliminar!"
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: "Eliminado!",
-        text: "Proveedor eliminado",
-        icon: "success"
+function eliminarProv(id) {
+  swal({
+  title: "¿Eliminar proveedor?",
+  text: "Si eliminas al proveedor no podrás recuperar el registro",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true
+})
+.then((ok) => {
+  if (ok) {
+      $.ajax({
+         url:"/eliminar/" + id,
+         success: function(res){
+         }
       });
-    }
-  });
+    swal("Proveedor eliminado", {
+      icon: "success"
+    }).then((ok)=>{
+        if (ok){
+            location.href="/compras";
+        }
+    });
+  } else {
+    swal("Proveedor no eliminado");
+  }
+});
 }
 
+//funcion limpiar campos
+function limpiarCampo(){
+    window.location='/compras';
+}
 
 //Función eliminar cita historial
 //Función eliminar cita historial

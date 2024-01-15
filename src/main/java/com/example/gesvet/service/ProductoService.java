@@ -1,0 +1,17 @@
+
+package com.example.gesvet.service;
+
+import com.example.gesvet.models.Productos;
+import java.util.List;
+import java.util.Optional;
+
+
+public interface ProductoService {
+    
+    public Productos save(Productos productos);
+    public Optional<Productos> get(Integer id);
+    public void update(Productos productos);
+    public void delete(Integer id);
+    public List<Productos> findAll();
+    
+}

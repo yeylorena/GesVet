@@ -394,7 +394,29 @@ h6 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.textoNeonU {
+  padding: 5px;
+  background-color: #403a3a;
+  color: white;
+
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: 100;
+  letter-spacing: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 1s;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .textoNeon:hover {
+  text-shadow: 0 0 8px #03e9f4,
+    0 0 25px #03e9f4,
+    0 0 50px #03e9f4,
+    0 0 100px #03e9f4;
+}
+
+.textoNeonU:hover {
   text-shadow: 0 0 8px #03e9f4,
     0 0 25px #03e9f4,
     0 0 50px #03e9f4,
