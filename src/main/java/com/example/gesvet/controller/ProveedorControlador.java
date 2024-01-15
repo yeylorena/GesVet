@@ -1,8 +1,8 @@
 
-package com.example.gesvet.controlador;
+package com.example.gesvet.controller;
 
-import com.example.gesvet.entidades.Proveedor;
-import com.example.gesvet.servicio.ProveedorServicio;
+import com.example.gesvet.models.Proveedor;
+import com.example.gesvet.service.ProveedorServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

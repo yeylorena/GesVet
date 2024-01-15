@@ -1,8 +1,8 @@
 
-package com.example.gesvet.servicio;
+package com.example.gesvet.service;
 
-import com.example.gesvet.entidades.Proveedor;
-import com.example.gesvet.repositorio.ProveedorRepositorio;
+import com.example.gesvet.models.Proveedor;
+import com.example.gesvet.repository.ProveedorRepositorio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

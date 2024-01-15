@@ -1,7 +1,7 @@
 
-package com.example.gesvet.repositorio;
+package com.example.gesvet.repository;
 
-import com.example.gesvet.entidades.Proveedor;
+import com.example.gesvet.models.Proveedor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

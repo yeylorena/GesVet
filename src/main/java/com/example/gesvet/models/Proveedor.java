@@ -1,5 +1,5 @@
 
-package com.example.gesvet.entidades;
+package com.example.gesvet.models;
 
 import java.io.Serializable;
 import javax.persistence.Column;
