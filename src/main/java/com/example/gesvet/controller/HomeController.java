@@ -66,7 +66,13 @@ public class HomeController {
         detalleFactura.setTotal(producto.getPrecio() * cantidad);
         detalleFactura.setProductos(producto);
         
-        detalles.add(detalleFactura);
+        //Validar que los productos se agreguen una vez
+        Integer idProducto = producto.getId();
+        boolean ingresado = detalles.stream().anyMatch(p -> p.getProductos().getId()==idProducto);
+        
+        if(!ingresado){
+            detalles.add(detalleFactura);
+        }
         
         //Función anónima para calcular suma total
         sumaTotal = detalles.stream().mapToDouble(dt->dt.getTotal()).sum();
@@ -77,6 +83,41 @@ public class HomeController {
         model.addAttribute("factura", factura);
         
         return "usuario/Carrito";
+    }
+    
+    //Quitar un producto del carrito
+    @GetMapping("/delete/cart/{id}")
+	public String deleteProductoCart(@PathVariable Integer id, Model model) {
+
+		// lista nueva de prodcutos
+		List<DetalleFactura> detalleNueva = new ArrayList<DetalleFactura>();
+
+		for (DetalleFactura detalleFactura : detalles) {
+			if (detalleFactura.getProductos().getId() != id) {
+				detalleNueva.add(detalleFactura);
+			}
+		}
+
+		// poner la nueva lista con los productos restantes
+		detalles = detalleNueva;
+
+		double sumaTotal = 0;
+		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+
+		factura.setTotal(sumaTotal);
+		model.addAttribute("cart", detalles);
+		model.addAttribute("factura", factura);
+
+		return "usuario/Carrito";
+	}
+        
+    @GetMapping("/getCart")
+    public String getCart(Model model){
+        
+        model.addAttribute("cart", detalles);
+	model.addAttribute("factura", factura);
+        
+        return "/usuario/Carrito";
     }
     
 }
