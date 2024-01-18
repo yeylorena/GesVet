@@ -3,7 +3,6 @@ package com.example.gesvet.controller;
 
 import com.example.gesvet.models.Productos;
 import com.example.gesvet.models.Usuario;
-import com.example.gesvet.service.ProductoService;
 import com.example.gesvet.service.UploadFileService;
 import java.io.IOException;
 import java.util.Optional;
@@ -16,13 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import com.example.gesvet.service.IProductoService;
 
 @Controller
 @RequestMapping("/productos")
 public class ProductoController {
     
     @Autowired
-    private ProductoService productoService;
+    private IProductoService productoService;
 
     @Autowired
     private UploadFileService upload;

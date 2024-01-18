@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+
+<head th:replace="Plantillas/usuario :: head"></head>
+
+<body>
+
+    <header th:replace="Plantillas/usuario :: header"></header> 
+
+    <aside th:replace="Plantillas/usuario :: sidebar"></aside>
+
+    <main id="main" class="main" style="background-color: #403a3a">
+
+        <div class="pagetitle">
+            <h1 style="color: white;">Compra de Productos y Servicios</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#" style="color: white;">Inicio</a></li>
+                    <li class="breadcrumb-item" style="color: white;">Productos y Servicios</li>
+                    <li class="breadcrumb-item active" style="color: white;">Compras</li>
+                    <li class="breadcrumb-item active" style="color: white;">Carrito</li>
+                    <li class="breadcrumb-item active" style="color: white;">Factura</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section profile">
+            <div class="col-xl-12">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                        data-bs-target="#profile-overview">Factura</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="container-fluid mt-2">
+                                <p class="textoNeonU">Resúmen de la Factura</p>
+                            </div>
+
+                            <div class="row mt-5">
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-9">
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    DATOS FACTURA
+                                                </h5>
+                                                <h6 th:text=" 'Nombre: '+ ${usuario.nombres}"> </h6>
+                                                <h6 th:text="'Correo: '+  ${usuario.email}"></h6>
+                                                <h6 th:text="'Dirección: '+ ${usuario.direccion}" ></h6>
+
+                                                <h5 class="card-title">
+                                                    PRODUCTOS
+                                                </h5>
+                                                <div class="alert alert-light" role="alert">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Producto</th>
+                                                                <th scope="col">Precio</th>
+                                                                <th scope="col">Cantidad</th>
+                                                                <th scope="col">Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr th:each="dtfactura : ${cart}">
+                                                                <td th:text="${dtfactura.nombre}"></td>
+                                                                <td th:text="${dtfactura.precio}"></td>
+                                                                <td th:text="${dtfactura.cantidad}"></td>
+                                                                <td th:text="${dtfactura.total}"></td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <h2 class="card-title">Resumen Factura</h2>
+
+                                            <ul class="list-group">
+                                                <li class="list-group-item"><h5 th:text=" 'Total: '+ ${factura.total} "> </h5></li>
+                                                <a href="@{saveOrder}" class="btn btn-dark">Generar</a>
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            </div>
+            </div>
+        </section>
+
+        <div th:replace="Plantillas/usuario :: scripts"></div>
+
+    </main><!-- End #main -->
+</body>
+</html>

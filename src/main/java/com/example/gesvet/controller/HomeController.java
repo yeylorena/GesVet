@@ -4,7 +4,7 @@ package com.example.gesvet.controller;
 import com.example.gesvet.models.DetalleFactura;
 import com.example.gesvet.models.Factura;
 import com.example.gesvet.models.Productos;
-import com.example.gesvet.service.ProductoService;
+import com.example.gesvet.models.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,13 +16,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.example.gesvet.service.IProductoService;
+import com.example.gesvet.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
     
     @Autowired
-    private ProductoService productoService;
+    private IProductoService productoService;
+    
+    @Autowired
+    private IUsuarioService usuarioService;
     
     //Array para almacenar los detalles de la factura
     List<DetalleFactura>detalles = new ArrayList<DetalleFactura>();
@@ -118,6 +123,18 @@ public class HomeController {
 	model.addAttribute("factura", factura);
         
         return "/usuario/Carrito";
+    }
+    
+    @GetMapping("/factura")
+    public String factura(Model model){
+        
+        Usuario usuario = usuarioService.findById(2).get();
+        
+        model.addAttribute("cart", detalles);
+	model.addAttribute("factura", factura);
+        model.addAttribute("usuario", usuario);
+        
+        return "usuario/ResumenFactura";
     }
     
 }

@@ -14,11 +14,12 @@
     <main id="main" class="main" style="background-color: #403a3a">
 
         <div class="pagetitle">
-            <h1 style="color: white;">Gestion Productos y Servicios</h1>
+            <h1 style="color: white;">Compra de Productos y Servicios</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#" style="color: white;">Inicio</a></li>
                     <li class="breadcrumb-item" style="color: white;">Productos y Servicios</li>
+                    <li class="breadcrumb-item active" style="color: white;">Compras</li>
                     <li class="breadcrumb-item active" style="color: white;">Carrito</li>
                 </ol>
             </nav>
@@ -76,7 +77,7 @@
 
                                             <ul class="list-group">
                                                 <li class="list-group-item"><h5 th:text="${factura.total}"></h5></li>
-                                                <a href="#" class="btn btn-dark">Ver Orden</a>
+                                                <a th:href="@{/factura}" class="btn btn-dark">Ver Factura</a>
                                             </ul>
                                         </div>
 
