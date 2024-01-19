@@ -5,6 +5,8 @@ import com.example.gesvet.models.DetalleFactura;
 import com.example.gesvet.models.Factura;
 import com.example.gesvet.models.Productos;
 import com.example.gesvet.models.Usuario;
+import com.example.gesvet.service.IDetalleFactService;
+import com.example.gesvet.service.IFacturaService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.gesvet.service.IProductoService;
 import com.example.gesvet.service.IUsuarioService;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/")
@@ -28,6 +31,12 @@ public class HomeController {
     
     @Autowired
     private IUsuarioService usuarioService;
+    
+    @Autowired
+    private IFacturaService facturaService;
+    
+    @Autowired
+    private IDetalleFactService detalleFactService; 
     
     //Array para almacenar los detalles de la factura
     List<DetalleFactura>detalles = new ArrayList<DetalleFactura>();
@@ -135,6 +144,38 @@ public class HomeController {
         model.addAttribute("usuario", usuario);
         
         return "usuario/ResumenFactura";
+    }
+    
+    @GetMapping("saveFact")
+    public String saveFact(){
+        
+        Date fecha= new Date();
+        
+        //Se guarda la fecha de la factura
+        factura.setFecha(fecha);
+        
+        //Se guarda el número de la factura
+        factura.setNumero(facturaService.generarNumFactura());
+        
+        //Usuario
+        Usuario usuario = usuarioService.findById(2).get();
+        
+        factura.setUsuario(usuario);
+        
+        //Se guardan los datos de la factura
+        facturaService.save(factura);
+        
+        //Guardar detalles
+        for(DetalleFactura dt:detalles){
+            dt.setFactura(factura);
+            detalleFactService.save(dt);
+        }
+        
+        //limpiar lista  y factura
+        factura = new Factura();
+        detalles.clear();
+       
+        return "redirect:/";
     }
     
 }

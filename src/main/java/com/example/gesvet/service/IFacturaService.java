@@ -9,5 +9,6 @@ public interface IFacturaService {
     
     List<Factura> findAll();
     Factura save(Factura factura);
+    String generarNumFactura();
     
 }
