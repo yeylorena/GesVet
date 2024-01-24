@@ -43,8 +43,25 @@
                                 <p class="textoNeonU">Productos y Servicios disponibles</p>
                             </div>
 
-                           <div class="row mt-5">
-                                   
+                             <div class="table-responsive">
+                                            <div class="card-body">
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-12 ">
+                                                        <form class="form-inline" method="post" th:action="@{/buscar}">
+                                                            <div class="form-group">
+                                                                <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off">
+                                                                
+                                                                    &nbsp;&nbsp;
+                                                                    <input id="buscar" type="submit" class="btn btn-outline-success" value="Buscar">
+                                                                       
+                                                                            </div>
+
+                                                                            </form>
+                                                                            </div>
+                                                                            </div>
+                                                <div class="row mt-5">
+                               
                                     <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}">
                                         <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
                                             <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
@@ -61,6 +78,10 @@
                                         </div>
                                     </div>
                         </div>
+                            
+                            
+                            
+                           
 
                     </div>
 

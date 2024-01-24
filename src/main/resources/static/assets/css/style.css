@@ -275,6 +275,20 @@ h6 {
   border-color: #d3d3d4;
 }
 
+#palabra{
+     box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
+    background: white;
+}
+
+#palabra:focus{
+  box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
+  border: 1px solid rgba(1, 41, 112, 0.3);
+}
+#palabra:hover{
+  box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
+  border: 1px solid rgba(1, 41, 112, 0.3);
+}
+
 /*Efectos cartas productos y servicios*/
 .catAlimentos {
   background: #d9d9d9;
@@ -795,12 +809,12 @@ h6 {
   width: 100%;
 }
 
-.header .search-form input:focus,
-.header .search-form input:hover {
-  outline: none;
-  box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
-  border: 1px solid rgba(1, 41, 112, 0.3);
-}
+    .header .search-form input:focus,
+    .header .search-form input:hover {
+      outline: none;
+      box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
+      border: 1px solid rgba(1, 41, 112, 0.3);
+    }
 
 .header .search-form button {
   border: 0;

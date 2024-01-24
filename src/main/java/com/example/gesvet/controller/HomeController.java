@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.gesvet.service.IProductoService;
 import com.example.gesvet.service.IUsuarioService;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
@@ -177,5 +178,15 @@ public class HomeController {
        
         return "redirect:/";
     }
+    
+    @PostMapping("/buscar")
+    public String buscarProducto(@RequestParam String palabra, Model model){
+        
+        //Filtro para retornar un nombre utilizando un filtro que busca en la lista de productos. Retorna un string y se pasa a una lista
+        List<Productos> productos = productoService.findAll().stream().filter(p -> p.getNombre().contains(palabra)).collect(Collectors.toList());
+        model.addAttribute("productos", productos);
+        return "usuario/home";
+    }
+
     
 }

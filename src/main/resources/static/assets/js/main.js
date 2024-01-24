@@ -357,7 +357,7 @@ function eliminarProv(id) {
 
 //funcion limpiar campos
 function limpiarCampo(){
-    window.location='/compras';
+    window.location='usuario/home';
 }
 
 //Función eliminar cita historial
