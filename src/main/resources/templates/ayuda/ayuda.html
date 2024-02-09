@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+
+<head th:replace="~{Plantillas/administrador :: head}"></head>
+
+<body style="background-color: #5DADE2;">
+
+    <!-- ======= Header ======= -->
+    <header th:replace="~{Plantillas/administrador :: header}"></header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside th:replace="~{Plantillas/administrador :: sidebar}"></aside><!-- End Sidebar-->
+
+    <main id="main" class="main" >
+
+        <div class="pagetitle">
+            <h1>Ayuda y soporte</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                    <li class="breadcrumb-item">Ayuda y soporte</li>
+                    <li class="breadcrumb-item">Ayuda</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section profile">
+
+            <div class="card">
+                <div class="card-body pt-3">
+                    <!-- Bordered Tabs -->
+                    <ul class="nav nav-tabs nav-tabs-bordered">
+
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Ayuda</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content pt-2">
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                            <div class="container">
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        <h2><strong>¡Bienvenido a nuestro servicio de ayuda!</strong></h2>
+                                    </div>
+                                    <br>
+                                        <div class="card-body text-center">
+                                            <p>
+                                                En GesVet, nos esforzamos por brindar la mejor
+                                                asistencia posible a nuestros clientes. Si necesitas ayuda con
+                                                cualquier pregunta, inquietud o problema relacionado con nuestros 
+                                                servicios, ¡estamos aquí para ayudarte! Para facilitar el proceso 
+                                                de asistencia, por favor envía un correo electrónico a <a
+                                                    href="mailto:soportegesvet@gmail.com">soportegesvet@gmail.com</a>.
+                                            </p>
+                                        </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <img src="https://www.gifsanimados.org/data/media/202/perro-imagen-animada-0638.gif" border="0" alt="perro-imagen-animada-0638" />    
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Bordered Tabs -->
+            </div>
+        </section>
+        <div th:replace="~{Plantillas/administrador :: scripts}"></div>
+    </main><!-- End #main -->
+</body>
+</html>

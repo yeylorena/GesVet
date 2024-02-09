@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages="com.example.gesvet.controller")
 public class GesvetApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GesvetApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(GesvetApplication.class, args);
+    }
 
 }

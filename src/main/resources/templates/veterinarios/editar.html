@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+
+<head th:replace="~{Plantillas/administrador :: head}"></head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header th:replace="~{Plantillas/administrador :: header}"></header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside th:replace="~{Plantillas/administrador :: sidebar}"></aside><!-- End Sidebar-->
+
+    <main id="main" class="main" style="background-color: #5DADE2;">
+
+        <div class="pagetitle">
+            <h1>Gestión veterinaria</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                    <li class="breadcrumb-item">Gestión veterinaria</li>
+                    <li class="breadcrumb-item active">Veterinarios</li>
+                    <li class="breadcrumb-item active">Modificar</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section profile">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                        data-bs-target="#profile-overview">Modificar</button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content pt-2">
+
+                            <div class="container-fluid mt-3">
+                                <p class="textoNe">Veterinarios</p>
+                            </div>
+
+                            <div class="container">
+                                <form id="editarVeterinarioForm" method="post" th:action="@{/veterinarios/update}">
+
+                                    <input type="hidden" name="id" th:value="${veterinariosEditar.id}" />
+
+                                    <div class="row my-2">
+                                        <div class="col-6">
+                                            <label class="form-label"><strong>Documento:</strong></label>
+                                            <input class="form-control" type="text" name="documento" id="documento" th:value="${veterinariosEditar.documento}" >
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label"><strong>Nombre:</strong></label>
+                                            <input class="form-control" type="text" name="nombres" id="nombres" th:value="${veterinariosEditar.nombres}">
+                                        </div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div class="col-6">
+                                            <label class="form-label"><strong>Apellido:</strong></label>
+                                            <input class="form-control" type="text" name="apellidos"
+                                                   id="apellidos" th:value="${veterinariosEditar.apellidos}" >
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label"><strong>Especialidad:</strong></label>
+                                            <select class="form-select"name="especialidad"
+                                                    id="especialidad" th:value="${veterinariosEditar.especialidad}"  >
+                                                <option>General</option>
+                                                <option>Odontología
+                                                </option>
+                                                <option>Traumatología
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div class="col-6">
+                                            <label class="form-label">Teléfono:</label>
+                                            <input class="form-control" type="text" name="telefono"
+                                                   id="telefono" th:value="${veterinariosEditar.telefono}" >
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label">Email:</label>
+                                            <input class="form-control" type="email" name="email" id="email" th:value="${veterinariosEditar.email}" >
+                                        </div>
+
+                                    </div>
+                                    <div class="row my-2">
+                                        <div class="col-6">
+                                            <label class="form-label">Dirección:</label>
+                                            <input class="form-control" type="text" name="direccion"
+                                                   id="direccion" th:value="${veterinariosEditar.direccion}">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label">Estado:</label>
+                                            <select class="form-select" name="estado"
+                                                    id="estado" th:value="${veterinariosEditar.estado}"  >
+                                                <option>Activo</option>
+                                                <option>Inactivo
+                                                </option>
+                                            </select>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <button type="submit" class="btn btn-success">Modificar</button>
+                                        </div> 
+                                        <div class="col-6">
+                                            <a class="btn btn-secondary" href="/veterinarios">Cancelar</a>
+                                        </div>  
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div th:replace="~{Plantillas/administrador :: scripts}"></div>
+    </main><!-- End #main -->
+</body>
+</html>
