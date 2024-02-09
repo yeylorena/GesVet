@@ -517,3 +517,18 @@ function eliminarEspe() {
     }
   });
 }
+
+function confirmarEliminacion() {
+        Swal.fire({
+            title: '¿Estás seguro de que quieres eliminar tu cuenta?',
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            icon: 'warning'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario hace clic en "Confirmar", envía el formulario
+                document.getElementById('eliminarCuentaForm').submit();
+            }
+        });
+    }
