@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+<head th:replace="~{Plantillas/administrador :: head}">
+
+</head>
+<body>
+    <header th:replace="~{Plantillas/administrador :: header}">
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside th:replace="~{Plantillas/administrador :: sidebar}">
+
+    </aside><!-- End Sidebar-->
+
+    <main id="main" class="main" style="background-color: #5c5db4;">
+
+        <div class="pagetitle">
+            <h1>Razas</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                    <li class="breadcrumb-item">Gestión Raza</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+        <section class="section profile">
+            <div class="col-xl-12">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                        data-bs-target="#profile-overview">Razas</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#especies">Especies
+                                </button>
+                            </li>
+
+
+                        </ul>
+                        <div class="tab-content pt-2">
+
+
+                            <!--Razas-->
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                <div class="table-responsive">
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-12">
+                                                <form class="form-inline" action="">
+                                                    <div class="form-group">
+                                                        <input type="text" name="palabraClave" placeholder="Palabra Clave" id="palabraClave">
+                                                            <input id="buscar" type="submit" class="btn btn-primary" value="Buscar">
+                                                                &nbsp;&nbsp;
+                                                                <input type="button" class="btn btn-secondary" value="" >
+                                                                    </div>
+
+                                                                    </form>
+                                                                    <form class="search-form d-flex align-items-center pb-1" method="post" action="" object="">
+
+                                                                        <a class="icon-link btn btn-success mt-2" th:href="@{/razas/create}">Crear</a>
+
+                                                                    </form>
+                                                                    </div>
+                                                                    </div>
+                                                                    <!-- Inicio Tabla -->
+                                                                    <table class="table table-striped table-hover text-start">
+                                                                        <thead>
+                                                                            <tr class="table-secondary">
+
+                                                                                <th scope="col">Nombre</th>
+                                                                                <th scope="col">Descripción</th>
+                                                                                <th scope="col">Estado</th>
+                                                                                <th scope="col">Editar</th>
+                                                                                <th scope="col">Eliminar</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                            <tr th:each="raza : ${razas}">
+                                                                                <td th:text="${raza.nombre}"></td>
+                                                                                <td th:text="${raza.descripcion}"></td>
+                                                                                <td th:text="${raza.estado}"></td>
+                                                                                <td>
+                                                                                    <!--boton de editar-->
+                                                                                    <a  class="btn btn-warning" th:href="@{razas/editarRaza/{id} (id=${raza.id}) }">
+                                                                                        Editar</a> 
+                                                                                    <!-- Eliminar -->
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a class="btn btn-danger" type="button" th:href="@{razas/delete/{id} (id=${raza.id}) }">Eliminar</a>   
+                                                                                </td>
+
+
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <!-- final de la tabla -->
+                                                                    </div>
+                                                                    </div>
+                                                                    </div>
+
+                                                                    <!-- Especie -->
+                                                                    <div class="tab-pane fade profile-overview" id="especies">
+
+                                                                        <div class="table-responsive">
+                                                                            <div class="card-body">
+
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-6 col-md-12">
+                                                                                        <form class="form-inline" action="">
+                                                                                            <div class="form-group">
+                                                                                                <input type="text" name="palabraClave" placeholder="Palabra Clave" id="palabraClave">
+                                                                                                    <input id="buscar" type="submit" class="btn btn-primary" value="Buscar">
+                                                                                                        &nbsp;&nbsp;
+                                                                                                        <input type="button" class="btn btn-secondary" value="" >
+                                                                                                            </div>
+
+                                                                                                            </form>
+                                                                                                            <form class="search-form d-flex align-items-center pb-1" method="post" action="" object="">
+                                                                                                                <!-- donde se pone la pagina de crear -->
+                                                                                                                <a class="icon-link btn btn-success mt-2" th:href="@{/razas/createEs}">Crear</a>
+
+                                                                                                            </form>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            <!-- Inicio Tabla -->
+                                                                                                            <table class="table table-striped table-hover text-start">
+                                                                                                                <thead>
+                                                                                                                    <tr class="table-secondary">
+
+                                                                                                                        <th scope="col">Nombre</th>
+                                                                                                                        <th scope="col">Descripción</th>
+                                                                                                                        <th scope="col">Estado</th>
+                                                                                                                        <th scope="col">Editar</th>
+                                                                                                                        <th scope="col">Eliminar</th>
+                                                                                                                    </tr>
+                                                                                                                </thead>
+                                                                                                                <tbody>
+
+                                                                                                                    <tr th:each="especie : ${especies}">
+                                                                                                                        <td th:text="${especie.nombre}"></td>
+                                                                                                                        <td th:text="${especie.descripcion}"></td>
+                                                                                                                        <td th:text="${especie.estado}"></td>
+                                                                                                                        <td>
+                                                                                                                            <!--boton de editar-->
+                                                                                                                            <a  class="btn btn-warning" th:href="@{razas/editarEspecie/{id} (id=${especie.id}) }">
+                                                                                                                                Editar</a> 
+                                                                                                                            <!-- Eliminar -->
+                                                                                                                        </td>
+                                                                                                                        <td>
+                                                                                                                            <a class="btn btn-danger" type="button" th:href="@{razas/deleteEspecie/{id} (id=${especie.id}) }">Eliminar</a>   
+                                                                                                                        </td>
+
+
+
+                                                                                                                    </tr>
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                                                                            <!-- final de la tabla -->
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            <!-- final de especies-->
+
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </section>
+
+                                                                                                            <div th:replace="~{Plantillas/administrador :: scripts}"></div>
+                                                                                                            </main><!-- End #main -->
+                                                                                                            </body>
+                                                                                                            </html>

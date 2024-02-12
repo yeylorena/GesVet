@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+
+<head th:replace="Plantillas/administrador :: head"></head>
+
+<body>
+
+    <header th:replace="Plantillas/administrador :: header"></header> 
+
+    <aside th:replace="Plantillas/administrador :: sidebar"></aside>
+
+    <main id="main" class="main" style="background-color: #5c5db4;">
+
+        <div class="pagetitle">
+            <h1>Gestion Especies</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                    <li class="breadcrumb-item">Gestión Especie</li>
+                    <li class="breadcrumb-item active">Modificar</li>
+
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section profile">
+            <div class="col-xl-12">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                        data-bs-target="#profile-overview">Editar</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="container-fluid mt-2">
+                                <p class="textoNeon">Editar Especie</p>
+                            </div>
+
+                            <div class="container">
+                                <form  th:action="@{/razas/updateEspecie}" object="" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" th:value="${especieEdit.id}">
+                                        <div class="card">
+
+                                            <div class="form-group">
+                                                <div class="row my-2">
+                                                    <div class="col-6 ">
+                                                        <label>Nombre:</label>
+                                                        <input type="text" name="nombre" field="" th:value="${especieEdit.nombre}" class="form-control" required autocomplete="off">
+                                                    </div>
+                                                    <div class="col-6 ">
+                                                        <label>Descripción:</label>
+                                                        <input type="text" name="descripcion" field="" th:value="${especieEdit.descripcion}" class="form-control" required autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row my-2">
+
+                                                    <div class="col-6 ">
+                                                        <label>Estado:</label>
+                                                        <select name="estado" class="form-control" th:value="${especieEdit.estado}">
+                                                            <option value="activo">Activo</option>
+                                                            <option value="inactivo">Inactivo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="box-footer">
+                                                <div class="row my-2">
+                                                    <div class="d-grid gap-2 col-6">
+                                                        <button type="submit" class="btn btn-success">Guardar</button>
+                                                    </div>
+                                                    <div class="d-grid gap-2 col-6">
+                                                        <a class="btn btn-danger" href="/razas">Cancelar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+            </div>
+            </div>
+        </section>
+
+        <div th:replace="Plantillas/administrador :: scripts"></div>
+
+    </main><!-- End #main -->
+</body>
+</html>
