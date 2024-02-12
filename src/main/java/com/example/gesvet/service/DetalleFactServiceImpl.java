@@ -1,4 +1,3 @@
-
 package com.example.gesvet.service;
 
 import com.example.gesvet.models.DetalleFactura;
@@ -11,10 +10,10 @@ public class DetalleFactServiceImpl implements IDetalleFactService {
 
     @Autowired
     private IDetalleFactRepository detalleFactRepository;
-    
+
     @Override
     public DetalleFactura save(DetalleFactura detalleFactura) {
         return detalleFactRepository.save(detalleFactura);
     }
-    
+
 }

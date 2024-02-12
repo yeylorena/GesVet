@@ -34,7 +34,7 @@
 
                                                                 </head>
 
-                                                                <body style="background-color: #9FAFE8;">
+                                                                <body style="background-color: #5DADE2;">
 
                                                                     <!-- ======= Header ======= -->
                                                                     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -273,8 +273,9 @@
                                                                     <aside id="sidebar" class="sidebar">
 
                                                                         <ul class="sidebar-nav" id="sidebar-nav">
+
                                                                             <li class="nav-item">
-                                                                                <a class="nav-link collapsed" th:href="@{/homes}">
+                                                                                <a class="nav-link collapsed" th:href="@{/home}">
                                                                                     <i class="bi bi-house"></i>
                                                                                     <span>Inicio</span>
                                                                                 </a>
@@ -282,51 +283,41 @@
                                                                             <li class="nav-item">
                                                                                 <a class="nav-link collapsed" th:href="@{/perfil}">
                                                                                     <i class="bi bi-person"></i>
-                                                                                    <span>Perfil</span>
+                                                                                    <span >Mi perfil</span>
                                                                                 </a>
                                                                             </li>
                                                                             <li class="nav-item">
-                                                                                <a class="nav-link collapsed" href="clientes.html">
-                                                                                    <i class="bi bi-people"></i>
-                                                                                    <span>Clientes</span>
+                                                                                <a class="nav-link collapsed" href="mascotas.html">
+                                                                                    <i class="bi bi-hearts"></i>
+                                                                                    <span>Mis mascotas</span>
                                                                                 </a>
                                                                             </li>
                                                                             <li class="nav-item">
-                                                                                <a class="nav-link collapsed" href="citas_vet.html">
-                                                                                    <i class="bi bi-calendar-event"></i>
-                                                                                    <span>Gestión citas</span>
+                                                                                <a class="nav-link collapsed" href="citas.html">
+                                                                                    <i class="bi bi-chat-quote"></i>
+                                                                                    <span>Citas</span>
                                                                                 </a>
                                                                             </li>
                                                                             <li class="nav-item">
-                                                                                <a class="nav-link collapsed" href="Gestion_Productos_Servicios.html">
-                                                                                    <i class="bi bi-box2-heart"></i>
-                                                                                    <span>Gestión productos_servicios</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li class="nav-item">
-                                                                                <a class="nav-link collapsed" href="Gestion_Compras.html">
+                                                                                <a class="nav-link collapsed" href="productos_servicios.html">
                                                                                     <i class="bi bi-bag-plus"></i>
-                                                                                    <span>Gestión compras</span>
+                                                                                    <span>Productos y servicios</span>
                                                                                 </a>
                                                                             </li>
                                                                             <li class="nav-item">
-                                                                                <a class="nav-link collapsed" href="Gestion_Ventas.html">
-                                                                                    <i class="bi bi-bag-plus"></i>
-                                                                                    <span>Gestión ventas</span>
+                                                                                <a class="nav-link collapsed" href="carrito_compras.html">
+                                                                                    <i class="bi bi-cart2"></i>
+                                                                                    <span>Carrito de compras</span>
                                                                                 </a>
                                                                             </li>
                                                                             <li class="nav-item">
-                                                                                <a class="nav-link collapsed" href="gestionveterinaria.html">
-                                                                                    <i class="bi bi-briefcase"></i>
-                                                                                    <span>Gestión veterinaria</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li class="nav-item">
-                                                                                <a class="nav-link collapsed" href="ayuda.html">
+                                                                                <a class="nav-link collapsed" href="ayuda_cliente.html">
                                                                                     <i class="bi bi-question-circle"></i>
-                                                                                    <span>Ayuda y soporte</span>
+                                                                                    <span>Centro de ayuda</span>
                                                                                 </a>
-                                                                            </li>
+                                                                            </li><!-- End Dashboard Nav -->
+
+
                                                                         </ul>
                                                                     </aside>
 
@@ -508,21 +499,21 @@
                                                                                                                                 <form action="/perfil/cambiar-contrasena" method="post">
 
                                                                                                                                     <div class="row mb-3">
-                                                                                                                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña Actual</label>
+                                                                                                                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña actual</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
                                                                                                                                         </div>
                                                                                                                                     </div>
 
                                                                                                                                     <div class="row mb-3">
-                                                                                                                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña Nueva</label>
+                                                                                                                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña nueva</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input name="newPassword" type="password" class="form-control" id="newPassword" required>
                                                                                                                                         </div>
                                                                                                                                     </div>
 
                                                                                                                                     <div class="row mb-3">
-                                                                                                                                        <label for="confirmNewPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar Contraseña Nueva</label>
+                                                                                                                                        <label for="confirmNewPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña nueva</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input name="confirmNewPassword" type="password" class="form-control" id="confirmNewPassword" required>
                                                                                                                                         </div>
@@ -542,7 +533,7 @@
 
                                                                                                                                     <div class="row mb-3">
                                                                                                                                         <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label"
-                                                                                                                                               style="text-align: center;">Desea Eliminar el Perfil?</label>
+                                                                                                                                               style="text-align: center;">¿Desea eliminar la cuenta?</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <button type="button" class="btn btn-danger" style="color: black;" onclick="confirmarEliminacion()">Eliminar Cuenta</button>
                                                                                                                                         </div>
@@ -550,139 +541,140 @@
 
                                                                                                                                     <p class="small " style="color: black;">🚨 Advertencia importante: Eliminación de cuenta 🚨
                                                                                                                                         <br>
-
-                                                                                                                                            Estimado usuario,
                                                                                                                                             <br>
 
-                                                                                                                                                Queremos informarte sobre las consecuencias de eliminar tu cuenta. Al hacerlo, todos los datos
-                                                                                                                                                asociados a tu cuenta serán permanentemente eliminados y no podrán ser recuperados en el futuro.
-                                                                                                                                                Ten en cuenta que al eliminar tu cuenta perderás acceso a todos los servicios, información y
-                                                                                                                                                contenido relacionado con la misma. Esto incluye tus mensajes, archivos, configuraciones
-                                                                                                                                                personalizadas y cualquier otra información guardada en nuestra plataforma.
+                                                                                                                                                Estimado usuario:
                                                                                                                                                 <br>
-
-                                                                                                                                                    Antes de tomar esta decisión, te recomendamos que consideres todas las implicaciones. Si tienes
-                                                                                                                                                    alguna preocupación o duda, nuestro equipo de soporte estará encantado de ayudarte a resolver
-                                                                                                                                                    cualquier problema que puedas tener.
                                                                                                                                                     <br>
 
-                                                                                                                                                        Recuerda que la eliminación de tu cuenta es una acción irreversible, por lo que te pedimos que
-                                                                                                                                                        tomes esta decisión con precaución.
+
+                                                                                                                                                        Al optar por eliminar tu cuenta, queremos informarte que esta será desactivada 
+                                                                                                                                                        y no se eliminará por completo de nuestra plataforma. Esto significa que tus datos y perfil no
+                                                                                                                                                        serán accesibles para otros usuarios, pero permanecerán en nuestra base de datos. 
                                                                                                                                                         <br>
 
-                                                                                                                                                            ¡Gracias por tu comprensión!
                                                                                                                                                             <br>
 
-                                                                                                                                                                Atentamente,
+                                                                                                                                                                Si en algún momento decides regresar, podrás activar tu cuenta nuevamente simplemente
+                                                                                                                                                                iniciando sesión con tus credenciales anteriores. Esta opción te permite volver a utilizar
+                                                                                                                                                                nuestros servicios sin perder tu historial o configuraciones previas.
                                                                                                                                                                 <br>
-                                                                                                                                                                    El equipo de soporte
-                                                                                                                                                                    </p>
+                                                                                                                                                                    <br>
+
+                                                                                                                                                                        Agradecemos tu comprensión y te recordamos que siempre estaremos aquí para ayudarte si cambias de opinión o necesitas asistencia.
+                                                                                                                                                                        <br>
+                                                                                                                                                                            <br>
+
+                                                                                                                                                                                Atentamente,
+                                                                                                                                                                                <br>
+                                                                                                                                                                                    El equipo de soporte.
+                                                                                                                                                                                    </p>
 
 
-                                                                                                                                                                    </form><!-- End Change Password Form -->
+                                                                                                                                                                                    </form><!-- End Change Password Form -->
 
-                                                                                                                                                                    </div>
+                                                                                                                                                                                    </div>
 
-                                                                                                                                                                    </div><!-- End Bordered Tabs -->
+                                                                                                                                                                                    </div><!-- End Bordered Tabs -->
 
-                                                                                                                                                                    </div>
-                                                                                                                                                                    </div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                    </div>
 
-                                                                                                                                                                    </div>
-                                                                                                                                                                    </div>
-                                                                                                                                                                    </section>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                    </section>
 
-                                                                                                                                                                    </main><!-- End #main -->
+                                                                                                                                                                                    </main><!-- End #main -->
 
 
-                                                                                                                                                                    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                                                                                                                                                                            class="bi bi-arrow-up-short"></i></a>
+                                                                                                                                                                                    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                                                                                                                                                                                            class="bi bi-arrow-up-short"></i></a>
 
-                                                                                                                                                                    <!-- Vendor JS Files -->
-                                                                                                                                                                    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-                                                                                                                                                                    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                                                                                                                                                                    <script src="assets/vendor/chart.js/chart.umd.js"></script>
-                                                                                                                                                                    <script src="assets/vendor/echarts/echarts.min.js"></script>
-                                                                                                                                                                    <script src="assets/vendor/quill/quill.min.js"></script>
-                                                                                                                                                                    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-                                                                                                                                                                    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-                                                                                                                                                                    <script src="assets/vendor/php-email-form/validate.js"></script>
-                                                                                                                                                                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-                                                                                                                                                                    <!-- Template Main JS File -->
-                                                                                                                                                                    <script src="assets/js/main.js"></script>
-                                                                                                                                                                    <script th:if="${modificacionExitosa}">
+                                                                                                                                                                                    <!-- Vendor JS Files -->
+                                                                                                                                                                                    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+                                                                                                                                                                                    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                                                                                                                                                                                    <script src="assets/vendor/chart.js/chart.umd.js"></script>
+                                                                                                                                                                                    <script src="assets/vendor/echarts/echarts.min.js"></script>
+                                                                                                                                                                                    <script src="assets/vendor/quill/quill.min.js"></script>
+                                                                                                                                                                                    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+                                                                                                                                                                                    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+                                                                                                                                                                                    <script src="assets/vendor/php-email-form/validate.js"></script>
+                                                                                                                                                                                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                                                                                                                                                                                    <!-- Template Main JS File -->
+                                                                                                                                                                                    <script src="assets/js/main.js"></script>
+                                                                                                                                                                                    <script th:if="${modificacionExitosa}">
                                                                                                                                                 Swal.fire({
                                                                                                                                                     icon: 'success',
                                                                                                                                                     title: '¡Éxito!',
                                                                                                                                                     text: 'Datos modificados correctamente'
                                                                                                                                                 });
-                                                                                                                                                                    </script>
+                                                                                                                                                                                    </script>
 
-                                                                                                                                                                    <script th:if="${errorModificacion}">
-                                                                                                                                                                        Swal.fire({
-                                                                                                                                                                            icon: 'error',
-                                                                                                                                                                            title: '¡Error!',
-                                                                                                                                                                            text: 'Hubo un problema al modificar los datos'
-                                                                                                                                                                        });
-                                                                                                                                                                    </script>
+                                                                                                                                                                                    <script th:if="${errorModificacion}">
+                                                                                                                                                                                        Swal.fire({
+                                                                                                                                                                                            icon: 'error',
+                                                                                                                                                                                            title: '¡Error!',
+                                                                                                                                                                                            text: 'Hubo un problema al modificar los datos'
+                                                                                                                                                                                        });
+                                                                                                                                                                                    </script>
 
-                                                                                                                                                                    <script th:if="${errorContrasena}" >
-                                                                                                                                                                        Swal.fire({
-                                                                                                                                                                            icon: 'error',
-                                                                                                                                                                            title: 'Error',
-                                                                                                                                                                            text: 'Contraseña actual incorrecta',
-                                                                                                                                                                        });
-                                                                                                                                                                    </script>
+                                                                                                                                                                                    <script th:if="${errorContrasena}" >
+                                                                                                                                                                                        Swal.fire({
+                                                                                                                                                                                            icon: 'error',
+                                                                                                                                                                                            title: 'Error',
+                                                                                                                                                                                            text: 'Contraseña actual incorrecta',
+                                                                                                                                                                                        });
+                                                                                                                                                                                    </script>
 
-                                                                                                                                                                    <script th:if="${errorContrasenaConfirmacion}">
-                                                                                                                                                                        Swal.fire({
-                                                                                                                                                                            icon: 'error',
-                                                                                                                                                                            title: 'Error',
-                                                                                                                                                                            text: 'Las contraseñas no coinciden',
-                                                                                                                                                                        });
-                                                                                                                                                                    </script>
-                                                                                                                                                                    <script th:if="${cambioContrasenaExitoso}">
-                                                                                                                                                                        Swal.fire({
-                                                                                                                                                                            icon: 'success',
-                                                                                                                                                                            title: 'Éxito',
-                                                                                                                                                                            text: 'Cambio de contraseña exitoso',
-                                                                                                                                                                        });
-                                                                                                                                                                    </script>
-                                                                                                                                                                    <script th:if="${errorCambioContrasena}">
-                                                                                                                                                                        Swal.fire({
-                                                                                                                                                                            icon: 'error',
-                                                                                                                                                                            title: 'Error',
-                                                                                                                                                                            text: 'Error al cambiar la contraseña',
-                                                                                                                                                                        });
-                                                                                                                                                                    </script>
-                                                                                                                                                                    <!-- Agrega este script al formulario -->
-                                                                                                                                                                    <script th:inline="javascript">
-                                                                                                                                                                        function mostrarVistaPrevia(input) {
-                                                                                                                                                                            var vistaPrevia = document.getElementById('vistaPrevia');
-                                                                                                                                                                            var file = input.files[0];
+                                                                                                                                                                                    <script th:if="${errorContrasenaConfirmacion}">
+                                                                                                                                                                                        Swal.fire({
+                                                                                                                                                                                            icon: 'error',
+                                                                                                                                                                                            title: 'Error',
+                                                                                                                                                                                            text: 'Las contraseñas no coinciden',
+                                                                                                                                                                                        });
+                                                                                                                                                                                    </script>
+                                                                                                                                                                                    <script th:if="${cambioContrasenaExitoso}">
+                                                                                                                                                                                        Swal.fire({
+                                                                                                                                                                                            icon: 'success',
+                                                                                                                                                                                            title: 'Éxito',
+                                                                                                                                                                                            text: 'Cambio de contraseña exitoso',
+                                                                                                                                                                                        });
+                                                                                                                                                                                    </script>
+                                                                                                                                                                                    <script th:if="${errorCambioContrasena}">
+                                                                                                                                                                                        Swal.fire({
+                                                                                                                                                                                            icon: 'error',
+                                                                                                                                                                                            title: 'Error',
+                                                                                                                                                                                            text: 'Error al cambiar la contraseña',
+                                                                                                                                                                                        });
+                                                                                                                                                                                    </script>
+                                                                                                                                                                                    <!-- Agrega este script al formulario -->
+                                                                                                                                                                                    <script th:inline="javascript">
+                                                                                                                                                                                        function mostrarVistaPrevia(input) {
+                                                                                                                                                                                            var vistaPrevia = document.getElementById('vistaPrevia');
+                                                                                                                                                                                            var file = input.files[0];
 
-                                                                                                                                                                            if (file) {
-                                                                                                                                                                                var reader = new FileReader();
+                                                                                                                                                                                            if (file) {
+                                                                                                                                                                                                var reader = new FileReader();
 
-                                                                                                                                                                                reader.onload = function (e) {
-                                                                                                                                                                                    vistaPrevia.src = e.target.result;
-                                                                                                                                                                                    vistaPrevia.style.display = 'block';
-                                                                                                                                                                                };
+                                                                                                                                                                                                reader.onload = function (e) {
+                                                                                                                                                                                                    vistaPrevia.src = e.target.result;
+                                                                                                                                                                                                    vistaPrevia.style.display = 'block';
+                                                                                                                                                                                                };
 
-                                                                                                                                                                                reader.readAsDataURL(file);
-                                                                                                                                                                            }
-                                                                                                                                                                        }
-                                                                                                                                                                    </script>
-                                                                                                                                                                    <script th:if="${errorEliminarCuenta}">
-                                                                                                                                                                        Swal.fire({
-                                                                                                                                                                            icon: 'error',
-                                                                                                                                                                            title: '¡Error!',
-                                                                                                                                                                            text: 'Hubo un problema al eliminar la cuenta'
-                                                                                                                                                                        });
-                                                                                                                                                                    </script>
+                                                                                                                                                                                                reader.readAsDataURL(file);
+                                                                                                                                                                                            }
+                                                                                                                                                                                        }
+                                                                                                                                                                                    </script>
+                                                                                                                                                                                    <script th:if="${errorEliminarCuenta}">
+                                                                                                                                                                                        Swal.fire({
+                                                                                                                                                                                            icon: 'error',
+                                                                                                                                                                                            title: '¡Error!',
+                                                                                                                                                                                            text: 'Hubo un problema al eliminar la cuenta'
+                                                                                                                                                                                        });
+                                                                                                                                                                                    </script>
 
 
 
-                                                                                                                                                                    </body>
+                                                                                                                                                                                    </body>
 
-                                                                                                                                                                    </html>
+                                                                                                                                                                                    </html>

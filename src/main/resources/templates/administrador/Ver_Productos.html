@@ -43,12 +43,12 @@
                                 <p class="textoNeon">Productos y Servicios</p>
                             </div>
 
-                           <div class="row mt-5">
-                                   
-                                    <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}">
-                                        <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
-                                            <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
-                                                alt="..." style="height: 180px;">
+                            <div class="row mt-5">
+
+                                <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}">
+                                    <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
+                                        <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
+                                             alt="..." style="height: 180px;">
                                             <div class="card-body">
                                                 <h5 class="card-title text-center">Alimentos</h5>
                                                 <p class="card-text text-center" th:text="${producto.nombre}"> </p>
@@ -58,15 +58,15 @@
                                                         Ver productos</a>
                                                 </div>
                                             </div>
-                                        </div>
                                     </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
 
                 </div>
-
-            </div>
             </div>
             </div>
             </div>

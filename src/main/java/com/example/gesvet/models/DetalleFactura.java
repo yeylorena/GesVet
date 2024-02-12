@@ -1,4 +1,3 @@
-
 package com.example.gesvet.models;
 
 import jakarta.persistence.Entity;
@@ -11,7 +10,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "detalles")
 public class DetalleFactura {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,10 +21,10 @@ public class DetalleFactura {
 
     @ManyToOne
     private Factura factura;
-    
+
     @ManyToOne
     private Productos productos;
-    
+
     public DetalleFactura() {
     }
 
@@ -98,5 +97,5 @@ public class DetalleFactura {
     public String toString() {
         return "DetalleFactura{" + "id=" + id + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + ", total=" + total + '}';
     }
-    
+
 }

@@ -1,27 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.dto;
 
-
-
-
 public class UserDto {
-	
-	
-	private Long id;
-	private String username;
-	private String password;
-        private String confirmPassword;
-	private String nombre;
-        private String apellido;
-        private String direccion;
-        private String telefono;
-        private String role;
-        private String acercade;
-      private String imagen;
-          private String currentPassword;
+
+    private Long id;
+    private String username;
+    private String password;
+    private String confirmPassword;
+    private String nombre;
+    private String apellido;
+    private String direccion;
+    private String telefono;
+    private String role;
+    private String acercade;
+    private String imagen;
+    private String currentPassword;
     private String newPassword;
     private String confirmNewPassword;
 
@@ -48,20 +40,13 @@ public class UserDto {
     public void setConfirmNewPassword(String confirmNewPassword) {
         this.confirmNewPassword = confirmNewPassword;
     }
-      
 
-   
-      
+    public UserDto() {
 
+    }
 
-	
-	public UserDto() {
-	
-	}
-
-   
-    public UserDto(Long id, String username, String password,String confirmPassword, String nombre, String apellido, String direccion, String telefono, String acercade, String imagen, String role,
-            String currentPassword,String newPassword, String confirmNewPassword) {
+    public UserDto(Long id, String username, String password, String confirmPassword, String nombre, String apellido, String direccion, String telefono, String acercade, String imagen, String role,
+            String currentPassword, String newPassword, String confirmNewPassword) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -73,10 +58,10 @@ public class UserDto {
         this.role = role;
         this.acercade = acercade;
         this.imagen = imagen;
-         this.currentPassword = currentPassword;
+        this.currentPassword = currentPassword;
         this.newPassword = newPassword;
-         this.confirmNewPassword = confirmNewPassword;
- 
+        this.confirmNewPassword = confirmNewPassword;
+
     }
 
     public String getImagen() {
@@ -86,8 +71,6 @@ public class UserDto {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-
-  
 
     public String getConfirmPassword() {
         return confirmPassword;
@@ -168,10 +151,5 @@ public class UserDto {
     public void setAcercade(String acercade) {
         this.acercade = acercade;
     }
-
-
-	
-	
-	
 
 }

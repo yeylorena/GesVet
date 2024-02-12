@@ -1,4 +1,3 @@
-
 package com.example.gesvet.controller;
 
 import com.example.gesvet.models.Productos;
@@ -13,17 +12,17 @@ import com.example.gesvet.service.IProductoService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    
+
     @Autowired
     private IProductoService productoService;
-    
+
     @GetMapping("")
-    public String home(Model model){
-        
+    public String home(Model model) {
+
         List<Productos> productos = productoService.findAll();
         model.addAttribute("productos", productos);
-        
+
         return "administrador/Ver_Productos";
     }
-    
+
 }

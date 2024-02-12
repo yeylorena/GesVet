@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.example.gesvet.repository;
-
 
 import com.example.gesvet.models.RecuperarContraseñaTokenusu;
 import com.example.gesvet.models.User;
@@ -14,13 +9,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RecuperarContraseñausuRepository extends JpaRepository<RecuperarContraseñaTokenusu, Long>{
-    
-  RecuperarContraseñaTokenusu findByToken(String token);
-  
-     @Transactional
+public interface RecuperarContraseñausuRepository extends JpaRepository<RecuperarContraseñaTokenusu, Long> {
+
+    RecuperarContraseñaTokenusu findByToken(String token);
+
+    @Transactional
     @Modifying
     @Query("DELETE FROM RecuperarContraseñaTokenusu t WHERE t.user = :user")
     void eliminarTokensPorUsuario(User user);
-    
+
 }

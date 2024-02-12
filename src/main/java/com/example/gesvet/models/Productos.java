@@ -1,4 +1,3 @@
-
 package com.example.gesvet.models;
 
 import jakarta.persistence.Entity;
@@ -11,7 +10,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "productos")
 public class Productos {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,7 +22,7 @@ public class Productos {
 
     @ManyToOne()
     private Usuario usuario;
-    
+
     public Productos() {
     }
 
@@ -38,7 +37,6 @@ public class Productos {
         this.usuario = usuario;
     }
 
-    
     public Integer getId() {
         return id;
     }
@@ -95,11 +93,9 @@ public class Productos {
         this.usuario = usuario;
     }
 
-    
-    
     @Override
     public String toString() {
         return "Productos{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", cantidad=" + cantidad + '}';
     }
-    
+
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
@@ -122,9 +118,7 @@ public class UserController {
             model.addAttribute("passwordMismatch", true);
             return "Registro_Usu";
         }
-       
-       
-        
+
         userService.save(userDto);
         return "redirect:/register?success";
     }

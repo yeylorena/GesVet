@@ -3,17 +3,17 @@ function direccion_sub_menu(titulo) {
 }
 
 /*
-txtPropietario
-txtTelefono
-txtEmail
-txtDireccion
-txtFecha
-txtMascota
-txtMotivo
-txtError
-txtDiagnostico
-txtTratamiento
-*/
+ txtPropietario
+ txtTelefono
+ txtEmail
+ txtDireccion
+ txtFecha
+ txtMascota
+ txtMotivo
+ txtError
+ txtDiagnostico
+ txtTratamiento
+ */
 function verificar() {
     let verificar = true
     if (txtMotivo.value.length <= 0) {

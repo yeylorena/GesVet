@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
@@ -30,11 +26,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PerfilControllerAdmin {
-      @Autowired
+
+    @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
     private UserService userService;
-     @Autowired
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @GetMapping("/perfil_admin")
@@ -68,42 +65,41 @@ public class PerfilControllerAdmin {
     }
 
     @PostMapping("/perfil_admin/editaradmin")
-public String editarPerfiladmin(UserDto userDto, @RequestParam("file") MultipartFile imagen, RedirectAttributes redirectAttributes) {
+    public String editarPerfiladmin(UserDto userDto, @RequestParam("file") MultipartFile imagen, RedirectAttributes redirectAttributes) {
 
-    try {
-        // Si se ha seleccionado una imagen
-        if (!imagen.isEmpty()) {
-            // Realizar la escritura del archivo
-            byte[] bytesImg = imagen.getBytes();
-            Path directorioImgenes = Paths.get("images//"); // Ajustar según necesidades
-            String rutaAbsoluta = directorioImgenes.toFile().getAbsolutePath();
-            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-            Files.write(rutaCompleta, bytesImg);
-            userDto.setImagen(imagen.getOriginalFilename());
-        } else {
-            // Mantener la imagen anterior
-            User user = userService.findById(userDto.getId());
-            userDto.setImagen(user.getImagen());
+        try {
+            // Si se ha seleccionado una imagen
+            if (!imagen.isEmpty()) {
+                // Realizar la escritura del archivo
+                byte[] bytesImg = imagen.getBytes();
+                Path directorioImgenes = Paths.get("images//"); // Ajustar según necesidades
+                String rutaAbsoluta = directorioImgenes.toFile().getAbsolutePath();
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+                Files.write(rutaCompleta, bytesImg);
+                userDto.setImagen(imagen.getOriginalFilename());
+            } else {
+                // Mantener la imagen anterior
+                User user = userService.findById(userDto.getId());
+                userDto.setImagen(user.getImagen());
+            }
+
+            // Actualizar los datos del usuario en la base de datos
+            userService.updateUser(userDto);
+
+            redirectAttributes.addFlashAttribute("modificacionExitosa", true);
+        } catch (IOException e) {
+            // Agregar un mensaje para la alerta de error
+            redirectAttributes.addFlashAttribute("errorModificacion", true);
+            e.printStackTrace(); // Puedes manejar el error según tus necesidades
+        } catch (ServiceException e) {
+            // Agregar un mensaje para la alerta de error del servicio
+            redirectAttributes.addFlashAttribute("errorModificacion", true);
+            e.printStackTrace(); // Puedes manejar el error según tus necesidades
         }
 
-        // Actualizar los datos del usuario en la base de datos
-        userService.updateUser(userDto);
-
-        redirectAttributes.addFlashAttribute("modificacionExitosa", true);
-    } catch (IOException e) {
-        // Agregar un mensaje para la alerta de error
-        redirectAttributes.addFlashAttribute("errorModificacion", true);
-        e.printStackTrace(); // Puedes manejar el error según tus necesidades
-    } catch (ServiceException e) {
-        // Agregar un mensaje para la alerta de error del servicio
-        redirectAttributes.addFlashAttribute("errorModificacion", true);
-        e.printStackTrace(); // Puedes manejar el error según tus necesidades
+        // Redirigir a la página de perfil o a donde desees después de la edición
+        return "redirect:/perfil_admin";
     }
-
-    // Redirigir a la página de perfil o a donde desees después de la edición
-    return "redirect:/perfil_admin";
-}
-
 
     @PostMapping("/perfil_admin/cambiar-contrasenaadmin")
     public String cambiarContrasenaadmin(@ModelAttribute("userDto") UserDto userDto, Model model, RedirectAttributes redirectAttributes) {
@@ -138,27 +134,26 @@ public String editarPerfiladmin(UserDto userDto, @RequestParam("file") Multipart
 
         return "redirect:/perfil_admin";
     }
+
     @PostMapping("/perfil_admin/eliminar-cuentaadmin")
-public String eliminarCuentaadmin(Authentication authentication, RedirectAttributes redirectAttributes) {
-    try {
-        String username = authentication.getName();
-        User user = userService.findByUsername(username);
-        
-        // Eliminar el usuario de la base de datos
-        userService.eliminarUsuario(user.getId());
+    public String eliminarCuentaadmin(Authentication authentication, RedirectAttributes redirectAttributes) {
+        try {
+            String username = authentication.getName();
+            User user = userService.findByUsername(username);
 
-        // Realizar la desconexión (logout) si es necesario
-        // Esto dependerá de cómo estés manejando la autenticación en tu aplicación
+            // Eliminar el usuario de la base de datos
+            userService.eliminarUsuario(user.getId());
 
-        // Redirigir a la página de inicio u otra página después de eliminar la cuenta
-        return "redirect:/logout";
-    } catch (Exception e) {
-        // Manejar la excepción según sea necesario
-        e.printStackTrace();
-        redirectAttributes.addFlashAttribute("errorEliminarCuenta", true);
-        return "redirect:/perfil_admin";
+            // Realizar la desconexión (logout) si es necesario
+            // Esto dependerá de cómo estés manejando la autenticación en tu aplicación
+            // Redirigir a la página de inicio u otra página después de eliminar la cuenta
+            return "redirect:/logout";
+        } catch (Exception e) {
+            // Manejar la excepción según sea necesario
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("errorEliminarCuenta", true);
+            return "redirect:/perfil_admin";
+        }
     }
-}
 
-    
 }

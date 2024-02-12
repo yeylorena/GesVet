@@ -358,8 +358,8 @@ function eliminarProv(id) {
 }
 
 //funcion limpiar campos
-function limpiarCampo(){
-    window.location='usuario/home';
+function limpiarCampo() {
+    window.location = 'usuario/home';
 }
 
 //Función eliminar cita historial
@@ -482,36 +482,36 @@ function eliminarRaza() {
 }
 //Función eliminar especie
 function eliminarEspe() {
-  Swal.fire({
-    title: "Eliminar Especie",
-    text: "¿Está seguro de eliminarla?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "¡Si, eliminar!"
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: "Eliminada!",
-        text: "Especie eliminada",
-        icon: "success"
-      });
-    }
-  });
+    Swal.fire({
+        title: "Eliminar Especie",
+        text: "¿Está seguro de eliminarla?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "¡Si, eliminar!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Eliminada!",
+                text: "Especie eliminada",
+                icon: "success"
+            });
+        }
+    });
 }
 
 function confirmarEliminacion() {
-        Swal.fire({
-            title: '¿Estás seguro de que quieres eliminar tu cuenta?',
-            showCancelButton: true,
-            confirmButtonText: 'Confirmar',
-            cancelButtonText: 'Cancelar',
-            icon: 'warning'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Si el usuario hace clic en "Confirmar", envía el formulario
-                document.getElementById('eliminarCuentaForm').submit();
-            }
-        });
-    }
+    Swal.fire({
+        title: '¿Estás seguro de que quieres eliminar tu cuenta?',
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+        icon: 'warning'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Si el usuario hace clic en "Confirmar", envía el formulario
+            document.getElementById('eliminarCuentaForm').submit();
+        }
+    });
+}

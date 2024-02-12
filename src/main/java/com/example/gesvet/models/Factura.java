@@ -1,4 +1,3 @@
-
 package com.example.gesvet.models;
 
 import jakarta.persistence.Entity;
@@ -14,7 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "facturas")
 public class Factura {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,10 +23,10 @@ public class Factura {
 
     @ManyToOne
     private Usuario usuario;
-    
+
     @OneToMany(mappedBy = "factura")
     private List<DetalleFactura> listaDetalles;
-    
+
     public Factura() {
     }
 
@@ -87,10 +86,9 @@ public class Factura {
         this.listaDetalles = listaDetalles;
     }
 
-    
     @Override
     public String toString() {
         return "Factura{" + "id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", total=" + total + '}';
     }
-    
+
 }

@@ -1,37 +1,33 @@
-
 package com.example.gesvet.models;
 
 import java.io.Serializable;
 import javax.persistence.Column;
 import jakarta.persistence.*;
 
-
-
-
 @Entity
 public class Proveedor implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false, length = 15)
     private String documento;
-    
+
     @Column(nullable = false, length = 60)
     private String nombres;
-    
+
     @Column(nullable = false, length = 60)
     private String apellidos;
-    
+
     @Column(nullable = false, length = 60)
     private String telefono;
-    
+
     @Column(nullable = false, length = 60)
     private String email;
-    
+
     @Column(nullable = false, length = 60)
     private String direccion;
 
@@ -105,6 +101,5 @@ public class Proveedor implements Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
-    
+
 }

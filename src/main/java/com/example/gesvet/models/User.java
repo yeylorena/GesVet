@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.models;
 
 import jakarta.persistence.Column;
@@ -120,7 +116,7 @@ public class User {
         this.direccion = direccion;
         this.telefono = telefono;
         this.acercade = acercade;
-         this.imagen = (imagen != null && !imagen.isEmpty()) ? imagen : IMAGEN_PREDETERMINADA;
+        this.imagen = (imagen != null && !imagen.isEmpty()) ? imagen : IMAGEN_PREDETERMINADA;
         // Set default role if not provided
         this.role = role != null ? role : "USER";
 

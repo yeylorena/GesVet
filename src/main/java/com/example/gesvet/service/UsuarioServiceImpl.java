@@ -1,4 +1,3 @@
-
 package com.example.gesvet.service;
 
 import com.example.gesvet.models.Usuario;
@@ -8,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioServiceImpl implements IUsuarioService{
+public class UsuarioServiceImpl implements IUsuarioService {
 
     @Autowired
     private IUsuarioRepository usuarioRepository;
@@ -17,7 +16,5 @@ public class UsuarioServiceImpl implements IUsuarioService{
     public Optional<Usuario> findById(Integer id) {
         return usuarioRepository.findById(id);
     }
-    
-   
-    
+
 }

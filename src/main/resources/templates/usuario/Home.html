@@ -43,58 +43,58 @@
                                 <p class="textoNeonU">Productos y Servicios disponibles</p>
                             </div>
 
-                             <div class="table-responsive">
-                                            <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="card-body">
 
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-12 ">
-                                                        <form class="form-inline" method="post" th:action="@{/buscar}">
-                                                            <div class="form-group">
-                                                                <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off">
-                                                                
-                                                                    &nbsp;&nbsp;
-                                                                    <input id="buscar" type="submit" class="btn btn-outline-success" value="Buscar">
-                                                                       
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 ">
+                                            <form class="form-inline" method="post" th:action="@{/buscar}">
+                                                <div class="form-group">
+                                                    <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off">
+
+                                                        &nbsp;&nbsp;
+                                                        <input id="buscar" type="submit" class="btn btn-outline-success" value="Buscar">
+
+                                                            </div>
+
+                                                            </form>
+                                                            </div>
+                                                            </div>
+                                                            <div class="row mt-5">
+
+                                                                <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}">
+                                                                    <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
+                                                                        <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
+                                                                             alt="..." style="height: 180px;">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title text-center">Alimentos</h5>
+                                                                                <p class="card-text text-center" th:text="${producto.nombre}"> </p>
+                                                                                <p class="card-stock text-center">Disponible</p>
+                                                                                <div class="text-center">
+                                                                                    <a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-primary btn-sm">
+                                                                                        Ver productos</a>
+                                                                                </div>
                                                                             </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                                                                            </form>
-                                                                            </div>
-                                                                            </div>
-                                                <div class="row mt-5">
-                               
-                                    <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}">
-                                        <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
-                                            <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
-                                                alt="..." style="height: 180px;">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center">Alimentos</h5>
-                                                <p class="card-text text-center" th:text="${producto.nombre}"> </p>
-                                                <p class="card-stock text-center">Disponible</p>
-                                                <div class="text-center">
-                                                    <a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-primary btn-sm">
-                                                        Ver productos</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                        </div>
-                            
-                            
-                            
-                           
 
-                    </div>
 
-                </div>
 
-            </div>
-            </div>
-            </div>
-            </div>
-        </section>
 
-        <div th:replace="Plantillas/usuario :: scripts"></div>
+                                                            </div>
 
-    </main><!-- End #main -->
-</body>
-</html>
+                                                            </div>
+
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                            </section>
+
+                                                            <div th:replace="Plantillas/usuario :: scripts"></div>
+
+                                                            </main><!-- End #main -->
+                                                            </body>
+                                                            </html>

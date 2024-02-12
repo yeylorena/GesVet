@@ -1,127 +1,127 @@
 
 
 .carousel {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
 .carousel-container {
-  display: flex;
-  transition: transform 0.5s ease;
+    display: flex;
+    transition: transform 0.5s ease;
 }
 
 .card {
-  flex: 0 0 auto;
-  width: 300px; /* Ancho de la tarjeta */
-  height: 200px; /* Alto de la tarjeta */
-  margin: 0 10px;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
+    flex: 0 0 auto;
+    width: 300px; /* Ancho de la tarjeta */
+    height: 200px; /* Alto de la tarjeta */
+    margin: 0 10px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
 }
 #antes,
 #despues {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .prev-btn {
-  left: 10px;
+    left: 10px;
 }
 
 .next-btn {
-  right: 10px;
+    right: 10px;
 }
 .card-img-top {
-  width: 100%; /* Ancho del 100% para ocupar todo el espacio de la tarjeta */
-  height: auto; /* Mantener la proporción original de la imagen */
-  border-radius: 30px; /* Si se desea mantener el borde redondeado */
+    width: 100%; /* Ancho del 100% para ocupar todo el espacio de la tarjeta */
+    height: auto; /* Mantener la proporción original de la imagen */
+    border-radius: 30px; /* Si se desea mantener el borde redondeado */
 }
 #perfil {
-  max-width: 12rem;
-  margin: 0 auto;
-  height:auto; /* Por ejemplo, establecer una altura de 10rem */
+    max-width: 12rem;
+    margin: 0 auto;
+    height:auto; /* Por ejemplo, establecer una altura de 10rem */
 }
 
 .card-img{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(32\).png');
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(32\).png');
 }
 .card-img-2{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(33\).png');
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(33\).png');
 }
 #card-left {
-  text-align: left;
-  color: black;
-  font-size: 13px; /* Puedes ajustar el valor según el tamaño deseado */
+    text-align: left;
+    color: black;
+    font-size: 13px; /* Puedes ajustar el valor según el tamaño deseado */
 
 }
 
 #masinfo {
-  width: 191px; /* Puedes ajustar el valor según el ancho deseado */
+    width: 191px; /* Puedes ajustar el valor según el ancho deseado */
 }
 
 .img-green{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(29\).png');
- 
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(29\).png');
+
 }
 .img-green-2{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(31\).png');
- 
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(31\).png');
+
 }
 .img-yellow{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(20\).png');
- 
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(20\).png');
+
 }
 .img-yellow-2{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(21\).png');
- 
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(21\).png');
+
 }
 .img-red{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(17\).png');
- 
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(17\).png');
+
 }
 .img-red-2{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(19\).png');
- 
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(19\).png');
+
 }
 .img-gris{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(24\).png');
- 
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(24\).png');
+
 }
 .img-gris-2{
-  background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(26\).png');
- 
+    background-image: url('../img/imagenes_inicio/Diseño\ sin\ título\ \(26\).png');
+
 }
 
 #idmaximizar{
-  color: #f8f8f8;
-  background-color: #00695c;
-  
+    color: #f8f8f8;
+    background-color: #00695c;
+
 }
 
 #toggleIcon{
-  float: right;
+    float: right;
 }
 #idmaximizar2{
-  color: #f8f8f8;
-  background-color: #00695c;
-  
+    color: #f8f8f8;
+    background-color: #00695c;
+
 }
 #toggleIcon2{
-  float: right;
+    float: right;
 }
 .card-hover {
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 .card-hover:hover {
-  transform: scale(1.05);
-  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+    transform: scale(1.05);
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
 }

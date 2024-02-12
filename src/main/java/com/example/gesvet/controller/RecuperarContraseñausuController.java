@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.controller;
 
 import com.example.gesvet.models.RecuperarContraseñaTokenusu;
@@ -25,6 +21,7 @@ import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+
 @Controller
 
 public class RecuperarContraseñausuController {
@@ -89,7 +86,7 @@ public class RecuperarContraseñausuController {
         String password = request.getParameter("password");
         String token = (String) session.getAttribute("token");
 
-         RecuperarContraseñaTokenusu recuperarContraseñaTokenusu = recuperarContraseñausuRepository.findByToken(token);
+        RecuperarContraseñaTokenusu recuperarContraseñaTokenusu = recuperarContraseñausuRepository.findByToken(token);
         User user = recuperarContraseñaTokenusu.getUser();
         user.setPassword(passwordEncoder.encode(password));
         recuperarContraseñaTokenusu.setUsed(true);

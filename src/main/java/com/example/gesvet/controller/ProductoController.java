@@ -1,4 +1,3 @@
-
 package com.example.gesvet.controller;
 
 import com.example.gesvet.models.Productos;
@@ -20,7 +19,7 @@ import com.example.gesvet.service.IProductoService;
 @Controller
 @RequestMapping("/productos")
 public class ProductoController {
-    
+
     @Autowired
     private IProductoService productoService;
 
@@ -70,7 +69,7 @@ public class ProductoController {
 
         Productos p = new Productos();
         p = productoService.get(producto.getId()).get();
-        
+
         if (file.isEmpty()) {//cuando editamos el producto pero no cambiamos la imagen
             producto.setImagen(p.getImagen());
         } else {//cuando editamos el producto y cambiamos la imagen
@@ -103,5 +102,5 @@ public class ProductoController {
         productoService.delete(id);
         return "redirect:/productos";
     }
-    
+
 }

@@ -1,4 +1,3 @@
-
 package com.example.gesvet.service;
 
 import com.example.gesvet.models.Productos;
@@ -9,11 +8,11 @@ import org.springframework.stereotype.Service;
 import com.example.gesvet.repository.IProductoRepository;
 
 @Service
-public class ProductoServiceImpl implements IProductoService{
+public class ProductoServiceImpl implements IProductoService {
 
     @Autowired
     private IProductoRepository productoRepository;
-    
+
     @Override
     public Productos save(Productos productos) {
         return productoRepository.save(productos);
@@ -38,7 +37,5 @@ public class ProductoServiceImpl implements IProductoService{
     public List<Productos> findAll() {
         return productoRepository.findAll();
     }
-    
-    
-    
+
 }

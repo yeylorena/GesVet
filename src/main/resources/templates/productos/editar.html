@@ -47,54 +47,54 @@
                             <div class="container">
                                 <form th:action="@{/productos/update}" object="" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="id" th:value="${producto.id}">
-                                    <div class="card">
-                                        
-                                        <div class="form-group">
-                                            <div class="row my-2">
-                                                <div class="col-6 ">
-                                                    <label>Nombre:</label>
-                                                    <input type="text" name="nombre" field="" th:value="${producto.nombre}" class="form-control" required autocomplete="off">
-                                                </div>
-                                                <div class="col-6 ">
-                                                    <label>Descripción:</label>
-                                                    <input type="text" name="descripcion" field="" th:value="${producto.descripcion}" class="form-control" required autocomplete="off">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row my-2">
-                                                <div class="col-6 ">
-                                                    <label>Cantidad:</label>
-                                                    <input type="number" name="cantidad" field="" th:value="${producto.cantidad}" class="form-control" required autocomplete="off">
-                                                </div>
-                                                <div class="col-6 ">
-                                                    <label>Precio:</label>
-                                                    <input type="number" name="precio" field="" th:value="${producto.precio}" class="form-control" required autocomplete="off">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div class="card">
 
-                                        <div class="form-group">
-                                            <div class="row my-2">
-                                                <div class="col-6 ">
-                                                    <label>Imagen:</label>
-                                                    <input type="file" name="img" field="" id="img" class="form-control" >
+                                            <div class="form-group">
+                                                <div class="row my-2">
+                                                    <div class="col-6 ">
+                                                        <label>Nombre:</label>
+                                                        <input type="text" name="nombre" field="" th:value="${producto.nombre}" class="form-control" required autocomplete="off">
+                                                    </div>
+                                                    <div class="col-6 ">
+                                                        <label>Descripción:</label>
+                                                        <input type="text" name="descripcion" field="" th:value="${producto.descripcion}" class="form-control" required autocomplete="off">
+                                                    </div>
                                                 </div>
-                                                
                                             </div>
-                                        </div>
+                                            <div class="form-group">
+                                                <div class="row my-2">
+                                                    <div class="col-6 ">
+                                                        <label>Cantidad:</label>
+                                                        <input type="number" name="cantidad" field="" th:value="${producto.cantidad}" class="form-control" required autocomplete="off">
+                                                    </div>
+                                                    <div class="col-6 ">
+                                                        <label>Precio:</label>
+                                                        <input type="number" name="precio" field="" th:value="${producto.precio}" class="form-control" required autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                        <div class="box-footer">
-                                        <div class="row my-2">
-                                            <div class="d-grid gap-2 col-6">
-                                                <button class="btn btn-success">Guardar</button>
+                                            <div class="form-group">
+                                                <div class="row my-2">
+                                                    <div class="col-6 ">
+                                                        <label>Imagen:</label>
+                                                        <input type="file" name="img" field="" id="img" class="form-control" >
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                            <div class="d-grid gap-2 col-6">
-                                                <a class="btn btn-danger" href="/productos">Cancelar</a>
+
+                                            <div class="box-footer">
+                                                <div class="row my-2">
+                                                    <div class="d-grid gap-2 col-6">
+                                                        <button class="btn btn-success">Guardar</button>
+                                                    </div>
+                                                    <div class="d-grid gap-2 col-6">
+                                                        <a class="btn btn-danger" href="/productos">Cancelar</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                            </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>

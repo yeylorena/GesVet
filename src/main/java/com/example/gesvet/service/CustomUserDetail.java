@@ -1,10 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.service;
-
-
 
 import com.example.gesvet.models.User;
 import java.util.Collection;
@@ -12,85 +6,78 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
-/**
- *
- * @author nicol
- */
 public class CustomUserDetail implements UserDetails {
-	      
-       
-private User user;
-	
-	
-	public CustomUserDetail(User user) {
-		this.user = user;
-	}
 
-	 
-	public String getNombre() {
-		return user.getNombre();
-	}
+    private User user;
 
-       public String getApellido() {
-		return user.getApellido();
-	}
-       public String getDireccion() {
-		return user.getDireccion();
-	}
-       public String getTelefono() {
-		return user.getTelefono();
-	}
-       
-       public String getAcercade() {
-		return user.getAcercade();
-	}
-        public String getImagen() {
-                return user.getImagen();
+    public CustomUserDetail(User user) {
+        this.user = user;
     }
 
-  
-       
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
-		return List.of(() -> user.getRole());
-	}
+    public String getNombre() {
+        return user.getNombre();
+    }
 
-	@Override
-	public String getPassword() {
-		
-		return user.getPassword();
-	}
+    public String getApellido() {
+        return user.getApellido();
+    }
 
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return user.getUsername();
-	}
+    public String getDireccion() {
+        return user.getDireccion();
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    public String getTelefono() {
+        return user.getTelefono();
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    public String getAcercade() {
+        return user.getAcercade();
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    public String getImagen() {
+        return user.getImagen();
+    }
 
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return List.of(() -> user.getRole());
+    }
+
+    @Override
+    public String getPassword() {
+
+        return user.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        // TODO Auto-generated method stub
+        return user.getUsername();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        // TODO Auto-generated method stub
+        return true;
+    }
 
 }

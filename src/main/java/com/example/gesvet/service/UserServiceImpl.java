@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.service;
 
 import com.example.gesvet.dto.UserDto;
@@ -21,7 +17,7 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
 
     private UserRepository userRepository;
-    
+
     @Autowired
     private RecuperarContraseñausuRepository recuperarContraseñausuRepository;
 
@@ -36,13 +32,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
 
-  @Override
-public User save(UserDto userDto) {
-      User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), userDto.getNombre(), userDto.getApellido(),
-            userDto.getDireccion(), userDto.getTelefono(), userDto.getRole(), userDto.getAcercade(), userDto.getImagen());
-    return userRepository.save(user);
+    @Override
+    public User save(UserDto userDto) {
+        User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), userDto.getNombre(), userDto.getApellido(),
+                userDto.getDireccion(), userDto.getTelefono(), userDto.getRole(), userDto.getAcercade(), userDto.getImagen());
+        return userRepository.save(user);
 
-}
+    }
 
     @Override
     public User save(User user) {
@@ -72,23 +68,23 @@ public User save(UserDto userDto) {
         // Guardar el usuario actualizado en la base de datos
         userRepository.save(existingUser);
     }
-  @Override
-public void eliminarUsuario(Long userId) {
-    Optional<User> optionalUser = userRepository.findById(userId);
 
-    if (optionalUser.isPresent()) {
-        User user = optionalUser.get();
+    @Override
+    public void eliminarUsuario(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
 
-        // Eliminar manualmente los registros relacionados
-        recuperarContraseñausuRepository.eliminarTokensPorUsuario(user);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
 
-        // Eliminar el usuario
-        userRepository.deleteById(userId);
+            // Eliminar manualmente los registros relacionados
+            recuperarContraseñausuRepository.eliminarTokensPorUsuario(user);
+
+            // Eliminar el usuario
+            userRepository.deleteById(userId);
+        }
     }
-}
 
-
-     @Override
+    @Override
     public User findById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + userId));

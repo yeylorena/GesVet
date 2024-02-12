@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.models;
-
 
 import jakarta.persistence.CascadeType;
 import java.time.LocalDateTime;
@@ -16,71 +11,66 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
 @Entity
 
-
 public class RecuperarContraseñaTokenusu {
- @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column(nullable = false)
-	private String token;
-	
-	
-        @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	@JoinColumn(nullable = false, name = "user_id")
-	private User user;
-        
-	
-	@Column(nullable = false)
-	private LocalDateTime expireTime;
 
-	
-	@Column(nullable = false)
-	private boolean isUsed;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(nullable = false)
+    private String token;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(nullable = false, name = "user_id")
+    private User user;
 
-	public String getToken() {
-		return token;
-	}
+    @Column(nullable = false)
+    private LocalDateTime expireTime;
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    @Column(nullable = false)
+    private boolean isUsed;
 
-	public User getUser() {
-		return user;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public LocalDateTime getExpireTime() {
-		return expireTime;
-	}
+    public String getToken() {
+        return token;
+    }
 
-	public void setExpireTime(LocalDateTime expireTime) {
-		this.expireTime = expireTime;
-	}
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-	public boolean isUsed() {
-		return isUsed;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUsed(boolean isUsed) {
-		this.isUsed = isUsed;
-	}
-	
-	
-	
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDateTime getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(LocalDateTime expireTime) {
+        this.expireTime = expireTime;
+    }
+
+    public boolean isUsed() {
+        return isUsed;
+    }
+
+    public void setUsed(boolean isUsed) {
+        this.isUsed = isUsed;
+    }
 
 }

@@ -1,4 +1,3 @@
-
 package com.example.gesvet.controller;
 
 import com.example.gesvet.models.Proveedor;
@@ -16,30 +15,30 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProveedorControlador {
-   
+
     @Autowired //inyectar servicio
     private ProveedorServicio proveedorServicio;
-    
+
     @GetMapping("/compras")
-    public String paginaCompras(Model modelo){
+    public String paginaCompras(Model modelo) {
         List<Proveedor> listaProveedores = proveedorServicio.listAll();
         modelo.addAttribute("listaProveedores", listaProveedores);
-        
+
         return "Gestion_Compras";
     }
-    
-   @GetMapping("/nuevo")
-    public String mostrarGuardarProveedor(Model modelo){
-       Proveedor proveedor = new Proveedor();
+
+    @GetMapping("/nuevo")
+    public String mostrarGuardarProveedor(Model modelo) {
+        Proveedor proveedor = new Proveedor();
         modelo.addAttribute("proveedor", proveedor);
-        
+
         return "Agregar_Proveedor";
     }
-    
-    @RequestMapping(value= "/guardar", method = RequestMethod.POST)
-    public String guardarProveedor(@ModelAttribute("proveedor") Proveedor proveedor){
+
+    @RequestMapping(value = "/guardar", method = RequestMethod.POST)
+    public String guardarProveedor(@ModelAttribute("proveedor") Proveedor proveedor) {
         proveedorServicio.save(proveedor);
         return "redirect:/compras";
-    }  
-    
+    }
+
 }

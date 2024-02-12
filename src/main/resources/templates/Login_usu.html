@@ -33,7 +33,7 @@
 
     </head>
 
-    <body style="background-color: #9FAFE8;">
+    <body style="background-color: #5DADE2;">
         <main>
             <div class="container-fluid py-5">
 
@@ -47,13 +47,15 @@
                                  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
                                  ">
                                 <div class="col-12 py-1 d-flex align-items-center my-1">
-                                    <img src="./img/image 14.png" alt=""
+                                    <img th:src="@{/assets/img/logoGesVet.png}"
                                          style="width: 80px; margin-right: 15px; margin-bottom: 15px;">
                                     <div>
                                         <h4 class="card-title fs-4 justify-content-between ">Inicio de Sesión</h4>
                                     </div>
                                 </div>
-                                <p class="text-center small ustify-content-between mb-0">Ingrese tu email y contraseña</p>
+                                <p class="text-center small ustify-content-between mb-0"><h5>Ingresa tu email y contraseña</h5>
+
+                                </p>
 
                                 <form  method="post"
                                        role="form"
@@ -63,7 +65,8 @@
                                     <div class="col-12 py-2">
                                         <label for="yourName" class="form-label">Email</label>
                                         <input th:field="*{username}" type="text" name="name" class="form-control" id="yourName" required>
-                                        <div class="invalid-feedback">Escribe un nombre de usuario</div>
+                                        <div class="invalid-feedback">Escribe tu dirección de correo electrónico
+                                        </div>
                                     </div>
                                     <div class="col-12 py-2">
                                         <label for="yourPassword" class="form-label">Contraseña</label>
@@ -71,14 +74,8 @@
                                         <div class="invalid-feedback">Escribe tu contraseña</div>
                                     </div>
                                     <div class="col-12 py-2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                                            <label class="form-check-label" for="acceptTerms">Recordarme </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2">
                                         <button type="submit"  class="btn c w-100"
-                                                style="background-color: #9FAFE8; color: black; display: inline-block; width: 100%; text-align: center; text-decoration: none; padding: 10px;">Ingresar</button>
+                                                style="background-color: #9FAFE8; color: black; display: inline-block; width: 100%; text-align: center; text-decoration: none; padding: 10px;"><strong>Ingresar</strong></button>
                                     </div>
                                     <div class="col-12 py-2">
                                         <p class="small mb-0">¿Olvidaste tu contraseña? <a th:href="@{/password-request}">Recuperar contraseña</a>
@@ -118,7 +115,7 @@
                 confirmButtonText: 'Ok'
             });
         </script>
-<script th:if="${param.logout}">
+        <script th:if="${param.logout}">
             Swal.fire({
                 title: 'Sesión cerrada',
                 text: 'GesVet',
