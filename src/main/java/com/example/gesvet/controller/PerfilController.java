@@ -65,8 +65,8 @@ public class PerfilController {
     }
 
     @PostMapping("/perfil/editar")
-    public String editarPerfil(UserDto userDto, @RequestParam("file") MultipartFile imagen, RedirectAttributes redirectAttributes) {
-
+    public String editarPerfil( UserDto userDto, @RequestParam("file") MultipartFile imagen, RedirectAttributes redirectAttributes) {
+      
         try {
             // Si se ha seleccionado una imagen
             if (!imagen.isEmpty()) {
@@ -122,7 +122,9 @@ public class PerfilController {
 
             // Actualizar la contraseña en la base de datos
             user.setPassword(passwordEncoder.encode(userDto.getNewPassword()));
+            
             userService.save(user);
+            userService.cambiarContrasenaYEnviarCorreo(user);
 
             redirectAttributes.addFlashAttribute("cambioContrasenaExitoso", true);
         } catch (ServiceException e) {

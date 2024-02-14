@@ -124,6 +124,7 @@ public class PerfilControllerAdmin {
             // Actualizar la contraseña en la base de datos
             user.setPassword(passwordEncoder.encode(userDto.getNewPassword()));
             userService.save(user);
+            userService.cambiarContrasenaYEnviarCorreo(user);
 
             redirectAttributes.addFlashAttribute("cambioContrasenaExitoso", true);
         } catch (ServiceException e) {

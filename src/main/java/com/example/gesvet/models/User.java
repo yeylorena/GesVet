@@ -24,7 +24,16 @@ public class User {
     private String telefono;
     private String acercade;
     private String imagen;
+    private boolean activo;
     private static final String IMAGEN_PREDETERMINADA = "usuario.png";
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
     public String getRole() {
         return role;
@@ -119,6 +128,7 @@ public class User {
         this.imagen = (imagen != null && !imagen.isEmpty()) ? imagen : IMAGEN_PREDETERMINADA;
         // Set default role if not provided
         this.role = role != null ? role : "USER";
+         this.activo = true;
 
     }
 

@@ -18,5 +18,7 @@ public interface UserService {
     void updateUser(UserDto userDto);
 
     void eliminarUsuario(Long userId);
+    
+    void cambiarContrasenaYEnviarCorreo(User user);
 
 }

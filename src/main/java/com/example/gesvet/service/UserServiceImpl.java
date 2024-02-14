@@ -7,12 +7,16 @@ import com.example.gesvet.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+     @Autowired
+    private JavaMailSender javaMailSender;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -76,11 +80,11 @@ public class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
 
-            // Eliminar manualmente los registros relacionados
-            recuperarContraseñausuRepository.eliminarTokensPorUsuario(user);
+             // Desactivar el usuario en lugar de borrarlo
+        user.setActivo(false);
 
-            // Eliminar el usuario
-            userRepository.deleteById(userId);
+        // Guardar el usuario actualizado en la base de datos
+        userRepository.save(user);
         }
     }
 
@@ -90,4 +94,26 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + userId));
     }
 
+    @Override
+    public void cambiarContrasenaYEnviarCorreo(User user) {
+        // Lógica para cambiar la contraseña
+
+        // Enviar correo electrónico
+        enviarCorreoElectronico(user);
+    }
+    private void enviarCorreoElectronico(User user) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(user.getUsername()); // Usar el campo de correo electrónico
+        message.setSubject("Contraseña cambiada exitosamente");
+        String contenidoMensaje = "Cordial saludo " +",\n\n"
+                + "Te informamos que la contraseña de tu cuenta en Gesvet ha sido cambiada con éxito.\n"
+                + "Si realizaste esta acción, puedes ignorar este mensaje.\n\n"
+                + "¡Gracias por confiar en Gesvet!\n\n"
+                + "Atentamente,\n"
+                + "El equipo de Gesvet";
+
+        message.setText(contenidoMensaje);
+
+        javaMailSender.send(message);
+    }
 }

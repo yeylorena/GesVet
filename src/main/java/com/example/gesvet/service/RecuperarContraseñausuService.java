@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
 public class RecuperarContraseñausuService {
@@ -51,21 +52,19 @@ public class RecuperarContraseñausuService {
         return LocalDateTime.now().isAfter(recuperarContraseñaTokenusu.getExpireTime());
     }
 
-    public String checkValidity(RecuperarContraseñaTokenusu recuperarContraseñaTokenusu, Model model) {
-
-        if (recuperarContraseñaTokenusu == null) {
-            model.addAttribute("error", "Invalid Token");
-            return "error-page";
-        } else if (recuperarContraseñaTokenusu.isUsed()) {
-            model.addAttribute("error", "the token is already used");
-            return "error-page";
-        } else if (isExpired(recuperarContraseñaTokenusu)) {
-            model.addAttribute("error", "the token is expired");
-            return "error-page";
-        } else {
-            return "reset-password";
-        }
-
+    public String checkValidity(RecuperarContraseñaTokenusu recuperarContraseñaTokenusu,Model model, RedirectAttributes redirectAttributes) {
+    if (recuperarContraseñaTokenusu == null) {
+        redirectAttributes.addFlashAttribute("Invalid_Token", true);
+        return "password-request";
+    } else if (recuperarContraseñaTokenusu.isUsed()) {
+        redirectAttributes.addFlashAttribute("token_used", true);
+        return "password-request";
+    } else if (isExpired(recuperarContraseñaTokenusu)) {
+        redirectAttributes.addFlashAttribute("token_expired", true);
+        return "password-request";
+    } else {
+        return "reset-password";
     }
-
+}
+    
 }

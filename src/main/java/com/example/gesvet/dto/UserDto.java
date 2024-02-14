@@ -1,9 +1,16 @@
 package com.example.gesvet.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 public class UserDto {
 
     private Long id;
     private String username;
+    @NotBlank(message = "La contraseña es obligatoria")
+    @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$", message = "La contraseña debe contener letras y números")
     private String password;
     private String confirmPassword;
     private String nombre;

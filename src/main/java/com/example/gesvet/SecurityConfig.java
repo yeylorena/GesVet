@@ -27,7 +27,7 @@ public class SecurityConfig {
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    
     @SuppressWarnings("removal")
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -45,7 +45,9 @@ public class SecurityConfig {
                 .logout(form -> form.invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout").permitAll());
+        http.exceptionHandling().accessDeniedPage("/error403");
 
+        
         http.headers().cacheControl().disable();
         return http.build();
 
@@ -55,5 +57,5 @@ public class SecurityConfig {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsServices).passwordEncoder(passwordEncoder());
     }
-
+    
 }

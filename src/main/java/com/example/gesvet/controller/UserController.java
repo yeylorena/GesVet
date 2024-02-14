@@ -3,12 +3,14 @@ package com.example.gesvet.controller;
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.User;
 import com.example.gesvet.service.UserService;
+import jakarta.validation.Valid;
 import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -106,7 +108,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerSave(@ModelAttribute("user") UserDto userDto, Model model) {
+    public String registerSave(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "Registro_Usu"; // Devolver al formulario de registro si hay errores de validación
+        }
+       
         User user = userService.findByUsername(userDto.getUsername());
 
         if (user != null) {

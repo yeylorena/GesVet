@@ -21,6 +21,7 @@ import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 
@@ -73,11 +74,11 @@ public class RecuperarContraseñausuController {
     }
 
     @GetMapping("/reset-password")
-    public String resetPassword(@Param(value = "token") String token, Model model, HttpSession session) {
+    public String resetPassword(@Param(value = "token") String token, Model model,RedirectAttributes redirectAttributes, HttpSession session) {
 
         session.setAttribute("token", token);
         RecuperarContraseñaTokenusu recuperarContraseñaTokenusu = recuperarContraseñausuRepository.findByToken(token);
-        return recuperarContraseñausuService.checkValidity(recuperarContraseñaTokenusu, model);
+        return recuperarContraseñausuService.checkValidity(recuperarContraseñaTokenusu,model,  redirectAttributes);
 
     }
 
@@ -92,6 +93,7 @@ public class RecuperarContraseñausuController {
         recuperarContraseñaTokenusu.setUsed(true);
         userService.save(user);
         recuperarContraseñausuRepository.save(recuperarContraseñaTokenusu);
+        userService.cambiarContrasenaYEnviarCorreo(user);
 
         model.addAttribute("message", "Has restablecido exitosamente tu contraseña");
 

@@ -515,3 +515,132 @@ function confirmarEliminacion() {
         }
     });
 }
+ function validarContrasena() {
+        var newPassword = document.getElementById("newPassword").value;
+
+        // Agrega tu propia lógica de validación aquí
+        var regex = /^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$/;
+        if (!regex.test(newPassword)) {
+            // Utilizando SweetAlert2 para mostrar el mensaje de error
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de validación',
+                text: 'La contraseña debe tener al menos 6 caracteres, incluyendo números y letras.',
+            });
+            return false; // Evita que el formulario se envíe si la validación falla
+        }
+
+        // Resto de la lógica de validación, si es necesario
+
+        return true; // Envía el formulario si la validación es exitosa
+    }
+    
+    function validarFormulario() {
+    // Validar campo acercade
+    var acercade = document.getElementById("acercade").value;
+    if (acercade.trim() === '' || acercade.length > 250) {
+        document.getElementById("errorAcercade").innerHTML = "Este campo no puede estar vacío y tiene un máximo de 250 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorAcercade").innerHTML = "";
+    }
+
+    // Validar campo nombre
+    var nombre = document.getElementById("nombre").value;
+    if (nombre.trim() === '' || nombre.length > 25) {
+        document.getElementById("errorNombre").innerHTML = "Este campo no puede estar vacío y tiene un máximo de 25 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorNombre").innerHTML = "";
+    }
+
+    // Validar campo apellido
+    var apellido = document.getElementById("apellido").value;
+    if (apellido.trim() === '' || apellido.length > 25) {
+        document.getElementById("errorApellido").innerHTML = "Este campo no puede estar vacío y tiene un máximo de 25 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorApellido").innerHTML = "";
+    }
+
+    // Validar campo direccion
+    var direccion = document.getElementById("direccion").value;
+    if (direccion.trim() === '' || direccion.length > 25) {
+        document.getElementById("errorDireccion").innerHTML = "Este campo no puede estar vacío y tiene un máximo de 25 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorDireccion").innerHTML = "";
+    }
+
+    // Validar campo telefono
+    var telefono = document.getElementById("telefono").value;
+    if (telefono.trim() === '' || !/^[0-9]{1,11}$/.test(telefono)) {
+        document.getElementById("errorTelefono").innerHTML = "Por favor, ingrese solo números y un máximo de 11 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorTelefono").innerHTML = "";
+    }
+
+    // Si todas las validaciones pasan, permitir el envío del formulario
+    return true;
+}
+
+    
+    function validarFormularioPrincipal() {
+    // Validar campo email
+    var email = document.getElementById("email").value;
+    if (email.trim() === '' || email.length > 25) {
+        document.getElementById("errorEmail").innerHTML = "Este campo no puede estar vacío y tiene un máximo de 25 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorEmail").innerHTML = "";
+    }
+
+    // Validar campo nombre
+    var nombre = document.getElementById("nombre").value;
+    if (nombre.trim() === '' || nombre.length > 25) {
+        document.getElementById("errorNombre").innerHTML = "Este campo no puede estar vacío y tiene un máximo de 25 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorNombre").innerHTML = "";
+    }
+
+    // Validar campo apellido
+    var apellido = document.getElementById("apellido").value;
+    if (apellido.trim() === '' || apellido.length > 25) {
+        document.getElementById("errorApellido").innerHTML = "Este campo no puede estar vacío y tiene un máximo de 25 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorApellido").innerHTML = "";
+    }
+
+    // Validar campo direccion
+    var direccion = document.getElementById("direccion").value;
+    if (direccion.trim() === '' || direccion.length > 25) {
+        document.getElementById("errorDireccion").innerHTML = "Este campo no puede estar vacío y tiene un máximo de 25 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorDireccion").innerHTML = "";
+    }
+
+    // Validar campo mensaje
+    var mensaje = document.getElementById("mensaje").value;
+    if (mensaje.trim() === '' || mensaje.length > 250) {
+        document.getElementById("errorMensaje").innerHTML = "Este campo no puede estar vacío y tiene un máximo de 250 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorMensaje").innerHTML = "";
+    }
+
+    // Validar campo telefono
+    var telefono = document.getElementById("telefono").value;
+    if (telefono.trim() === '' || !/^[0-9]{1,11}$/.test(telefono)) {
+        document.getElementById("errorTelefono").innerHTML = "Por favor, ingrese solo números y un máximo de 11 caracteres";
+        return false;
+    } else {
+        document.getElementById("errorTelefono").innerHTML = "";
+    }
+
+    // Si todas las validaciones pasan, permitir el envío del formulario
+    return true;
+}
