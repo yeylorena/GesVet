@@ -50,6 +50,8 @@
                                                 <div class="col-6">
                                                     <label>Nombre:</label>
                                                     <input type="text" name="nombre" class="form-control">
+                                                        <small id="nombreHel" class="form-text text-danger"
+                                                               style="display:none;">Por favor, ingrese solo letras y entre 3 y 20 caracteres.</small>
                                                 </div>
                                                 <div class="col-6">
                                                     <label>Descripción:</label>
@@ -91,5 +93,18 @@
         <div th:replace="Plantillas/administrador :: scripts"></div>
 
     </main><!-- End #main -->
+      <!-- validación nombre -->
+    <script>
+        document.getElementById("nombreInput").addEventListener("input", function () {
+            var input = this.value;
+            var regex = /^[a-zA-Z]+$/;
+            var nombreHelp = document.getElementById("nombreHel");
+            if (!regex.test(input) || input.length < 3 || input.length > 20) {
+                nombreHelp.style.display = "block";
+            } else {
+                nombreHelp.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -10,11 +10,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+
 
 import jakarta.persistence.Table;
-import java.util.List;
+
 
 /**
  *
@@ -27,20 +26,25 @@ public class Mascota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String nombre;
     private String imagen;
     private String color;
     private String edad;
+    private String tiempo;
     private String genero;
     private String detalles;
 
     // Mapeo de Especie
     @ManyToOne
+    @JoinColumn(name = "especie_id")
     private Especie especie;
-
-    // Mapeo de Clientes
+    
+   //mapeo de user 
     @ManyToOne
-    private Clientes clientes;
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    // Mapeo de razas
     @ManyToOne
     @JoinColumn(name = "raza_id")
     private Raza raza;
@@ -48,18 +52,24 @@ public class Mascota {
     public Mascota(int par, String string, String string1, String string2, String string3, String string4, String string5) {
     }
 
-    public Mascota(Integer id, String imagen, String color, String edad, String genero, String detalles, Especie especie, Clientes clientes, Raza raza) {
+    public Mascota() {
+    }
+
+    public Mascota(Integer id, String nombre, String imagen, String color, String edad, String tiempo, String genero, String detalles, Especie especie, User user, Raza raza) {
         this.id = id;
+        this.nombre = nombre;
         this.imagen = imagen;
         this.color = color;
         this.edad = edad;
+        this.tiempo = tiempo;
         this.genero = genero;
         this.detalles = detalles;
         this.especie = especie;
-        this.clientes = clientes;
+        this.user = user;
         this.raza = raza;
     }
 
+  
     public Integer getId() {
         return id;
     }
@@ -108,13 +118,6 @@ public class Mascota {
         this.detalles = detalles;
     }
 
-    public Clientes getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(Clientes clientes) {
-        this.clientes = clientes;
-    }
 
     public Raza getRaza() {
         return raza;
@@ -124,9 +127,43 @@ public class Mascota {
         this.raza = raza;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public String toString() {
-        return "Mascota{" + "id=" + id + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", genero=" + genero + ", detalles=" + detalles + '}';
+        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", tiempo=" + tiempo + ", genero=" + genero + ", detalles=" + detalles + ", especie=" + especie + ", user=" + user + ", raza=" + raza + '}';
     }
+
+    public Especie getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(Especie especie) {
+        this.especie = especie;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
+    }
+
+     
 
 }

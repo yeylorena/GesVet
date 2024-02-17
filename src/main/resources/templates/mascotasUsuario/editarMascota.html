@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+
+<head th:replace="~{Plantillas/usuario :: head}">
+    <!-- Agrega SweetAlert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-4p0Y+4CgwLThdzfp++l8Lao0y9e9wMci1TDCBwaJTqGrX8x8EBf5ls7xmxYO0I2mE5J5PusKjJLwN44lt3T6kg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body  style="background-color: #5DADE2;">
+
+    <!-- ======= Header ======= -->
+    <header th:replace="~{Plantillas/usuario :: header}"></header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside th:replace="~{Plantillas/usuario :: sidebar}"></aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Editar Mascotas</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                    <li class="breadcrumb-item">Gestión Mascotas</li>
+                    <li class="breadcrumb-item active">Editar</li>
+                </ol>
+            </nav>
+            <section class="section profile">
+                <div class="col-xl-12">
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <ul class="nav nav-tabs nav-tabs-bordered">
+
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab"
+                                            data-bs-target="#profile-overview">Editar</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content pt-2">
+
+                                <div class="container">
+                                    <form  th:action="@{/mascotas/update}" object="" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" th:value="${Raza.id}">
+                                            <div class="card">
+
+                                                <div class="form-group">
+                                                    <div class="row my-2">
+                                                        <div class="col-6 ">
+                                                            <label>Nombre:</label>
+                                                            <input type="text" name="nombre" field="" th:value="${mascota.nombre}" class="form-control" required autocomplete="off">
+                                                        </div>
+                                                        <div class="col-6 ">
+                                                            <label>Color:</label>
+                                                            <input type="text" name="color" field="" th:value="${mascota.color}" class="form-control" required autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row my-2">
+                                                        <div class="col-6 ">
+                                                            <label>Edad:</label>
+                                                            <input type="text" name="edad" field="" th:value="${mascota.edad}" class="form-control" required autocomplete="off">
+                                                        </div>
+                                                        <div class="col-6 ">
+                                                            <label>Tiempo:</label>
+                                                            <input type="text" name="tiempo" field="" th:value="${mascota.tiempo}" class="form-control" required autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row my-2">
+                                                        <div class="col-6 ">
+                                                            <label>Género:</label>
+                                                            <select name="genero" class="form-control">
+                                                                <option value="activo">Macho</option>
+                                                                <option value="inactivo">Hembra</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label style="color: black;">Raza</label>
+                                                            <select name="raza" class="form-control" required>
+                                                                <option value="">Selecciona una raza</option>
+                                                                <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row my-2">
+                                                          <div class="col-6">
+                                                            <label style="color: black;">Especies</label>
+                                                            <select name="especie" class="form-control" required>
+                                                                <option value="">Selecciona una especie</option>
+                                                                <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}"></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label style="color: black;">Detalles</label>
+                                                               <input type="text" name="detalles" field="" th:value="${mascota.detalles}" class="form-control" required autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="box-footer">
+                                                <div class="row my-2">
+                                                    <div class="d-grid gap-2 col-6">
+                                                        <button class="btn btn-success">Guardar</button>
+                                                    </div>
+                                                    <div class="d-grid gap-2 col-6">
+                                                        <a class="btn btn-danger" href="/mascotas">Cancelar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+        </div>
+        </div>
+        </div>
+        </section>
+
+        <div th:replace="Plantillas/administrador :: scripts"></div>
+        </div><!-- End Page Title -->
+
+
+
+    </main>
+</body>
+</html>

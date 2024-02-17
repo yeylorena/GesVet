@@ -1,12 +1,15 @@
 package com.example.gesvet.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import java.util.List;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
@@ -26,6 +29,11 @@ public class User {
     private String imagen;
     private boolean activo;
     private static final String IMAGEN_PREDETERMINADA = "usuario.png";
+    
+    // mapeo de mascotas sofia 
+     //relacion con mascotas sofia 
+     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) // Nombre del atributo en la clase Mascota que referencia al usuario
+    private List<Mascota> mascotas; // Lista de mascotas propiedad del usuario
 
     public boolean isActivo() {
         return activo;

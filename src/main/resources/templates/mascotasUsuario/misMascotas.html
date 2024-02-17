@@ -1,15 +1,413 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+
+<head th:replace="~{Plantillas/usuario :: head}">
+    <!-- Agrega SweetAlert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-4p0Y+4CgwLThdzfp++l8Lao0y9e9wMci1TDCBwaJTqGrX8x8EBf5ls7xmxYO0I2mE5J5PusKjJLwN44lt3T6kg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body  style="background-color: #5DADE2;">
+
+    <!-- ======= Header ======= -->
+    <header th:replace="~{Plantillas/usuario :: header}"></header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside th:replace="~{Plantillas/usuario :: sidebar}"></aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Mis mascotas</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="inicio.html">Inicio</a></li>
+                    <li class="breadcrumb-item">Mis mascotas</li>
+                    <li class="breadcrumb-item">Ver</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <div class="pagetitle">
+
+            <nav>
+
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section profile">
+
+            <div class="card">
+                <div class="card-body pt-3">
+                    <!-- Bordered Tabs -->
+                    <ul class="nav nav-tabs nav-tabs-bordered">
+
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab"
+                                    data-bs-target="#profile-overview">Ver</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab"
+                                    data-bs-target="#profile-regis">Registrar</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab"
+                                    data-bs-target="#profile-edit">Modificar</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab"
+                                    data-bs-target="#profile-change-password">Historial</button>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content pt-2">
+                        <!-- ver -->
+
+                        <!-- Sección de "Ver" -->
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                            <div class="row mt-5">
+                                <!-- Iterar sobre cada mascota -->
+                                <div th:each="mascota : ${mascotas}" class="col-12 col-md-6 mb-4">
+                                    <!-- Tarjeta de mascota -->
+                                    <div class="alimentos card h-100" style="max-width: 15rem;">
+                                        <!-- Imagen de la mascota -->
+                                        <img th:src="@{/images/{imageName}(imageName=${mascota.imagen})}" class="perfil card-img-top" alt="...">
+                                            <!-- Detalles de la mascota -->
+                                            <div class="card-body" style="background: #d9d9d9;">
+                                                <!-- Título y otros detalles -->
+                                                <h5 class="card-title text-center">Información</h5>
+                                                <!-- Detalles específicos de la mascota -->
+                                                <ul class="list-unstyled">
+                                                    <li>Nombre: <span th:text="${mascota.nombre}"></span></li>
+                                                    <li>Color: <span th:text="${mascota.color}"></span></li>
+                                                    <li>Edad: <span th:text="${mascota.edad}"></span></li>
+                                                    <li>Tiempo: <span th:text="${mascota.tiempo}"></span></li>
+                                                    <li>Género: <span th:text="${mascota.genero}"></span></li>
+                                                    <li>Raza: <span th:text="${mascota.raza.nombre}"></span></li>
+                                                    <li>Especie: <span th:text="${mascota.especie.nombre}"></span></li>
+                                                    <li>Detalles: <span th:text="${mascota.detalles}"></span></li>
+                                                </ul>
+                                                <!-- Botones de eliminar y editar -->
+                                                <div class="text-center">
+                                                    <button  class="btn btn-danger btn-sm mx-1" >Eliminar</button>
+                                                    <button class="btn btn-primary btn-sm mx-1" th:href="@{mascotas/editarMascota/{id}(id=${mascota.id})}">Editar</button>
+
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- fin de ver -->
+
+                        <div class="tab-pane fade profile-edit pt-3" id="profile-regis">
+
+                            <!-- Registrar  mascota -->
+                            <form th:action="@{/mascotasUsuarios/saveM}" method="post" th:object="${mascota}" enctype="multipart/form-data">
+
+                                <!-- crear mascota campos  -->
+                                <div class="row mb-5">
+                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Imagen de Perfil</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <div class="row my-2">
+                                            <div class="col-6">
+
+                                                <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);">
+                                                    <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('imagen').click(); return false;">
+                                                        <i class="fas fa-plus"></i> Agregar imagen
+                                                    </button>
+                                                    <img id="vistaPrevia" src="#" alt="Vista Previa de la Imagen" style="display: none; max-width: 100%;" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label style="color: black;">Nombre:</label>
+                                        <input type="text" name="nombre" field="" class="form-control" id="nombreInput" required>
+                                            <small id="nombreHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo letras y entre 3 y 20 caracteres.</small>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <label style="color: black;">Color</label>
+                                        <input type="text" name="color" field="" class="form-control" required >
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label style="color: black;">Edad:</label>
+                                        <input type="text" name="edad" field="" class="form-control" id="edadInput" required>
+                                            <small id="edadHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo números.</small>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <label style="color: black;">Tiempo</label>
+                                        <select name="tiempo" class="form-control" required>
+                                            <option value="Meses">Meses</option>
+                                            <option value="Años">Años</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6 ">
+                                        <label style="color: black;">Género</label>
+                                        <select name="genero" class="form-control" required>
+                                            <option value="Macho">Macho</option>
+                                            <option value="Hembra">Hembra</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label style="color: black;">Raza</label>
+                                        <select name="raza" class="form-control" required>
+                                            <option value="">Selecciona una raza</option>
+                                            <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-6 ">
+                                        <label style="color: black;">Especie</label>
+                                        <select name="especie" class="form-control" required>
+                                            <option value="">Selecciona una especie</option>
+                                            <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <label  style="color: black;">Detalles</label>
+                                    <div class="col-12">
+                                        <input name="detalles" type="text" class="form-control" id="detalles" value="">
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn " id="btnRegistrar"
+                                            style="background-color: #979AD4; color: black;">Registrar</button>
+                                </div>
+
+
+
+
+                            </form><!-- End Profile Edit Form -->
+                        </div>
+
+                        <!--Fin registrar mascota-->
+
+                        <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                            <!-- modificar mascota -->
+                            <form>
+                                <div class="row mb-5">
+                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label "
+                                           style="color: black;">Imagen
+                                        de
+                                        Perfil</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <img class="imgMascota" src="./img/productos_servicios/perro.jpg" alt="Profile">
+                                            <div class="pt-2">
+                                                <a href="" class="btn  btn-sm" title="Upload new profile image"><img
+                                                        class="" src="./img/image 90.png" alt="" style="width: 25px ;"></a>
+                                                <a href="#" class="btn  btn-sm" title="Remove my profile image"><img
+                                                        class="" src="./img/image 57.png" alt="" style="width: 15px ;"></a>
+                                            </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-3">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label "
+                                           style="color: black;">Nombre</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="fullName" type="text" class="form-control" id="fullName"
+                                               value="Kiara">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="company" class="col-md-4 col-lg-3 col-form-label "
+                                           style="color: black;">Especie</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="company" type="text" class="form-control" id="company"
+                                               value="Perro">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="company" class="col-md-4 col-lg-3 col-form-label"
+                                           style="color: black;">Raza</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="company" type="text" class="form-control" id="company"
+                                               value="Labrador">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="Job" class="col-md-4 col-lg-3 col-form-label"
+                                           style="color: black;">Color</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="job" type="text" class="form-control" id="Job" value="Amarillo">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="Country" class="col-md-4 col-lg-3 col-form-label"
+                                           style="color: black;">Edad</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="country" type="text" class="form-control" id="Country"
+                                               value="2 años">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="Country" class="col-md-4 col-lg-3 col-form-label"
+                                           style="color: black;">Género</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="country" type="text" class="form-control" id="Country"
+                                               value="Hembra">
+                                    </div>
+                                </div>
+
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn "
+                                            style="background-color: #979AD4; color: black;">Modificar</button>
+                                </div>
+
+
+                            </form><!-- End Profile Edit Form -->
+
+                        </div>
+                    </div>
+                    <!--Fin modificar mascota-->
+
+                    <!--Historial-->
+                    <!--Historial-->
+                    <div class="tab-pane fade pt-3" id="profile-change-password">
+                        <!-- Historial mascota -->
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover text-start">
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Raza</th>
+                                        <th scope="col">Especie</th>
+                                        <th scope="col">Color</th>
+                                        <th scope="col">Edad</th>
+                                        <th scope="col">Tiempo</th>
+                                        <th scope="col">Genero</th>
+                                        <th scope="col">Detalles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Iterar sobre cada mascota -->
+                                    <tr th:each="mascota : ${mascotas}">
+                                        <td><img th:src="@{/images/{imageName}(imageName=${mascota.imagen})}" alt="Mascota" style="width: 50px; height: 50px;"></td>
+                                        <td th:text="${mascota.nombre}"></td>
+                                        <td th:text="${mascota.raza.nombre}"></td>
+                                        <td th:text="${mascota.especie.nombre}"></td>
+                                        <td th:text="${mascota.color}"></td>
+                                        <td th:text="${mascota.edad}"></td>
+                                        <td th:text="${mascota.tiempo}"</td>
+                                        <td th:text="${mascota.genero}"></td>
+                                        <td th:text="${mascota.detalles}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- End Historial tab-pane -->
+
+                </div>
+            </div>
+
+        </section>
+        <div th:replace="~{Plantillas/usuario :: scripts}"></div>
+
+
+    </main><!-- End #main -->
+    <!-- validación números -->
+    <script>
+        document.getElementById("edadInput").addEventListener("input", function () {
+            var input = this.value;
+            var regex = /^[0-9]*$/;
+            var edadHelp = document.getElementById("edadHelp");
+            if (!regex.test(input)) {
+                edadHelp.style.display = "block";
+            } else {
+                edadHelp.style.display = "none";
+            }
+        });
+    </script>
+
+    <!-- validación nombre -->
+    <script>
+        document.getElementById("nombreInput").addEventListener("input", function () {
+            var input = this.value;
+            var regex = /^[a-zA-Z]+$/;
+            var nombreHelp = document.getElementById("nombreHelp");
+            if (!regex.test(input) || input.length < 3 || input.length > 20) {
+                nombreHelp.style.display = "block";
+            } else {
+                nombreHelp.style.display = "none";
+            }
+        });
+    </script>
+    <script th:inline="javascript">
+        function mostrarVistaPrevia(input) {
+            var vistaPrevia = document.getElementById('vistaPrevia');
+            var file = input.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    vistaPrevia.src = e.target.result;
+                    vistaPrevia.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+        // boton de registrar
+        document.getElementById('btnRegistrar').addEventListener('click', function () {
+            var nombre = document.getElementById('nombreInput').value.trim();
+            var color = document.getElementsByName('color')[0].value.trim();
+            var edad = document.getElementById('edadInput').value.trim();
+            var genero = document.getElementsByName('genero')[0].value.trim();
+            var raza = document.getElementsByName('raza')[0].value.trim();
+            var especie = document.getElementsByName('especie')[0].value.trim();
+            var tiempo = document.getElementsByName('tiempo')[0].value.trim();
+            // Verifica si algún campo está vacío
+            if (nombre === '' || color === '' || edad === '' || genero === '' || raza === '' || especie === '' || tiempo === "") {
+                swal("Error", "Por favor complete todos los campos.", "error");
+            } else {
+                swal("¡Mascota creada con éxito!", "", "success");
+
+            }
+        });
+        // Captura el evento click del botón "Editar"
+        document.querySelectorAll('.editar-mascota').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                // Obtiene el ID de la mascota desde el atributo data-id
+                var mascotaId = this.getAttribute('data-id');
+                // Redirige a la sección de modificar mascota con los datos cargados
+                window.location.href = '#profile-edit';
+                // Aquí puedes cargar los datos de la mascota para editar utilizando AJAX o de otra manera
+            });
+        });
+
+
+
+
+    </script>
+</body>
+
 </html>

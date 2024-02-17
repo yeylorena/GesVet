@@ -19,4 +19,6 @@ public interface RazaService {
     public void update(Raza raza);
     public void delete(Integer id);
     public List<Raza> findAll();
+
+    public List<Raza> getAllRazas();
 }

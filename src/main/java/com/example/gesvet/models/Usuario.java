@@ -29,6 +29,7 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     private List<Factura> listaFacturas;
+   
 
     public Usuario() {
     }
