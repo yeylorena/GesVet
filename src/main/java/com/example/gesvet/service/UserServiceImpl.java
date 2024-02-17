@@ -89,5 +89,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + userId));
     }
+    
+    // metodo de sofia para el id 
+    
+    @Override
+    public Long getUserIdByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            return user.getId();
+        }
+        return null; // O puedes lanzar una excepción si el usuario no se encuentra
+    }
 
 }

@@ -18,4 +18,6 @@ public interface EspecieService {
     public void update(Especie especie);
     public void delete(Integer id);
     public List<Especie> findAll();
+
+    public List<Especie> getAllEspecies();
 }

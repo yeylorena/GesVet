@@ -6,6 +6,7 @@ package com.example.gesvet.service;
 
 import com.example.gesvet.models.Raza;
 import com.example.gesvet.repository.RazaRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +47,18 @@ public class RazaServiceImpl implements RazaService {
         return razaRepository.findAll();
     }
 
+    // metodo para que cargue solo el nombre de la raza
+    public List<String> getAllRazaNames() {
+        List<Raza> razas = razaRepository.findAll();
+        List<String> nombresRazas = new ArrayList<>();
+        for (Raza raza : razas) {
+            nombresRazas.add(raza.getNombre());
+        }
+        return nombresRazas;
+    }
+
+     @Override
+    public List<Raza> getAllRazas() {
+        return razaRepository.findAll();
+    }
 }

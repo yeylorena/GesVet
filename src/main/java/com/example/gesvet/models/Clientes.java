@@ -30,8 +30,8 @@ public class Clientes {
     private String direccion;
 
 // Mapeo de la relación con Mascota
-    @OneToMany(mappedBy = "clientes")
-    private List<Mascota> mascotas;
+   /* @OneToMany(mappedBy = "clientes")
+    private List<Mascota> mascotas;*/
 
     public Clientes() {
     }
