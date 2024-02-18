@@ -35,13 +35,15 @@ public class RecuperarContraseñausuService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        String emailContent = "<p>Hola</p>"
-                + "Haga clic en el enlace a continuación para restablecer la contraseña"
-                + "<p><a href=\"" + emailLink + "\">Cambiar mi contraseña</a></p>"
-                + "<br>"
-                + "Ignorar este correo electrónico si no realizó la solicitud";
+        String emailContent = "<p style=\"color: black;\">Hola,</p>"
+                + "<p style=\"color: black;\">Recibimos una solicitud para restablecer la contraseña de tu cuenta. Si solicitaste este cambio, haz clic en el siguiente enlace para continuar con el proceso:</p>"
+                + "<p><a href=\"" + emailLink + "\">Cambiar mi contraseña</a></p>" + "<p style=\"color: black;\">Por motivos de seguridad, este enlace es de un solo uso y solo será válido durante los próximos 10 minutos. Después de ese tiempo, deberás solicitar un nuevo enlace.</p>"
+                + "<p style=\"color: black;\">Si no solicitaste este cambio, puedes ignorar este correo electrónico.</p>"
+                + "<p style=\"color: black;\">Gracias,</p>"
+                + "El equipo de GesVet.";
+
         helper.setText(emailContent, true);
-        helper.setFrom("nicolas260805@gmail.com", "GesVet");
+        helper.setFrom("nicolas260805@gmail.com", "Atención y soporte GesVet");
         helper.setSubject(subject);
         helper.setTo(to);
         javaMailSender.send(message);
