@@ -30,10 +30,15 @@ public class User {
     private boolean activo;
     private static final String IMAGEN_PREDETERMINADA = "usuario.png";
     
-    // mapeo de mascotas sofia 
-     //relacion con mascotas sofia 
-     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) // Nombre del atributo en la clase Mascota que referencia al usuario
-    private List<Mascota> mascotas; // Lista de mascotas propiedad del usuario
+     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Mascota> mascotas;
+
+    // Resto de tu código...
+
+    // Agrega este método para obtener la lista de mascotas del usuario
+    public List<Mascota> getMascotas() {
+        return mascotas;
+    }
 
     public boolean isActivo() {
         return activo;

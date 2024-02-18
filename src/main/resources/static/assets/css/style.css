@@ -1650,4 +1650,7 @@ h6 {
 .form-check-label.accept-terms {
     color: blue;
 }
+.active-tab {
+    border-bottom: 2px solid blue; /* Puedes ajustar el color y el estilo de la línea según tus preferencias */
+}
 
