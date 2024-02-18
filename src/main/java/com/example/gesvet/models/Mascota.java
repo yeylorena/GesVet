@@ -39,11 +39,17 @@ public class Mascota {
     @JoinColumn(name = "especie_id")
     private Especie especie;
     
-   //mapeo de user 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+@ManyToOne
+@JoinColumn(name = "usuario_id")
+private User usuario;
 
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
     // Mapeo de razas
     @ManyToOne
     @JoinColumn(name = "raza_id")
@@ -55,7 +61,7 @@ public class Mascota {
     public Mascota() {
     }
 
-    public Mascota(Integer id, String nombre, String imagen, String color, String edad, String tiempo, String genero, String detalles, Especie especie, User user, Raza raza) {
+    public Mascota(Integer id, String nombre, String imagen, String color, String edad, String tiempo, String genero, String detalles, Especie especie,  Raza raza) {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -65,7 +71,6 @@ public class Mascota {
         this.genero = genero;
         this.detalles = detalles;
         this.especie = especie;
-        this.user = user;
         this.raza = raza;
     }
 
@@ -137,7 +142,7 @@ public class Mascota {
 
     @Override
     public String toString() {
-        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", tiempo=" + tiempo + ", genero=" + genero + ", detalles=" + detalles + ", especie=" + especie + ", user=" + user + ", raza=" + raza + '}';
+        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", tiempo=" + tiempo + ", genero=" + genero + ", detalles=" + detalles + ", especie=" + especie  + ", raza=" + raza + '}';
     }
 
     public Especie getEspecie() {
@@ -148,13 +153,7 @@ public class Mascota {
         this.especie = especie;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+   
 
     public String getTiempo() {
         return tiempo;

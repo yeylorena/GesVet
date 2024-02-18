@@ -20,6 +20,8 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public Mascota save(Mascota mascota) {
+        // Asignar la mascota al usuario
+        mascota.getUsuario().getMascotas().add(mascota);
         return mascotaRepository.save(mascota);
     }
 

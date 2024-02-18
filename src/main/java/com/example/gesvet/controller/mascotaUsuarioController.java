@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -106,6 +107,11 @@ public class mascotaUsuarioController {
    @PostMapping("/saveM")
 public String saveM(Mascota mascota, Model model, @RequestParam("file") MultipartFile imagen, int especie, Authentication authentication, Principal principal) {
 
+    // Obtener el usuario actual
+    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    User user = userService.findByUsername(userDetails.getUsername());
+    //traer id de usuario
+    mascota.setUsuario(user);
     try {
         var objEspecie = especieService.get(especie);
         mascota.setEspecie(objEspecie.get());
@@ -119,7 +125,7 @@ public String saveM(Mascota mascota, Model model, @RequestParam("file") Multipar
             Files.write(rutaCompleta, bytesImg);
             mascota.setImagen(imagen.getOriginalFilename());
         }
-
+ 
         // Guardar la mascota
         mascotaService.save(mascota);
         
@@ -146,5 +152,5 @@ public String saveM(Mascota mascota, Model model, @RequestParam("file") Multipar
         mascota = optionalMascota.get();
         model.addAttribute("Mascota", mascota);
         return "mascotasUsuario/misMascotas";
-    }
+}
 }
