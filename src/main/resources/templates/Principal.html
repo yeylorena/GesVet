@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="./css/inicio.css">
         <!-- Agrega esto en el head de tu HTML -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
         <!-- Favicons -->
         <link href="../img/productos_servicios/logo.png" rel="icon">
@@ -29,6 +32,53 @@
                 box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
                 background-color: #A0A0A0; /* Cambia el color al pasar el mouse */
             }
+            .inria-sans-light {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 300;
+                font-style: normal;
+            }
+
+            .inria-sans-regular {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            .inria-sans-bold {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                margin-right: 100px;
+                font-size: 30px;
+                line-height: 50px;
+            }
+            .inria-sans-bolds {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                margin-right: 100px;
+                font-size: 20px;
+                line-height: 50px;
+            }
+
+            .inria-sans-light-italic {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            .inria-sans-regular-italic {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 400;
+                font-style: italic;
+            }
+
+            .inria-sans-bold-italic {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-style: italic;
+            }
+
 
         </style>
         <script th:src="@{/assets/js/main.js}"></script>
@@ -48,24 +98,23 @@
                             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" style="margin-right: 100px; font-family: 'Inter'; font-style: italic; font-weight: 900;font-size: 30px; line-height: 50px;
-                                           ">GesVet</a>
+                                        <a class="nav-link active inria-sans-bold"  aria-current="page" 
+                                           >GesVet</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#quienesSomosFooter"
-                                           style=" margin-right: 100px; font-family: 'Inter'; font-style: normal; font-weight: 700; font-size: 20px; line-height: 50px;">¿Quiénes
+                                        <a class="nav-link inria-sans-bolds"  href="#quienesSomosFooter"
+                                           >¿Quiénes
                                             Somos?</a>
                                     </li>
 
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#nuestros-servicios"
-                                           style="margin-right: 100px; font-family: 'Inter'; font-style: normal; font-weight: 700; font-size: 20px; line-height: 50px;">Servicios</a>
+                                        <a class="nav-link inria-sans-bolds" href="#nuestros-servicios"
+                                           >Servicios</a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#contacto"
-                                           style="margin-right: 100px; font-family: 'Inter'; font-style: normal; font-weight: 700; font-size: 20px; line-height: 50px;">Contacto</a>
+                                        <a class="nav-link nav-link inria-sans-bolds" href="#contacto">Contacto</a>
                                     </li>
 
 
