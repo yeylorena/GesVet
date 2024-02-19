@@ -18,12 +18,9 @@ public interface UserService {
     void updateUser(UserDto userDto);
 
     void eliminarUsuario(Long userId);
-<<<<<<< HEAD
     
     void cambiarContrasenaYEnviarCorreo(User user);
 
-=======
     //sofia
     Long getUserIdByUsername(String username); // Método para obtener el ID del usuario por su nombre de usuario
->>>>>>> SofiaLa
 }
