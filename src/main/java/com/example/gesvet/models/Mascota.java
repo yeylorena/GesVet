@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -11,9 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-
 import jakarta.persistence.Table;
-
 
 /**
  *
@@ -38,10 +36,10 @@ public class Mascota {
     @ManyToOne
     @JoinColumn(name = "especie_id")
     private Especie especie;
-    
-@ManyToOne
-@JoinColumn(name = "usuario_id")
-private User usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private User usuario;
 
     public User getUsuario() {
         return usuario;
@@ -61,7 +59,7 @@ private User usuario;
     public Mascota() {
     }
 
-    public Mascota(Integer id, String nombre, String imagen, String color, String edad, String tiempo, String genero, String detalles, Especie especie,  Raza raza) {
+    public Mascota(Integer id, String nombre, String imagen, String color, String edad, String tiempo, String genero, String detalles, Especie especie, Raza raza) {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -74,7 +72,6 @@ private User usuario;
         this.raza = raza;
     }
 
-  
     public Integer getId() {
         return id;
     }
@@ -123,7 +120,6 @@ private User usuario;
         this.detalles = detalles;
     }
 
-
     public Raza getRaza() {
         return raza;
     }
@@ -142,7 +138,7 @@ private User usuario;
 
     @Override
     public String toString() {
-        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", tiempo=" + tiempo + ", genero=" + genero + ", detalles=" + detalles + ", especie=" + especie  + ", raza=" + raza + '}';
+        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", tiempo=" + tiempo + ", genero=" + genero + ", detalles=" + detalles + ", especie=" + especie + ", raza=" + raza + '}';
     }
 
     public Especie getEspecie() {
@@ -153,8 +149,6 @@ private User usuario;
         this.especie = especie;
     }
 
-   
-
     public String getTiempo() {
         return tiempo;
     }
@@ -162,7 +156,5 @@ private User usuario;
     public void setTiempo(String tiempo) {
         this.tiempo = tiempo;
     }
-
-     
 
 }

@@ -480,6 +480,25 @@ function eliminarRaza() {
         }
     });
 }
+
+function eliminarMascota(id) {
+    Swal.fire({
+        title: '¿Estás seguro de eliminar esta mascota?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminarla'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Si el usuario confirma, redirige a la URL de eliminación
+            window.location.href = '/mascotasUsuarios/delete/' + id;
+        }
+    });
+}
+
+
 //Función eliminar especie
 function eliminarEspe() {
     Swal.fire({
@@ -515,27 +534,27 @@ function confirmarEliminacion() {
         }
     });
 }
- function validarContrasena() {
-        var newPassword = document.getElementById("newPassword").value;
+function validarContrasena() {
+    var newPassword = document.getElementById("newPassword").value;
 
-        // Agrega tu propia lógica de validación aquí
-        var regex = /^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$/;
-        if (!regex.test(newPassword)) {
-            // Utilizando SweetAlert2 para mostrar el mensaje de error
-            Swal.fire({
-                icon: 'error',
-                title: 'Error de validación',
-                text: 'La contraseña debe tener al menos 6 caracteres, incluyendo números y letras.',
-            });
-            return false; // Evita que el formulario se envíe si la validación falla
-        }
-
-        // Resto de la lógica de validación, si es necesario
-
-        return true; // Envía el formulario si la validación es exitosa
+    // Agrega tu propia lógica de validación aquí
+    var regex = /^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$/;
+    if (!regex.test(newPassword)) {
+        // Utilizando SweetAlert2 para mostrar el mensaje de error
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de validación',
+            text: 'La contraseña debe tener al menos 6 caracteres, incluyendo números y letras.',
+        });
+        return false; // Evita que el formulario se envíe si la validación falla
     }
-    
-    function validarFormulario() {
+
+    // Resto de la lógica de validación, si es necesario
+
+    return true; // Envía el formulario si la validación es exitosa
+}
+
+function validarFormulario() {
     // Validar campo acercade
     var acercade = document.getElementById("acercade").value;
     if (acercade.trim() === '' || acercade.length > 250) {
@@ -585,8 +604,8 @@ function confirmarEliminacion() {
     return true;
 }
 
-    
-    function validarFormularioPrincipal() {
+
+function validarFormularioPrincipal() {
     // Validar campo email
     var email = document.getElementById("email").value;
     if (email.trim() === '' || email.length > 25) {

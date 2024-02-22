@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/gestioncitas")
-public class citasController {
+@RequestMapping("/citas")
+public class citasUsucontroller {
 
     @GetMapping("")
     public String show(Model model) {  //el objeto model lleva información desde el backend hacia la vista
-        return "citas/citas_vet";
+        return "citas/citas_usu";
 
     }
+
 }

@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/compras")
 public class ProveedorControlador {
 
     @Autowired //inyectar servicio
     private ProveedorServicio proveedorServicio;
 
-    @GetMapping("/compras")
+    @GetMapping("")
     public String paginaCompras(Model modelo) {
         List<Proveedor> listaProveedores = proveedorServicio.listAll();
         modelo.addAttribute("listaProveedores", listaProveedores);

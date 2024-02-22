@@ -1653,4 +1653,24 @@ h6 {
 .active-tab {
     border-bottom: 2px solid blue; /* Puedes ajustar el color y el estilo de la línea según tus preferencias */
 }
+/*Tipografía*/
+/*.h4, h5, h6{
+    font-size: 16px;
+    letter-spacing: 0;
+    font-weight: 600;
+    line-height: 26px;
+}
+.h1, h2, h3, h4, h5, h6{
+    clear: both;
+    font-family: Monserrat,Arial,sans-serif;
+    margin: 0 0 20px;
+    padding: 0;
+}
+.h4{
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}*/
 

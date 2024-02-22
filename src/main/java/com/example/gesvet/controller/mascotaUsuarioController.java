@@ -28,6 +28,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.hibernate.service.spi.ServiceException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -94,8 +96,7 @@ public class mascotaUsuarioController {
     }
 
     @GetMapping("/crearMascota")
-    public String crearM(Model model,Authentication authentication, Principal principal) {
-      
+    public String crearM(Model model, Authentication authentication, Principal principal) {
 
         // Nuevo objeto Mascota para el formulario
         Mascota mascota = new Mascota();
@@ -104,53 +105,93 @@ public class mascotaUsuarioController {
         return "mascotasUsuario/misMascotas";
     }
 
-   @PostMapping("/saveM")
-public String saveM(Mascota mascota, Model model, @RequestParam("file") MultipartFile imagen, int especie, Authentication authentication, Principal principal) {
+    @PostMapping("/saveM")
+    public String saveM(Mascota mascota, Model model, @RequestParam("file") MultipartFile imagen, int especie, Authentication authentication, Principal principal) {
 
-    // Obtener el usuario actual
-    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-    User user = userService.findByUsername(userDetails.getUsername());
-    //traer id de usuario
-    mascota.setUsuario(user);
-    try {
-        var objEspecie = especieService.get(especie);
-        mascota.setEspecie(objEspecie.get());
-        // Manejar el archivo de imagen
-        if (!imagen.isEmpty()) {
-            // Realizar la escritura del archivo
-            byte[] bytesImg = imagen.getBytes();
-            Path directorioImgenes = Paths.get("images//"); // Ajustar según necesidades
-            String rutaAbsoluta = directorioImgenes.toFile().getAbsolutePath();
-            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-            Files.write(rutaCompleta, bytesImg);
-            mascota.setImagen(imagen.getOriginalFilename());
+        // Obtener el usuario actual
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = userService.findByUsername(userDetails.getUsername());
+        //traer id de usuario
+        mascota.setUsuario(user);
+        try {
+            var objEspecie = especieService.get(especie);
+            mascota.setEspecie(objEspecie.get());
+            // Manejar el archivo de imagen
+            if (!imagen.isEmpty()) {
+                // Realizar la escritura del archivo
+                byte[] bytesImg = imagen.getBytes();
+                Path directorioImgenes = Paths.get("images//"); // Ajustar según necesidades
+                String rutaAbsoluta = directorioImgenes.toFile().getAbsolutePath();
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+                Files.write(rutaCompleta, bytesImg);
+                mascota.setImagen(imagen.getOriginalFilename());
+            }
+
+            // Guardar la mascota
+            mascotaService.save(mascota);
+
+            // Obtener todas las mascotas nuevamente
+            List<Mascota> mascotasActualizadas = mascotaService.findAll();
+            model.addAttribute("mascotas", mascotasActualizadas);
+
+            // Redirigir a la página de "Mis mascotas"
+            return "redirect:/mascotasUsuarios";
+        } catch (IOException e) {
+            // Manejar cualquier excepción de E/S (Input/Output) que pueda ocurrir al guardar la imagen
+            e.printStackTrace();
+
+            return "errorPage"; // Reemplaza con la página de error adecuada
         }
- 
-        // Guardar la mascota
-        mascotaService.save(mascota);
-        
-        // Obtener todas las mascotas nuevamente
-        List<Mascota> mascotasActualizadas = mascotaService.findAll();
-        model.addAttribute("mascotas", mascotasActualizadas);
 
-        // Redirigir a la página de "Mis mascotas"
-        return "redirect:/mascotasUsuarios"; 
-    } catch (IOException e) {
-        // Manejar cualquier excepción de E/S (Input/Output) que pueda ocurrir al guardar la imagen
-        e.printStackTrace();
-
-        return "errorPage"; // Reemplaza con la página de error adecuada
     }
 
-}
+    // metodo para editar la mascota 
+    @PostMapping("/mascotas/editar")
+    public String editarMascota(Mascota mascota, @RequestParam("file") MultipartFile imagen, RedirectAttributes redirectAttributes) {
 
- // metodo para editar la mascota 
-    @GetMapping("/editarMascota/{id}")
-    public String editarMas(@PathVariable Integer id, Model model) {
-       Mascota mascota = new Mascota();
-        Optional<Mascota> optionalMascota = mascotaService.get(id);
-        mascota = optionalMascota.get();
-        model.addAttribute("Mascota", mascota);
-        return "mascotasUsuario/misMascotas";
-}
+        try {
+            // Si se ha seleccionado una imagen
+            if (!imagen.isEmpty()) {
+                // Realizar la escritura del archivo
+                byte[] bytesImg = imagen.getBytes();
+                Path directorioImgenes = Paths.get("images//"); // Ajustar según necesidades
+                String rutaAbsoluta = directorioImgenes.toFile().getAbsolutePath();
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+                Files.write(rutaCompleta, bytesImg);
+                mascota.setImagen(imagen.getOriginalFilename());
+            } else {
+                // Mantener la imagen anterior
+                Mascota mascotaExistente = mascotaService.findById(mascota.getId());
+                mascota.setImagen(mascotaExistente.getImagen());
+            }
+
+            // Actualizar los datos del usuario en la base de datos
+            mascotaService.update(mascota);
+
+            redirectAttributes.addFlashAttribute("modificacionExitosa", true);
+        } catch (IOException e) {
+            // Agregar un mensaje para la alerta de error
+            redirectAttributes.addFlashAttribute("errorModificacion", true);
+            e.printStackTrace(); // Puedes manejar el error según tus necesidades
+        } catch (ServiceException e) {
+            // Agregar un mensaje para la alerta de error del servicio
+            redirectAttributes.addFlashAttribute("errorModificacion", true);
+            e.printStackTrace(); // Puedes manejar el error según tus necesidades
+        }
+        // Puedes redirigir a la página de perfil o a donde desees después de la edición
+        return "redirect:/mascotasUsuarios";
+    }
+
+    @GetMapping("/mascota/{id}")
+    public ResponseEntity<Mascota> getMascotaDetails(@PathVariable Integer id) {
+        Mascota mascota = mascotaService.findById(id);
+        return ResponseEntity.ok().body(mascota);
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        mascotaService.delete(id);
+        return "redirect:/mascotasUsuarios";
+    }
+
 }
