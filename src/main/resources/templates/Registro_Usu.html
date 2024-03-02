@@ -43,6 +43,180 @@
                                                                 <!-- Template Main CSS File -->
                                                                 <link th:href="@{/assets/css/style.css}" rel="stylesheet">
 
+                                                                    <!-- estylos para letras -->
+                                                                    <style>
+                                                                        html {
+                                                                            scroll-behavior: smooth;
+                                                                            scroll-padding: 10rem;
+                                                                        }
+
+                                                                        .card-hover {
+                                                                            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+                                                                        }
+
+                                                                        .card-hover:hover {
+                                                                            transform: scale(1.05);
+                                                                            box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+                                                                            background-color: #A0A0A0; /* Cambia el color al pasar el mouse */
+                                                                        }
+                                                                        .inria-sans-light {
+                                                                            font-family: "Inria Sans", sans-serif;
+                                                                            font-weight: 300;
+                                                                            font-style: normal;
+                                                                        }
+
+                                                                        .inria-sans-regular {
+                                                                            font-family: "Inria Sans", sans-serif;
+                                                                            font-weight: 400;
+                                                                            font-style: normal;
+                                                                        }
+
+                                                                        .inria-sans-bold {
+                                                                            font-family: "Inria Sans", sans-serif;
+                                                                            font-weight: 700;
+                                                                            font-style: normal;
+                                                                            margin-right: 100px;
+                                                                            font-size: 30px;
+                                                                            line-height: 50px;
+                                                                        }
+                                                                        .inria-sans-bolds {
+                                                                            font-family: "Inria Sans", sans-serif;
+                                                                            font-weight: 700;
+                                                                            font-style: normal;
+                                                                            margin-right: 100px;
+                                                                            font-size: 20px;
+                                                                            line-height: 50px;
+                                                                        }
+
+                                                                        .inria-sans-light-italic {
+                                                                            font-family: "Inria Sans", sans-serif;
+                                                                            font-weight: 300;
+                                                                            font-style: italic;
+                                                                        }
+
+                                                                        .inria-sans-regular-italic {
+                                                                            font-family: "Inria Sans", sans-serif;
+                                                                            font-weight: 400;
+                                                                            font-style: italic;
+                                                                        }
+
+                                                                        .inria-sans-bold-italic {
+                                                                            font-family: "Inria Sans", sans-serif;
+                                                                            font-weight: 700;
+                                                                            font-style: italic;
+                                                                        }
+
+                                                                        .texto {
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 20px;
+                                                                            margin: 0 0 20px;
+                                                                            padding: 0;
+
+
+                                                                        }
+                                                                        .texto2 {
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 15px;
+                                                                            margin: 0 0 20px;
+                                                                            padding: 0;
+
+
+                                                                        }
+
+                                                                        .titulo {
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 18px;
+                                                                            font-weight: 700;
+                                                                            margin-right: 100px;
+                                                                            line-height: 50px;
+                                                                            color: #444444
+
+                                                                        }
+                                                                        .botones{
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 16px;
+                                                                            font-weight: 600;
+                                                                            margin-right: 60px;
+                                                                            color: #FFFFFF;
+                                                                            background-color: #2FD6B5 !important;
+                                                                            border-radius: 8px;
+                                                                            margin-top: 10px;
+                                                                            width: 150px; /* Define el ancho deseado para el botón */
+                                                                        }
+                                                                        .subboton{
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 16px;
+                                                                            font-weight: 600;
+                                                                            margin-right: 60px;
+                                                                            color: white !important; /* Color del texto blanco */
+                                                                            background-color: #39DBC1;
+                                                                            border-radius: 8px;
+                                                                            margin-top: 10px;
+                                                                            width: 120px; /* Define el ancho deseado para el botón */
+                                                                        }
+                                                                        .nav-item:hover .nav-link {
+                                                                            color: #2FD6B5; /* Cambia el color del texto al pasar el mouse por encima */
+                                                                        }
+                                                                        .custom-btn {
+                                                                            color: white !important; /* Color del texto blanco */
+                                                                        }
+
+                                                                        .encabezados {
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 30px;
+                                                                            font-weight: 700;
+                                                                            margin-right: 10px;
+                                                                            line-height: 50px;
+                                                                            color: #FFFFFF;
+                                                                            text-align: center;
+
+
+                                                                        }
+                                                                        .titlecartas {
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 20px;
+                                                                            font-weight: 600;
+                                                                            line-height: 50px;
+                                                                            color: #FFFFFF;
+
+                                                                        }
+                                                                        .textcartas {
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 19px;
+                                                                            font-weight: 300;
+                                                                            color: #000000;
+
+                                                                        }
+
+                                                                        .titleGesvet {
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 40px;
+                                                                            font-weight: 500;
+                                                                            line-height: 50px;
+                                                                            color: #FFFFFF;
+
+
+                                                                        }
+                                                                        .titlecartasDos {
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 16px;
+                                                                            font-weight: 600;
+                                                                            line-height: 50px;
+                                                                            color: #FFFFFF;
+
+                                                                        }
+                                                                        .titlecartaSel {
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 16px;
+                                                                            font-weight: 600;
+                                                                            line-height: 50px;
+                                                                            color: #000000;
+
+                                                                        }
+
+
+                                                                    </style>
 
                                                                     </head>
 
@@ -58,7 +232,7 @@
 
                                                                                         <div class="card mb-3 ">
                                                                                             <div class="card-body " style="width: 400px; background: #FFFFFF;
-                                                                                                 border: 1px solid #000000;
+                                                                                                 border-radius: 8px;
                                                                                                  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
                                                                                                  ">
                                                                                                 <div class="col-12 py-1 d-flex align-items-center my-1">
@@ -67,10 +241,10 @@
                                                                                                          style="width: 80px; margin-right: 15px; margin-bottom: 15px;">
 
                                                                                                         <div>
-                                                                                                            <h4 class="card-title fs-4 justify-content-between ">Crea una Cuenta</h4>
+                                                                                                            <h4 class="fs-4 justify-content-between titlecartaSel" >Crear una Cuenta</h4>
                                                                                                         </div>
                                                                                                 </div>
-                                                                                                <p class="text-center small ustify-content-between mb-0"><h5>Ingresa la siguiente información para crear la cuenta:</h5>
+                                                                                                <p class="text-center small justify-content-between mb-0"><h5 class="texto">Ingresa la siguiente información para crear una cuenta:</h5>
 
                                                                                                 </p>
 
@@ -80,22 +254,22 @@
                                                                                                          th:object="${user}"    class="row g-3 needs-validation py-2" novalidate>
 
                                                                                                     <div class="col-12 py-2">
-                                                                                                        <label for="yourName" class="form-label">Email</label>
+                                                                                                        <label for="yourName" class="form-label titlecartaSel ">Email</label>
                                                                                                         <input  th:field="*{username}" type="email" name="name" class="form-control" id="yourName" required>
                                                                                                             <span th:if="${userexist}" style="color: red;">El nombre de usuario ya está registrado</span>
                                                                                                             <div class="invalid-feedback">Escribe tu correo electrónico</div>
                                                                                                     </div>
                                                                                                     <div class="col-12 py-1">
-                                                                                                        <label for="password" class="form-label">Contraseña</label>
+                                                                                                        <label for="password" class="form-label titlecartaSel ">Contraseña</label>
                                                                                                         <input th:field="*{password}" type="password" name="password" class="form-control" id="password" required>
-                                                                                                           <div class="invalid-feedback">Escribe tu Contraseña</div>
+                                                                                                            <div class="invalid-feedback">Escribe tu Contraseña</div>
                                                                                                             <div th:if="${#fields.hasErrors('password')}" style="color: red;" role="alert">
                                                                                                                 La contraseña debe tener al menos 6 caracteres y combinar letras y números.
                                                                                                             </div>
                                                                                                     </div>
 
                                                                                                     <div class="col-12 py-1">
-                                                                                                        <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                                                                                                        <label for="confirmPassword" class="form-label titlecartaSel ">Confirmar Contraseña</label>
                                                                                                         <input th:field="*{confirmPassword}" type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
                                                                                                             <div class="invalid-feedback">Confirma tu contraseña</div>
                                                                                                     </div>
@@ -103,66 +277,66 @@
                                                                                                     <div class="col-12 py-1">
                                                                                                         <div class="form-check">
                                                                                                             <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                                                                                                                 <a class="form-check-label accept-terms" for="acceptTerms" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">Acepto los términos y condiciones</a>
+                                                                                                                <a class="form-check-label accept-terms texto2" for="acceptTerms" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer; color:#000000">Acepto los términos y condiciones</a>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="col-12 py-1">
-                                                                                                        <button type="submit" class="btn c w-100"
-                                                                                                                style="background-color: #9FAFE8; color: black; display: inline-block; width: 100%; text-align: center; text-decoration: none; padding: 10px;"><strong>Crear cuenta</strong></button>
+                                                                                                        <button type="submit" class="btn c w-100 texto2"
+                                                                                                                style="background-color: #2FD6B4; color: black; display: inline-block; width: 100%; text-align: center; text-decoration: none; padding: 10px;"><strong>Crear cuenta</strong></button>
                                                                                                     </div>
                                                                                                     <div class="col-12 py-2">
-                                                                                                        <p class="small mb-0">¿Ya tienes una cuenta? <a th:href="@{/login}">Iniciar Sesión</a>
+                                                                                                        <p class="small mb-0 texto2">¿Ya tienes una cuenta? <a th:href="@{/login}" style="color:#2FC0D5;">Iniciar Sesión</a>
                                                                                                         </p>
                                                                                                     </div>
-                                                                                         
 
- 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-         <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Términos y Condiciones</strong></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Fecha de última actualización:</strong> [05/04/2024]</p>
-        <p>Bienvenido a <strong>GesVet</strong>, nos complace tenerte con nosotros. Estos términos y condiciones ("Términos") rigen tu uso de la aplicación web y los servicios relacionados (conjuntamente, los "Servicios"). Al acceder y utilizar nuestros Servicios, aceptas cumplir y estar sujeto a estos Términos. Si no estás de acuerdo con alguno de estos términos, por favor, no utilices nuestros Servicios.</p>
-        
-        <ol>
-          <li><strong>Información del Usuario y Privacidad</strong></li>
-          <p>Al utilizar nuestros Servicios, aceptas proporcionar información precisa y completa sobre ti y la mascota para la cual estás buscando servicios veterinarios. Nos comprometemos a proteger tu privacidad y a cumplir con todas las leyes aplicables de protección de datos. Consulta nuestra Política de Privacidad para obtener más detalles sobre cómo recopilamos, utilizamos y protegemos tu información.</p>
 
-          <li><strong>Uso Apropiado de los Servicios</strong></li>
-          <p>Estás de acuerdo en utilizar nuestros Servicios de manera adecuada y legal. No debes utilizar los Servicios para actividades ilícitas, fraudulentas o inapropiadas. Nos reservamos el derecho de suspender o cancelar tu cuenta si sospechamos que estás utilizando los Servicios de manera indebida.</p>
 
-          <li><strong>Comunicaciones Electrónicas</strong></li>
-          <p>Al registrarte en nuestros Servicios, aceptas recibir comunicaciones electrónicas de nuestra parte, como correos electrónicos relacionados con la cuenta, actualizaciones y noticias. Puedes optar por no recibir ciertas comunicaciones, pero esto puede afectar tu capacidad para utilizar algunos aspectos de los Servicios.</p>
+                                                                                                    <!-- Modal -->
+                                                                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h1 class=" modal-title fs-5 texto" id="exampleModalLabel"><strong>Términos y Condiciones</strong></h1>
+                                                                                                                    <button style="background-color:#2FD6B4" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <p class="texto"><strong>Fecha de última actualización:</strong> [05/04/2024]</p>
+                                                                                                                    <p class="texto2">Bienvenido a <strong>GesVet</strong>, nos complace tenerte con nosotros. Estos términos y condiciones ("Términos") rigen tu uso de la aplicación web y los servicios relacionados (conjuntamente, los "Servicios"). Al acceder y utilizar nuestros Servicios, aceptas cumplir y estar sujeto a estos Términos. Si no estás de acuerdo con alguno de estos términos, por favor, no utilices nuestros Servicios.</p>
 
-          <li><strong>Responsabilidades del Usuario</strong></li>
-          <p>Eres responsable de mantener la confidencialidad de tu información de inicio de sesión y de todas las actividades que ocurran bajo tu cuenta. Debes notificarnos de inmediato cualquier uso no autorizado de tu cuenta.</p>
+                                                                                                                    <ol>
+                                                                                                                        <li class="texto"><strong>Información del Usuario y Privacidad</strong></li>
+                                                                                                                        <p class="texto2">Al utilizar nuestros Servicios, aceptas proporcionar información precisa y completa sobre ti y la mascota para la cual estás buscando servicios veterinarios. Nos comprometemos a proteger tu privacidad y a cumplir con todas las leyes aplicables de protección de datos. Consulta nuestra Política de Privacidad para obtener más detalles sobre cómo recopilamos, utilizamos y protegemos tu información.</p>
 
-          <li><strong>Limitación de Responsabilidad</strong></li>
-          <p>Nuestra responsabilidad se limita a la prestación de los Servicios de acuerdo con estos Términos. No somos responsables de daños indirectos, consecuentes, incidentales o especiales.</p>
+                                                                                                                        <li class="texto"><strong>Uso Apropiado de los Servicios</strong></li>
+                                                                                                                        <p class="texto2">Estás de acuerdo en utilizar nuestros Servicios de manera adecuada y legal. No debes utilizar los Servicios para actividades ilícitas, fraudulentas o inapropiadas. Nos reservamos el derecho de suspender o cancelar tu cuenta si sospechamos que estás utilizando los Servicios de manera indebida.</p>
 
-          <li><strong>Cambios en los Términos</strong></li>
-          <p>Nos reservamos el derecho de modificar estos Términos en cualquier momento. Los cambios entrarán en vigencia inmediatamente después de su publicación en la aplicación. Continuar utilizando los Servicios después de dichos cambios constituye tu aceptación de los términos modificados.</p>
-        </ol>
+                                                                                                                        <li class="texto"><strong>Comunicaciones Electrónicas</strong></li>
+                                                                                                                        <p class="texto2">Al registrarte en nuestros Servicios, aceptas recibir comunicaciones electrónicas de nuestra parte, como correos electrónicos relacionados con la cuenta, actualizaciones y noticias. Puedes optar por no recibir ciertas comunicaciones, pero esto puede afectar tu capacidad para utilizar algunos aspectos de los Servicios.</p>
 
-        <p>Al utilizar nuestros Servicios, aceptas estos Términos y te comprometes a cumplir con ellos. Si tienes alguna pregunta o inquietud, contáctanos a través de <a href="mailto:nicolas260805@gmail.com">nicolas260805@gmail.com</a></p>
-        
-        <p><strong>¡Gracias por utilizar GesVet!</strong></p>
+                                                                                                                        <li class="texto"><strong>Responsabilidades del Usuario</strong></li>
+                                                                                                                        <p class="texto2">Eres responsable de mantener la confidencialidad de tu información de inicio de sesión y de todas las actividades que ocurran bajo tu cuenta. Debes notificarnos de inmediato cualquier uso no autorizado de tu cuenta.</p>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        
-      </div>
-    </div>
-  </div>
-</div>
-                                                                                                  
+                                                                                                                        <li class="texto"><strong>Limitación de Responsabilidad</strong></li>
+                                                                                                                        <p class="texto2">Nuestra responsabilidad se limita a la prestación de los Servicios de acuerdo con estos Términos. No somos responsables de daños indirectos, consecuentes, incidentales o especiales.</p>
+
+                                                                                                                        <li class="texto"><strong>Cambios en los Términos</strong></li>
+                                                                                                                        <p class="texto2">Nos reservamos el derecho de modificar estos Términos en cualquier momento. Los cambios entrarán en vigencia inmediatamente después de su publicación en la aplicación. Continuar utilizando los Servicios después de dichos cambios constituye tu aceptación de los términos modificados.</p>
+                                                                                                                    </ol>
+
+                                                                                                                    <p class="texto2">Al utilizar nuestros Servicios, aceptas estos Términos y te comprometes a cumplir con ellos. Si tienes alguna pregunta o inquietud, contáctanos a través de <a href="mailto:nicolas260805@gmail.com">nicolas260805@gmail.com</a></p>
+
+                                                                                                                    <p class="texto2"><strong>¡Gracias por utilizar GesVet!</strong></p>
+
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <button type="button" style="background-color:#2FD6B4 " class="btn btn-secondary texto2" data-bs-dismiss="modal">Cerrar</button>
+
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
                                                                                                 </form>
                                                                                             </div>
                                                                                         </div>

@@ -72,11 +72,11 @@
     scroll-behavior: smooth;
 }
 
-body {
+/*body {
     font-family: "Open Sans", sans-serif;
     background: #f6f9ff;
     color: #444444;
-}
+}*/
 
 a {
     color: #4154f1;
@@ -88,14 +88,14 @@ a:hover {
     text-decoration: none;
 }
 
-h1,
+/*h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
     font-family: "Nunito", sans-serif;
-}
+}*/
 
 /*--------------------------------------------------------------
 # Main
@@ -1417,7 +1417,7 @@ h6 {
 }
 
 .profile .profile-edit label {
-    font-weight: 600;
+    font-weight: 500;
     color: rgba(1, 41, 112, 0.6);
 }
 
