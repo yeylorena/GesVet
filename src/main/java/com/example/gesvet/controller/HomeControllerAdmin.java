@@ -1,0 +1,469 @@
+package com.example.gesvet.controller;
+
+import com.example.gesvet.dto.UserDto;
+import com.example.gesvet.models.DetalleFactura;
+import com.example.gesvet.models.Factura;
+import com.example.gesvet.models.Productos;
+import com.example.gesvet.models.User;
+import com.example.gesvet.repository.UserRepository;
+import com.example.gesvet.service.IDetalleFactService;
+import com.example.gesvet.service.IFacturaService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.example.gesvet.service.IProductoService;
+import com.example.gesvet.service.UserService;
+import java.security.Principal;
+import java.util.Date;
+import java.util.stream.Collectors;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+@Controller
+@RequestMapping("/")
+public class HomeControllerAdmin {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private IProductoService productoService;
+
+    @Autowired
+    private UserRepository usuarioService;
+
+    @Autowired
+    private IFacturaService facturaService;
+
+    @Autowired
+    private IDetalleFactService detalleFactService;
+
+    //Array para almacenar los detalles de la factura
+    List<DetalleFactura> detalles = new ArrayList<DetalleFactura>();
+
+    //datos de la factura
+    Factura factura = new Factura();
+
+    @GetMapping("verhomeadmin")
+    public String home(Model model, Authentication authentication, Principal principal) {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        List<Factura> factura = facturaService.findByUsuario(user);
+
+        model.addAttribute("userDto", userDto);
+
+        model.addAttribute("productos", productoService.findAll());
+        model.addAttribute("factura", factura);
+        return "usuario/Homeadmin";
+    }
+
+    @GetMapping("productohomeadmin/{id}")
+    public String productoHome(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+// Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        Productos producto = new Productos();
+        Optional<Productos> productoOptional = productoService.get(id);
+        producto = productoOptional.get();
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("producto", producto);
+
+        return "usuario/Producto_Homeadmin";
+    }
+
+    @PostMapping("/cartadmin")
+    public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        DetalleFactura detalleFactura = new DetalleFactura();
+        Productos producto = new Productos();
+        double sumaTotal = 0;
+
+        Optional<Productos> optionalProducto = productoService.get(id);
+        producto = optionalProducto.orElseThrow(() -> new RuntimeException("Product not found"));
+
+        // Check if the product is already in the cart
+        Optional<DetalleFactura> existingDetail = detalles.stream()
+                .filter(p -> p.getProductos().getId().equals(id))
+                .findFirst();
+
+        if (existingDetail.isPresent()) {
+            // Update the quantity if the product is already in the cart
+            DetalleFactura existingDetalle = existingDetail.get();
+
+            // Check if adding the new quantity exceeds the available quantity
+            if (existingDetalle.getCantidad() + cantidad > producto.getCantidad()) {
+
+                redirectAttributes.addFlashAttribute("erroradmin", true);
+                return "redirect:/productohomeadmin/" + id;
+            }
+
+            existingDetalle.setCantidad(existingDetalle.getCantidad() + cantidad);
+            existingDetalle.setTotal(existingDetalle.getPrecio() * existingDetalle.getCantidad());
+        } else {
+            // Check if adding the new quantity exceeds the available quantity
+            if (cantidad > producto.getCantidad()) {
+
+                redirectAttributes.addFlashAttribute("erroradmin", true);
+                return "redirect:/productohomeadmin/" + id;
+            }
+
+            detalleFactura.setCantidad(cantidad);
+            detalleFactura.setPrecio(producto.getPrecio());
+            detalleFactura.setNombre(producto.getNombre());
+            detalleFactura.setTotal(producto.getPrecio() * cantidad);
+            detalleFactura.setProductos(producto);
+
+            detalles.add(detalleFactura);
+        }
+
+        // Calculate the total sum
+        sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+
+        factura.setTotal(sumaTotal);
+
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("cart", detalles);
+        model.addAttribute("factura", factura);
+        return "usuario/Carritoadmin";
+    }
+
+    //Quitar un producto del carrito
+    @GetMapping("/deleteadmin/cartadmin/{id}")
+    public String deleteProductoCart(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+// Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        // lista nueva de prodcutos
+        List<DetalleFactura> detalleNueva = new ArrayList<DetalleFactura>();
+
+        for (DetalleFactura detalleFactura : detalles) {
+            if (detalleFactura.getProductos().getId() != id) {
+                detalleNueva.add(detalleFactura);
+            }
+        }
+
+        // poner la nueva lista con los productos restantes
+        detalles = detalleNueva;
+
+        double sumaTotal = 0;
+        sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+
+        factura.setTotal(sumaTotal);
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("cart", detalles);
+        model.addAttribute("factura", factura);
+
+        return "usuario/Carritoadmin";
+    }
+
+    @GetMapping("/getCartadmin")
+    public String getCart(Model model, Authentication authentication, Principal principal) {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        model.addAttribute("userDto", userDto);
+
+        model.addAttribute("cart", detalles);
+        model.addAttribute("factura", factura);
+
+        return "/usuario/Carritoadmin";
+    }
+
+    @GetMapping("/facturaadmin")
+    public String factura(Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("cart", detalles);
+        model.addAttribute("factura", factura);
+        model.addAttribute("usuario", user);
+
+        return "usuario/ResumenFacturaadmin";
+    }
+
+    @GetMapping("saveFactadmin")
+    public String saveFact(Model model, Authentication authentication, Principal principal) {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        Date fecha = new Date();
+
+        //Se guarda la fecha de la factura
+        factura.setFecha(fecha);
+
+        //Se guarda el número de la factura
+        factura.setNumero(facturaService.generarNumFactura());
+
+
+        factura.setUser(user);
+
+        //Se guardan los datos de la factura
+        facturaService.save(factura);
+
+        //Guardar detalles
+        for (DetalleFactura dt : detalles) {
+            dt.setFactura(factura);
+            detalleFactService.save(dt);
+        }
+
+        //limpiar lista  y factura
+        factura = new Factura();
+        detalles.clear();
+        model.addAttribute("userDto", userDto);
+        return "redirect:/";
+    }
+
+    @PostMapping("/buscaradmin")
+    public String buscarProducto(@RequestParam String palabra, Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        //Filtro para retornar un nombre utilizando un filtro que busca en la lista de productos. Retorna un string y se pasa a una lista
+        List<Productos> productos = productoService.findAll().stream().filter(p -> p.getNombre().contains(palabra)).collect(Collectors.toList());
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("productos", productos);
+        return "usuario/Homeadmin";
+    }
+
+    /* detalles compras admin */
+ /*
+    
+	@GetMapping("/comprasadmin")
+	public String obtenerCompras(Model model, Authentication authentication, Principal principal) {
+ // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+        
+        
+		List<Factura> factura= facturaService.findByUsuario(user);
+                
+		 model.addAttribute("userDto", userDto);
+		model.addAttribute("factura", factura);
+		
+		return "usuario/Homeadmin";
+	}
+     */
+    @GetMapping("/detalleadmin/{id}")
+    public String detalleCompra(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        Optional<Factura> factura = facturaService.findById(id);
+
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("detalles", factura.get().getListaDetalles());
+
+        return "usuario/detallecompraadmin";
+    }
+
+}

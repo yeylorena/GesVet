@@ -1,14 +1,19 @@
 package com.example.gesvet.service;
 
 import com.example.gesvet.models.Factura;
+import com.example.gesvet.models.User;
 import java.util.List;
+import java.util.Optional;
 
 public interface IFacturaService {
 
     List<Factura> findAll();
-
+    Optional<Factura> findById(Integer id);
     Factura save(Factura factura);
 
     String generarNumFactura();
+    
+    List<Factura>findByUsuario(User usuario);
+    
 
 }

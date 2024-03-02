@@ -20,9 +20,43 @@ public class Factura {
     private String numero;
     private Date fecha;
     private double total;
+    private String estadoPago;
+    private String imagen;
+    private String estadoEnvio;
 
+    public String getEstadoPago() {
+        return estadoPago;
+    }
+
+    public void setEstadoPago(String estadoPago) {
+        this.estadoPago = estadoPago;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getEstadoEnvio() {
+        return estadoEnvio;
+    }
+
+    public void setEstadoEnvio(String estadoEnvio) {
+        this.estadoEnvio = estadoEnvio;
+    }
+
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
     @ManyToOne
-    private Usuario usuario;
+    private User usuario;
 
     @OneToMany(mappedBy = "factura")
     private List<DetalleFactura> listaDetalles;
@@ -30,13 +64,19 @@ public class Factura {
     public Factura() {
     }
 
-    public Factura(Integer id, String numero, Date fecha, double total) {
-        super();
+    public Factura(Integer id, String numero, Date fecha, double total, String estadoPago, String imagen, String estadoEnvio, User usuario) {
+        super ();
         this.id = id;
         this.numero = numero;
         this.fecha = fecha;
         this.total = total;
+        this.estadoPago = estadoPago;
+        this.imagen = imagen;
+        this.estadoEnvio = estadoEnvio;
+        this.usuario = usuario;
     }
+
+   
 
     public Integer getId() {
         return id;
@@ -70,11 +110,11 @@ public class Factura {
         this.total = total;
     }
 
-    public Usuario getUsuario() {
+    public User getUser() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUser(User usuario) {
         this.usuario = usuario;
     }
 
@@ -88,7 +128,9 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Factura{" + "id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", total=" + total + '}';
+        return "Factura{" + "id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", total=" + total + ", estadoPago=" + estadoPago + ", imagen=" + imagen + ", estadoEnvio=" + estadoEnvio + '}';
     }
+
+    
 
 }

@@ -17,7 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
     private String username;
     private String password;
     private String role;
@@ -29,12 +29,11 @@ public class User {
     private String imagen;
     private boolean activo;
     private static final String IMAGEN_PREDETERMINADA = "usuario.png";
-    
-     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Mascota> mascotas;
 
     // Resto de tu código...
-
     // Agrega este método para obtener la lista de mascotas del usuario
     public List<Mascota> getMascotas() {
         return mascotas;
@@ -64,18 +63,18 @@ public class User {
         this.imagen = imagen;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     public String getUsername() {
         return username;
     }
-    
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -83,7 +82,7 @@ public class User {
     public String getPassword() {
         return password;
     }
-   
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -141,11 +140,52 @@ public class User {
         this.imagen = (imagen != null && !imagen.isEmpty()) ? imagen : IMAGEN_PREDETERMINADA;
         // Set default role if not provided
         this.role = role != null ? role : "USER";
-         this.activo = true;
+        this.activo = true;
 
     }
 
     public User() {
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", telefono=" + telefono + ", acercade=" + acercade + ", imagen=" + imagen + ", activo=" + activo + ", mascotas=" + mascotas + '}';
+    }
+ /* productos v*/
+    @OneToMany(mappedBy = "usuario")
+    private List<Productos> listaProductos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Factura> listaFacturas;
+
+    public List<Productos> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(List<Productos> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+     /* fin productos v*/
+    /* categorias v*/
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Categorias> listaCategorias;
+
+    public List<Categorias> getListaCategorias() {
+        return listaCategorias;
+    }
+
+    public void setListaCategorias(List<Categorias> listaCategorias) {
+        this.listaCategorias = listaCategorias;
+    }
+ /* fin categorias v*/
     
+    public List<Factura> getListaFacturas() {
+        return listaFacturas;
+    }
+
+    public void setListaFacturas(List<Factura> listaFacturas) {
+        this.listaFacturas = listaFacturas;
+    }
+
 }

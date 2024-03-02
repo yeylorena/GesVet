@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(UserDto userDto) {
         // Verificar si el ID no es nulo
-        Long userId = userDto.getId();
+        Integer userId = userDto.getId();
         if (userId == null) {
             throw new IllegalArgumentException("ID del usuario no puede ser nulo");
         }
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void eliminarUsuario(Long userId) {
+    public void eliminarUsuario(Integer userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
 
         if (optionalUser.isPresent()) {
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(Long userId) {
+    public User findById(Integer userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + userId));
     }

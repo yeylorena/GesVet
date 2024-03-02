@@ -1,9 +1,11 @@
 package com.example.gesvet.service;
 
 import com.example.gesvet.models.Factura;
+import com.example.gesvet.models.User;
 import com.example.gesvet.repository.IFacturaRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +61,15 @@ public class FacturaServiceImpl implements IFacturaService {
         }
 
         return numeroConcatenado;
+    }
+
+    @Override
+    public List<Factura> findByUsuario(User usuario) {
+       return facturaRepository.findByUsuario(usuario);  }
+
+    @Override
+    public Optional<Factura> findById(Integer id) {
+       return facturaRepository.findById(id);
     }
 
 }
