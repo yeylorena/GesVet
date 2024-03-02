@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 public class UserDto {
 
-    private Long id;
+    private Integer id;
     private String username;
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
@@ -52,7 +52,7 @@ public class UserDto {
 
     }
 
-    public UserDto(Long id, String username, String password, String confirmPassword, String nombre, String apellido, String direccion, String telefono, String acercade, String imagen, String role,
+    public UserDto(Integer id, String username, String password, String confirmPassword, String nombre, String apellido, String direccion, String telefono, String acercade, String imagen, String role,
             String currentPassword, String newPassword, String confirmNewPassword) {
         this.id = id;
         this.username = username;
@@ -87,11 +87,11 @@ public class UserDto {
         this.confirmPassword = confirmPassword;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

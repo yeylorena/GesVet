@@ -219,12 +219,12 @@
 
                                                                                             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                                                                                                 <img th:src="@{/img/image 20.png}" alt="Profile" class="rounded-circle">
-                                                                                                    <span class="d-none d-md-block dropdown-toggle ps-2"th:text="${userdetail.nombre}"></span>
+                                                                                                    <span class="d-none d-md-block dropdown-toggle ps-2"></span>
                                                                                             </a><!-- End Profile Iamge Icon -->
 
                                                                                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                                                                                 <li class="dropdown-header">
-                                                                                                    <h6  th:text="${userdetail.nombre}"></h6>
+                                                                                                    <h6></h6>
                                                                                                     <span>Usuario</span>
                                                                                                 </li>
 
@@ -311,7 +311,7 @@
                                                                                     </li>
 
                                                                                     <li class="nav-item">
-                                                                                        <a class="nav-link collapsed" href="/">
+                                                                                        <a class="nav-link collapsed" th:href="@{/verhome}">
                                                                                             <i class="bi bi-people"></i>
                                                                                             <span>Productos y Servicios</span>
                                                                                         </a>

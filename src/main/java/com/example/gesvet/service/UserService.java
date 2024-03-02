@@ -5,11 +5,12 @@ import com.example.gesvet.models.User;
 import java.awt.Image;
 import java.util.List;
 
+
 public interface UserService {
 
     User findByUsername(String username);
 
-    User findById(Long userId);
+    User findById(Integer userId);
 
     User save(UserDto userDto);
 
@@ -17,7 +18,7 @@ public interface UserService {
 
     void updateUser(UserDto userDto);
 
-    void eliminarUsuario(Long userId);
+    void eliminarUsuario(Integer userId);
    
     void cambiarContrasenaYEnviarCorreo(User user);
 

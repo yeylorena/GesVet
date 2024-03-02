@@ -53,19 +53,14 @@
         <header id="header" class="header fixed-top d-flex align-items-center">
 
             <div class="d-flex align-items-center justify-content-between">
-                <a href="Principal.html" class="logo d-flex align-items-center">
+                <a href="index.html" class="logo d-flex align-items-center">
                     <img src="assets/img/logoGesVet.png">
                     <span class="d-none d-lg-block">GesVet</span>
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
             </div><!-- End Logo -->
 
-            <div class="search-bar">
-                <form class="search-form d-flex align-items-center" method="POST" action="#">
-                    <input type="text" name="query" placeholder="Buscar" title="Enter search keyword">
-                    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-                </form>
-            </div><!-- End Search Bar -->
+
 
             <nav class="header-nav ms-auto">
                 <ul class="d-flex align-items-center">
@@ -75,6 +70,10 @@
                             <i class="bi bi-search"></i>
                         </a>
                     </li><!-- End Search Icon-->
+                    <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
+                        <i class="bi bi-journal-bookmark-fill"></i>
+                        <span class="badge bg-primary badge-number"></span>
+                    </a>
 
                     <li class="nav-item dropdown">
 
@@ -85,7 +84,7 @@
 
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                             <li class="dropdown-header">
-                                You have 4 new notifications
+                                Tienes 4 nuevas notificaciones
                                 <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                             </li>
                             <li>
@@ -172,7 +171,7 @@
                                     <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
                                     <div>
                                         <h4>Maria Hudson</h4>
-                                        <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut.</p>
+                                        <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
                                         <p>4 hrs. ago</p>
                                     </div>
                                 </a>
@@ -220,13 +219,13 @@
                     <li class="nav-item dropdown pe-3">
 
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <img src="./img/image 20.png" alt="Profile" class="rounded-circle">
-                            <span class="d-none d-md-block dropdown-toggle ps-2">Herley Puentes</span>
+                            <img th:src="${userDto.imagen}" th:alt="${userDto.imagen}" class="rounded-circle"/>
+                            <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${userdetail.nombre}"></span>
                         </a><!-- End Profile Iamge Icon -->
 
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li class="dropdown-header">
-                                <h6>Herley Puentes</h6>
+                                <h6 th:text="${userdetail.nombre}"></h6>
                                 <span>Administrador</span>
                             </li>
                             <li>
@@ -234,7 +233,7 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="perfil_vet.html">
+                                <a class="dropdown-item d-flex align-items-center"  th:href="@{/perfil_admin}">
                                     <i class="bi bi-person"></i>
                                     <span>Mi perfil</span>
                                 </a>
@@ -244,7 +243,7 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="perfil_vet.html">
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
                                     <i class="bi bi-gear"></i>
                                     <span>Configuracion de la Cuenta</span>
                                 </a>
@@ -264,7 +263,7 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="Principal.html">
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
                                     <i class="bi bi-box-arrow-right"></i>
                                     <span>Salir</span>
                                 </a>
@@ -280,94 +279,91 @@
 
         <!-- ======= Sidebar ======= -->
         <aside id="sidebar" class="sidebar">
-            <ul class="sidebar-nav" id="sidebar-nav">
 
+            <ul class="sidebar-nav" id="sidebar-nav">
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="inicio_vet.html">
+                    <a class="nav-link collapsed" th:href="@{/homes}">
                         <i class="bi bi-house"></i>
                         <span>Inicio</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="perfil_vet.html">
+                    <a class="nav-link collapsed" th:href="@{/perfil_admin}">
                         <i class="bi bi-person"></i>
-                        <span>Perfil</span>
+                        <span>Mi perfil</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="clientes.html">
+                    <a class="nav-link collapsed" th:href="@{/cliente}">
                         <i class="bi bi-people"></i>
                         <span>Clientes</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="Raza_Especie.html">
+                    <a class="nav-link collapsed" th:href="@{/razas}">
                         <i class="bi bi-people"></i>
                         <span>Gestión mascotas</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="atencion_cita.html">
                         <i class="bi bi-people"></i>
                         <span>Seguimiento médico</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="citas_vet.html">
+                    <a class="nav-link collapsed" th:href="@{/citas}">
                         <i class="bi bi-calendar-event"></i>
                         <span>Gestión citas</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="Gestion_Productos_Servicios.html">
+                    <a class="nav-link collapsed" th:href="@{/admin}">
+                        <i class="bi bi-box2-heart"></i>
+                        <span>Ver Tienda</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/productos}">
                         <i class="bi bi-box2-heart"></i>
                         <span>Gestión productos_servicios</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="compras.html">
+                    <a class="nav-link collapsed" th:href="@{/compras}">
                         <i class="bi bi-bag-plus"></i>
                         <span>Gestión compras</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="Gestion_Ventas.html">
+                    <a class="nav-link collapsed" th:href="@{/verhomeadmin}">
                         <i class="bi bi-bag-plus"></i>
                         <span>Gestión ventas</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="gestionveterinaria.html">
-                        <i class="bi bi-briefcase"></i>
-                        <span>Gestión veterinaria</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="ayuda.html">
+                    <a class="nav-link collapsed" th:href="@{/ayuda}">
                         <i class="bi bi-question-circle"></i>
                         <span>Ayuda y soporte</span>
                     </a>
                 </li>
-
-                <!-- End Profile Page Nav -->
-
+                <!-- End Dashboard Nav -->
             </ul>
-        </aside><!-- End Sidebar-->
+        </aside>
 
         <main id="main" class="main" style="background-color: #5c5db4;">
 
             <div class="pagetitle">
                 <h1>Gestion Ventas</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="inicio.html">Inicio</a></li>
-                        <li class="breadcrumb-item">Gestión Ventas</li>
-                        <li class="breadcrumb-item active">Registrar</li>
-                        <li class="breadcrumb-item active">Listar Ventas</li>
-                        <li class="breadcrumb-item active">Pedidos</li>
-                        <li class="breadcrumb-item active">Listar Pedidos</li>
-                    </ol>
-                </nav>
+
             </div><!-- End Page Title -->
 
             <section class="section profile">
@@ -379,7 +375,7 @@
                             <ul class="nav nav-tabs nav-tabs-bordered">
 
                                 <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Registrar
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Registrar Venta
                                     </button>
                                 </li>
                                 <li class="nav-item">
@@ -398,255 +394,79 @@
                                 <!--Registrar venta-->
                                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
 
-                                    <div class="container-fluid mt-3">
-                                        <p class="textoNeon">Registrar</p>
+                                    <div class="container-fluid mt-2">
+                                        <p class="textoNeonU">Gestion Ventas</p>
                                     </div>
 
                                     <div class="container-fluid">
                                         <div>
 
-                                            <div class="row">
-                                                <div class="col-lg-12 col-md-12">
-
-                                                    <div class="row my-2">
-                                                        <h5 class="mb-3">Datos del cliente</h5>
-                                                        <div class="col-4">
-                                                            <label class="form-label">Documento:</label>
-                                                            <input class="form-control" type="text" name="txtDoc" id="txtDoc">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label class="form-label">Nombre:</label>
-                                                            <input class="form-control" type="text" name="txtNombre" id="txtNombre">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label class="form-label">Apellido:</label>
-                                                            <input class="form-control" type="text" name="txtApellido" id="txtApellido">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row my-2">
-                                                        <div class="col-4">
-                                                            <label class="form-label">Teléfono:</label>
-                                                            <input class="form-control" type="text" name="txtTeléfono" id="txtTeléfono">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label class="form-label">Dirección:</label>
-                                                            <input class="form-control" type="text" name="txtDirección" id="txtDireccion">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label class="form-label">Email:</label>
-                                                            <input class="form-control" type="email" name="txtEmail" id="txtEmail">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row my-2">
-                                                        <h5 class="mt-3 pb-2">Datos del producto/servicio</h5>
-                                                        <div class="col-4">
-                                                            <label for="tipo"><strong>Categoría:</strong></label>
-                                                            <select class="form-select">
-                                                                <option>Seleccionar</option>
-                                                                <option>Alimentos </option>
-                                                                <option>Accesorior</option>
-                                                                <option>Vacunación</option>
-                                                                <option>Citas</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label class="form-label">Producto:</label>
-                                                            <input class="form-control" type="text" name="txtProducto" id="txtProducto">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label class="form-label">Cantidad:</label>
-                                                            <input class="form-control" type="number" name="txtCantidad" id="txtCantidad">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row my-2">
-                                                        <div class="col-4">
-                                                            <label class="form-label">Valor unitario:</label>
-                                                            <input class="form-control" type="text" name="txtPrecio" id="txtPrecio">
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="row my-2">
-                                                        <div class="d-grid gap-2">
-                                                            <button class="mt-3 btn btn-success" type="button">Agregar más</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="container-fluid">
                                             <div class="table-responsive">
+                                                <div class="card-body">
 
-                                                <!-- Inicio Tabla -->
-                                                <table class="table table-striped table-hover text-start">
-                                                    <thead>
-                                                        <tr class="table-secondary">
-                                                    <h5 class="text-center mb-4">Lista de productos/servicios</h5>
-                                                    <th scope="col">Código</th>
-                                                    <th scope="col">Producto</th>
-                                                    <th scope="col">Categoría</th>
-                                                    <th scope="col">Cantidad</th>
-                                                    <th scope="col">V/unitario</th>
-                                                    <th scope="col">V/total</th>
-                                                    <th scope="col">Opciones</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">SR01</th>
-                                                            <td>Parvovirosis</td>
-                                                            <td>Vacunación</td>
-                                                            <td>1</td>
-                                                            <td>40000</td>
-                                                            <td>40000</td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                                        data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-12 ">
+                                                            <form class="form-inline" method="post" th:action="@{/buscaradmin}">
+                                                                <div class="form-group">
+                                                                    <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off">
 
-                                                                <!-- Modal editar venta producto-->
-                                                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                                                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                                                     aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header" style="background: #5c5db4;">
-                                                                                <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: white;">
-                                                                                    Modificar producto o servicio</h1>
-                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                                        aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="row my-2">
-                                                                                    <div class="col-6">
-                                                                                        <label class="form-label">Código:</label>
-                                                                                        <input class="form-control" type="text" name="txtCod" id="txtCod">
-                                                                                    </div>
-                                                                                    <div class="col-6">
-                                                                                        <label class="form-label">Producto:</label>
-                                                                                        <input class="form-control" type="text" name="txtProducto" id="txtProducto">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row my-2">
-                                                                                    <div class="col-6">
-                                                                                        <label for="tipo"><strong>Categoría:</strong></label>
-                                                                                        <select class="form-select">
-                                                                                            <option>Seleccionar</option>
-                                                                                            <option>Alimentos </option>
-                                                                                            <option>Accesorior</option>
-                                                                                            <option>Vacunación</option>
-                                                                                            <option>Citas</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-6">
-                                                                                        <label class="form-label">Cantidad:</label>
-                                                                                        <input class="form-control" type="number" name="txtCantidad" id="txtCantidad">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row my-2">
-                                                                                    <div class="col-6">
-                                                                                        <label class="form-label">V/Unitario:</label>
-                                                                                        <input class="form-control" type="text" name="txtValorU" id="txtValorU">
-                                                                                    </div>
-                                                                                    <div class="col-6">
-                                                                                        <label class="form-label">V/Total:</label>
-                                                                                        <input class="form-control" type="text" name="txtTotal" id="txtTotal">
-                                                                                    </div>
-                                                                                </div>
+                                                                    &nbsp;&nbsp;
+                                                                    <input id="buscar" type="submit" class="btn btn-outline-success" value="Buscar">
 
-                                                                            </div>
-                                                                            <div class="modal-footer" style="background: #5c5db4;">
-                                                                                <button type="button" class="btn btn-secondary"
-                                                                                        data-bs-dismiss="modal">Cancelar</button>
-                                                                                <button type="button" class="btn btn-success">Modificar</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
                                                                 </div>
 
-                                                                <!-- Modal eliminar producto -->
-                                                                <button onclick="eliminarProd()" type="button" class="btn btn-danger"><i
-                                                                        class="bi bi-trash3"></i></button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">PR02</th>
-                                                            <td>Arena gatos</td>
-                                                            <td>Accesorios</td>
-                                                            <td>2</td>
-                                                            <td>25000</td>
-                                                            <td>50000</td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                                        data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
-                                                                <!-- Modal eliminar producto -->
-                                                                <button onclick="eliminarProd()" type="button" class="btn btn-danger"><i
-                                                                        class="bi bi-trash3"></i></button>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">PR06</th>
-                                                            <td>Pelota goma</td>
-                                                            <td>Accesorios</td>
-                                                            <td>1</td>
-                                                            <td>8000</td>
-                                                            <td>8000</td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                                        data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
-                                                                <!-- Modal eliminar producto -->
-                                                                <button onclick="eliminarProd()" type="button" class="btn btn-danger"><i
-                                                                        class="bi bi-trash3"></i></button>
-                                                        </tr>
-
-                                                        <tr class="table-light">
-                                                            <th scope="row"></th>
-                                                            <td></td>
-                                                            <td>TOTAL</td>
-                                                            <td>4</td>
-                                                            <td>73000</td>
-                                                            <td>98000</td>
-                                                            <td></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <!-- End Table with stripped rows -->
-
-                                            </div>
-                                            <div class="row my-2">
-                                                <h5 class="text-center mb-4">Confirmar venta</h5>
-                                                <div class="col-3">
-                                                    <label class="form-label">Total:</label>
-                                                    <input class="form-control" type="text" name="txtTotalVenta" id="txtTotalVenta">
-                                                </div>
-                                                <div class="col-3">
-                                                    <label for="tipo"><strong>Servicio:</strong></label>
-                                                    <select class="form-select">
-                                                        <option>Seleccionar</option>
-                                                        <option>Presencial</option>
-                                                        <option>Domicilio</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-3">
-                                                    <label for="tipo"><strong>Pago:</strong></label>
-                                                    <select class="form-select">
-                                                        <option>Seleccionar</option>
-                                                        <option>Efectivo</option>
-                                                        <option>Tarjeta</option>
-                                                        <option>Nequi</option>
-                                                        <option>Daviplata</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="d-grid gap-2">
-                                                        <button class="mt-3 btn btn-success" type="button">Finalizar</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
+
+                                                    <div class="row mt-5">
+                                                        <div class="col-12">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Imagen</th>
+                                                                        <th>Categoría</th>
+                                                                        <th>Nombre</th>
+                                                                        <th>Disponibilidad</th>
+                                                                        <th>Opcion</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- Iterar sobre la lista de productos -->
+                                                                    <tr th:each="producto: ${productos}" th:if="${producto.activos}">
+                                                                        <td>
+                                                                            <img th:src="@{/images/{img} (img=${producto.imagen})}" alt="..." style="height: 80px;">
+                                                                        </td>
+                                                                        <td th:text="${producto.categoria != null ? producto.categoria.nombre : 'N/A'}"></td>
+                                                                        <td th:text="${producto.nombre}"></td>
+                                                                        <td>
+                                                                            <!-- Usar expresión Thymeleaf para mostrar "Activo" o "Inactivo" -->
+                                                                            <span th:if="${producto.activo} == true">Disponible</span>
+                                                                            <span th:if="${producto.activo} == false">Inactivo</span>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a th:href="@{/productohomeadmin/{id} (id=${producto.id})}" class="btn btn-primary btn-sm">Ver producto</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+
                                                 </div>
+
                                             </div>
                                         </div>
+
+
+
+
+
                                     </div>
                                 </div>
 
@@ -676,59 +496,24 @@
                                                     </div>
 
                                                     <!-- Inicio Tabla facturas-->
-                                                    <table class="table table-striped table-hover text-start">
-                                                        <thead>
-                                                            <tr class="table-secondary">
-                                                                <th scope="col">N° Fact.</th>
-                                                                <th scope="col">Fecha</th>
-                                                                <th scope="col">Cliente</th>
-                                                                <th scope="col">Valor</th>
-                                                                <th scope="col">Servicio</th>
-                                                                <th scope="col">Pago</th>
-                                                                <th scope="col">Opciones</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th scope="row">F001</th>
-                                                                <td>2023-11-02</td>
-                                                                <td>Maria C. Gutiérrez</td>
-                                                                <td>120000</td>
-                                                                <td>Domicilio</td>
-                                                                <td>Nequi</td>
-                                                                <td>
-                                                                    <a href="Historial_Ventas.html" class="btn  btn-success"
-                                                                       title="Upload new profile image"><i class="bi bi-filetype-pdf"></i></a>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">F001</th>
-                                                                <td>2023-11-02</td>
-                                                                <td>Cristian Guzman</td>
-                                                                <td>88500</td>
-                                                                <td>Presencial</td>
-                                                                <td>Efectivo</td>
-                                                                <td>
-                                                                    <a href="Historial_Ventas.html" class="btn  btn-success"
-                                                                       title="Upload new profile image"><i class="bi bi-filetype-pdf"></i></a>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <th scope="row">F001</th>
-                                                                <td>2023-11-02</td>
-                                                                <td>Juliana López</td>
-                                                                <td>35000</td>
-                                                                <td>Domicilio</td>
-                                                                <td>Tarjeta</td>
-                                                                <td>
-                                                                    <a href="Historial_Ventas.html" class="btn  btn-success"
-                                                                       title="Upload new profile image"><i class="bi bi-filetype-pdf"></i></a>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">No. de Orden</th>
+                                                            <th scope="col">Fecha</th>
+                                                            <th scope="col">Valor</th>
+                                                            <th scope="col">Acción</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="factura: ${factura}">
+                                                            <td th:text="${factura.numero}"></td>
+                                                            <td th:text="${factura.fecha}" ></td>
+                                                            <td th:text="${factura.total}" ></td>
+                                                           <td><a th:href="@{/detalleadmin/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                                 </div>
                                             </div>
                                         </div>

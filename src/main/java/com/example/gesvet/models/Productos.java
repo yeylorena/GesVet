@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -19,23 +20,53 @@ public class Productos {
     private String imagen;
     private double precio;
     private int cantidad;
+    private boolean activo;
+    private boolean activos = true;
+
+    public boolean isActivos() {
+        return activos;
+    }
+
+    public void setActivos(boolean activos) {
+        this.activos = activos;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
     @ManyToOne()
-    private Usuario usuario;
+    private User usuario;
+
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
 
     public Productos() {
     }
 
-    public Productos(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad, Usuario usuario) {
-        super();
+    public Productos(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad, boolean activo,  User usuario) {
+        super ();
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.precio = precio;
         this.cantidad = cantidad;
+        this.activo = activo;
+        this.activos = true;
         this.usuario = usuario;
     }
+
+   
 
     public Integer getId() {
         return id;
@@ -85,17 +116,22 @@ public class Productos {
         this.cantidad = cantidad;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     @Override
     public String toString() {
-        return "Productos{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", cantidad=" + cantidad + '}';
+        return "Productos{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", cantidad=" + cantidad + ", activo=" + activo + ", activos=" + activos + ", usuario=" + usuario + '}';
     }
 
+    
+
+  @ManyToOne
+    @JoinColumn(name = "categoria_id") // Nombre de la columna en la tabla productos que contiene la clave foránea
+    private Categorias categoria;
+
+    public Categorias getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categorias categoria) {
+        this.categoria = categoria;
+    }
 }
