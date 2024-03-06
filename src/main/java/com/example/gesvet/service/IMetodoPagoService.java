@@ -23,5 +23,6 @@ public interface IMetodoPagoService {
     void delete(Integer id);
 
     List<MetodoPago> findAll();
+    MetodoPago findById(Integer id);
     
 }

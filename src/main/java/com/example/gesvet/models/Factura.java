@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -23,6 +24,24 @@ public class Factura {
     private String estadoPago;
     private String imagen;
     private String estadoEnvio;
+    private String role;
+    private boolean procesada;
+
+    public boolean isProcesada() {
+        return procesada;
+    }
+
+    public void setProcesada(boolean procesada) {
+        this.procesada = procesada;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getEstadoPago() {
         return estadoPago;
@@ -64,8 +83,7 @@ public class Factura {
     public Factura() {
     }
 
-    public Factura(Integer id, String numero, Date fecha, double total, String estadoPago, String imagen, String estadoEnvio, User usuario) {
-        super ();
+    public Factura(Integer id, String numero, Date fecha, double total, String estadoPago, String imagen, String estadoEnvio, String role, User usuario) {
         this.id = id;
         this.numero = numero;
         this.fecha = fecha;
@@ -73,6 +91,7 @@ public class Factura {
         this.estadoPago = estadoPago;
         this.imagen = imagen;
         this.estadoEnvio = estadoEnvio;
+        this.role = role;
         this.usuario = usuario;
     }
 
@@ -128,9 +147,20 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Factura{" + "id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", total=" + total + ", estadoPago=" + estadoPago + ", imagen=" + imagen + ", estadoEnvio=" + estadoEnvio + '}';
+        return "Factura{" + "id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", total=" + total + ", estadoPago=" + estadoPago + ", imagen=" + imagen + ", estadoEnvio=" + estadoEnvio + ", role=" + role + ", usuario=" + usuario + '}';
     }
 
-    
+   
 
+    @ManyToOne
+    @JoinColumn(name = "metodo_pago_id")
+    private MetodoPago metodoPago;
+
+    public MetodoPago getMetodoPago() {
+        return metodoPago;
+    }
+
+    public void setMetodoPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
+    }
 }

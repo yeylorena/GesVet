@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -81,7 +82,14 @@ public class HomeControllerAdmin {
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
 
+        //ESTA ES PARA EL ADMINISTRADOR
         List<Factura> factura = facturaService.findByUsuario(user);
+
+        //ESTA ES PARA EL USUARIO
+        List<Factura> facturas = facturaService.findByUser_Role("USER");
+
+        // Agrega las facturas al modelo
+        model.addAttribute("facturas", facturas);
 
         model.addAttribute("userDto", userDto);
 
@@ -347,7 +355,6 @@ public class HomeControllerAdmin {
         //Se guarda el número de la factura
         factura.setNumero(facturaService.generarNumFactura());
 
-
         factura.setUser(user);
 
         //Se guardan los datos de la factura
@@ -364,6 +371,99 @@ public class HomeControllerAdmin {
         detalles.clear();
         model.addAttribute("userDto", userDto);
         return "redirect:/";
+    }
+
+    // Método para mostrar el formulario de edición
+    @GetMapping("/editarFactura/{id}")
+    public String mostrarFormularioEdicion(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        Factura factura = facturaService.findById(id).orElse(new Factura());
+        // Agrega la factura al modelo para mostrar los detalles en el formulario de edición
+        model.addAttribute("factura", factura);
+        model.addAttribute("userDto", userDto);
+
+        return "usuario/editarfactura"; // Reemplaza con la ruta correcta de tu formulario de edición
+    }
+
+    @PostMapping("/editarFactura/{id}")
+    public String actualizarFactura(@PathVariable Integer id, Factura factura, Model model,
+            Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        Factura existingFactura = facturaService.findById(id).orElse(null);
+
+        if (existingFactura != null) {
+            // Verificar si la factura ya ha sido procesada
+            if (!existingFactura.isProcesada()) {
+                // Actualizar solo los campos deseados
+                existingFactura.setEstadoPago(factura.getEstadoPago());
+                existingFactura.setEstadoEnvio(factura.getEstadoEnvio());
+
+                // Lógica de descuento de productos al aprobar la factura
+                if ("Aprobado".equals(factura.getEstadoPago())) {
+                    for (DetalleFactura detalle : existingFactura.getListaDetalles()) {
+                        Productos producto = detalle.getProductos();
+                        // Verificar si hay suficientes productos disponibles antes de realizar el descuento
+                        if (producto.getCantidad() >= detalle.getCantidad()) {
+                            producto.setCantidad((int) (producto.getCantidad() - detalle.getCantidad()));
+                            // Actualizar el producto en la base de datos
+                            productoService.update(producto);
+                        } else {
+                            // Manejar la situación donde no hay suficientes productos disponibles
+                            // Agregar un mensaje de error para mostrar en el HTML
+                            redirectAttributes.addFlashAttribute("errorfact", "No hay suficientes productos disponibles. Producto: " + producto.getNombre());
+                            return "redirect:/editarFactura/{id}";
+                        }
+                    }
+
+                    // Marcar la factura como procesada para evitar descuentos adicionales
+                    existingFactura.setProcesada(true);
+                }
+
+                facturaService.update(existingFactura);
+            } else {
+                // Manejar el caso en que la factura ya ha sido procesada
+                redirectAttributes.addFlashAttribute("error", "Esta factura ya ha sido procesada.");
+                return "redirect:/editarFactura/{id}";
+            }
+        }
+
+        model.addAttribute("userDto", userDto);
+        return "redirect:/verhomeadmin";
     }
 
     @PostMapping("/buscaradmin")

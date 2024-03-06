@@ -72,4 +72,13 @@ public class FacturaServiceImpl implements IFacturaService {
        return facturaRepository.findById(id);
     }
 
+    @Override
+public List<Factura> findByUser_Role(String role) {
+    return facturaRepository.findByUserRole(role);
+}
+
+    @Override
+    public void update(Factura factura) {
+     facturaRepository.save(factura);}
+
 }

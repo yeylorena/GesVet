@@ -72,14 +72,17 @@ public class MetodoPago {
     
     
     @OneToMany(mappedBy = "metodoPago")
-    private List<DetalleFactura> detallefactura ;
+    private List<Factura> factura ;
 
-    public List<DetalleFactura> getDetallefactura() {
-        return detallefactura;
+    public List<Factura> getFactura() {
+        return factura;
     }
 
-    public void setDetallefactura(List<DetalleFactura> detallefactura) {
-        this.detallefactura = detallefactura;
+    public void setFactura(List<Factura> factura) {
+        this.factura = factura;
     }
-    
+
+  public MetodoPago(){
+      
+  } 
 }

@@ -43,5 +43,9 @@ public class MetodoPagoServiceImpl implements IMetodoPagoService {
     public List<MetodoPago> findAll() {
     return metodopagorepository.findAll();
     }
-    
+     @Override
+    public MetodoPago findById(Integer id) {
+        Optional<MetodoPago> optionalMetodoPago = metodopagorepository.findById(id);
+        return optionalMetodoPago.orElse(null);
+    }
 }

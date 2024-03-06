@@ -16,4 +16,9 @@ public interface IFacturaService {
     List<Factura>findByUsuario(User usuario);
     
 
+List<Factura> findByUser_Role(String role);
+
+public void update(Factura factura);
+
+
 }

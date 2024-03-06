@@ -496,24 +496,24 @@
                                                     </div>
 
                                                     <!-- Inicio Tabla facturas-->
-                                                    <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">No. de Orden</th>
-                                                            <th scope="col">Fecha</th>
-                                                            <th scope="col">Valor</th>
-                                                            <th scope="col">Acción</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr th:each="factura: ${factura}">
-                                                            <td th:text="${factura.numero}"></td>
-                                                            <td th:text="${factura.fecha}" ></td>
-                                                            <td th:text="${factura.total}" ></td>
-                                                           <td><a th:href="@{/detalleadmin/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                    <table class="table table-striped table-hover text-start">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">No. de Orden</th>
+                                                                <th scope="col">Fecha</th>
+                                                                <th scope="col">Valor</th>
+                                                                <th scope="col">Acción</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr th:each="factura: ${factura}">
+                                                                <td th:text="${factura.numero}"></td>
+                                                                <td th:text="${factura.fecha}" ></td>
+                                                                <td th:text="${factura.total}" ></td>
+                                                                <td><a th:href="@{/detalleadmin/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -588,57 +588,54 @@
                                                     <!-- Inicio Tabla facturas-->
                                                     <table class="table table-striped table-hover text-start">
                                                         <thead>
-                                                            <tr class="table-secondary">
-                                                                <th scope="col">N° Fact.</th>
+                                                            <tr>
+                                                                <th scope="col">No. de Orden</th>
+                                                                <th scope="col">Usuario</th>
+                                                                <th scope="col">Telefono</th>
                                                                 <th scope="col">Fecha</th>
-                                                                <th scope="col">Cliente</th>
                                                                 <th scope="col">Valor</th>
-                                                                <th scope="col">Servicio</th>
-                                                                <th scope="col">Pago</th>
-                                                                <th scope="col">Opciones</th>
+                                                                <th scope="col">Comprobante</th>
+                                                                <th scope="col">E. Pago</th>
+                                                                <th scope="col">E. Envio</th>
+                                                                <th scope="col">Acción</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">F001</th>
-                                                                <td>2023-11-02</td>
-                                                                <td>Maria C. Gutiérrez</td>
-                                                                <td>120000</td>
-                                                                <td>Domicilio</td>
-                                                                <td>Nequi</td>
-                                                                <td>
-                                                                    <a href="#" class="btn  btn-success"
-                                                                       title="Upload new profile image"><i class="bi bi-filetype-pdf"></i></a>
-                                                                </td>
-                                                            </tr>
+                                                            <tr th:each="factura: ${facturas}" th:if="${factura.usuario.role == 'USER'}">
+                                                                <td th:text="${factura.numero}"></td>
+                                                                <td th:text="${factura.usuario.nombre}"></td>
+                                                                <td th:text="${factura.usuario.telefono}"></td>
+                                                                <td th:text="${factura.fecha}" ></td>
+                                                                <td th:text="${factura.total}" ></td>
 
-                                                            <tr>
-                                                                <th scope="row">F001</th>
-                                                                <td>2023-11-02</td>
-                                                                <td>Cristian Guzman</td>
-                                                                <td>88500</td>
-                                                                <td>Presencial</td>
-                                                                <td>Efectivo</td>
-                                                                <td>
-                                                                    <a href="#" class="btn  btn-success"
-                                                                       title="Upload new profile image"><i class="bi bi-filetype-pdf"></i></a>
+                                                                <td style="position: relative;">
+                                                                    <img class="expandable-image" th:src="@{/images/{img} (img=${factura.imagen})}" alt="..." style="height: 80px; width: 100px;" data-toggle="modal" data-target="#myModal">
                                                                 </td>
-                                                            </tr>
+                                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Imagen de la factura</h5>
+                                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <img id="modalImage" src="" alt="Factura">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                                            <tr>
-                                                                <th scope="row">F001</th>
-                                                                <td>2023-11-02</td>
-                                                                <td>Juliana López</td>
-                                                                <td>35000</td>
-                                                                <td>Domicilio</td>
-                                                                <td>Tarjeta</td>
-                                                                <td>
-                                                                    <a href="#" class="btn  btn-success"
-                                                                       title="Upload new profile image"><i class="bi bi-filetype-pdf"></i></a>
-                                                                </td>
-                                                            </tr>
+                                                        <td th:text="${factura.estadoPago}"></td>
+                                                        <td th:text="${factura.estadoEnvio}"></td>
+                                                        <td>
+                                                            <a th:href="@{/editarFactura/{id} (id=${factura.id}) }" class="btn btn-primary">Modificar</a></td>
+                                                        </tr>
                                                         </tbody>
                                                     </table>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -671,44 +668,29 @@
                                                     </div>
 
                                                     <!-- Inicio Tabla facturas-->
+                                                    <!-- Inicio Tabla facturas-->
                                                     <table class="table table-striped table-hover text-start">
                                                         <thead>
-                                                            <tr class="table-secondary">
-                                                                <th scope="col">Documento</th>
-                                                                <th scope="col">Nombre</th>
-                                                                <th scope="col">Apellido</th>
-                                                                <th scope="col">Opciones</th>
+                                                            <tr>
+                                                                <th scope="col">No. de Orden</th>
+                                                                <th scope="col">Usuario</th>
+
+                                                                <th scope="col">Fecha</th>
+                                                                <th scope="col">Valor</th>
+
+                                                                <th scope="col">Acción</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">4007865</th>
-                                                                <td>Veronica</td>
-                                                                <td>Castro Murillo</td>
-                                                                <td>
-                                                                    <a href="Historial_Ventas.html" class="btn  btn-success" title="Upload new profile image"><i
-                                                                            class="bi bi-filetype-pdf"></i></a>
-                                                                </td>
-                                                            </tr>
+                                                            <tr th:each="factura: ${facturas}" th:if="${factura.usuario.role == 'USER'}">
+                                                                <td th:text="${factura.numero}"></td>
+                                                                <td th:text="${factura.usuario.nombre}"></td>
 
-                                                            <tr>
-                                                                <th scope="row">36301257</th>
-                                                                <td>Steven</td>
-                                                                <td>Valencia</td>
-                                                                <td>
-                                                                    <a href="Historial_Ventas.html" class="btn  btn-success" title="Upload new profile image"><i
-                                                                            class="bi bi-filetype-pdf"></i></a>
-                                                                </td>
-                                                            </tr>
+                                                                <td th:text="${factura.fecha}" ></td>
+                                                                <td th:text="${factura.total}" ></td>
 
-                                                            <tr>
-                                                                <th scope="row">40774374</th>
-                                                                <td>Allan</td>
-                                                                <td>Ochoa</td>
-                                                                <td>
-                                                                    <a href="Historial_Ventas.html" class="btn  btn-success" title="Upload new profile image"><i
-                                                                            class="bi bi-filetype-pdf"></i></a>
-                                                                </td>
+                                                                <td><a th:href="@{/detalleadmin/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a>
+
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -742,6 +724,18 @@
 
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+                $('.expandable-image').click(function () {
+                    var imageUrl = $(this).attr('src');
+                    $('#modalImage').attr('src', imageUrl);
+                    $('#myModal').modal('show');
+                });
+            });
+        </script>
+
 
     </body>
 

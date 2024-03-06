@@ -23,17 +23,8 @@ public class DetalleFactura {
     @ManyToOne
     private Factura factura;
     
-    @ManyToOne
-    @JoinColumn(name = "metodo_pago_id")
-    private MetodoPago metodoPago;
+    
 
-    public MetodoPago getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(MetodoPago metodoPago) {
-        this.metodoPago = metodoPago;
-    }
     
     @ManyToOne
     private Productos productos;
