@@ -7,224 +7,224 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-4p0Y+4CgwLThdzfp++l8Lao0y9e9wMci1TDCBwaJTqGrX8x8EBf5ls7xmxYO0I2mE5J5PusKjJLwN44lt3T6kg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-         <!-- Estilos letras-->
-                                                                    <style>
-                                                                        .card-hover:hover {
-                                                                            transform: scale(1.05);
-                                                                            box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
-                                                                        }
-                                                                        /*ESTILOS DE LETRAS*/
-                                                                        html {
-                                                                            scroll-behavior: smooth;
-                                                                            scroll-padding: 10rem;
-                                                                        }
+        <!-- Estilos letras-->
+        <style>
+            .card-hover:hover {
+                transform: scale(1.05);
+                box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+            }
+            /*ESTILOS DE LETRAS*/
+            html {
+                scroll-behavior: smooth;
+                scroll-padding: 10rem;
+            }
 
-                                                                        .card-hover {
-                                                                            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            .card-hover {
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
-                                                                        }
+            }
 
-                                                                        .card-hover:hover {
-                                                                            transform: scale(1.05);
-                                                                            box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
-                                                                            background-color: #A0A0A0; /* Cambia el color al pasar el mouse */
-                                                                        }
-                                                                        .inria-sans-light {
-                                                                            font-family: "Inria Sans", sans-serif;
-                                                                            font-weight: 300;
-                                                                            font-style: normal;
-                                                                        }
+            .card-hover:hover {
+                transform: scale(1.05);
+                box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+                background-color: #A0A0A0; /* Cambia el color al pasar el mouse */
+            }
+            .inria-sans-light {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 300;
+                font-style: normal;
+            }
 
-                                                                        .inria-sans-regular {
-                                                                            font-family: "Inria Sans", sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-style: normal;
-                                                                        }
+            .inria-sans-regular {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+            }
 
-                                                                        .inria-sans-bold {
-                                                                            font-family: "Inria Sans", sans-serif;
-                                                                            font-weight: 700;
-                                                                            font-style: normal;
-                                                                            margin-right: 100px;
-                                                                            font-size: 30px;
-                                                                            line-height: 50px;
-                                                                        }
-                                                                        .inria-sans-bolds {
-                                                                            font-family: "Inria Sans", sans-serif;
-                                                                            font-weight: 700;
-                                                                            font-style: normal;
-                                                                            margin-right: 100px;
-                                                                            font-size: 20px;
-                                                                            line-height: 50px;
-                                                                        }
+            .inria-sans-bold {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                margin-right: 100px;
+                font-size: 30px;
+                line-height: 50px;
+            }
+            .inria-sans-bolds {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                margin-right: 100px;
+                font-size: 20px;
+                line-height: 50px;
+            }
 
-                                                                        .inria-sans-light-italic {
-                                                                            font-family: "Inria Sans", sans-serif;
-                                                                            font-weight: 300;
-                                                                            font-style: italic;
-                                                                        }
+            .inria-sans-light-italic {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 300;
+                font-style: italic;
+            }
 
-                                                                        .inria-sans-regular-italic {
-                                                                            font-family: "Inria Sans", sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-style: italic;
-                                                                        }
+            .inria-sans-regular-italic {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 400;
+                font-style: italic;
+            }
 
-                                                                        .inria-sans-bold-italic {
-                                                                            font-family: "Inria Sans", sans-serif;
-                                                                            font-weight: 700;
-                                                                            font-style: italic;
-                                                                        }
+            .inria-sans-bold-italic {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-style: italic;
+            }
 
-                                                                        .texto {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 20px;
-                                                                            margin: 0 0 20px;
-                                                                            padding: 0;
-
-
-                                                                        }
-                                                                        .texto2 {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 15px;
-                                                                            margin: 0 0 20px;
-                                                                            padding: 0;
+            .texto {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 20px;
+                margin: 0 0 20px;
+                padding: 0;
 
 
-                                                                        }
-
-                                                                        .titulo {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 18px;
-                                                                            font-weight: 700;
-                                                                            margin-right: 100px;
-                                                                            line-height: 50px;
-                                                                            color: #444444
-
-                                                                        }
-                                                                        .botones{
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 16px;
-                                                                            font-weight: 600;
-                                                                            margin-right: 60px;
-                                                                            color: #FFFFFF;
-                                                                            background-color: #2FD6B5 !important;
-                                                                            border-radius: 8px;
-                                                                            margin-top: 10px;
-                                                                            width: 150px; /* Define el ancho deseado para el botón */
-                                                                        }
-                                                                        .subboton{
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 16px;
-                                                                            font-weight: 600;
-                                                                            margin-right: 60px;
-                                                                            color: white !important; /* Color del texto blanco */
-                                                                            background-color: #39DBC1;
-                                                                            border-radius: 8px;
-                                                                            margin-top: 10px;
-                                                                            width: 120px; /* Define el ancho deseado para el botón */
-                                                                        }
-                                                                        .nav-item:hover .nav-link {
-                                                                            color: #2FD6B5; /* Cambia el color del texto al pasar el mouse por encima */
-                                                                        }
-                                                                        .custom-btn {
-                                                                            color: white !important; /* Color del texto blanco */
-                                                                        }
-
-                                                                        .encabezados {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 30px;
-                                                                            font-weight: 700;
-                                                                            margin-right: 10px;
-                                                                            line-height: 50px;
-                                                                            color: #FFFFFF;
-                                                                            text-align: center;
+            }
+            .texto2 {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 15px;
+                margin: 0 0 20px;
+                padding: 0;
 
 
-                                                                        }
-                                                                        .titlecartas {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 20px;
-                                                                            font-weight: 600;
-                                                                            line-height: 50px;
-                                                                            color: #FFFFFF;
+            }
 
-                                                                        }
-                                                                        .titlecartass{
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 20px;
-                                                                            font-weight: 500;
+            .titulo {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 18px;
+                font-weight: 700;
+                margin-right: 100px;
+                line-height: 50px;
+                color: #444444
 
-                                                                        }
-                                                                        .textcartas {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 19px;
-                                                                            font-weight: 300;
-                                                                            color: #000000;
+            }
+            .botones{
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                margin-right: 60px;
+                color: #FFFFFF;
+                background-color: #2FD6B5 !important;
+                border-radius: 8px;
+                margin-top: 10px;
+                width: 150px; /* Define el ancho deseado para el botón */
+            }
+            .subboton{
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                margin-right: 60px;
+                color: white !important; /* Color del texto blanco */
+                background-color: #39DBC1;
+                border-radius: 8px;
+                margin-top: 10px;
+                width: 120px; /* Define el ancho deseado para el botón */
+            }
+            .nav-item:hover .nav-link {
+                color: #2FD6B5; /* Cambia el color del texto al pasar el mouse por encima */
+            }
+            .custom-btn {
+                color: white !important; /* Color del texto blanco */
+            }
 
-                                                                        }
+            .encabezados {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 30px;
+                font-weight: 700;
+                margin-right: 10px;
+                line-height: 50px;
+                color: #FFFFFF;
+                text-align: center;
 
-                                                                        .titleGesvet {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 40px;
-                                                                            font-weight: 500;
-                                                                            line-height: 50px;
-                                                                            color: #FFFFFF;
+
+            }
+            .titlecartas {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 50px;
+                color: #FFFFFF;
+
+            }
+            .titlecartass{
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 20px;
+                font-weight: 500;
+
+            }
+            .textcartas {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 19px;
+                font-weight: 300;
+                color: #000000;
+
+            }
+
+            .titleGesvet {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 40px;
+                font-weight: 500;
+                line-height: 50px;
+                color: #FFFFFF;
 
 
-                                                                        }
-                                                                        .titlecartasDos {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 16px;
-                                                                            font-weight: 600;
-                                                                            line-height: 50px;
-                                                                            color: #FFFFFF;
+            }
+            .titlecartasDos {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 50px;
+                color: #FFFFFF;
 
-                                                                        }
-                                                                        .titlecartaSel {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 16px;
-                                                                            font-weight: 600;
-                                                                            line-height: 50px;
-                                                                            color: #000000;
+            }
+            .titlecartaSel {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 50px;
+                color: #000000;
 
-                                                                        }
-                                                                        .titlecartaUna {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 15px;
-                                                                            font-weight: 500;
-                                                                            line-height: 50px;
-                                                                            color: #000000;
+            }
+            .titlecartaUna {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 15px;
+                font-weight: 500;
+                line-height: 50px;
+                color: #000000;
 
-                                                                        }
-                                                                        .titlecartaSel2 {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 16px;
-                                                                            font-weight: 600;
-                                                                            line-height: 20px;
-                                                                            color: #000000;
+            }
+            .titlecartaSel2 {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 20px;
+                color: #000000;
 
-                                                                        }
-                                                                        .encabezadosCategoria {
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 50px;
-                                                                            font-weight: 700;
-                                                                            margin-right: 10px;
-                                                                            line-height: 50px;
-                                                                            color: #FFFFFF;
-                                                                            text-align: center;
-                                                                        }
+            }
+            .encabezadosCategoria {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 50px;
+                font-weight: 700;
+                margin-right: 10px;
+                line-height: 50px;
+                color: #FFFFFF;
+                text-align: center;
+            }
 
-                                                                            .titlecartaLetra{
-                                                                                font-family: 'Montserrat', Arial, sans-serif;
-                                                                                font-size: 15px;
-                                                                                font-weight: 500;
-                                                                                line-height: 20px;
-                                                                                color: #000000;
+            .titlecartaLetra{
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 15px;
+                font-weight: 500;
+                line-height: 20px;
+                color: #000000;
 
-                                                                            }
+            }
 
-                                                                        </style>
+        </style>
 </head>
 
 <body  style="background-color: #2FC0D5;">
@@ -262,7 +262,7 @@
                     <!-- Bordered Tabs -->
                     <ul class="nav nav-tabs nav-tabs-bordered">
 
-                        <li class="nav-item ">
+                        <li class="nav-item titlecartaSel2">
                             <button class="nav-link active " data-bs-toggle="tab"
                                     data-bs-target="#profile-overview">Ver</button>
                         </li>
@@ -314,7 +314,8 @@
                                                 <div class="text-center">
                                                     <button th:onclick="'eliminarMascota(' + ${mascota.id} + ')'" type="button" class="btn btn-danger">
                                                         <i class="bi bi-trash"></i>
-                                                    </button>                                                    <button class="btn btn-primary btn-sm mx-1" th:href="@{mascotasUsuarios/editarMascota/{id}(id=${mascota.id})}">Editar</button>
+                                                    </button>                                                    
+                                                    <button class="btn btn-primary btn-sm mx-1" th:href="@{mascotasUsuarios/editarMascota/{id}(id=${mascota.id})}">Editar</button>
                                                 </div>
                                             </div>
                                     </div>

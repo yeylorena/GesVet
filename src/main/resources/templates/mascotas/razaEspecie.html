@@ -6,72 +6,311 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"/>
 <head th:replace="~{Plantillas/administrador :: head}">
+    <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
+        <!-- Estilos letras-->
+        <style>
+            .card-hover:hover {
+                transform: scale(1.05);
+                box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+            }
+            /*ESTILOS DE LETRAS*/
+            html {
+                scroll-behavior: smooth;
+                scroll-padding: 10rem;
+            }
 
-</head>
-<body>
-    <header th:replace="~{Plantillas/administrador :: header}">
+            .card-hover {
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
-    </header><!-- End Header -->
+            }
 
-    <!-- ======= Sidebar ======= -->
-    <aside th:replace="~{Plantillas/administrador :: sidebar}">
+            .card-hover:hover {
+                transform: scale(1.05);
+                box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+                background-color: #A0A0A0; /* Cambia el color al pasar el mouse */
+            }
+            .inria-sans-light {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 300;
+                font-style: normal;
+            }
 
-    </aside><!-- End Sidebar-->
+            .inria-sans-regular {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+            }
 
-    <main id="main" class="main" style="background-color: #5c5db4;">
+            .inria-sans-bold {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                margin-right: 100px;
+                font-size: 30px;
+                line-height: 50px;
+            }
+            .inria-sans-bolds {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                margin-right: 100px;
+                font-size: 20px;
+                line-height: 50px;
+            }
 
-        <div class="pagetitle">
-            <h1>Razas</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
-                    <li class="breadcrumb-item">Gestión Raza</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
-        <section class="section profile">
-            <div class="col-xl-12">
+            .inria-sans-light-italic {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 300;
+                font-style: italic;
+            }
 
-                <div class="card">
-                    <div class="card-body pt-3">
-                        <!-- Bordered Tabs -->
-                        <ul class="nav nav-tabs nav-tabs-bordered">
+            .inria-sans-regular-italic {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 400;
+                font-style: italic;
+            }
 
-                            <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#profile-overview">Razas</button>
-                            </li>
+            .inria-sans-bold-italic {
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-style: italic;
+            }
 
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#especies">Especies
-                                </button>
-                            </li>
+            .texto {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 20px;
+                margin: 0 0 20px;
+                padding: 0;
 
 
-                        </ul>
-                        <div class="tab-content pt-2">
+            }
+            .texto2 {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 15px;
+                margin: 0 0 20px;
+                padding: 0;
 
 
-                            <!--Razas-->
-                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+            }
 
-                                <div class="table-responsive">
-                                    <div class="card-body">
+            .titulo {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 18px;
+                font-weight: 700;
+                margin-right: 100px;
+                line-height: 50px;
+                color: #444444
 
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12">
-                                                <form class="form-inline" action="">
-                                                    <div class="form-group">
-                                                        <input type="text" name="palabraClave" placeholder="Palabra Clave" id="palabraClave">
-                                                            <input id="buscar" type="submit" class="btn btn-primary" value="Buscar">
-                                                                &nbsp;&nbsp;
-                                                                <input type="button" class="btn btn-secondary" value="" >
-                                                                    </div>
+            }
+            .botones{
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                margin-right: 60px;
+                color: #FFFFFF;
+                background-color: #2FD6B5 !important;
+                border-radius: 8px;
+                margin-top: 10px;
+                width: 150px; /* Define el ancho deseado para el botón */
+            }
+            .subboton{
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                margin-right: 60px;
+                color: white !important; /* Color del texto blanco */
+                background-color: #39DBC1;
+                border-radius: 8px;
+                margin-top: 10px;
+                width: 120px; /* Define el ancho deseado para el botón */
+            }
+            .nav-item:hover .nav-link {
+                color: #2FD6B5; /* Cambia el color del texto al pasar el mouse por encima */
+            }
+            .custom-btn {
+                color: white !important; /* Color del texto blanco */
+            }
 
-                                                                    </form>
-                                                                    <form class="search-form d-flex align-items-center pb-1" method="post" action="" object="">
+            .encabezados {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 30px;
+                font-weight: 700;
+                margin-right: 10px;
+                line-height: 50px;
+                color: #FFFFFF;
+                text-align: center;
 
-                                                                        <a class="icon-link btn btn-success mt-2" th:href="@{/razas/create}">Crear</a>
+
+            }
+            .titlecartas {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 50px;
+                color: #FFFFFF;
+
+            }
+            .titlecartass{
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 20px;
+                font-weight: 500;
+
+            }
+            .textcartas {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 19px;
+                font-weight: 300;
+                color: #000000;
+
+            }
+
+            .titleGesvet {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 40px;
+                font-weight: 500;
+                line-height: 50px;
+                color: #FFFFFF;
+
+
+            }
+            .titlecartasDos {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 50px;
+                color: #FFFFFF;
+
+            }
+            .titlecartaSel {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 50px;
+                color: #000000;
+
+            }
+            .titlecartaUna {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 15px;
+                font-weight: 500;
+                line-height: 50px;
+                color: #000000;
+
+            }
+            .titlecartaSel2 {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 20px;
+                color: #000000;
+
+            }
+            .encabezadosCategoria {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 50px;
+                font-weight: 700;
+                margin-right: 10px;
+                line-height: 50px;
+                color: #FFFFFF;
+                text-align: center;
+
+                .titlecartaLetra{
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 15px;
+                    font-weight: 500;
+                    line-height: 20px;
+                    color: #000000;
+
+                }
+
+            </style>
+
+
+    </head>
+    <body style="background-color: #2FC0D5;">
+        <header th:replace="~{Plantillas/administrador :: header}">
+
+        </header><!-- End Header -->
+
+        <!-- ======= Sidebar ======= -->
+        <aside th:replace="~{Plantillas/administrador :: sidebar}">
+
+        </aside><!-- End Sidebar-->
+
+        <main id="main" class="main" >
+
+            <div class="pagetitle">
+                <h1 class="textcartas">Razas</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item titlecartaSel"><a href="inicio_vet.html">Inicio</a></li>
+                        <li class="breadcrumb-item titlecartaSel">Gestión Raza</li>
+                    </ol>
+                </nav>
+            </div><!-- End Page Title -->
+            <section class="section profile">
+                <div class="col-xl-12">
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <ul class="nav nav-tabs nav-tabs-bordered">
+
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab"
+                                            data-bs-target="#profile-overview" 
+                                            style="font-family: 'Montserrat', Arial, sans-serif;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            color: #000000;">Razas</button>
+                                </li>
+
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#especies"
+                                            style="font-family: 'Montserrat', Arial, sans-serif;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            color: #000000;">Especies
+                                    </button>
+                                </li>
+
+
+                            </ul>
+                            <div class="tab-content pt-2">
+
+
+                                <!--Razas-->
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                    <div class="table-responsive">
+                                        <div class="card-body">
+
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <form class="form-inline" action="">
+                                                        <div class="form-group">
+                                                            <input type="text" name="palabraClave" placeholder="Palabra Clave" id="palabraClave">
+                                                                <input  id="buscar" type="submit" class="btn texto2" style="background-color:#2FD6B4" value="Buscar">
+                                                                        &nbsp;&nbsp;
+
+                                                                        </div>
+
+                                                                        </form>
+                                                                        <form class="search-form d-flex align-items-center pb-1" method="post" action="" object="">
+
+                                                                            <a class="icon-link btn mt-2" style="background-color:#2FD6B4;
+                                                                            font-family: 'Montserrat', Arial, sans-serif;
+                                                                            font-size: 15px;
+                                                                            margin: 0 0 20px;
+                                                                            padding: 0;
+                                                                            width: 55px;
+                                                                            height: 40px;
+                                                                            display: flex;
+                                                                            justify-content: center;
+                                                                            align-items: center;"
+                                                                            th:href="@{/razas/create}">Crear</a>
 
                                                                     </form>
                                                                     </div>
@@ -81,11 +320,31 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                                         <thead>
                                                                             <tr class="table-secondary">
 
-                                                                                <th scope="col">Nombre</th>
-                                                                                <th scope="col">Descripción</th>
-                                                                                <th scope="col">Estado</th>
-                                                                                <th scope="col">Editar</th>
-                                                                                <th scope="col">Eliminar</th>
+                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                    font-size: 16px;
+                                                                                    font-weight: 600;
+                                                                                    line-height: 20px;
+                                                                                    color: #000000;" scope="col">Nombre</th>
+                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                    font-size: 16px;
+                                                                                    font-weight: 600;
+                                                                                    line-height: 20px;
+                                                                                    color: #000000;" scope="col">Descripción</th>
+                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                    font-size: 16px;
+                                                                                    font-weight: 600;
+                                                                                    line-height: 20px;
+                                                                                    color: #000000;" scope="col">Estado</th>
+                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                    font-size: 16px;
+                                                                                    font-weight: 600;
+                                                                                    line-height: 20px;
+                                                                                    color: #000000;" scope="col">Editar</th>
+                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                    font-size: 16px;
+                                                                                    font-weight: 600;
+                                                                                    line-height: 20px;
+                                                                                    color: #000000;" scope="col">Eliminar</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -96,74 +355,104 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                                                 <td th:text="${raza.estado}"></td>
                                                                                 <td>
                                                                                     <!--boton de editar-->
-                                                                                    <a  class="btn btn-warning" th:href="@{razas/editarRaza/{id} (id=${raza.id}) }">
-                                                                                        Editar</a> 
-                                                                                    <!-- Eliminar -->
-                                                                                </td>
-                                                                                <td>
-                                                                                    <a class="btn btn-danger" type="button" th:href="@{razas/delete/{id} (id=${raza.id}) }">Eliminar</a>   
-                                                                                </td>
+                                                                                    <a  class="btn texto2" style="background-color:#2FD6B4"  th:href="@{razas/editarRaza/{id} (id=${raza.id}) }">
+                                                                                            Editar</a> 
+                                                                                        <!-- Eliminar -->
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a class="btn texto2" style="background-color:#2FD6B4" type="button" onclick="show()" th:href="@{razas/delete/{id} (id=${raza.id}) }">Eliminar</a>   
+                                                                                    </td>
 
 
 
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <!-- final de la tabla -->
-                                                                    </div>
-                                                                    </div>
-                                                                    </div>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <!-- final de la tabla -->
+                                                                        </div>
+                                                                        </div>
+                                                                        </div>
 
-                                                                    <!-- Especie -->
-                                                                    <div class="tab-pane fade profile-overview" id="especies">
+                                                                        <!-- Especie -->
+                                                                        <div class="tab-pane fade profile-overview" id="especies">
 
-                                                                        <div class="table-responsive">
-                                                                            <div class="card-body">
+                                                                            <div class="table-responsive">
+                                                                                <div class="card-body">
 
-                                                                                <div class="row">
-                                                                                    <div class="col-lg-6 col-md-12">
-                                                                                        <form class="form-inline" action="">
-                                                                                            <div class="form-group">
-                                                                                                <input type="text" name="palabraClave" placeholder="Palabra Clave" id="palabraClave">
-                                                                                                    <input id="buscar" type="submit" class="btn btn-primary" value="Buscar">
-                                                                                                        &nbsp;&nbsp;
-                                                                                                        <input type="button" class="btn btn-secondary" value="" >
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-6 col-md-12">
+                                                                                            <form class="form-inline" action="">
+                                                                                                <div class="form-group">
+                                                                                                    <input type="text" name="palabraClave" placeholder="Palabra Clave" id="palabraClave">
+                                                                                                        <input id="buscar" type="submit" class="btn texto2" style="background-color:#2FD6B4" value="Buscar">
+                                                                                                            &nbsp;&nbsp;
+
                                                                                                             </div>
 
                                                                                                             </form>
                                                                                                             <form class="search-form d-flex align-items-center pb-1" method="post" action="" object="">
                                                                                                                 <!-- donde se pone la pagina de crear -->
-                                                                                                                <a class="icon-link btn btn-success mt-2" th:href="@{/razas/createEs}">Crear</a>
+                                                                                                                <a class="icon-link btn  mt-2 texto2" 
+                                                                                                                   style="background-color:#2FD6B4;
+                                                                                                                font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                                font-size: 15px;
+                                                                                                                margin: 0 0 20px;
+                                                                                                                padding: 0;
+                                                                                                                width: 55px;
+                                                                                                                height: 40px;
+                                                                                                                display: flex;
+                                                                                                                justify-content: center;
+                                                                                                                align-items: center;"th:href="@{/razas/createEs}">Crear</a>
 
-                                                                                                            </form>
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            <!-- Inicio Tabla -->
-                                                                                                            <table class="table table-striped table-hover text-start">
-                                                                                                                <thead>
-                                                                                                                    <tr class="table-secondary">
+                                                                                                        </form>
+                                                                                                        </div>
+                                                                                                        </div>
+                                                                                                        <!-- Inicio Tabla -->
+                                                                                                        <table class="table table-striped table-hover text-start">
+                                                                                                            <thead>
+                                                                                                                <tr class="table-secondary">
 
-                                                                                                                        <th scope="col">Nombre</th>
-                                                                                                                        <th scope="col">Descripción</th>
-                                                                                                                        <th scope="col">Estado</th>
-                                                                                                                        <th scope="col">Editar</th>
-                                                                                                                        <th scope="col">Eliminar</th>
-                                                                                                                    </tr>
-                                                                                                                </thead>
-                                                                                                                <tbody>
+                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                                        font-size: 16px;
+                                                                                                                        font-weight: 600;
+                                                                                                                        line-height: 20px;
+                                                                                                                        color: #000000;" scope="col">Nombre</th>
+                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                                        font-size: 16px;
+                                                                                                                        font-weight: 600;
+                                                                                                                        line-height: 20px;
+                                                                                                                        color: #000000;" scope="col">Descripción</th>
+                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                                        font-size: 16px;
+                                                                                                                        font-weight: 600;
+                                                                                                                        line-height: 20px;
+                                                                                                                        color: #000000;" scope="col">Estado</th>
+                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                                        font-size: 16px;
+                                                                                                                        font-weight: 600;
+                                                                                                                        line-height: 20px;
+                                                                                                                        color: #000000;" scope="col">Editar</th>
+                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                                        font-size: 16px;
+                                                                                                                        font-weight: 600;
+                                                                                                                        line-height: 20px;
+                                                                                                                        color: #000000;" scope="col">Eliminar</th>
+                                                                                                                </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
 
-                                                                                                                    <tr th:each="especie : ${especies}">
-                                                                                                                        <td th:text="${especie.nombre}"></td>
-                                                                                                                        <td th:text="${especie.descripcion}"></td>
-                                                                                                                        <td th:text="${especie.estado}"></td>
-                                                                                                                        <td>
-                                                                                                                            <!--boton de editar-->
-                                                                                                                            <a  class="btn btn-warning" th:href="@{razas/editarEspecie/{id} (id=${especie.id}) }">
+                                                                                                                <tr th:each="especie : ${especies}">
+                                                                                                                    <td th:text="${especie.nombre}"></td>
+                                                                                                                    <td th:text="${especie.descripcion}"></td>
+                                                                                                                    <td th:text="${especie.estado}"></td>
+                                                                                                                    <td>
+                                                                                                                        <!--boton de editar-->
+                                                                                                                        <a  class="btn texto2" style="background-color:#2FD6B4" th:href="@{razas/editarEspecie/{id} (id=${especie.id}) }">
                                                                                                                                 Editar</a> 
                                                                                                                             <!-- Eliminar -->
                                                                                                                         </td>
                                                                                                                         <td>
-                                                                                                                            <a class="btn btn-danger" type="button" th:href="@{razas/deleteEspecie/{id} (id=${especie.id}) }">Eliminar</a>   
+                                                                                                                            <a class="btn texto2" style="background-color:#2FD6B4" type="button" onclick="showAlert()" th:href="@{razas/deleteEspecie/{id} (id=${especie.id}) }">Eliminar</a>   
                                                                                                                         </td>
 
 
@@ -185,5 +474,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                                                                                                             <div th:replace="~{Plantillas/administrador :: scripts}"></div>
                                                                                                             </main><!-- End #main -->
-                                                                                                            </body>
-                                                                                                            </html>
+                                                                                                            <script>
+                                                                                                               // Función para mostrar la alerta de especie
+                                                                                                               function showAlert() {
+                                                                                                                   // Muestra la alerta utilizando SweetAlert
+                                                                                                                   swal("Especie eliminada", "", "success");
+                                                                                                               }
+                                                                                                               
+                                                                                                               function show() {
+                                                                                                                   // Muestra la alerta utilizando SweetAlert
+                                                                                                                   swal("Raza eliminada", "", "success");
+                                                                                                               }
+                                                                                                               </script>
+
+                                                                                                               </body>
+                                                                                                                       </html>
