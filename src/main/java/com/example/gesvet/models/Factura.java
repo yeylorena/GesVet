@@ -95,8 +95,6 @@ public class Factura {
         this.usuario = usuario;
     }
 
-   
-
     public Integer getId() {
         return id;
     }
@@ -149,8 +147,6 @@ public class Factura {
     public String toString() {
         return "Factura{" + "id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", total=" + total + ", estadoPago=" + estadoPago + ", imagen=" + imagen + ", estadoEnvio=" + estadoEnvio + ", role=" + role + ", usuario=" + usuario + '}';
     }
-
-   
 
     @ManyToOne
     @JoinColumn(name = "metodo_pago_id")

@@ -1,35 +1,24 @@
 package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
-
 import com.example.gesvet.models.respuesta;
 import com.example.gesvet.models.User;
-import com.example.gesvet.service.CustomUserDetail;
 import com.example.gesvet.service.CustomUserDetailsService;
 import com.example.gesvet.service.UserService;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,8 +33,6 @@ public class UserControllerApi {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
-   
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -95,7 +82,8 @@ public class UserControllerApi {
         model.addAttribute("user", userDto);
         return "Login_usu";
     }
-/*
+
+    /*
     @PostMapping("/login-page")
     public ResponseEntity<?> postLogin(@RequestBody User user) {
         String message = "Invalid Credential";
@@ -111,7 +99,7 @@ public class UserControllerApi {
         // Puedes incluir el token en el cuerpo de la respuesta
         return ResponseEntity.ok(Map.of("message", "Login exitoso", "token", token));
     }
-*/
+     */
     @GetMapping("/register")
     public String register(Model model, UserDto userDto) {
 
@@ -162,7 +150,7 @@ public class UserControllerApi {
         );
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
-/*
+    /*
    @GetMapping("/details")
 public ResponseEntity<?> getUserDetails(@RequestHeader("Authorization") String token) {
     try {
@@ -191,5 +179,5 @@ public ResponseEntity<?> getUserDetails(@RequestHeader("Authorization") String t
     }
 }
 
-*/
+     */
 }

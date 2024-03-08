@@ -112,7 +112,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "Registro_Usu"; // Devolver al formulario de registro si hay errores de validación
         }
-       
+
         User user = userService.findByUsername(userDto.getUsername());
 
         if (user != null) {

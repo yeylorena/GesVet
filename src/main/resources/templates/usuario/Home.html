@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"/>
 
-<head th:replace="Plantillas/usuario :: head"></head>
+<head th:replace="~{Plantillas/usuario :: head}">
 
-<body>
+    <body>
 
      <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -293,56 +293,56 @@
             </ul>
         </aside>
 
-    <main id="main" class="main" style="background-color: #403a3a">
+        <main id="main" class="main" style="background-color: #403a3a">
 
-        <div class="pagetitle">
-            <h1 style="color: white;">Gestion Productos y Servicios</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" style="color: white;">Inicio</a></li>
-                    <li class="breadcrumb-item" style="color: white;">Productos y Servicios disponibles</li>
-                    <li class="breadcrumb-item active" style="color: white;">Ver todos</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
+            <div class="pagetitle">
+                <h1 style="color: white;">Gestion Productos y Servicios</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" style="color: white;">Inicio</a></li>
+                        <li class="breadcrumb-item" style="color: white;">Productos y Servicios disponibles</li>
+                        <li class="breadcrumb-item active" style="color: white;">Ver todos</li>
+                    </ol>
+                </nav>
+            </div><!-- End Page Title -->
 
-        <section class="section profile">
-            <div class="col-xl-12">
+            <section class="section profile">
+                <div class="col-xl-12">
 
-                <div class="card">
-                    <div class="card-body pt-3">
-                        <!-- Bordered Tabs -->
-                        <ul class="nav nav-tabs nav-tabs-bordered">
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <ul class="nav nav-tabs nav-tabs-bordered">
 
-                            <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#profile-overview">Ver Todos</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content pt-2">
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab"
+                                            data-bs-target="#profile-overview">Ver Todos</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content pt-2">
 
-                            <div class="container-fluid mt-2">
-                                <p class="textoNeonU">Productos y Servicios disponibles</p>
-                            </div>
+                                <div class="container-fluid mt-2">
+                                    <p class="textoNeonU">Productos y Servicios disponibles</p>
+                                </div>
 
-                            <div class="table-responsive">
-                                <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="card-body">
 
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 ">
-                                            <form class="form-inline" method="post" th:action="@{/buscar}">
-                                                <div class="form-group">
-                                                    <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-12 ">
+                                                <form class="form-inline" method="post" th:action="@{/buscar}">
+                                                    <div class="form-group">
+                                                        <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off">
 
-                                                        &nbsp;&nbsp;
-                                                        <input id="buscar" type="submit" class="btn btn-outline-success" value="Buscar">
+                                                            &nbsp;&nbsp;
+                                                            <input id="buscar" type="submit" class="btn btn-outline-success" value="Buscar">
 
-                                                            </div>
+                                                                </div>
 
-                                                            </form>
-                                                            </div>
-                                                            </div>
-                                                            <div class="row mt-5">
+                                                                </form>
+                                                                </div>
+                                                                </div>
+                                                                <div class="row mt-5">
 
                                                                 <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}" th:if="${producto.activos}">
                                                                     <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
@@ -361,27 +361,26 @@
                                                                                     <a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-primary btn-sm">
                                                                                         Ver productos</a>
                                                                                 </div>
-                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
 
 
 
 
-                                                            </div>
+                                                                </div>
 
-                                                            </div>
+                                                                </div>
 
-                                                            </div>
-                                                            </div>
-                                                            </div>
-                                                            </div>
-                                                            </section>
+                                                                </div>
+                                                                </div>
+                                                                </div>
+                                                                </div>
+                                                                </section>
 
-                                                            <div th:replace="Plantillas/usuario :: scripts"></div>
+                                                                <div th:replace="~{Plantillas/usuario :: scripts}"></div>
 
-                                                            </main><!-- End #main -->
-                                                            </body>
-                                                            </html>
+                                                                </main><!-- End #main -->
+                                                                </body>
+                                                                </html>

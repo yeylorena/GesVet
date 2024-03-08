@@ -1,7 +1,6 @@
 package com.example.gesvet.models;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,6 +31,17 @@ public class User {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Mascota> mascotas;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<citaRapida> citasRapidas;
+
+    public List<citaRapida> getCitasRapidas() {
+        return citasRapidas;
+    }
+
+    public void setCitasRapidas(List<citaRapida> citasRapidas) {
+        this.citasRapidas = citasRapidas;
+    }
 
     // Resto de tu código...
     // Agrega este método para obtener la lista de mascotas del usuario
@@ -151,7 +161,7 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", telefono=" + telefono + ", acercade=" + acercade + ", imagen=" + imagen + ", activo=" + activo + ", mascotas=" + mascotas + '}';
     }
- /* productos v*/
+    /* productos v*/
     @OneToMany(mappedBy = "usuario")
     private List<Productos> listaProductos;
 
@@ -165,8 +175,8 @@ public class User {
     public void setListaProductos(List<Productos> listaProductos) {
         this.listaProductos = listaProductos;
     }
-     /* fin productos v*/
-    /* categorias v*/
+    /* fin productos v*/
+ /* categorias v*/
 
     @OneToMany(mappedBy = "usuario")
     private List<Categorias> listaCategorias;
@@ -178,8 +188,9 @@ public class User {
     public void setListaCategorias(List<Categorias> listaCategorias) {
         this.listaCategorias = listaCategorias;
     }
- /* fin categorias v*/
-    
+
+    /* fin categorias v*/
+
     public List<Factura> getListaFacturas() {
         return listaFacturas;
     }

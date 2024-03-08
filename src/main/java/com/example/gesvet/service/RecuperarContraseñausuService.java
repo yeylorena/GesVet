@@ -4,13 +4,11 @@ import com.example.gesvet.models.RecuperarContraseñaTokenusu;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -54,19 +52,19 @@ public class RecuperarContraseñausuService {
         return LocalDateTime.now().isAfter(recuperarContraseñaTokenusu.getExpireTime());
     }
 
-    public String checkValidity(RecuperarContraseñaTokenusu recuperarContraseñaTokenusu,Model model, RedirectAttributes redirectAttributes) {
-    if (recuperarContraseñaTokenusu == null) {
-        redirectAttributes.addFlashAttribute("Invalid_Token", true);
-        return "password-request";
-    } else if (recuperarContraseñaTokenusu.isUsed()) {
-        redirectAttributes.addFlashAttribute("token_used", true);
-        return "password-request";
-    } else if (isExpired(recuperarContraseñaTokenusu)) {
-        redirectAttributes.addFlashAttribute("token_expired", true);
-        return "password-request";
-    } else {
-        return "reset-password";
+    public String checkValidity(RecuperarContraseñaTokenusu recuperarContraseñaTokenusu, Model model, RedirectAttributes redirectAttributes) {
+        if (recuperarContraseñaTokenusu == null) {
+            redirectAttributes.addFlashAttribute("Invalid_Token", true);
+            return "password-request";
+        } else if (recuperarContraseñaTokenusu.isUsed()) {
+            redirectAttributes.addFlashAttribute("token_used", true);
+            return "password-request";
+        } else if (isExpired(recuperarContraseñaTokenusu)) {
+            redirectAttributes.addFlashAttribute("token_expired", true);
+            return "password-request";
+        } else {
+            return "reset-password";
+        }
     }
-}
-    
+
 }

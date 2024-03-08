@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
+
+<head th:replace="~{Plantillas/administrador :: head}"></head>
+
+<body style="background-color: #5DADE2;">
+
+    <!-- ======= Header ======= -->
+    <header th:replace="~{Plantillas/administrador :: header}"></header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside th:replace="~{Plantillas/administrador :: sidebar}"></aside><!-- End Sidebar-->
+
+    <main id="main" class="main" >
+
+        <div class="pagetitle">
+            <h1>Gestión clientes</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                    <li class="breadcrumb-item">Gestión clientes</li>
+                    <li class="breadcrumb-item active">Mascotas</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section profile">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                        data-bs-target="#profile-overview">Mascotas</button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content pt-2">
+
+                            <div class="container-fluid mt-3">
+                                <p  class="textoNe"<h2>Mascotas de 
+                                        <span th:if="${cliente.nombre != null and cliente.apellido != null}" th:text="${cliente.nombre + ' ' + cliente.apellido}"></span>
+                                        <span th:unless="${cliente.nombre != null and cliente.apellido != null}">usuario</span>
+                                    </h2></p>
+                            </div>
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover text-start">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Foto</th>
+                                                <th>Nombre</th>
+                                                <th>Especie</th>
+                                                <th>Raza</th>
+                                                <th>Color</th>
+                                                <th>Edad</th>
+                                                <th>Tiempo</th>
+                                                <th>Genero</th>
+                                                <th>Cita</th>
+                                                <!-- Otros campos de mascota que desees mostrar -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="mascota, iterStat : ${mascotas}">
+                                                <td th:text="${iterStat.index + 1}"></td>
+                                                <td>
+                                                    <img th:src="@{'/images/' + ${mascota.imagen}}"
+                                                         height="50px" width="50px"
+                                                         onclick="alternarTamañoImagen(this)">
+                                                </td>
+                                                <td th:text="${mascota.nombre}"></td>
+                                                <td th:text="${mascota.especie.nombre}"></td>
+                                                <td th:text="${mascota.raza.nombre}"></td>
+                                                <td th:text="${mascota.color}"></td>
+                                                <td th:text="${mascota.edad}"></td>
+                                                <td th:text="${mascota.tiempo}"></td>
+                                                <td th:text="${mascota.genero}"></td>
+                                                <td>
+                                                    <button class="btn btn-primary" >Agendar</button>
+                                                </td>
+                                                <!-- Otros campos de mascota que desees mostrar -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10">
+                                    </div>
+                                    <div class="col-2">
+                                        <button onclick="volver()" class="btn btn-primary">Volver</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </main>
+
+    <!-- JavaScript para mostrar la imagen más grande -->
+    <script>
+        function alternarTamañoImagen(imagen) {
+            if (imagen.style.height === '200px' && imagen.style.width === '200px') {
+                // Si la imagen ya está agrandada, la volvemos al tamaño original
+                imagen.style.height = '50px';
+                imagen.style.width = '50px';
+            } else {
+                // Si la imagen está en su tamaño original, la agrandamos
+                imagen.style.height = '200px';
+                imagen.style.width = '200px';
+            }
+        }
+        // Función para volver a la página anterior
+        function volver() {
+            window.location.href = '/cliente';
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.models;
 
 import jakarta.persistence.Entity;
@@ -16,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "tipocategorias")
 public class Tipocategoria {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -33,16 +29,12 @@ public class Tipocategoria {
         this.usuario = usuario;
     }
 
-
-
     public Tipocategoria(Integer id, String nombre, boolean activo, User usuario) {
         this.id = id;
         this.nombre = nombre;
         this.activo = activo;
         this.usuario = usuario;
     }
-
-    
 
     public Integer getId() {
         return id;
@@ -73,17 +65,11 @@ public class Tipocategoria {
         return "Tipocategoria{" + "id=" + id + ", nombre=" + nombre + ", activo=" + activo + ", usuario=" + usuario + ", categorias=" + categorias + '}';
     }
 
-    
+    public Tipocategoria() {
 
-    
-    
-   public Tipocategoria(){
-       
-   }
+    }
 
-    
-   
-     @OneToMany(mappedBy = "tipocategoria")
+    @OneToMany(mappedBy = "tipocategoria")
     private List<Categorias> categorias;
 
     public List<Categorias> getCategorias() {
@@ -93,5 +79,5 @@ public class Tipocategoria {
     public void setCategorias(List<Categorias> categorias) {
         this.categorias = categorias;
     }
-     
+
 }

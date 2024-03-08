@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.controller.login;
 
 import com.example.gesvet.dto.UserDto;
@@ -10,7 +6,6 @@ import com.example.gesvet.models.User;
 import com.example.gesvet.service.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.Optional;
 import java.util.UUID;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,6 +130,7 @@ public class SecretController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No autorizado");
         }
     }
+
     @DeleteMapping("/eliminar-cuenta")
     public ResponseEntity<String> eliminarCuenta(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
         String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
@@ -153,7 +149,6 @@ public class SecretController {
 
                 // Realizar la desconexión (logout) si es necesario
                 // Esto dependerá de cómo estés manejando la autenticación en tu aplicación
-
                 return ResponseEntity.status(HttpStatus.OK).body("Usuario eliminado con éxito");
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el usuario");
@@ -162,7 +157,6 @@ public class SecretController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No autorizado");
         }
     }
-
 
     // Método auxiliar para extraer el token del encabezado de la solicitud
     private String extractTokenFromRequest(HttpServletRequest request) {

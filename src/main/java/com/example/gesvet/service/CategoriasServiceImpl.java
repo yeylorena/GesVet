@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.service;
 
 import com.example.gesvet.models.Categorias;
@@ -43,12 +39,8 @@ public class CategoriasServiceImpl implements ICategoriasService {
     }
 
     @Override
-   public List<Categorias> findByTipoCategoria(String tipoCategoria) {
+    public List<Categorias> findByTipoCategoria(String tipoCategoria) {
         return categoriasRepository.findByTipocategoriaNombre(tipoCategoria);
     }
-    
-  
-
-
 
 }

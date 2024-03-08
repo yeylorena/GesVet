@@ -1,24 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.models;
 
-import com.example.gesvet.models.Mascota;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import java.util.List;
 
-/**
- *
- * @author sofia
- */
 @Entity
 
 public class Clientes {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,12 +20,10 @@ public class Clientes {
     private String direccion;
 
 // Mapeo de la relación con Mascota
-   /* @OneToMany(mappedBy = "clientes")
+    /* @OneToMany(mappedBy = "clientes")
     private List<Mascota> mascotas;*/
-
     public Clientes() {
     }
-    
 
     public Clientes(Integer id, String nombres, String apellidos, int documento, String telefono, String email, String direccion, String mascotas) {
         this.id = id;
@@ -45,7 +33,7 @@ public class Clientes {
         this.telefono = telefono;
         this.email = email;
         this.direccion = direccion;
-       
+
     }
 
     public Integer getId() {
@@ -109,10 +97,4 @@ public class Clientes {
         return "Clientes{" + "id=" + id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", documento=" + documento + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + '}';
     }
 
-
-    
-    
-
-  
-    
 }

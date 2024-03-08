@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.models;
 
 import jakarta.persistence.Entity;
@@ -91,7 +87,6 @@ public class Categorias {
         return "Categorias{" + "id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", descripcion=" + descripcion + ", activo=" + activo + ", usuario=" + usuario + ", productos=" + productos + ", tipocategoria=" + tipocategoria + '}';
     }
 
-   
     public Categorias() {
 
     }
@@ -105,9 +100,8 @@ public class Categorias {
     public void setProductos(List<Productos> productos) {
         this.productos = productos;
     }
-   
 
-  @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "tipocategoria_id")
     private Tipocategoria tipocategoria;
 
@@ -118,7 +112,7 @@ public class Categorias {
     public void setTipocategoria(Tipocategoria tipocategoria) {
         this.tipocategoria = tipocategoria;
     }
-    
+
     @OneToMany(mappedBy = "categoria")
     private List<ServiciosUser> serviciosusers;
 

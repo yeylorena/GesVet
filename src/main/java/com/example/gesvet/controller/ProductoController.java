@@ -7,7 +7,6 @@ import com.example.gesvet.models.Servicios;
 import com.example.gesvet.models.ServiciosUser;
 import com.example.gesvet.models.Tipocategoria;
 import com.example.gesvet.models.User;
-
 import com.example.gesvet.service.ICategoriasService;
 import com.example.gesvet.service.UploadFileService;
 import java.io.IOException;
@@ -900,8 +899,6 @@ public class ProductoController {
         List<Categorias> categoriasServicio = categoriasService.findByTipoCategoria("Servicio");
 
         // Utiliza un nombre consistente para el atributo del modelo
-        
-
         model.addAttribute("userDto", userDto);
         model.addAttribute("serviciouser", serviciouser);
         model.addAttribute("categoriasServicio", categoriasServicio);

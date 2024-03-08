@@ -1,6 +1,5 @@
 package com.example.gesvet.service;
 
-import com.example.gesvet.models.Categorias;
 import com.example.gesvet.models.Productos;
 import java.util.List;
 import java.util.Optional;
@@ -39,4 +38,4 @@ public class ProductoServiceImpl implements IProductoService {
         return productoRepository.findAll();
     }
 
-        }
+}

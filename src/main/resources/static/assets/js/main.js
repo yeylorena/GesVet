@@ -544,7 +544,7 @@ function validarContrasena() {
         Swal.fire({
             icon: 'error',
             title: 'Error de validación',
-            text: 'La contraseña debe tener al menos 6 caracteres, incluyendo números y letras.',
+            text: 'La contraseña debe tener al menos 6 caracteres, incluyendo números y letras.'
         });
         return false; // Evita que el formulario se envíe si la validación falla
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.controller.login;
 
 import com.example.gesvet.auth.AuthService;
@@ -17,33 +13,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-  private final AuthService authService;
 
-  @PostMapping("/login")
-  public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto authRequestDto) {
-    var jwtToken = authService.login(authRequestDto.username(), authRequestDto.password());
+    private final AuthService authService;
 
-    var authResponseDto = new AuthResponseDto(jwtToken, AuthStatus.LOGIN_SUCCESS);
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto authRequestDto) {
+        var jwtToken = authService.login(authRequestDto.username(), authRequestDto.password());
 
-    return ResponseEntity
-        .status(HttpStatus.OK)
-        .body(authResponseDto);
-  }
+        var authResponseDto = new AuthResponseDto(jwtToken, AuthStatus.LOGIN_SUCCESS);
 
- 
-
-  @PostMapping("/verify-token")
-  public ResponseEntity<String> verifyToken(@RequestBody String token) {
-    try {
-      var username = authService.verifyToken(token.substring(7));
-
-      return ResponseEntity
-          .status(HttpStatus.OK)
-          .body(username);
-    } catch (Exception e) {
-      return ResponseEntity
-          .status(HttpStatus.UNAUTHORIZED)
-          .build();
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(authResponseDto);
     }
-  }
+
+    @PostMapping("/verify-token")
+    public ResponseEntity<String> verifyToken(@RequestBody String token) {
+        try {
+            var username = authService.verifyToken(token.substring(7));
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(username);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .build();
+        }
+    }
 }

@@ -2,21 +2,17 @@ package com.example.gesvet.controller;
 
 import com.example.gesvet.models.RecuperarContraseñaTokenusu;
 import com.example.gesvet.models.User;
-
 import com.example.gesvet.repository.RecuperarContraseñausuRepository;
 import com.example.gesvet.service.RecuperarContraseñausuService;
 import com.example.gesvet.service.UserService;
 import java.io.UnsupportedEncodingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -74,11 +70,11 @@ public class RecuperarContraseñausuController {
     }
 
     @GetMapping("/reset-password")
-    public String resetPassword(@Param(value = "token") String token, Model model,RedirectAttributes redirectAttributes, HttpSession session) {
+    public String resetPassword(@Param(value = "token") String token, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
 
         session.setAttribute("token", token);
         RecuperarContraseñaTokenusu recuperarContraseñaTokenusu = recuperarContraseñausuRepository.findByToken(token);
-        return recuperarContraseñausuService.checkValidity(recuperarContraseñaTokenusu,model,  redirectAttributes);
+        return recuperarContraseñausuService.checkValidity(recuperarContraseñaTokenusu, model, redirectAttributes);
 
     }
 

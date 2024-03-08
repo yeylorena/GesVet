@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.models;
 
 import jakarta.persistence.Entity;
@@ -15,8 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "metodoPago")
 public class MetodoPago {
-    
-     @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
@@ -47,7 +43,6 @@ public class MetodoPago {
         this.cuenta = cuenta;
     }
 
-
     public boolean isActivo() {
         return activo;
     }
@@ -61,18 +56,17 @@ public class MetodoPago {
         this.id = id;
         this.nombre = nombre;
         this.cuenta = cuenta;
-     
+
         this.activo = activo;
     }
 
     @Override
     public String toString() {
-        return "MetodoPago{" + "id=" + id + ", nombre=" + nombre + ", cuenta=" + cuenta  + ", activo=" + activo + '}';
+        return "MetodoPago{" + "id=" + id + ", nombre=" + nombre + ", cuenta=" + cuenta + ", activo=" + activo + '}';
     }
-    
-    
+
     @OneToMany(mappedBy = "metodoPago")
-    private List<Factura> factura ;
+    private List<Factura> factura;
 
     public List<Factura> getFactura() {
         return factura;
@@ -82,7 +76,7 @@ public class MetodoPago {
         this.factura = factura;
     }
 
-  public MetodoPago(){
-      
-  } 
+    public MetodoPago() {
+
+    }
 }

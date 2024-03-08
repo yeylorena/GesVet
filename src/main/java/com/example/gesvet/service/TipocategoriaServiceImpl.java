@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.service;
 
 import com.example.gesvet.models.Tipocategoria;
@@ -12,39 +8,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TipocategoriaServiceImpl implements ITipocategoriaservice{
-    
+public class TipocategoriaServiceImpl implements ITipocategoriaservice {
+
     @Autowired
     ITipocategoriaRepository tipocategoriarepository;
 
     @Override
     public Tipocategoria save(Tipocategoria tipocategoria) {
-     
-    return tipocategoriarepository.save(tipocategoria);
+
+        return tipocategoriarepository.save(tipocategoria);
     }
 
     @Override
     public Optional<Tipocategoria> get(Integer id) {
-    
-    return tipocategoriarepository.findById(id);
+
+        return tipocategoriarepository.findById(id);
     }
 
     @Override
     public void update(Tipocategoria tipocategoria) {
-    tipocategoriarepository.save(tipocategoria);
-    
+        tipocategoriarepository.save(tipocategoria);
+
     }
 
     @Override
     public void delete(Integer id) {
-    tipocategoriarepository.deleteById(id);
-    
+        tipocategoriarepository.deleteById(id);
+
     }
 
     @Override
     public List<Tipocategoria> findAll() {
-     return tipocategoriarepository.findAll();
-    
+        return tipocategoriarepository.findAll();
+
     }
-    
+
 }

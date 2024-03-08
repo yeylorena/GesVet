@@ -24,47 +24,48 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 @RequiredArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
-  private final UserDetailsService userDetailsService;
 
-  @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-    // Fetch token from request
-    var jwtTokenOptional = getTokenFromRequest(request);
+    private final UserDetailsService userDetailsService;
 
-    // Validate jwt token -> JWT utils
-    jwtTokenOptional.ifPresent(jwtToken -> {
-      if (JwtUtils.validateToken(jwtToken)) {
-        // Get username from jwt token
-        var usernameOptional = JwtUtils.getUsernameFromToken(jwtToken);
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // Fetch token from request
+        var jwtTokenOptional = getTokenFromRequest(request);
 
-        usernameOptional.ifPresent(username -> {
-          // Fetch user details with the help of username
-          var userDetails = userDetailsService.loadUserByUsername(username);
+        // Validate jwt token -> JWT utils
+        jwtTokenOptional.ifPresent(jwtToken -> {
+            if (JwtUtils.validateToken(jwtToken)) {
+                // Get username from jwt token
+                var usernameOptional = JwtUtils.getUsernameFromToken(jwtToken);
 
-          // Create Authentication token
-          var authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-          authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                usernameOptional.ifPresent(username -> {
+                    // Fetch user details with the help of username
+                    var userDetails = userDetailsService.loadUserByUsername(username);
 
-          // Set authentication token to Security Context
-          SecurityContextHolder.getContext()
-              .setAuthentication(authenticationToken);
+                    // Create Authentication token
+                    var authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                    // Set authentication token to Security Context
+                    SecurityContextHolder.getContext()
+                            .setAuthentication(authenticationToken);
+                });
+            }
         });
-      }
-    });
 
-    // Pass request and response to next filter
-    filterChain.doFilter(request, response);
-  }
-
-  private Optional<String> getTokenFromRequest(HttpServletRequest request) {
-    // Extract authentication header
-    var authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-
-    // Bearer <JWT TOKEN>
-    if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) {
-      return Optional.of(authHeader.substring(7));
+        // Pass request and response to next filter
+        filterChain.doFilter(request, response);
     }
 
-    return Optional.empty();
-  }
+    private Optional<String> getTokenFromRequest(HttpServletRequest request) {
+        // Extract authentication header
+        var authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+
+        // Bearer <JWT TOKEN>
+        if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) {
+            return Optional.of(authHeader.substring(7));
+        }
+
+        return Optional.empty();
+    }
 }

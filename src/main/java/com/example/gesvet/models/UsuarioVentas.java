@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.models;
 
 import jakarta.persistence.Entity;
@@ -13,7 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "usuarioVentas")
 public class UsuarioVentas {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,7 +21,7 @@ public class UsuarioVentas {
     private String email;
 
     public UsuarioVentas(Long id, String documento, String nombre, String apellido, String direccion, String telefono, String email) {
-       super();
+        super();
         this.id = id;
         this.documento = documento;
         this.nombre = nombre;
@@ -90,8 +86,8 @@ public class UsuarioVentas {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public UsuarioVentas() {
     }
-    
+
 }

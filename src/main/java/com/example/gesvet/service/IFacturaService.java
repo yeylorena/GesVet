@@ -8,17 +8,17 @@ import java.util.Optional;
 public interface IFacturaService {
 
     List<Factura> findAll();
+
     Optional<Factura> findById(Integer id);
+
     Factura save(Factura factura);
 
     String generarNumFactura();
-    
-    List<Factura>findByUsuario(User usuario);
-    
 
-List<Factura> findByUser_Role(String role);
+    List<Factura> findByUsuario(User usuario);
 
-public void update(Factura factura);
+    List<Factura> findByUser_Role(String role);
 
+    public void update(Factura factura);
 
 }

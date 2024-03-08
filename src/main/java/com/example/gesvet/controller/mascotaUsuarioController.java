@@ -14,7 +14,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
-import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +22,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import org.hibernate.service.spi.ServiceException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -86,9 +79,9 @@ public class mascotaUsuarioController {
 
         List<Especie> especies = especieService.getAllEspecies();
         model.addAttribute("especies", especies);
-        // Obtener el nombre de usuario actual
-        //String username = authentication.getName();
-        List<Mascota> mascotas = mascotaService.findAll();
+
+        // Obtener las mascotas del usuario actual solamente
+        List<Mascota> mascotas = user.getMascotas(); // Aquí obtenemos las mascotas asociadas al usuario actual
         model.addAttribute("mascotas", mascotas);
 
         //obtener la información de las razas 
@@ -146,46 +139,23 @@ public class mascotaUsuarioController {
     }
 
     // metodo para editar la mascota 
-    @PostMapping("/mascotas/editar")
-    public String editarMascota(Mascota mascota, @RequestParam("file") MultipartFile imagen, RedirectAttributes redirectAttributes) {
+    @GetMapping("/editarMascota/{id}")
+    public String edit(@PathVariable Integer id, Model model) {   //PathVariable esta anotacion mapea el id o la variable que viene en la url y pasarla a la variable que esta contigua a la anotacion pathVaribale
+        Mascota mascota = new Mascota();
+        Optional<Mascota> optionalMascota = mascotaService.get(id);
+        mascota = optionalMascota.get();  //trae el veterinario que hemos mandado a buscar
 
-        try {
-            // Si se ha seleccionado una imagen
-            if (!imagen.isEmpty()) {
-                // Realizar la escritura del archivo
-                byte[] bytesImg = imagen.getBytes();
-                Path directorioImgenes = Paths.get("images//"); // Ajustar según necesidades
-                String rutaAbsoluta = directorioImgenes.toFile().getAbsolutePath();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-                Files.write(rutaCompleta, bytesImg);
-                mascota.setImagen(imagen.getOriginalFilename());
-            } else {
-                // Mantener la imagen anterior
-                Mascota mascotaExistente = mascotaService.findById(mascota.getId());
-                mascota.setImagen(mascotaExistente.getImagen());
-            }
+        LOGGER.info("Mascota buscada: {}", mascota);
+        model.addAttribute("mascotasEditar", mascota); //Al objeto model llamamos el metodo addAttribute y le declaramos una variable llamada "veterinariosEditar" que la lleve a la vista y se le pasa el valor de lo que tiene el objeto de la clase Veterinario la cual denominamos "veterinario"
 
-            // Actualizar los datos del usuario en la base de datos
-            mascotaService.update(mascota);
-
-            redirectAttributes.addFlashAttribute("modificacionExitosa", true);
-        } catch (IOException e) {
-            // Agregar un mensaje para la alerta de error
-            redirectAttributes.addFlashAttribute("errorModificacion", true);
-            e.printStackTrace(); // Puedes manejar el error según tus necesidades
-        } catch (ServiceException e) {
-            // Agregar un mensaje para la alerta de error del servicio
-            redirectAttributes.addFlashAttribute("errorModificacion", true);
-            e.printStackTrace(); // Puedes manejar el error según tus necesidades
-        }
-        // Puedes redirigir a la página de perfil o a donde desees después de la edición
-        return "redirect:/mascotasUsuarios";
+        //Luego nos envía a la vista todo el objeto buscado
+        return "mascotasUsuario/editarMascota";
     }
 
-    @GetMapping("/mascota/{id}")
-    public ResponseEntity<Mascota> getMascotaDetails(@PathVariable Integer id) {
-        Mascota mascota = mascotaService.findById(id);
-        return ResponseEntity.ok().body(mascota);
+    @PostMapping("/update")
+    public String update(Mascota mascota) {  //recibe como parametro un objeto de tipo Veterinario
+        mascotaService.update(mascota);
+        return "redirect:/mascotasUsuarios";
     }
 
     @GetMapping("/delete/{id}")

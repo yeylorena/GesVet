@@ -55,10 +55,10 @@ public class HomeController {
 
     @Autowired
     private IDetalleFactService detalleFactService;
-    
+
     @Autowired
     private UploadFileService upload;
-    
+
     @Autowired
     private IMetodoPagoService metodopagoservice;
 
@@ -319,9 +319,8 @@ public class HomeController {
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
 
-        
-  List<MetodoPago> metodosDePago = metodopagoservice.findAll(); // Reemplaza esto con tu lógica para obtener los métodos de pago
-    model.addAttribute("metodosDePago", metodosDePago);
+        List<MetodoPago> metodosDePago = metodopagoservice.findAll(); // Reemplaza esto con tu lógica para obtener los métodos de pago
+        model.addAttribute("metodosDePago", metodosDePago);
         model.addAttribute("userDto", userDto);
         model.addAttribute("cart", detalles);
         model.addAttribute("factura", factura);
@@ -331,7 +330,7 @@ public class HomeController {
     }
 
     @PostMapping("saveFact")
-    public String saveFact(Model model, Authentication authentication, Principal principal,@RequestParam("img") MultipartFile file,@RequestParam("metodoPago") Integer metodoPagoId) throws IOException  {
+    public String saveFact(Model model, Authentication authentication, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("metodoPago") Integer metodoPagoId) throws IOException {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -355,14 +354,14 @@ public class HomeController {
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
 
-         // Aquí puedes usar el ID recibido para buscar el Método de Pago seleccionado
-    MetodoPago metodoPagoSeleccionado = metodopagoservice.findById(metodoPagoId);
-    // Asignar el Método de Pago a la Factura
-    factura.setMetodoPago(metodoPagoSeleccionado);
-    
-    // Añadir el role del usuario a la factura
-factura.setRole(user.getRole());
-    
+        // Aquí puedes usar el ID recibido para buscar el Método de Pago seleccionado
+        MetodoPago metodoPagoSeleccionado = metodopagoservice.findById(metodoPagoId);
+        // Asignar el Método de Pago a la Factura
+        factura.setMetodoPago(metodoPagoSeleccionado);
+
+        // Añadir el role del usuario a la factura
+        factura.setRole(user.getRole());
+
         Date fecha = new Date();
 
         //Se guarda la fecha de la factura
@@ -374,8 +373,7 @@ factura.setRole(user.getRole());
         // Establecer estados como "Pendiente"
         factura.setEstadoPago("Pendiente");
         factura.setEstadoEnvio("Pendiente");
-        
-         
+
         //imagen
         if (factura.getId() == null) {//cuando se crea un producto
             String nombreImagen = upload.saveImage(file);
@@ -394,8 +392,6 @@ factura.setRole(user.getRole());
             dt.setFactura(factura);
             detalleFactService.save(dt);
         }
-        
-        
 
         //limpiar lista  y factura
         factura = new Factura();

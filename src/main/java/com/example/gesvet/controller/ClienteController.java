@@ -1,38 +1,84 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.controller;
 
-import com.example.gesvet.models.Clientes;
-import com.example.gesvet.repository.ClienteRepository;
+import com.example.gesvet.dto.UserDto;
+import com.example.gesvet.models.Mascota;
+import com.example.gesvet.models.User;
+import com.example.gesvet.service.ClienteService;
+import com.example.gesvet.service.UserService;
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- *
- * @author sofia
- */
 @Controller
-@RequestMapping("/clientes")
+@RequestMapping("/cliente")
 public class ClienteController {
 
-    @GetMapping("")
-    public String clientes(Model model) {
-        List<Clientes> clientes = clienteRepository.findAll();
-        int size = clientes.size();
-        System.out.println(size);
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-        model.addAttribute("clientes", clientes);
-        return "clientes/Gestion_Clientes";
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ClienteService clienteService;
+
+    @GetMapping("")
+    public String clientes(Model model, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener la lista de usuarios con rol "USER"
+// Obtener la lista de usuarios con rol "USER" y activos
+        List<User> usuarios = userService.findByRoleAndActivo("USER", true);
+
+        // Preparar los datos de los usuarios para mostrarlos en la vista
+        List<UserDto> usuariosDto = new ArrayList<>();
+        for (User user : usuarios) {
+            UserDto userDto = new UserDto();
+            userDto.setId(user.getId());
+            userDto.setUsername(user.getUsername());
+            userDto.setNombre(user.getNombre());
+            userDto.setApellido(user.getApellido());
+            userDto.setDireccion(user.getDireccion());
+            userDto.setTelefono(user.getTelefono());
+            userDto.setRole(user.getRole());
+            userDto.setAcercade(user.getAcercade());
+            userDto.setImagen(user.getImagen());
+            // Obtener las mascotas asociadas a este usuario
+            List<Mascota> mascotas = user.getMascotas();
+            List<String> nombresMascotas = new ArrayList<>();
+            for (Mascota mascota : mascotas) {
+                nombresMascotas.add(mascota.getNombre()); // O cualquier otro atributo que desees mostrar
+            }
+            userDto.setMascotas(nombresMascotas);
+
+            usuariosDto.add(userDto);
+        }
+
+        model.addAttribute("usuarios", usuariosDto);
+
+        return "clientes/clientes";
 
     }
-    @Autowired
-    private ClienteRepository clienteRepository;
 
+    @GetMapping("/mascotas")
+    public String mostrarMascotas(@RequestParam Integer userId, Model model) {
+        User cliente = userService.findById(userId);
+        List<Mascota> mascotas = cliente.getMascotas();
+
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("mascotas", mascotas);
+
+        return "clientes/consultar_mascotas";
+    }
 
 }

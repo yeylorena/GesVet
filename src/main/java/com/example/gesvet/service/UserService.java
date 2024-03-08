@@ -2,9 +2,8 @@ package com.example.gesvet.service;
 
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.User;
-import java.awt.Image;
 import java.util.List;
-
+import java.util.Optional;
 
 public interface UserService {
 
@@ -19,7 +18,13 @@ public interface UserService {
     void updateUser(UserDto userDto);
 
     void eliminarUsuario(Integer userId);
-   
+
     void cambiarContrasenaYEnviarCorreo(User user);
+
+    List<User> findByRoleAndActivo(String role, boolean activo);
+
+    public int countUsersByRole(String role);
+
+    public Optional<User> get(Integer id);
 
 }

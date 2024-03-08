@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.gesvet.models;
 
 import jakarta.persistence.Entity;
@@ -15,6 +11,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "serviciosUser")
 public class ServiciosUser {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -32,12 +29,11 @@ public class ServiciosUser {
     public void setActivos(boolean activos) {
         this.activos = activos;
     }
-    
-     @ManyToOne
+
+    @ManyToOne
     @JoinColumn(name = "categoria_id") // Nombre de la columna en la tabla productos que contiene la clave foránea
     private Categorias categoria;
-    
-     
+
     @ManyToOne()
     private User usuario;
 
@@ -81,8 +77,6 @@ public class ServiciosUser {
         this.precio = precio;
     }
 
-   
-
     public boolean isActivo() {
         return activo;
     }
@@ -107,7 +101,7 @@ public class ServiciosUser {
         this.usuario = usuario;
     }
 
-    public ServiciosUser(Integer id, String nombre, String descripcion, String imagen, double precio,  boolean activo, User usuario) {
+    public ServiciosUser(Integer id, String nombre, String descripcion, String imagen, double precio, boolean activo, User usuario) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -123,11 +117,7 @@ public class ServiciosUser {
         return "ServiciosUser{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", activo=" + activo + ", activos=" + activos + ", usuario=" + usuario + '}';
     }
 
-    
+    public ServiciosUser() {
 
-    
-    
-    public ServiciosUser (){
-        
     }
 }

@@ -1,6 +1,5 @@
 package com.example.gesvet.models;
 
-import com.example.gesvet.models.Mascota;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

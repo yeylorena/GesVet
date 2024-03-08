@@ -1,6 +1,5 @@
 package com.example.gesvet;
 
-
 import com.example.gesvet.service.CustomSuccessHandler;
 import com.example.gesvet.service.CustomUserDetailsService;
 import java.util.List;
@@ -8,21 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -31,13 +22,14 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 @Order(2)
 public class SecurityFilterChainConfig {
-  private final AuthenticationEntryPoint authenticationEntryPoint;
-  private final JWTAuthenticationFilter jwtAuthenticationFilter;
 
-  public SecurityFilterChainConfig(AuthenticationEntryPoint authenticationEntryPoint, JWTAuthenticationFilter jwtAuthenticationFilter) {
-    this.authenticationEntryPoint = authenticationEntryPoint;
-    this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-  }
+    private final AuthenticationEntryPoint authenticationEntryPoint;
+    private final JWTAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityFilterChainConfig(AuthenticationEntryPoint authenticationEntryPoint, JWTAuthenticationFilter jwtAuthenticationFilter) {
+        this.authenticationEntryPoint = authenticationEntryPoint;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
     @Autowired
     CustomSuccessHandler customSuccessHandler;
@@ -45,49 +37,47 @@ public class SecurityFilterChainConfig {
     @Autowired
     CustomUserDetailsService customUserDetailsServices;
 
-   
+    @Bean
+    public SecurityFilterChain securityFilterChainapi(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.cors(corsConfig -> corsConfig.configurationSource(getConfigurationSource()));
 
-   @Bean
-  public SecurityFilterChain securityFilterChainapi(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.cors(corsConfig->corsConfig.configurationSource(getConfigurationSource()));
+        // Disable CSRF
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
-    // Disable CSRF
-    httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        // Http Request Filter
+        httpSecurity.authorizeHttpRequests(
+                requestMatcher
+                -> requestMatcher.requestMatchers("/api/auth/login/**").permitAll()
+                        .requestMatchers("/api/auth/sign-up/**").permitAll()
+                        .requestMatchers("/api/auth/verify-token/**").permitAll()
+                        .anyRequest().authenticated()
+        );
 
-    // Http Request Filter
-    httpSecurity.authorizeHttpRequests(
-        requestMatcher ->
-            requestMatcher.requestMatchers("/api/auth/login/**").permitAll()
-                .requestMatchers("/api/auth/sign-up/**").permitAll()
-                .requestMatchers("/api/auth/verify-token/**").permitAll()
-                .anyRequest().authenticated()
-    );
+        // Authentication Entry Point -> Exception Handler
+        httpSecurity.exceptionHandling(
+                exceptionConfig -> exceptionConfig.authenticationEntryPoint(authenticationEntryPoint)
+        );
 
-    // Authentication Entry Point -> Exception Handler
-    httpSecurity.exceptionHandling(
-        exceptionConfig -> exceptionConfig.authenticationEntryPoint(authenticationEntryPoint)
-    );
+        // Set session policy = STATELESS
+        httpSecurity.sessionManagement(
+                sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        );
 
-    // Set session policy = STATELESS
-    httpSecurity.sessionManagement(
-        sessionConfig->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-    );
+        // Add JWT Authentication Filter
+        httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-    // Add JWT Authentication Filter
-    httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        return httpSecurity.build();
+    }
 
-    return httpSecurity.build();
-  }
+    private static CorsConfigurationSource getConfigurationSource() {
+        var corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedMethods(List.of("*"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000/", "http://localhost:8080"));
+        corsConfiguration.setAllowedHeaders(List.of("Content-Type"));
 
-  private static CorsConfigurationSource getConfigurationSource(){
-    var corsConfiguration = new CorsConfiguration();
-    corsConfiguration.setAllowedMethods(List.of("*"));
-    corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000/", "http://localhost:8080"));
-    corsConfiguration.setAllowedHeaders(List.of("Content-Type"));
+        var source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
 
-    var source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", corsConfiguration);
-
-    return  source;
-  }
+        return source;
+    }
 }
