@@ -29,12 +29,22 @@ public class User {
     private String imagen;
     private boolean activo;
     private static final String IMAGEN_PREDETERMINADA = "usuario.png";
-    
-     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Mascota> mascotas;
 
-    // Resto de tu código...
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<citaRapida> citasRapidas;
 
+    public List<citaRapida> getCitasRapidas() {
+        return citasRapidas;
+    }
+
+    public void setCitasRapidas(List<citaRapida> citasRapidas) {
+        this.citasRapidas = citasRapidas;
+    }
+
+    // Resto de tu código...
     // Agrega este método para obtener la lista de mascotas del usuario
     public List<Mascota> getMascotas() {
         return mascotas;
@@ -141,7 +151,7 @@ public class User {
         this.imagen = (imagen != null && !imagen.isEmpty()) ? imagen : IMAGEN_PREDETERMINADA;
         // Set default role if not provided
         this.role = role != null ? role : "USER";
-         this.activo = true;
+        this.activo = true;
 
     }
 

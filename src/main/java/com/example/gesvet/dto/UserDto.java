@@ -3,6 +3,7 @@ package com.example.gesvet.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import java.util.List;
 
 public class UserDto {
 
@@ -23,6 +24,8 @@ public class UserDto {
     private String currentPassword;
     private String newPassword;
     private String confirmNewPassword;
+    private List<String> mascotas; // Agregar el campo para las mascotas
+    
 
     public String getCurrentPassword() {
         return currentPassword;
@@ -157,6 +160,14 @@ public class UserDto {
 
     public void setAcercade(String acercade) {
         this.acercade = acercade;
+    }
+
+    public void setMascotas(List<String> nombresMascotas) {
+        this.mascotas = nombresMascotas;
+    }
+
+    public List<String> getMascotas() {
+        return mascotas;
     }
 
 }

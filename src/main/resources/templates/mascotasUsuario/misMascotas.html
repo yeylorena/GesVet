@@ -31,13 +31,6 @@
             </nav>
         </div><!-- End Page Title -->
 
-        <div class="pagetitle">
-
-            <nav>
-
-            </nav>
-        </div><!-- End Page Title -->
-
         <section class="section profile">
 
             <div class="card">
@@ -53,11 +46,6 @@
                         <li class="nav-item">
                             <button class="nav-link" data-bs-toggle="tab"
                                     data-bs-target="#profile-regis">Registrar</button>
-                        </li>
-
-                        <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab"
-                                    data-bs-target="#profile-edit">Modificar</button>
                         </li>
 
                         <li class="nav-item">
@@ -97,7 +85,8 @@
                                                 <div class="text-center">
                                                     <button th:onclick="'eliminarMascota(' + ${mascota.id} + ')'" type="button" class="btn btn-danger">
                                                         <i class="bi bi-trash"></i>
-                                                    </button>                                                    <button class="btn btn-primary btn-sm mx-1" th:href="@{mascotasUsuarios/editarMascota/{id}(id=${mascota.id})}">Editar</button>
+                                                    </button>   
+                                                    
                                                 </div>
                                             </div>
                                     </div>
@@ -130,9 +119,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div class="row mb-3">
                                         <div class="col-6">
                                             <label style="color: black;">Nombre:</label>
@@ -193,126 +179,11 @@
                                         <button type="submit" class="btn " id="btnRegistrar"
                                                 style="background-color: #979AD4; color: black;">Registrar</button>
                                     </div>
-
-
-
-
                             </form><!-- End Profile Edit Form -->
                         </div>
 
                         <!--Fin registrar mascota-->
                         <!-- Modificar mascota -->
-
-
-                        <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <form>
-
-                                        <!-- Aquí va tu formulario de selección -->
-                                        <div class="form-group">
-                                            <select id="mascotaSeleccionada" name="mascotaSeleccionada" class="form-select" onchange="submitForm()" required>
-                                                <option value="">Seleccionar mascota</option>
-                                                <!-- Iterar sobre cada mascota en el modelo y crear una opción para cada una -->
-                                                <option th:each="mascota : ${mascotas}" th:value="${mascota.id}" th:text="${mascota.nombre}"></option>
-                                            </select>
-
-                                        </div>
-                                        <!-- Agrega cualquier otro campo necesario para tu formulario de selección -->
-                                        <!-- ... -->
-                                    </form>
-                                </div>
-                                <div class="col-md-8">
-                                    <!-- modificar mascota -->
-
-                                    <!-- modificar mascota -->
-
-                                    <form id="editarForm" th:action="@{/mascotas/editar}" th:object="${mascota}" enctype="multipart/form-data" method="post" onsubmit="return validarFormulario()">
-                                        <input type="hidden" name="usuario.id" th:value="${userDto.id}">
-
-                                            <!-- crear mascota campos  -->
-                                            <div class="row mb-5">
-                                                <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Imagen de Perfil</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <img th:src="@{'/images/' + ${userDto.imagen}}" th:alt="${userDto.imagen}" class="rounded-circle"/>
-
-                                                    <div class="row my-2">
-                                                        <div class="col-6">
-                                                            <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);">
-                                                                <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('imagen').click(); return false;">
-                                                                    <i class="fas fa-plus"></i> Agregar imagen
-                                                                </button>
-                                                                <img id="vistaPrevia" src="#" alt="Vista Previa de la Imagen" style="display: none; max-width: 100%;" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <div class="col-6">
-                                                    <label style="color: black;">Nombre:</label>
-                                                    <input type="text" name="nombre" id="nombreInput" class="form-control" required>
-                                                        <small id="nombreHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo letras y entre 3 y 20 caracteres.</small>
-                                                </div>
-                                                <div class="col-6 ">
-                                                    <label style="color: black;">Color</label>
-                                                    <input type="text" name="color" id="colorInput" class="form-control" required >
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-6">
-                                                    <label style="color: black;">Edad:</label>
-                                                    <input type="text" name="edad" id="edadInput" class="form-control" required>
-                                                        <small id="edadHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo números.</small>
-                                                </div>
-                                                <div class="col-6 ">
-                                                    <label style="color: black;">Tiempo</label>
-                                                    <select name="tiempo" id="tiempoInput" class="form-select" required>
-                                                        <option value="Meses">Meses</option>
-                                                        <option value="Años">Años</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-6 ">
-                                                    <label style="color: black;">Género</label>
-                                                    <select name="genero" id="generoInput" class="form-select" required>
-                                                        <option value="Macho">Macho</option>
-                                                        <option value="Hembra">Hembra</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label style="color: black;">Raza</label>
-                                                    <select name="raza" id="razaInput" class="form-select" required>
-                                                        <option value="">Selecciona una raza</option>
-                                                        <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <div class="col-6 ">
-                                                    <label style="color: black;">Especie</label>
-                                                    <select name="especie" id="especieInput" class="form-select" required>
-                                                        <option value="">Selecciona una especie</option>
-                                                        <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}"></option>
-                                                    </select>
-                                                </div>
-                                                <label style="color: black;">Detalles</label>
-                                                <div class="col-12">
-                                                    <input name="detalles" id="detalles" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="text-center">
-                                                <button type="submit" class="btn " id="btnModificar" style="background-color: #979AD4; color: black;">Modificar</button>
-                                            </div>
-                                    </form><!-- End Profile Edit Form -->
-                                    <!-- End Profile Edit Form -->
-
-                                </div>
-                            </div>
-                        </div>
                         <!--Fin modificar mascota-->
 
                         <!--Historial-->
@@ -357,8 +228,6 @@
 
         </section>
         <div th:replace="~{Plantillas/usuario :: scripts}"></div>
-
-
     </main><!-- End #main -->
     <!-- validación números -->
     <script>
