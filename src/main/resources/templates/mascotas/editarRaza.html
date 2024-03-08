@@ -1,105 +1,341 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"/>
+      xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="Plantillas/administrador :: head"></head>
+    <head th:replace="Plantillas/administrador :: head">
+        <!-- Agrega SweetAlert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
+    </head>
 
-<body>
+    <body style="background-color: #2FC0D5;">
 
-    <header th:replace="Plantillas/administrador :: header"></header> 
+        <header th:replace="Plantillas/administrador :: header">
+            <!-- Estilos letras-->
+            <style>
+                .card-hover:hover {
+                    transform: scale(1.05);
+                    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+                }
+                /*ESTILOS DE LETRAS*/
+                html {
+                    scroll-behavior: smooth;
+                    scroll-padding: 10rem;
+                }
 
-    <aside th:replace="Plantillas/administrador :: sidebar"></aside>
+                .card-hover {
+                    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
-    <main id="main" class="main" style="background-color: #5c5db4;">
+                }
 
-        <div class="pagetitle">
-            <h1>Gestion Razas</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
-                    <li class="breadcrumb-item">Gestión Raza</li>
-                    <li class="breadcrumb-item active">Modificar</li>
+                .card-hover:hover {
+                    transform: scale(1.05);
+                    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+                    background-color: #A0A0A0; /* Cambia el color al pasar el mouse */
+                }
+                .inria-sans-light {
+                    font-family: "Inria Sans", sans-serif;
+                    font-weight: 300;
+                    font-style: normal;
+                }
 
-               </ol>
-            </nav>
-        </div><!-- End Page Title -->
+                .inria-sans-regular {
+                    font-family: "Inria Sans", sans-serif;
+                    font-weight: 400;
+                    font-style: normal;
+                }
 
-        <section class="section profile">
-            <div class="col-xl-12">
+                .inria-sans-bold {
+                    font-family: "Inria Sans", sans-serif;
+                    font-weight: 700;
+                    font-style: normal;
+                    margin-right: 100px;
+                    font-size: 30px;
+                    line-height: 50px;
+                }
+                .inria-sans-bolds {
+                    font-family: "Inria Sans", sans-serif;
+                    font-weight: 700;
+                    font-style: normal;
+                    margin-right: 100px;
+                    font-size: 20px;
+                    line-height: 50px;
+                }
 
-                <div class="card">
-                    <div class="card-body pt-3">
-                        <!-- Bordered Tabs -->
-                        <ul class="nav nav-tabs nav-tabs-bordered">
+                .inria-sans-light-italic {
+                    font-family: "Inria Sans", sans-serif;
+                    font-weight: 300;
+                    font-style: italic;
+                }
 
-                            <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#profile-overview">Editar</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content pt-2">
+                .inria-sans-regular-italic {
+                    font-family: "Inria Sans", sans-serif;
+                    font-weight: 400;
+                    font-style: italic;
+                }
 
-                            <div class="container-fluid mt-2">
-                                <p class="textoNeon">Editar Raza</p>
-                            </div>
+                .inria-sans-bold-italic {
+                    font-family: "Inria Sans", sans-serif;
+                    font-weight: 700;
+                    font-style: italic;
+                }
 
-                            <div class="container">
-                                <form  th:action="@{/razas/update}" object="" method="post" enctype="multipart/form-data">
-                                   <input type="hidden" name="id" th:value="${Raza.id}">
-                                    <div class="card">
-                                        
-                                        <div class="form-group">
-                                            <div class="row my-2">
-                                                <div class="col-6 ">
-                                                    <label>Nombre:</label>
-                                                    <input type="text" name="nombre" field="" th:value="${Raza.nombre}" class="form-control" required autocomplete="off">
-                                                </div>
-                                                <div class="col-6 ">
-                                                    <label>Descripción:</label>
-                                                <input type="text" name="descripcion" field="" th:value="${Raza.descripcion}" class="form-control" required autocomplete="off">
-                                                </div>
-                                            </div>
+                .texto {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 20px;
+                    margin: 0 0 20px;
+                    padding: 0;
+
+
+                }
+                .texto2 {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 15px;
+                    margin: 0 0 20px;
+                    padding: 0;
+
+
+                }
+
+                .titulo {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 18px;
+                    font-weight: 700;
+                    margin-right: 100px;
+                    line-height: 50px;
+                    color: #444444
+
+                }
+                .botones{
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-right: 60px;
+                    color: #FFFFFF;
+                    background-color: #2FD6B5 !important;
+                    border-radius: 8px;
+                    margin-top: 10px;
+                    width: 150px; /* Define el ancho deseado para el botón */
+                }
+                .subboton{
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-right: 60px;
+                    color: white !important; /* Color del texto blanco */
+                    background-color: #39DBC1;
+                    border-radius: 8px;
+                    margin-top: 10px;
+                    width: 120px; /* Define el ancho deseado para el botón */
+                }
+                .nav-item:hover .nav-link {
+                    color: #2FD6B5; /* Cambia el color del texto al pasar el mouse por encima */
+                }
+                .custom-btn {
+                    color: white !important; /* Color del texto blanco */
+                }
+
+                .encabezados {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 30px;
+                    font-weight: 700;
+                    margin-right: 10px;
+                    line-height: 50px;
+                    color: #FFFFFF;
+                    text-align: center;
+
+
+                }
+                .titlecartas {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 20px;
+                    font-weight: 600;
+                    line-height: 50px;
+                    color: #FFFFFF;
+
+                }
+                .titlecartass{
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 20px;
+                    font-weight: 500;
+
+                }
+                .textcartas {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 19px;
+                    font-weight: 300;
+                    color: #000000;
+
+                }
+
+                .titleGesvet {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 40px;
+                    font-weight: 500;
+                    line-height: 50px;
+                    color: #FFFFFF;
+
+
+                }
+                .titlecartasDos {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: 50px;
+                    color: #FFFFFF;
+
+                }
+                .titlecartaSel {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: 50px;
+                    color: #000000;
+
+                }
+                .titlecartaUna {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 15px;
+                    font-weight: 500;
+                    line-height: 50px;
+                    color: #000000;
+
+                }
+                .titlecartaSel2 {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: 20px;
+                    color: #000000;
+
+                }
+                .encabezadosCategoria {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-size: 50px;
+                    font-weight: 700;
+                    margin-right: 10px;
+                    line-height: 50px;
+                    color: #FFFFFF;
+                    text-align: center;
+
+                    .titlecartaLetra{
+                        font-family: 'Montserrat', Arial, sans-serif;
+                        font-size: 15px;
+                        font-weight: 500;
+                        line-height: 20px;
+                        color: #000000;
+
+                    }
+
+                </style>
+            </header> 
+
+            <aside th:replace="Plantillas/administrador :: sidebar"></aside>
+
+            <main id="main" class="main" >
+
+                <div class="pagetitle">
+                    <h1>Gestion Razas</h1>
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                            <li class="breadcrumb-item">Gestión Raza</li>
+                            <li class="breadcrumb-item active">Modificar</li>
+                        </ol>
+                    </nav>
+                </div><!-- End Page Title -->
+
+                <section class="section profile">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body pt-3">
+                                <!-- Bordered Tabs -->
+                                <ul class="nav nav-tabs nav-tabs-bordered">
+                                    <li class="nav-item">
+                                        <button id="editarBtn" class="nav-link active">Editar</button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content pt-2">
+                                    <div class="container">
+                                        <form  th:action="@{/razas/update}" object="" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" name="id" th:value="${Raza.id}">
+                                                <div class="card">
+                                                    <div class="form-group">
+                                                        <div class="row my-2" style="font-family: 'Montserrat', Arial, sans-serif;
+                                                             font-size: 15px;
+                                                             font-weight: 500;
+                                                             line-height: 50px;
+                                                             color: #000000;">
+                                                            <div class="col-6">
+                                                                <label>Nombre:</label>
+                                                                <input type="text" id="nombre" name="nombre" th:value="${Raza.nombre}" class="form-control" required autocomplete="off">
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label >Descripción:</label>
+                                                                <input type="text" id="descripcion" name="descripcion" th:value="${Raza.descripcion}" class="form-control" required autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row my-2">
+                                                            <div class="col-6" >
+                                                                <label>Estado:</label>
+                                                                <select id="estado" name="estado" class="form-control">
+                                                                    <option value="activo">Activo</option>
+                                                                    <option value="inactivo">Inactivo</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="box-footer">
+                                                        <div class="row my-2">
+                                                            <div class="d-grid gap-2 col-6">
+                                                                <button id="guardarBtn" class="btn " style="background-color:#2FD6B4" >Guardar</button>
+                                                                </div>
+                                                                <div class="d-grid gap-2 col-6">
+                                                                    <a class="btn " style="background-color:#2FD6B4"  href="/razas">Cancelar</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </form>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="row my-2">
-                      
-                                                <div class="col-6 ">
-                                                    <label>Estado:</label>
-                                                    <select name="estado" class="form-control">
-                                                        <option value="activo">Activo</option>
-                                                        <option value="inactivo">Inactivo</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="box-footer">
-                                        <div class="row my-2">
-                                            <div class="d-grid gap-2 col-6">
-                                                <button class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="d-grid gap-2 col-6">
-                                                <a class="btn btn-danger" href="/razas">Cancelar</a>
-                                            </div>
-                                        </div>
-                                            </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
+                    </section>
 
-                    </div>
+                    <div th:replace="Plantillas/administrador :: scripts"></div>
 
-                </div>
+                </main><!-- End #main -->
 
-            </div>
-            </div>
-            </div>
-            </div>
-        </section>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const guardarBtn = document.getElementById('guardarBtn');
+                        guardarBtn.addEventListener('click', function () {
+                            const nombre = document.getElementById('nombre').value;
+                            const descripcion = document.getElementById('descripcion').value;
+                            const estado = document.getElementById('estado').value;
+                            if (nombre.trim() !== '' && descripcion.trim() !== '' && estado.trim() !== '') {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Raza modificada",
+                                    showConfirmButton: true // Mostrar el botón de confirmación
 
-        <div th:replace="Plantillas/administrador :: scripts"></div>
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Something went wrong!"
+                                });
+                            }
+                        });
+                    });
+                </script>
 
-    </main><!-- End #main -->
-</body>
-</html>
+            </body>
+        </html>
+

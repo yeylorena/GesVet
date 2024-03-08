@@ -1,105 +1,328 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"/>
 
-<head th:replace="Plantillas/administrador :: head"></head>
+<head th:replace="Plantillas/administrador :: head">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Estilos letras-->
+    <style>
+        .card-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+        }
+        /*ESTILOS DE LETRAS*/
+        html {
+            scroll-behavior: smooth;
+            scroll-padding: 10rem;
+        }
 
-<body>
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
-    <header th:replace="Plantillas/administrador :: header"></header> 
+        }
 
-    <aside th:replace="Plantillas/administrador :: sidebar"></aside>
+        .card-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
+            background-color: #A0A0A0; /* Cambia el color al pasar el mouse */
+        }
+        .inria-sans-light {
+            font-family: "Inria Sans", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+        }
 
-    <main id="main" class="main" style="background-color: #5c5db4;">
+        .inria-sans-regular {
+            font-family: "Inria Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
 
-        <div class="pagetitle">
-            <h1>Gestion Especies</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
-                    <li class="breadcrumb-item">Gestión Especie</li>
-                    <li class="breadcrumb-item active">Modificar</li>
+        .inria-sans-bold {
+            font-family: "Inria Sans", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            margin-right: 100px;
+            font-size: 30px;
+            line-height: 50px;
+        }
+        .inria-sans-bolds {
+            font-family: "Inria Sans", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            margin-right: 100px;
+            font-size: 20px;
+            line-height: 50px;
+        }
 
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
+        .inria-sans-light-italic {
+            font-family: "Inria Sans", sans-serif;
+            font-weight: 300;
+            font-style: italic;
+        }
 
-        <section class="section profile">
-            <div class="col-xl-12">
+        .inria-sans-regular-italic {
+            font-family: "Inria Sans", sans-serif;
+            font-weight: 400;
+            font-style: italic;
+        }
 
-                <div class="card">
-                    <div class="card-body pt-3">
-                        <!-- Bordered Tabs -->
-                        <ul class="nav nav-tabs nav-tabs-bordered">
+        .inria-sans-bold-italic {
+            font-family: "Inria Sans", sans-serif;
+            font-weight: 700;
+            font-style: italic;
+        }
 
-                            <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#profile-overview">Editar</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content pt-2">
+        .texto {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 20px;
+            margin: 0 0 20px;
+            padding: 0;
 
-                            <div class="container-fluid mt-2">
-                                <p class="textoNeon">Editar Especie</p>
+
+        }
+        .texto2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 15px;
+            margin: 0 0 20px;
+            padding: 0;
+
+
+        }
+
+        .titulo {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-right: 100px;
+            line-height: 50px;
+            color: #444444
+
+        }
+        .botones{
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-right: 60px;
+            color: #FFFFFF;
+            background-color: #2FD6B5 !important;
+            border-radius: 8px;
+            margin-top: 10px;
+            width: 150px; /* Define el ancho deseado para el botón */
+        }
+        .subboton{
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-right: 60px;
+            color: white !important; /* Color del texto blanco */
+            background-color: #39DBC1;
+            border-radius: 8px;
+            margin-top: 10px;
+            width: 120px; /* Define el ancho deseado para el botón */
+        }
+        .nav-item:hover .nav-link {
+            color: #2FD6B5; /* Cambia el color del texto al pasar el mouse por encima */
+        }
+        .custom-btn {
+            color: white !important; /* Color del texto blanco */
+        }
+
+        .encabezados {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 30px;
+            font-weight: 700;
+            margin-right: 10px;
+            line-height: 50px;
+            color: #FFFFFF;
+            text-align: center;
+
+
+        }
+        .titlecartas {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 50px;
+            color: #FFFFFF;
+
+        }
+        .titlecartass{
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+
+        }
+        .textcartas {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 19px;
+            font-weight: 300;
+            color: #000000;
+
+        }
+
+        .titleGesvet {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 40px;
+            font-weight: 500;
+            line-height: 50px;
+            color: #FFFFFF;
+
+
+        }
+        .titlecartasDos {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 50px;
+            color: #FFFFFF;
+
+        }
+        .titlecartaSel {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 50px;
+            color: #000000;
+
+        }
+        .titlecartaUna {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 50px;
+            color: #000000;
+
+        }
+        .titlecartaSel2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 20px;
+            color: #000000;
+
+        }
+        .encabezadosCategoria {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 50px;
+            font-weight: 700;
+            margin-right: 10px;
+            line-height: 50px;
+            color: #FFFFFF;
+            text-align: center;
+
+            .titlecartaLetra{
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 15px;
+                font-weight: 500;
+                line-height: 20px;
+                color: #000000;
+
+            }
+
+        </style>
+
+    </head>
+
+    <body style="background-color: #2FC0D5;">
+
+        <header th:replace="Plantillas/administrador :: header"></header> 
+
+        <aside th:replace="Plantillas/administrador :: sidebar"></aside>
+
+        <main id="main" class="main">
+
+            <div class="pagetitle">
+                <h1>Gestion Especies</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
+                        <li class="breadcrumb-item">Gestión Especie</li>
+                        <li class="breadcrumb-item active">Modificar</li>
+
+                    </ol>
+                </nav>
+            </div><!-- End Page Title -->
+
+            <section class="section profile">
+                <div class="col-xl-12">
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <ul class="nav nav-tabs nav-tabs-bordered">
+
+                                <li class="nav-item">
+                                    <button class="nav-link active titlecartaSel2 " data-bs-toggle="tab"
+                                            data-bs-target="#profile-overview">Editar</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content pt-2">
+                                <div class="container">
+                                    <form  th:action="@{/razas/updateEspecie}" object="" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" th:value="${especieEdit.id}">
+                                            <div class="card">
+
+                                                <div class="form-group" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                                     font-size: 15px;
+                                                     font-weight: 500;
+                                                     line-height: 50px;
+                                                     color: #000000;">
+                                                    <div class="row my-2">
+                                                        <div class="col-6 ">
+                                                            <label>Nombre:</label>
+                                                            <input type="text" name="nombre" field="" th:value="${especieEdit.nombre}" class="form-control" required autocomplete="off">
+                                                        </div>
+                                                        <div class="col-6 ">
+                                                            <label>Descripción:</label>
+                                                            <input type="text" name="descripcion" field="" th:value="${especieEdit.descripcion}" class="form-control" required autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                                     font-size: 15px;
+                                                     font-weight: 500;
+                                                     line-height: 50px;
+                                                     color: #000000;">
+                                                    <div class="row my-2">
+
+                                                        <div class="col-6 ">
+                                                            <label>Estado:</label>
+                                                            <select name="estado" class="form-control" th:value="${especieEdit.estado}">
+                                                                <option value="activo">Activo</option>
+                                                                <option value="inactivo">Inactivo</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="box-footer">
+                                                    <div class="row my-2">
+                                                        <div class="d-grid gap-2 col-6">
+                                                            <button id="guardarEspecie" type="submit" class="btn " style="background-color:#2FD6B4">Guardar</button>
+                                                            </div>
+                                                            <div class="d-grid gap-2 col-6">
+                                                                <a class="btn " style="background-color:#2FD6B4" href="/razas">Cancelar</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                    </div>
+                                </div>
+
                             </div>
 
-                            <div class="container">
-                                <form  th:action="@{/razas/updateEspecie}" object="" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" th:value="${especieEdit.id}">
-                                        <div class="card">
-
-                                            <div class="form-group">
-                                                <div class="row my-2">
-                                                    <div class="col-6 ">
-                                                        <label>Nombre:</label>
-                                                        <input type="text" name="nombre" field="" th:value="${especieEdit.nombre}" class="form-control" required autocomplete="off">
-                                                    </div>
-                                                    <div class="col-6 ">
-                                                        <label>Descripción:</label>
-                                                        <input type="text" name="descripcion" field="" th:value="${especieEdit.descripcion}" class="form-control" required autocomplete="off">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row my-2">
-
-                                                    <div class="col-6 ">
-                                                        <label>Estado:</label>
-                                                        <select name="estado" class="form-control" th:value="${especieEdit.estado}">
-                                                            <option value="activo">Activo</option>
-                                                            <option value="inactivo">Inactivo</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="box-footer">
-                                                <div class="row my-2">
-                                                    <div class="d-grid gap-2 col-6">
-                                                        <button type="submit" class="btn btn-success">Guardar</button>
-                                                    </div>
-                                                    <div class="d-grid gap-2 col-6">
-                                                        <a class="btn btn-danger" href="/razas">Cancelar</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </form>
-                            </div>
                         </div>
 
                     </div>
+                    </div>
+                    </div>
+                    </div>
+                </section>
 
-                </div>
+                <div th:replace="Plantillas/administrador :: scripts"></div>
 
-            </div>
-            </div>
-            </div>
-            </div>
-        </section>
-
-        <div th:replace="Plantillas/administrador :: scripts"></div>
-
-    </main><!-- End #main -->
-</body>
-</html>
+            </main><!-- End #main -->
+        </body>
+    </html>
