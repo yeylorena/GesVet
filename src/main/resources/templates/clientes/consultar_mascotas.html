@@ -90,7 +90,7 @@
                                     <div class="col-10">
                                     </div>
                                     <div class="col-2">
-                                        <button onclick="volver()" class="btn btn-primary">Volver</button>
+                                        <a class="btn btn-primary" th:href="@{/cliente}">Volver</a>
                                     </div>
                                 </div>
                             </div>
@@ -112,10 +112,6 @@
                 imagen.style.height = '200px';
                 imagen.style.width = '200px';
             }
-        }
-        // Función para volver a la página anterior
-        function volver() {
-            window.location.href = '/cliente';
         }
     </script>
 

@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/ayuda")
-public class ayudaadminController {
+@RequestMapping("/ayudausuario")
+public class ayudausuController {
 
     @GetMapping("")
     public String show(Model model) {  //el objeto model lleva información desde el backend hacia la vista
-        return "ayuda/ayudaVet";
+        return "ayuda/ayuda_cliente";
 
     }
 

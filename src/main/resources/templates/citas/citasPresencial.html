@@ -67,17 +67,11 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-12">
                                                     <form method="post" action="/citasRapidas/guardar" class="search-form d-flex align-items-center pb-3">
-
-
                                                         <input type="text" name="query" placeholder="Buscar" title="Enter search keyword">
-
                                                             <button id="buscar" type="button" class="btn"><i class="bi bi-search"></i></button>
-
                                                             <input type="hidden" name="estado" value="pendiente">
-
                                                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                                                         data-bs-target="#agregarProv">Agregar cita  <i class="bi bi-calendar-plus"></i></button>
-
                                                                 <!-- Modal agregar veterinario-->
                                                                 <div class="modal fade" id="agregarProv" data-bs-backdrop="static"
                                                                      data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
@@ -100,7 +94,6 @@
                                                                                             <input type="text" name="nombreCita" id="nombreCita"
                                                                                                    class="form-control custom-border custom-bg-fondo">
                                                                                                 <span class="error-message"></span>
-
                                                                                                 </div>
                                                                                                 <div class="col">
                                                                                                     <br>
@@ -334,28 +327,77 @@ Swal.fire({
 
                                                                                                                                                 <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
 
+
                                                                                                                                                 <script>
+document.getElementById('btnGuardar').addEventListener('click', function () {
+    // Obtener los datos del formulario
+    var nombreCita = document.getElementById('nombreCita').value;
+    var colorCita = document.getElementById('colorMascota').value;
+    var inicio = document.getElementById('fechaInicio').value;
+
+    // Realizar una solicitud AJAX para guardar la cita
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/citasRapidas/guardar', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // La cita se guardó correctamente, actualizar el FullCalendar
+                actualizarCalendario();
+            } else {
+                // Hubo un error al guardar la cita
+                console.error('Error al guardar la cita:', xhr.responseText);
+            }
+        }
+    };
+    // Enviar los datos del formulario al servidor
+    xhr.send('nombreCita=' + encodeURIComponent(nombreCita) + '&colorMascota=' + encodeURIComponent(colorCita) + '&inicio=' + encodeURIComponent(inicio));
+});
+
+// Función para actualizar el FullCalendar con los eventos de las citas guardadas
+function actualizarCalendario() {
+    // Realizar una solicitud AJAX para obtener la lista de eventos
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/citasRapidas/eventos', true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Parsear la respuesta JSON con los eventos
+                var eventos = JSON.parse(xhr.responseText);
+                // Limpiar el calendario
+                calendar.removeAllEvents();
+                // Agregar los eventos al calendario
+                calendar.addEventSource(eventos);
+            } else {
+                // Hubo un error al obtener los eventos
+                console.error('Error al obtener los eventos:', xhr.responseText);
+            }
+        }
+    };
+    // Enviar la solicitud GET para obtener los eventos
+    xhr.send();
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        locale: 'es', // Establece el idioma en español
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        buttonText: {
-            today: 'Hoy',
-            month: 'Mes',
-            week: 'Semana',
-            day: 'Día'
+        locale: 'es',
+        dateClick: function (info) {
+            // info.date contiene la fecha seleccionada por el usuario
+            // Puedes usar esta fecha para mostrarla en algún campo de tu formulario
+            document.getElementById('fechaInicio').value = info.date.toISOString().slice(0, 16);
         }
     });
+
     calendar.render();
 });
+
+
+
                                                                                                                                                 </script>
+
 
                                                                                                                                                 <script>
                                                                                                                                                     document.addEventListener('DOMContentLoaded', function () {

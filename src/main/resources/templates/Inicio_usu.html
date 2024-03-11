@@ -246,8 +246,12 @@
                                 <i class="bi bi-search"></i>
                             </a>
                         </li><!-- End Search Icon-->
-                        <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
+                        <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf" title="Manual de usuario">
                             <i class="bi bi-journal-bookmark-fill"></i>
+                            <span class="badge bg-primary badge-number"></span>
+                        </a>
+                        <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                            <i class="bi bi-whatsapp"></i>   
                             <span class="badge bg-primary badge-number"></span>
                         </a>
 
@@ -340,25 +344,25 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="citas.html">
+                        <a class="nav-link collapsed" th:href="@{/citas}">
                             <i class="bi bi-chat-quote"></i>
                             <span>Citas</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="productos_servicios.html">
+                        <a class="nav-link collapsed" th:href="@{/verhome}">
                             <i class="bi bi-bag-plus"></i>
                             <span>Productos y servicios</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="carrito_compras.html">
+                        <a class="nav-link collapsed" th:href="@{/getCart}">
                             <i class="bi bi-cart2"></i>
                             <span>Carrito de compras</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="ayuda_cliente.html">
+                        <a class="nav-link collapsed" th:href="@{/ayudausuario}">
                             <i class="bi bi-question-circle"></i>
                             <span>Centro de ayuda</span>
                         </a>
@@ -436,7 +440,7 @@
                                         <div class="card-body ">
                                             <a href="#" class="btn  my-4 titlecartass"
                                                style="background-color: #ffffff;
-                                              ">Accesorios</a>
+                                               ">Accesorios</a>
                                         </div>
                                     </div>
                                     <div class="card my-4 card-hover" style=" background-color: #2FD6B4;
@@ -449,7 +453,7 @@
                                         <div class="card-body ">
                                             <a href="#" class="btn  my-4 titlecartass"
                                                style="background-color: #ffffff;
-                                             ">Aseo</a>
+                                               ">Aseo</a>
                                         </div>
                                     </div>
                                     <div class="card my-4 card-hover" style=" background-color: #2FD6B4;
@@ -462,7 +466,7 @@
                                         <div class="card-body ">
                                             <a href="#" class="btn  my-4 titlecartass"
                                                style="background-color: #ffffff;
-                                              ">Medicamentos</a>
+                                               ">Medicamentos</a>
                                         </div>
                                     </div>
                                     <div class="card my-4 card-hover" style=" background-color: #2FD6B4;
@@ -475,7 +479,7 @@
                                         <div class="card-body ">
                                             <a href="#" class="btn  my-4 titlecartass"
                                                style="background-color: #ffffff;
-                                             ">Estética</a>
+                                               ">Estética</a>
                                         </div>
                                     </div>
                                     <div class="card my-4 card-hover" style=" background-color: #2FD6B4;
@@ -488,7 +492,7 @@
                                         <div class="card-body ">
                                             <a href="#" class="btn  my-4 titlecartass"
                                                style="background-color: #ffffff;
-                                              ">Urgencias</a>
+                                               ">Urgencias</a>
                                         </div>
                                     </div>
                                     <div class="card my-4 card-hover" style=" background-color: #2FD6B4;
@@ -501,7 +505,7 @@
                                         <div class="card-body ">
                                             <a href="#" class="btn  my-4 titlecartass"
                                                style="background-color: #ffffff;
-                                              ">Laboratorio</a>
+                                               ">Laboratorio</a>
                                         </div>
                                     </div>
                                     <div class="card my-4 card-hover" style=" background-color: #2FD6B4;
@@ -526,7 +530,7 @@
                                              object-fit: cover;">
                                         <div class="card-body ">
                                             <a href="#" class="btn  my-4 titlecartass" style="background-color: #ffffff;
-                                             ">Citas</a>
+                                               ">Citas</a>
                                         </div>
                                     </div>
                                 </div>
