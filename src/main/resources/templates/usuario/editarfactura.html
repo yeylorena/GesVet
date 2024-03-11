@@ -364,7 +364,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-6 ">
-                                                    <label>Estado Pago:</label>
+                                                    <label>Estado Envio:</label>
                                                     <select th:field="*{estadoEnvio}" class="form-control">
                                                         <option value="Pendiente" th:selected="${factura.estadoEnvio == 'Pendiente'}">Pendiente</option>
                                                         <option value="Enviado" th:selected="${factura.estadoEnvio == 'Enviado'}">Enviado</option>
@@ -416,7 +416,7 @@
     Swal.fire({
          icon: 'error',
         title: 'No hay suficientes productos para descontar',
-        text: '${error}',
+        text: 'Verifica la cantidad de tus produtos',
     });
 </script>
 
@@ -428,6 +428,13 @@
         
     });
 </script>
+<script th:if="${errorfactenvio != null}">
+    Swal.fire({
+        icon: 'error',
+        title: 'Para aprobar la factura, el estado de envío debe ser "Enviado"',
+    });
+</script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </main><!-- End #main -->

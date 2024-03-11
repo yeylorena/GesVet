@@ -65,20 +65,34 @@ public class FacturaServiceImpl implements IFacturaService {
 
     @Override
     public List<Factura> findByUsuario(User usuario) {
-       return facturaRepository.findByUsuario(usuario);  }
-
-    @Override
-    public Optional<Factura> findById(Integer id) {
-       return facturaRepository.findById(id);
+        return facturaRepository.findByUsuario(usuario);
     }
 
     @Override
-public List<Factura> findByUser_Role(String role) {
-    return facturaRepository.findByUserRole(role);
-}
+    public Optional<Factura> findById(Integer id) {
+        return facturaRepository.findById(id);
+    }
+
+    @Override
+    public List<Factura> findByUser_Role(String role) {
+        return facturaRepository.findByUserRole(role);
+    }
 
     @Override
     public void update(Factura factura) {
-     facturaRepository.save(factura);}
+        facturaRepository.save(factura);
+    }
+
+    @Override
+    public void delete(Factura factura) {
+        facturaRepository.delete(factura);
+    }
+
+    @Override
+    public List<Object[]> obtenerTopProductosMasVendidos() {
+        return facturaRepository.findTopProductosMasVendidos();
+    }
+    
+   
 
 }

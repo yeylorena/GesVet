@@ -17,5 +17,6 @@ public interface ICategoriasService {
     List<Categorias> findAll();
     // Nuevo método para obtener categorías por tipo
      List<Categorias> findByTipoCategoria(String tipoCategoria);
+      boolean existsByNombre(String nombre);
 }
 

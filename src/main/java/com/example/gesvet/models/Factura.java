@@ -163,4 +163,16 @@ public class Factura {
     public void setMetodoPago(MetodoPago metodoPago) {
         this.metodoPago = metodoPago;
     }
+    
+    @ManyToOne
+    @JoinColumn(name = "usuarioventas_id")
+    private UsuarioVentas usuarioventas;
+
+    public UsuarioVentas getUsuarioventas() {
+        return usuarioventas;
+    }
+
+    public void setUsuarioventas(UsuarioVentas usuarioventas) {
+        this.usuarioventas = usuarioventas;
+    }
 }

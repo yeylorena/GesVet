@@ -8,7 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarioVentas")
@@ -93,5 +95,14 @@ public class UsuarioVentas {
     
     public UsuarioVentas() {
     }
-    
+     @OneToMany(mappedBy = "usuarioventas")
+    private List<Factura> facturasuser;
+
+    public List<Factura> getFacturasuser() {
+        return facturasuser;
+    }
+
+    public void setFacturasuser(List<Factura> facturasuser) {
+        this.facturasuser = facturasuser;
+    }
 }

@@ -23,5 +23,6 @@ public interface ITipocategoriaservice {
     void delete(Integer id);
 
     List<Tipocategoria> findAll();
+    boolean existsByNombre(String nombre);
     
 }

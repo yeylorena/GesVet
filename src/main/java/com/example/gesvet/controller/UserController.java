@@ -1,10 +1,14 @@
 package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
+import com.example.gesvet.models.Productos;
 import com.example.gesvet.models.User;
+import com.example.gesvet.service.IFacturaService;
+import com.example.gesvet.service.IProductoService;
 import com.example.gesvet.service.UserService;
 import jakarta.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +21,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
+    
+    @Autowired
+    private IProductoService productoService;
+    
+    @Autowired
+    private IFacturaService facturaService;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -87,6 +97,16 @@ public class UserController {
             userDto.setRole(user.getRole());
             userDto.setAcercade(user.getAcercade());
             userDto.setImagen("/images/" + user.getImagen()); // Asegúrate de tener la ruta correcta
+            
+            List<Object[]> productosMasVendidos = facturaService.obtenerTopProductosMasVendidos();
+
+        model.addAttribute("productosMasVendidos", productosMasVendidos);
+         int limite = 10; // Cantidad máxima de productos a mostrar
+        int minimoStock = 5; // Establece el límite inferior para considerar un producto con poco stock
+
+        List<Productos> productosConPocoStock = productoService.getTopProductosConPocoStock(limite, minimoStock);
+
+        model.addAttribute("productosConPocoStock", productosConPocoStock);
 
             model.addAttribute("userDto", userDto);
         }

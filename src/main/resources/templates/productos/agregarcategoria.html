@@ -357,11 +357,11 @@
                                             <div class="row my-2">
                                                 <div class="col-6 ">
                                                     <label>Nombre:</label>
-                                                    <input type="text" name="nombre" field="" class="form-control">
+                                                    <input type="text" name="nombre" field="" class="form-control" required>
                                                 </div>
                                                 <div class="col-6 ">
                                                     <label>Descripción:</label>
-                                                    <input type="text" name="descripcion" field="" class="form-control" >
+                                                    <input type="text" name="descripcion" field="" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -425,5 +425,17 @@
         <div th:replace="Plantillas/administrador :: scripts"></div>
 
     </main><!-- End #main -->
+    <script th:if="${validarformulario != null}">
+        Swal.fire({
+            icon: 'error',
+            title: 'Por favor, completa todos los campos del formulario.',
+        });
+    </script>
+    <script th:if="${errorcategoriaexist != null}">
+        Swal.fire({
+            icon: 'error',
+            title: 'Ya existe una categoría con el mismo nombre.',
+        });
+    </script>
 </body>
 </html>

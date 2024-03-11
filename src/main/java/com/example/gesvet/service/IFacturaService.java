@@ -19,6 +19,10 @@ public interface IFacturaService {
 List<Factura> findByUser_Role(String role);
 
 public void update(Factura factura);
+void delete(Factura factura);
+
+List<Object[]> obtenerTopProductosMasVendidos();
+
 
 
 }

@@ -271,11 +271,11 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="carrito_compras.html">
-                    <i class="bi bi-cart2"></i>
-                    <span>Carrito de compras</span>
-                </a>
-            </li>
+                <a class="nav-link collapsed" th:href="@{/getCart}">
+                            <i class="bi bi-cart2"></i>
+                            <span>Carrito de compras</span>
+                        </a>
+                    </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/comprasUser}">
                     <i class="bi bi-cart2"></i>
@@ -343,15 +343,25 @@
                                                         <li class="list-group-item"><h5 th:text=" 'Precio: ' + ${producto.precio}"></h5></li>
                                                         <li class="list-group-item"><p th:text=" 'Descripción: ' + ${producto.descripcion}"></p>
                                                         </li>
-                                                        <li class="list-group-item"><h6>
-                                                                Cantidad: <input type="number" id="cantidad" name="cantidad"
-                                                                                 autocomplete="off" min="1" th:max="${producto.cantidad}" value="1">
-                                                            </h6></li>
+                                                         <li class="list-group-item">
+                                                            <h6 th:if="${producto.cantidad > 0}">
+                                                                Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off" min="1" th:max="${producto.cantidad}" value="1">
+                                                            </h6>
+                                                            <h6 th:unless="${producto.cantidad > 0}">
+                                                                Producto agotado
+                                                            </h6>
+                                                        </li>
                                                     </ul>
 
 
-                                                    <button type="submit" class="btn btn-dark">Añadir al
-                                                        carrito</button>
+                                                    <!-- Botones -->
+                                                    <div th:if="${producto.cantidad > 0}">
+                                                        <button type="submit" class="btn btn-dark">Agregar</button>
+                                                        <a class="btn btn-danger" href="/verhome">Cancelar</a>
+                                                    </div>
+                                                    <div th:unless="${producto.cantidad > 0}">
+                                                        <a class="btn btn-danger" href="/verhome">Cancelar</a>
+                                                    </div>
 
                                             </form>
                                         </div>

@@ -349,7 +349,7 @@
                             </div>
 
                             <div class="container">
-                                <form th:action="@{/productos/updatetipocategoria}" object="" method="post" enctype="multipart/form-data">
+                                <form th:action="@{/productos/updatetipocategoria}" object="" method="post" enctype="multipart/form-data" onsubmit="return validarFormulario()">
                                     <input type="hidden" name="id" th:value="${servicio.id}">
                                         <div class="card">
 
@@ -357,7 +357,7 @@
                                                 <div class="row my-2">
                                                     <div class="col-6 ">
                                                         <label>Nombre:</label>
-                                                        <input type="text" name="nombre" field="" th:value="${servicio.nombre}" class="form-control" required autocomplete="off">
+                                                        <input type="text" name="nombre" field="" th:value="${servicio.nombre}" class="form-control" >
                                                     </div>
                                                     <div class="col-6 ">
                                                         <label class="form-label">Estado:</label><br>
@@ -406,5 +406,11 @@
         <div th:replace="Plantillas/administrador :: scripts"></div>
 
     </main><!-- End #main -->
+    <script th:if="${errortipocategoriaexist != null}">
+        Swal.fire({
+            icon: 'error',
+            title: 'Ya existe un tipo de categoría con el mismo nombre.',
+        });
+    </script>
 </body>
 </html>

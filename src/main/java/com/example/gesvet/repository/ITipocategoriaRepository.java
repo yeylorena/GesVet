@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ITipocategoriaRepository extends JpaRepository<Tipocategoria, Integer>{
-    
+     boolean existsByNombre(String nombre);
 }

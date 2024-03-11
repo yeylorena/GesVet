@@ -350,7 +350,7 @@
                             </div>
 
                             <div class="container">
-                                <form th:action="@{/productos/save}" object="" method="post" enctype="multipart/form-data">
+                                <form th:action="@{/productos/save}" object="" method="post" enctype="multipart/form-data" onsubmit="return validarFormularioproducto()">
                                     <div class="card">
 
                                         <div class="form-group">
@@ -373,7 +373,7 @@
                                                 </div>
                                                 <div class="col-6 ">
                                                     <label>Precio:</label>
-                                                    <input type="text" name="precio" field="" class="form-control" >
+                                                    <input type="number" name="precio" field="" class="form-control" step="0.01" min="0">
                                                 </div>
                                             </div>
                                         </div>
@@ -445,5 +445,7 @@
         <div th:replace="Plantillas/administrador :: scripts"></div>
 
     </main><!-- End #main -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 </body>
 </html>

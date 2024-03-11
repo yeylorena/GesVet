@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
 
     <head>
         <meta charset="utf-8">
@@ -429,120 +430,67 @@
 
 
 
-                        <table class="table  table-striped table-hover">
-                            <thead class="thead-dark bg-black">
-                                <tr>
-                                    <th id="idmaximizar" scope="col" colspan="4">
-                                        Los 10 productos mas vendidos
-                                        <a id="toggleButton" onclick="toggleTable()">
-                                            <i id="toggleIcon" class="fa-solid fa-minus"></i>
-                                        </a>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Código Prod.</th>
-                                    <th scope="col">Producto</th>
-                                    <th scope="col">Cantidad</th>
-                                    <th scope="col">Venta</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td scope="row">34234324</td>
-                                    <td>Hills Prescription Diet Gatos Kidney Care k/d 4 Lb</td>
-                                    <td>32</td>
-                                    <td>$2.000.000</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">2434324</td>
-                                    <td>Agility Gold Gatos Sin Granos 7 Kg</td>
-                                    <td>27</td>
-                                    <td>$1.500.000</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">4545654</td>
-                                    <td>Monello cat salmón, atún y pollo 7 KG</td>
-                                    <td>25</td>
-                                    <td>$1.400.000</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">32434543</td>
-                                    <td>Max Cat gatos adultos pollo y arroz 3 Kg</td>
-                                    <td>24</td>
-                                    <td>$1.300.000</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">453563467</td>
-                                    <td>Taste of the wild rocky mountain para gatos 14 Lb</td>
-                                    <td>23</td>
-                                    <td>$1.200.000</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">436546545</td>
-                                    <td>Nutra-Nuggets Fórmula de Mantenimiento para Gatos 7.5 Kg</td>
-                                    <td>22</td>
-                                    <td>$1.100.000</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">43645765</td>
-                                    <td>Hills Prescription Diet Gatos Weight Reduction r/d 4 Lb</td>
-                                    <td>21</td>
-                                    <td>$1.000.000</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">4564567</td>
-                                    <td>Cat Chow Gatos Adultos Delimix 10 Kg</td>
-                                    <td>20</td>
-                                    <td>$900.000</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">46457654</td>
-                                    <td>Equilíbrio Concentrado Gatos Adultos Light 1.5 Kg</td>
-                                    <td>19</td>
-                                    <td>$800.000</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">455645645</td>
-                                    <td>Concentrado Donkat para gatos adultos 7 Kg</td>
-                                    <td>14</td>
-                                    <td>$700.000</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                       <table class="table  table-striped table-hover">
+    <thead class="thead-dark bg-black">
+        <tr>
+            <th id="idmaximizar" scope="col" colspan="4">
+                Los 10 productos más vendidos
+                <a id="toggleButton" onclick="toggleTable()">
+                    <i id="toggleIcon" class="fa-solid fa-minus"></i>
+                </a>
+            </th>
+        </tr>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Venta</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="producto, iterStat : ${productosMasVendidos}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${producto[1]}"></td>
+            <td th:text="${producto[2]}"></td>
+            <td th:text="${producto[3]}"></td> <!-- Venta Total -->
+            <!-- Añade más columnas según sea necesario -->
+        </tr>
+    </tbody>
+</table>
+
                     </div>
 
                     <div class="col-lg-6 justify-content-end">
                         <table class="table table-hover table-striped justify-content-end">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th id="idmaximizar2" scope="col" colspan="4">
-                                        Productos con poco Stock
-                                        <a id="toggleButton2" onclick="toggleTable2()">
-                                            <i id="toggleIcon2" class="fa-solid fa-minus"></i>
-                                        </a>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Código Prod.</th>
-                                    <th scope="col">Producto</th>
-                                    <th scope="col">Stock Actual</th>
-                                    <th scope="col">Minimo Stock</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody2">
-                                <tr>
-                                    <td scope="row">4344565645</td>
-                                    <td>Dog chaow k/d 4 Lb</td>
-                                    <td>= 0 Und(s)</td>
-                                    <td>0 Und(s)</td>
-                                </tr>
-                            <td scope="row">44534632</td>
-                            <td>Cat run chaow k/d 4 Lb</td>
-                            <td>0 Und(s)</td>
-                            <td>0 Und(s)</td>
-                            </tr>
-                            </tbody>
-                        </table>
+    <!-- Encabezados de la tabla -->
+    <thead class="thead-dark">
+        <tr>
+            <th id="idmaximizar2" scope="col" colspan="4">
+                Productos con poco Stock
+                <a id="toggleButton2" onclick="toggleTable2()">
+                    <i id="toggleIcon2" class="fa-solid fa-minus"></i>
+                </a>
+            </th>
+        </tr>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Stock Actual</th>
+            
+        </tr>
+    </thead>
+    <!-- Cuerpo de la tabla -->
+    <tbody id="tbody2">
+        <!-- Iterar sobre la lista de productos con poco stock -->
+        <tr th:each="producto, iterStat : ${productosConPocoStock}">
+        <td scope="row" th:text="${iterStat.count}"></td>
+            <td th:text="${producto.nombre}"></td>
+            <td th:text="${producto.cantidad} + ' Und(s)'"></td>
+            
+        </tr>
+    </tbody>
+</table>
+
                     </div>
 
                 </div>
