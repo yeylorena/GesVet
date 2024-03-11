@@ -1,15 +1,42 @@
 package com.example.gesvet.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "evento")
 public class Evento {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String title;
     private LocalDateTime start;
-    private LocalDateTime end;
+    private String color;
+    private Integer citaId;
 
     public Evento() {
 
+    }
+
+    public Evento(Integer id, String title, LocalDateTime start, String color, Integer citaId) {
+        this.id = id;
+        this.title = title;
+        this.start = start;
+        this.color = color;
+        this.citaId = citaId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -28,17 +55,25 @@ public class Evento {
         this.start = start;
     }
 
-    public LocalDateTime getEnd() {
-        return end;
+    public String getColor() {
+        return color;
     }
 
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public Integer getCitaId() {
+        return citaId;
+    }
+
+    public void setCitaId(Integer citaId) {
+        this.citaId = citaId;
     }
 
     @Override
     public String toString() {
-        return "Evento{" + "title=" + title + ", start=" + start + ", end=" + end + '}';
+        return "Evento{" + "id=" + id + ", title=" + title + ", start=" + start + ", color=" + color + ", citaId=" + citaId + '}';
     }
 
 }

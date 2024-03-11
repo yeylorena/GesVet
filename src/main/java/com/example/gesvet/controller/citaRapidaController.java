@@ -2,6 +2,7 @@ package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.Especie;
+import com.example.gesvet.models.Evento;
 import com.example.gesvet.models.Mascota;
 import com.example.gesvet.models.User;
 import com.example.gesvet.models.citaRapida;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.gesvet.service.UserService;
 import com.example.gesvet.service.citaRapidaService;
+import com.example.gesvet.service.eventoService;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,6 +44,9 @@ public class citaRapidaController {
 
     @Autowired
     private citaRapidaRepository citarapidarepository;
+
+    @Autowired
+    private eventoService eventoService;
 
     @GetMapping("")
     public String clientes(Model model, Principal principal) {
@@ -114,6 +119,14 @@ public class citaRapidaController {
             if (disponible) {
                 // Guardar la cita si está disponible
                 citarapidaservice.save(citarapida);
+                // Crear un evento basado en la cita
+                Evento evento = new Evento();
+                evento.setTitle(citarapida.getNombreCita());
+                evento.setStart(citarapida.getInicio()); // Utiliza la fecha de inicio de la cita
+                evento.setColor(citarapida.getColorMascota()); // Utiliza el color de la mascota para el evento
+
+                // Guardar el evento
+                eventoService.save(evento);
                 return "redirect:/citasRapidas";
             } else {
                 // Manejar el caso en el que la cita no está disponible para el veterinario
@@ -142,6 +155,26 @@ public class citaRapidaController {
             // Guardar los cambios en la cita (si es necesario)
             citarapidaservice.save(cita);
         }
+        return "redirect:/citasRapidas";
+    }
+
+    @GetMapping("/eventos")
+    @ResponseBody
+    public List<Evento> getEventos() {
+        List<Evento> eventos = eventoService.findAll(); // Suponiendo que tienes un método para obtener todos los eventos
+        return eventos;
+    }
+
+    // Métodos para manejar los eventos
+    @PostMapping("/evento/crear")
+    public String crearEvento(@ModelAttribute("evento") Evento evento) {
+        eventoService.save(evento);
+        return "redirect:/citasRapidas";
+    }
+
+    @PostMapping("/evento/eliminar/{id}")
+    public String eliminarEvento(@PathVariable Integer id) {
+        eventoService.delete(id);
         return "redirect:/citasRapidas";
     }
 

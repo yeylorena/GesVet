@@ -27,6 +27,7 @@ import java.util.Optional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -147,14 +148,48 @@ public class mascotaUsuarioController {
 
         LOGGER.info("Mascota buscada: {}", mascota);
         model.addAttribute("mascotasEditar", mascota); //Al objeto model llamamos el metodo addAttribute y le declaramos una variable llamada "veterinariosEditar" que la lleve a la vista y se le pasa el valor de lo que tiene el objeto de la clase Veterinario la cual denominamos "veterinario"
+        User usuarioMascota = mascota.getUsuario();
+        model.addAttribute("usuarioMascota", usuarioMascota);
+
+        // Obtener todas las razas y especies disponibles
+        List<Raza> razas = razaService.getAllRazas();
+        model.addAttribute("razas", razas);
+
+        List<Especie> especies = especieService.getAllEspecies();
+        model.addAttribute("especies", especies);
 
         //Luego nos envía a la vista todo el objeto buscado
         return "mascotasUsuario/editarMascota";
     }
 
     @PostMapping("/update")
-    public String update(Mascota mascota) {  //recibe como parametro un objeto de tipo Veterinario
+    public String update(Mascota mascota, @RequestParam(value = "file", required = false) MultipartFile imagen) {
+        if (imagen != null && !imagen.isEmpty()) {
+            try {
+                // Procesa la nueva imagen si se ha seleccionado
+                byte[] bytesImg = imagen.getBytes();
+                Path directorioImagenes = Paths.get("images/");
+                String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
+                Files.write(rutaCompleta, bytesImg);
+                mascota.setImagen(imagen.getOriginalFilename());
+            } catch (IOException e) {
+                // Maneja cualquier excepción de E/S que pueda ocurrir al guardar la imagen
+                e.printStackTrace();
+                return "errorPage";
+            }
+        } else {
+            // Si no se selecciona una nueva imagen, mantén la imagen actual
+            Mascota mascotaActual = mascotaService.get(mascota.getId()).orElse(null);
+            if (mascotaActual != null) {
+                mascota.setImagen(mascotaActual.getImagen());
+            }
+        }
+
+        // Actualiza la mascota en la base de datos
         mascotaService.update(mascota);
+
+        // Redirige al usuario a la página principal de mascotas
         return "redirect:/mascotasUsuarios";
     }
 

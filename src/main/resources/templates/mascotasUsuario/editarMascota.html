@@ -25,7 +25,6 @@
         </div><!-- End Page Title -->
         <section class="section profile">
             <div class="col-xl-12">
-
                 <div class="card">
                     <div class="card-body pt-3">
                         <!-- Bordered Tabs -->
@@ -37,128 +36,126 @@
                             </li>
                         </ul>
                         <div class="tab-content pt-2">
-
                             <div class="container">
-                                <form id="editarMascotaForm" method="post" th:action="@{/mascotasUsuarios/update}">
+                                <form id="editarMascotaForm" method="post" th:action="@{/mascotasUsuarios/update}" enctype="multipart/form-data">
+                                    <input type="hidden" name="usuario.id" th:value="${usuarioMascota.id}"/>
                                     <input type="hidden" name="id" th:value="${mascotasEditar.id}" />
-
-
                                     <div class="card">
-                                        <img th:src="@{/images/{imageName}(imageName=${mascotasEditar.imagen})}" class="rounded-circle" alt="...">
-                                            <!--  <img th:src="@{'/images/' + ${userDto.imagen}}" th:alt="${userDto.imagen}" class="rounded-circle"/> -->
-
-                                            <div class="pt-2">
-
-                                                <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);">
-                                                    <input type="image" src="./img/image 90.png" alt="" style="width: 25px;" onclick="document.getElementById('imagen').click(); return false;">
-                                                        <!-- Agrega este elemento img para mostrar la vista previa -->
-                                                        <img id="vistaPrevia" src="#" alt="Vista Previa de la Imagen" style="display: none; max-width: 100%;" />
-
-
-                                                        <!--     <a href="#" class="btn  btn-sm" title="Remove my profile image"><img class=""
-                                                                                                                                src="./img/image 57.png" alt="" style="width: 15px ;"></a> -->
-                                                        </div>
-
-
-                                                        <div class="form-group">
-                                                            <div class="row my-2">
-                                                                <div class="col-6 ">
-                                                                    <label for="nombre">Nombre:</label>
-                                                                    <input type="text" name="nombre" field="" th:value="${mascotasEditar.nombre}" class="form-control" required autocomplete="off">
+                                        <div class="row mb-3">
+                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Imagen de
+                                                Mascota</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <img th:src="@{/images/{imageName}(imageName=${mascotasEditar.imagen})}" class="rounded-circle" alt="..." width="20%">
+                                                    <div class="pt-2">
+                                                        <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);">
+                                                            <input type="image" src="/img/image 90.png" alt="" style="width: 25px;" onclick="document.getElementById('imagen').click(); return false;">
+                                                                <!-- Agrega este elemento img para mostrar la vista previa -->
+                                                                <img id="vistaPrevia" src="#" alt="Vista Previa de la Imagen" style="display: none;
+                                                                     max-width: 50%;" />
+                                                                <!--     <a href="#" class="btn  btn-sm" title="Remove my profile image"><img class=""
+                                                                                                                                    src="./img/image 57.png" alt="" style="width: 15px ;"></a> -->
                                                                 </div>
-                                                                <div class="col-6 ">
-                                                                    <label for="color">Color:</label>
-                                                                    <input type="text" name="color" field="" th:value="${mascotasEditar.color}" class="form-control" required autocomplete="off">
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="row my-2">
-                                                                <div class="col-6 ">
-                                                                    <label for="edad">Edad:</label>
-                                                                    <input type="text" name="edad" field="" th:value="${mascotasEditar.edad}" class="form-control" required autocomplete="off">
                                                                 </div>
-                                                                <div class="col-6 ">
-                                                                    <label for="tiempo">Tiempo:</label>
-                                                                    <input type="text" name="tiempo" field="" th:value="${mascotasEditar.tiempo}" class="form-control" required autocomplete="off">
+
+                                                                <div class="form-group">
+                                                                    <div class="row my-2">
+                                                                        <div class="col-6 ">
+                                                                            <label for="nombre">Nombre:</label>
+                                                                            <input type="text" name="nombre" field="" th:value="${mascotasEditar.nombre}" class="form-control" required autocomplete="off">
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <label for="color">Color:</label>
+                                                                            <input type="text" name="color" field="" th:value="${mascotasEditar.color}" class="form-control" required autocomplete="off">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="row my-2">
-                                                                <div class="col-6 ">
-                                                                    <label for="genero">Género:</label>
-                                                                    <select name="genero" class="form-control" th:value="${mascotasEditar.genero}" >
-                                                                        <option value="activo">Macho</option>
-                                                                        <option value="inactivo">Hembra</option>
-                                                                    </select>
+                                                                <div class="form-group">
+                                                                    <div class="row my-2">
+                                                                        <div class="col-6 ">
+                                                                            <label for="edad">Edad:</label>
+                                                                            <input type="text" name="edad" field="" th:value="${mascotasEditar.edad}" class="form-control" required autocomplete="off">
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <label for="tiempo">Tiempo:</label>
+                                                                            <select name="tiempo" class="form-select" th:value="${mascotasEditar.tiempo}" required>
+                                                                                <option value="Meses" th:selected="${mascotasEditar.tiempo == 'Meses'}">Meses</option>
+                                                                                <option value="Años" th:selected="${mascotasEditar.tiempo == 'Años'}">Años</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-6">
-                                                                    <label for="raza" style="color: black;">Raza</label>
-                                                                    <select name="raza" class="form-control" th:value="${mascotasEditar.raza}"  required>
-                                                                        <option value="">Selecciona una raza</option>
-                                                                        <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
-                                                                    </select>
+                                                                <div class="form-group">
+                                                                    <div class="row my-2">
+                                                                        <div class="col-6 ">
+                                                                            <label for="genero">Género:</label>
+                                                                            <select name="genero" class="form-select" th:value="${mascotasEditar.genero}" >
+                                                                                <option value="Macho" th:selected="${mascotasEditar.genero == 'Macho'}">Macho</option>
+                                                                                <option value="Hembra" th:selected="${mascotasEditar.genero == 'Hembra'}">Hembra</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <label for="especie" style="color: black;">Especies</label>
+                                                                            <select name="especie" class="form-select" th:value="${mascotasEditar.especie}"  required>
+                                                                                <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}" th:selected="${especie.id == mascotasEditar.especie.id}"></option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="row my-2">
-                                                                <div class="col-6">
-                                                                    <label for="especie" style="color: black;">Especies</label>
-                                                                    <select name="especie" class="form-select" th:value="${mascotasEditar.especie}"  required>
-                                                                        <option value="">Selecciona una especie</option>
-                                                                        <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}"></option>
-                                                                    </select>
+                                                                <div class="form-group">
+                                                                    <div class="row my-2">
+                                                                        <div class="col-6">
+                                                                            <label for="raza" style="color: black;">Raza</label>
+                                                                            <select name="raza" class="form-select" th:value="${mascotasEditar.raza}"  required>
+                                                                                <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <label for="detalles" style="color: black;">Detalles</label>
+                                                                            <input type="text" name="detalles" field="" th:value="${mascotasEditar.detalles}" class="form-control" required autocomplete="off">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-6">
-                                                                    <label for="detalles" style="color: black;">Detalles</label>
-                                                                    <input type="text" name="detalles" field="" th:value="${mascotasEditar.detalles}" class="form-control" required autocomplete="off">
+
+
+                                                                <div class="box-footer">
+                                                                    <div class="row my-2">
+                                                                        <div class="d-grid gap-2 col-6">
+                                                                            <button type="submit" class="btn btn-success">Guardar</button>
+                                                                        </div>
+                                                                        <div class="d-grid gap-2 col-6">
+                                                                            <a class="btn btn-danger" th:href="@{/mascotasUsuarios}">Cancelar</a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-
-                                                        <div class="box-footer">
-                                                            <div class="row my-2">
-                                                                <div class="d-grid gap-2 col-6">
-                                                                    <button type="submit" class="btn btn-success">Guardar</button>
                                                                 </div>
-                                                                <div class="d-grid gap-2 col-6">
-                                                                    <a class="btn btn-danger" href="/mascotas">Cancelar</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                </form>
+                                                                </div><!-- end container -->
+                                                                </div><!-- end tab-content -->
+                                                                </div><!-- card-body pt-3 -->
+                                                                </div><!-- end card -->
+                                                                </div><!--col-xl-12 -->
+                                                                </section><!-- end section -->
+                                                                <div th:replace="~{Plantillas/usuario :: scripts}"></div>
 
-                                                        </form>
-                                                        </div>
-                                                        </div>
-                                                        </div>
+                                                                </main>
+                                                                <script th:inline="javascript">
+                                                                    function mostrarVistaPrevia(input) {
+                                                                        var vistaPrevia = document.getElementById('vistaPrevia');
+                                                                        var file = input.files[0];
 
-                                                        </div>
+                                                                        if (file) {
+                                                                            var reader = new FileReader();
 
-                                                        </div>
-                                                        </section>
-                                                        <div th:replace="~{Plantillas/usuario :: scripts}"></div>
+                                                                            reader.onload = function (e) {
+                                                                                vistaPrevia.src = e.target.result;
+                                                                                vistaPrevia.style.display = 'block';
+                                                                            };
 
-                                                        </main>
-                                                        <script th:inline="javascript">
-                                                            function mostrarVistaPrevia(input) {
-                                                                var vistaPrevia = document.getElementById('vistaPrevia');
-                                                                var file = input.files[0];
+                                                                            reader.readAsDataURL(file);
+                                                                        }
+                                                                    }
+                                                                </script>
 
-                                                                if (file) {
-                                                                    var reader = new FileReader();
-
-                                                                    reader.onload = function (e) {
-                                                                        vistaPrevia.src = e.target.result;
-                                                                        vistaPrevia.style.display = 'block';
-                                                                    };
-
-                                                                    reader.readAsDataURL(file);
-                                                                }
-                                                            }
-                                                        </script>
-
-                                                        </body>
-                                                        </html>
+                                                                </body>
+                                                                </html>

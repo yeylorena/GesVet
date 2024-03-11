@@ -267,11 +267,6 @@
 
                         <li class="nav-item titlecartaSel2">
                             <button class="nav-link" data-bs-toggle="tab"
-                                    data-bs-target="#profile-edit">Modificar</button>
-                        </li>
-
-                        <li class="nav-item titlecartaSel2">
-                            <button class="nav-link" data-bs-toggle="tab"
                                     data-bs-target="#profile-change-password">Historial</button>
                         </li>
 
@@ -283,11 +278,11 @@
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
                             <div class="row mt-5">
                                 <!-- Iterar sobre cada mascota -->
-                                <div th:each="mascota : ${mascotas}" class="col-12 col-md-6 mb-4">
+                                <div th:each="mascota : ${mascotas}" class="col-12 col-md-4 mb-4">
                                     <!-- Tarjeta de mascota -->
-                                    <div class="alimentos card h-100" style="max-width: 15rem;">
+                                    <div class="alimentos card h-90">
                                         <!-- Imagen de la mascota -->
-                                        <img th:src="@{/images/{imageName}(imageName=${mascota.imagen})}" class="perfil card-img-top" alt="...">
+                                        <img th:src="@{/images/{imageName}(imageName=${mascota.imagen})}" class="perfil card-img-top" alt="..." style="width: 300px; height: 200px; object-fit: cover;">
                                             <!-- Detalles de la mascota -->
                                             <div class="card-body" style="background: #d9d9d9;">
                                                 <!-- Título y otros detalles -->
@@ -297,18 +292,20 @@
                                                     <li class="titlecartaUna">Nombre: <span th:text="${mascota.nombre}"></span></li>
                                                     <li>Color: <span th:text="${mascota.color}"></span></li>
                                                     <li>Edad: <span th:text="${mascota.edad}"></span></li>
-                                                    <li>Tiempo: <span th:text0="${mascota.tiempo}"></span></li>
+                                                    <li>Tiempo: <span th:text="${mascota.tiempo}"></span></li>
                                                     <li>Género: <span th:text="${mascota.genero}"></span></li>
-                                                    <li>Raza: <span th:text="${mascota.raza.nombre}"></span></li>
                                                     <li>Especie: <span th:text="${mascota.especie.nombre}"></span></li>
+                                                    <li>Raza: <span th:text="${mascota.raza.nombre}"></span></li>
                                                     <li>Detalles: <span th:text="${mascota.detalles}"></span></li>
                                                 </ul>
                                                 <!-- Botones de eliminar y editar -->
                                                 <div class="text-center">
+                                                    <a th:href="@{mascotasUsuarios/editarMascota/{id}(id=${mascota.id})}" class="btn btn-success">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
                                                     <button th:onclick="'eliminarMascota(' + ${mascota.id} + ')'" type="button" class="btn btn-danger">
                                                         <i class="bi bi-trash"></i>
-                                                    </button>                                                    
-                                                    <button class="btn btn-primary btn-sm mx-1" th:href="@{mascotasUsuarios/editarMascota/{id}(id=${mascota.id})}">Editar</button>
+                                                    </button> 
                                                 </div>
                                             </div>
                                     </div>
@@ -327,7 +324,7 @@
 
                                     <!-- crear mascota campos  -->
                                     <div class="row mb-5">
-                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Imagen de Perfil</label>
+                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Imagen de Mascota</label>
                                         <div class="col-md-8 col-lg-9">
                                             <div class="row my-2">
                                                 <div class="col-6">
@@ -361,6 +358,7 @@
                                         <div class="col-6 ">
                                             <label style="color: black;">Tiempo</label>
                                             <select name="tiempo" class="form-select" required>
+                                                <option value="">Selecciona el tiempo</option>
                                                 <option value="Meses">Meses</option>
                                                 <option value="Años">Años</option>
                                             </select>
@@ -370,20 +368,11 @@
                                         <div class="col-6 ">
                                             <label style="color: black;">Género</label>
                                             <select name="genero" class="form-select" required>
+                                                <option value="">Selecciona una género</option>
                                                 <option value="Macho">Macho</option>
                                                 <option value="Hembra">Hembra</option>
                                             </select>
                                         </div>
-                                        <div class="col-6">
-                                            <label style="color: black;">Raza</label>
-                                            <select name="raza" class="form-select" required>
-                                                <option value="">Selecciona una raza</option>
-                                                <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
                                         <div class="col-6 ">
                                             <label style="color: black;">Especie</label>
                                             <select name="especie" class="form-select" required>
@@ -391,6 +380,17 @@
                                                 <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}"></option>
                                             </select>
                                         </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <label style="color: black;">Raza</label>
+                                            <select name="raza" class="form-select" required>
+                                                <option value="">Selecciona una raza</option>
+                                                <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
+                                            </select>
+                                        </div>
+
                                         <label  style="color: black;">Detalles</label>
                                         <div class="col-12">
                                             <input name="detalles" type="text" class="form-control" id="detalles" value="">
@@ -511,44 +511,13 @@
 
             }
         });
-        // Captura el evento click del botón "Editar"
-        document.querySelectorAll('.editar-mascota').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                // Obtiene el ID de la mascota desde el atributo data-id
-                var mascotaId = this.getAttribute('data-id');
-                // Redirige a la sección de modificar mascota con los datos cargados
-                window.location.href = '#profile-edit';
-                // Aquí puedes cargar los datos de la mascota para editar utilizando AJAX o de otra manera
-            });
-        });
+
 
 
 
 
     </script>
-    <script th:inline="javascript">
-        function submitForm() {
-            var select = document.getElementById("mascotaSeleccionada");
-            var selectedMascotaId = select.options[select.selectedIndex].value;
 
-            // Realizar una solicitud AJAX para obtener los detalles de la mascota seleccionada
-            // Aquí debes implementar tu lógica para obtener los detalles de la mascota por su ID
-            // Supongamos que obtienes los detalles en un objeto llamado 'mascotaDetails'
-
-            // Rellenar los campos del formulario con los detalles de la mascota
-            document.getElementById("nombreInput").value = mascotaDetails.nombre;
-            document.getElementById("color").value = mascotaDetails.color;
-            document.getElementById("edadInput").value = mascotaDetails.edad;
-            document.getElementById("tiempo").value = mascotaDetails.tiempo;
-            document.getElementById("genero").value = mascotaDetails.genero;
-            document.getElementById("raza").value = mascotaDetails.razaId; // Ajusta este valor según lo que recibas de la mascota
-            document.getElementById("especie").value = mascotaDetails.especieId; // Ajusta este valor según lo que recibas de la mascota
-            document.getElementById("detalles").value = mascotaDetails.detalles;
-
-            // Envía el formulario de modificación
-            document.getElementById("editarForm").submit();
-        }
-    </script>
 
 </body>
 
