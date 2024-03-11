@@ -686,7 +686,8 @@ function validarFormularioPrincipal() {
         var descripcion = document.getElementsByName('descripcion')[0].value;
         var cantidad = document.getElementsByName('cantidad')[0].value;
         var imagen = document.getElementById('img').files[0];
-          var categoria = document.getElementById('categoria.id').files[0];
+          var categoria = document.getElementsByName('categoria.id')[0].value;
+
 
         // Validar que los campos no estén vacíos
         if (nombre.trim() === '' || descripcion.trim() === '' || cantidad.trim() === '') {
