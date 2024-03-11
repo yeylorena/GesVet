@@ -295,7 +295,7 @@ public class HomeController {
     }
 
     @GetMapping("/factura")
-    public String factura(Model model, Authentication authentication, Principal principal) {
+    public String factura(Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -330,7 +330,8 @@ public class HomeController {
     }
 
     @PostMapping("saveFact")
-    public String saveFact(Model model, Authentication authentication, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("metodoPago") Integer metodoPagoId) throws IOException {
+    public String saveFact(Model model, Authentication authentication, Principal principal,@RequestParam("img") MultipartFile file,@RequestParam("metodoPago") Integer metodoPagoId,RedirectAttributes redirectAttributes) throws IOException  {
+
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -398,7 +399,9 @@ public class HomeController {
         detalles.clear();
 
         model.addAttribute("userDto", userDto);
-        return "redirect:/";
+        // Agregar mensaje de éxito para mostrar en la página de destino
+    redirectAttributes.addFlashAttribute("exitofacturauser", "Compra efectuada con éxito.");
+        return "redirect:/verhome";
     }
 
     @PostMapping("/buscar")

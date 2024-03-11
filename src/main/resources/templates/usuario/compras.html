@@ -271,7 +271,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="carrito_compras.html">
+                    <a class="nav-link collapsed" th:href="@{/getCart}">
                         <i class="bi bi-cart2"></i>
                         <span>Carrito de compras</span>
                     </a>
@@ -337,6 +337,8 @@
                                                         <tr>
                                                             <th scope="col">No. de Orden</th>
                                                             <th scope="col">Fecha</th>
+                                                            <th scope="col">E. Pago</th>
+                                                                <th scope="col">E. Envio</th>
                                                             <th scope="col">Valor</th>
                                                             <th scope="col">Acción</th>
                                                         </tr>
@@ -345,6 +347,9 @@
                                                         <tr th:each="factura: ${factura}">
                                                             <td th:text="${factura.numero}"></td>
                                                             <td th:text="${factura.fecha}" ></td>
+                                                            <td th:text="${factura.estadoPago}"></td>
+                                                            <td th:text="${factura.estadoEnvio}"></td>
+                                                            
                                                             <td th:text="${factura.total}" ></td>
                                                            <td><a th:href="@{/detalle/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a></td>
                                                         </tr>

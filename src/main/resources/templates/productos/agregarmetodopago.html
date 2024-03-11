@@ -11,7 +11,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <a href="index.html" class="logo d-flex align-items-center">
                     <img src="assets/img/logoGesVet.png">
-                    <span class="d-none d-lg-block">Tipo Categoria</span>
+                    <span class="d-none d-lg-block">GesVet</span>
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
             </div><!-- End Logo -->
@@ -345,11 +345,11 @@
                         <div class="tab-content pt-2">
 
                             <div class="container-fluid mt-2">
-                                <p class="textoNeon">Registrar Tipo Categoria</p>
+                                <p class="textoNeon">Registrar Tipo de Metodo Pago</p>
                             </div>
 
                             <div class="container">
-                                <form th:action="@{/productos/savetipocategoria}" method="post" onsubmit="return validarFormulario()">
+                                <form th:action="@{/productos/savemetodopago}" object="" method="post" onsubmit="return validarFormulario()">
                                     <div class="card">
 
                                         <div class="form-group">
@@ -371,6 +371,15 @@
                                                     
                                                     
                                                 </div>
+                                            </div>
+                                        </div>
+                                         <div class="form-group">
+                                            <div class="row my-2">
+                                                <div class="col-6 ">
+                                                    <label>Cuenta:</label>
+                                                    <input type="number" name="cuenta" field="" class="form-control">
+                                                </div>
+                                                
                                             </div>
                                         </div>
 
@@ -405,11 +414,5 @@
         <div th:replace="Plantillas/administrador :: scripts"></div>
 
     </main><!-- End #main -->
-    <script th:if="${errortipocategoriaexist != null}">
-        Swal.fire({
-            icon: 'error',
-            title: 'Ya existe un Tipo de categoría con el mismo nombre.',
-        });
-    </script>
 </body>
 </html>

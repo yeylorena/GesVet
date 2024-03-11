@@ -16,6 +16,15 @@ public class Servicios {
     private Integer id;
     private String nombre;
     private boolean activo;
+    private boolean activos = true;
+
+    public boolean isActivos() {
+        return activos;
+    }
+
+    public void setActivos(boolean activos) {
+        this.activos = activos;
+    }
 
     @ManyToOne()
     private User usuario;

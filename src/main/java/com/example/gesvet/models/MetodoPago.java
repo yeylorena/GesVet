@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
@@ -18,6 +19,15 @@ public class MetodoPago {
     private String nombre;
     private String cuenta;
     private boolean activo;
+     private boolean activos = true;
+
+    public boolean isActivos() {
+        return activos;
+    }
+
+    public void setActivos(boolean activos) {
+        this.activos = activos;
+    }
 
     public Integer getId() {
         return id;
@@ -76,7 +86,19 @@ public class MetodoPago {
         this.factura = factura;
     }
 
-    public MetodoPago() {
+
+  public MetodoPago(){
+      
+  } 
+   @ManyToOne
+    private User usuario;
+
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
 
     }
 }

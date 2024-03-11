@@ -350,18 +350,18 @@
                             </div>
 
                             <div class="container">
-                                <form th:action="@{/productos/saveserviciouser}" object="" method="post" enctype="multipart/form-data">
+                                <form th:action="@{/productos/saveserviciouser}" object="" method="post" enctype="multipart/form-data" onsubmit="return validarFormularioServiciouser()">
                                     <div class="card">
 
                                         <div class="form-group">
                                             <div class="row my-2">
                                                 <div class="col-6 ">
                                                     <label>Nombre:</label>
-                                                    <input type="text" name="nombre" field="" class="form-control">
+                                                    <input type="text" name="nombre" field="" class="form-control" required autocomplete="off" >
                                                 </div>
                                                 <div class="col-6 ">
                                                     <label>Descripción:</label>
-                                                    <input type="text" name="descripcion" field="" class="form-control" >
+                                                    <input type="text" name="descripcion" field="" class="form-control" required autocomplete="off"  >
                                                 </div>
                                             </div>
                                         </div>
@@ -369,11 +369,11 @@
                                             <div class="row my-2">
                                                 <div class="col-6 ">
                                                     <label>Imagen:</label>
-                                                    <input type="file" name="img" id="img" class="form-control" >
+                                                    <input type="file" name="img" id="img" class="form-control" required autocomplete="off" >
                                                 </div>
                                                 <div class="col-6 ">
                                                     <label>Precio:</label>
-                                                    <input type="text" name="precio" field="" class="form-control" >
+                                                     <input type="number" name="precio" field="" class="form-control" step="0.01" min="0" required autocomplete="off">
                                                 </div>
                                             </div>
                                         </div>
@@ -395,7 +395,7 @@
                                                 </div>
                                                 <div class="col-6 ">
                                                     <label>Categoría:</label>
-                                                    <select name="categoria.id" class="form-control">
+                                                    <select name="categoria.id" class="form-control" required autocomplete="off" >
                                                         <option th:each="categoria : ${categoriasServicio}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
                                                     </select>
                                                 </div>

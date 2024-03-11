@@ -663,3 +663,174 @@ function validarFormularioPrincipal() {
     // Si todas las validaciones pasan, permitir el envío del formulario
     return true;
 }
+
+//funcion validar campo nombre de tipod e categoria
+ function validarFormulario() {
+        var nombre = document.getElementsByName("nombre")[0].value;
+
+        if (nombre.trim() === "") {
+            // Mostrar SweetAlert de error
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, ingrese un nombre.',
+            });
+            return false; // Evitar que el formulario se envíe
+        }
+
+        return true; // Permitir que el formulario se envíe
+    }
+ 
+ function validarFormularioproducto() {
+        var nombre = document.getElementsByName('nombre')[0].value;
+        var descripcion = document.getElementsByName('descripcion')[0].value;
+        var cantidad = document.getElementsByName('cantidad')[0].value;
+        var imagen = document.getElementById('img').files[0];
+          var categoria = document.getElementById('categoria.id').files[0];
+
+        // Validar que los campos no estén vacíos
+        if (nombre.trim() === '' || descripcion.trim() === '' || cantidad.trim() === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, completa todos los campos.'
+            });
+            return false;
+        }
+
+        // Validar que la cantidad sea un número positivo
+        if (isNaN(parseInt(cantidad)) || parseInt(cantidad) <= 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'La cantidad debe ser un número positivo.'
+            });
+            return false;
+        }
+
+        // Validar que se haya seleccionado una imagen
+        if (!imagen) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, selecciona una imagen.'
+            });
+            return false;
+        }
+        // Validar que se haya seleccionado una imagen
+        if (!categoria) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, selecciona una categoria.'
+            });
+            return false;
+        }
+
+        // Otras validaciones si es necesario
+
+        return true; // Enviar el formulario si todas las validaciones son exitosas
+    }
+    
+    
+    function validarFormularioproductoupdate() {
+        var nombre = document.getElementsByName('nombre')[0].value;
+        var descripcion = document.getElementsByName('descripcion')[0].value;
+        var cantidad = document.getElementsByName('cantidad')[0].value;
+       
+
+        // Validar que los campos no estén vacíos
+        if (nombre.trim() === '' || descripcion.trim() === '' || cantidad.trim() === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, completa todos los campos.'
+            });
+            return false;
+        }
+
+        // Validar que la cantidad sea un número positivo
+        if (isNaN(parseInt(cantidad)) || parseInt(cantidad) <= 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'La cantidad debe ser un número positivo.'
+            });
+            return false;
+        }
+
+        
+
+        // Otras validaciones si es necesario
+
+        return true; // Enviar el formulario si todas las validaciones son exitosas
+    }
+    
+     function validarFormularioServicio() {
+        var nombre = document.getElementsByName('nombre')[0].value;
+        var descripcion = document.getElementsByName('descripcion')[0].value;
+        var imagen = document.getElementById('img').files[0];
+        
+
+        // Validar que los campos no estén vacíos
+        if (nombre.trim() === '' || descripcion.trim() === '' || !imagen) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, completa todos los campos.'
+            });
+            return false;
+        }
+        
+
+        // Otras validaciones si es necesario
+
+        return true; // Enviar el formulario si todas las validaciones son exitosas
+    }
+    
+    function validarFormularioServiciouser() {
+        var nombre = document.getElementsByName('nombre')[0].value;
+        var descripcion = document.getElementsByName('descripcion')[0].value;
+        var imagen = document.getElementById('img').files[0];
+        var categoria = document.getElementById('categoria.id').files[0];
+
+        // Validar que los campos no estén vacíos
+        if (nombre.trim() === '' || descripcion.trim() === '' || !imagen) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, completa todos los campos.'
+            });
+            return false;
+        }
+        // Validar que se haya seleccionado una imagen
+        if (!categoria) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, selecciona una categoria.'
+            });
+            return false;
+        }
+
+        // Otras validaciones si es necesario
+
+        return true; // Enviar el formulario si todas las validaciones son exitosas
+    }
+    function confirmarCompra() {
+        Swal.fire({
+            title: '¿Estás seguro de realizar la compra?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, comprar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma, entonces se realiza la compra
+                document.forms[0].submit(); // Puedes ajustar esto según la estructura de tu formulario
+            } else {
+                // Si el usuario cancela, no se hace nada
+            }
+        });
+    }
+

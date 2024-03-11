@@ -271,7 +271,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="carrito_compras.html">
+                <a class="nav-link collapsed" th:href="@{/getCart}">
                     <i class="bi bi-cart2"></i>
                     <span>Carrito de compras</span>
                 </a>
@@ -328,7 +328,7 @@
                             </div>
 
                             <div class="row mt-5">
-                                <form th:action="@{/saveFact}" method="post" enctype="multipart/form-data">
+                                <form th:action="@{/saveFact}" method="post" enctype="multipart/form-data" onsubmit="return validarPago()">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-9">
@@ -382,7 +382,7 @@
                                                         <span id="numeroCuenta"></span>
                                                     </li>
 
-                                                    
+
 
                                                     <li class="list-group-item">
                                                         <h6>Subir Comprobante:</h6>
@@ -391,7 +391,7 @@
                                                     <li class="list-group-item">
                                                         <!-- comment <a th:href="@{saveFactadmin}" class="btn btn-dark">Generar</a> -->
 
-                                                        <button type="submit" class="btn btn-dark">Generar</button>
+                                                        <button type="submit" class="btn btn-dark">Pagar</button>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -416,13 +416,66 @@
     </main><!-- End #main -->
 </body>
 <script th:inline="javascript">
-                                                        // JavaScript para manejar eventos de cambio en los botones de radio
-                                                        var radios = document.querySelectorAll('input[name="metodoPago"]');
-                                                        radios.forEach(function (radio) {
-                                                            radio.addEventListener('change', function () {
-                                                                var numeroCuenta = this.nextElementSibling.getAttribute('data-cuenta');
-                                                                document.getElementById('numeroCuenta').innerText = numeroCuenta;
-                                                            });
-                                                        });
-                                                    </script>
+    // JavaScript para manejar eventos de cambio en los botones de radio
+    var radios = document.querySelectorAll('input[name="metodoPago"]');
+    radios.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            var numeroCuenta = this.nextElementSibling.getAttribute('data-cuenta');
+            document.getElementById('numeroCuenta').innerText = numeroCuenta;
+        });
+    });
+</script>
+<script>
+    function validarPago() {
+        if (!validarMetodoPago() || !validarComprobante()) {
+            return false;
+        }
+
+        Swal.fire({
+            title: '¿Estás seguro de realizar la compra?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, comprar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.forms[0].submit();
+            }
+        });
+
+        return false;
+    }
+
+    function validarMetodoPago() {
+        var metodoPagoSeleccionado = document.querySelector('input[name="metodoPago"]:checked');
+        if (!metodoPagoSeleccionado) {
+            mostrarError('Debe seleccionar un método de pago');
+            return false;
+        }
+
+        var numeroCuenta = metodoPagoSeleccionado.getAttribute('data-cuenta');
+        document.getElementById('numeroCuenta').textContent = 'Número de Cuenta: ' + numeroCuenta;
+
+        return true;
+    }
+
+    function validarComprobante() {
+        var comprobante = document.getElementById('img').files[0];
+        if (!comprobante) {
+            mostrarError('Debe subir un comprobante');
+            return false;
+        }
+
+        return true;
+    }
+
+    function mostrarError(mensaje) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: mensaje
+        });
+    }
+</script>
+
 </html>

@@ -350,7 +350,7 @@
                             </div>
 
                             <div class="container">
-                                <form th:action="@{/productos/update}" object="" method="post" enctype="multipart/form-data">
+                                <form th:action="@{/productos/update}" object="" method="post" enctype="multipart/form-data" onsubmit="return validarFormularioproductoupdate()">
                                     <input type="hidden" name="id" th:value="${producto.id}">
                                         <div class="card">
 
@@ -375,6 +375,7 @@
                                                     <div class="col-6 ">
                                                         <label>Precio:</label>
                                                         <input type="number" name="precio" field="" th:value="${producto.precio}" class="form-control" required autocomplete="off">
+                                                             
                                                     </div>
                                                 </div>
                                             </div>

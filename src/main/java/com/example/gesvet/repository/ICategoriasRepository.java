@@ -8,5 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICategoriasRepository extends JpaRepository<Categorias, Integer> {
 
-    List<Categorias> findByTipocategoriaNombre(String tipoCategoriaNombre);
+
+    
+
+      List<Categorias> findByTipocategoriaNombre(String tipoCategoriaNombre);
+      boolean existsByNombre(String nombre);
+
 }

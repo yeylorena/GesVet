@@ -16,4 +16,10 @@ public interface IProductoService {
 
     public List<Productos> findAll();
 
+    
+    Productos findById(Integer id);
+    
+    List<Productos> getTopProductosConPocoStock(int limite, int minimoStock);
+    
+
 }

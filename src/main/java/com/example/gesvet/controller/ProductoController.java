@@ -2,12 +2,14 @@ package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.Categorias;
+import com.example.gesvet.models.MetodoPago;
 import com.example.gesvet.models.Productos;
 import com.example.gesvet.models.Servicios;
 import com.example.gesvet.models.ServiciosUser;
 import com.example.gesvet.models.Tipocategoria;
 import com.example.gesvet.models.User;
 import com.example.gesvet.service.ICategoriasService;
+import com.example.gesvet.service.IMetodoPagoService;
 import com.example.gesvet.service.UploadFileService;
 import java.io.IOException;
 import java.util.Optional;
@@ -25,17 +27,23 @@ import com.example.gesvet.service.IServicioService;
 import com.example.gesvet.service.IServiciosUserService;
 import com.example.gesvet.service.ITipocategoriaservice;
 import com.example.gesvet.service.UserService;
+import jakarta.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/productos")
 public class ProductoController {
+    
+    @Autowired
+    IMetodoPagoService metodopagoservice;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -90,6 +98,7 @@ public class ProductoController {
         model.addAttribute("servicios", serviciosService.findAll());
         model.addAttribute("tipocategorias", tipocategoriaservice.findAll());
         model.addAttribute("serviciousers", serviciouserservice.findAll());
+        model.addAttribute("metodopagos", metodopagoservice.findAll());
         model.addAttribute("userDto", userDto);
         return "productos/Gestion_Productos_Servicios";
     }
@@ -131,7 +140,7 @@ public class ProductoController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Productos productos, Model model, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("activo") boolean activo) throws IOException {
+    public String save(@ModelAttribute @Valid Productos productos, BindingResult result, Model model, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("activo") boolean activo, RedirectAttributes redirectAttributes) throws IOException {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -154,6 +163,7 @@ public class ProductoController {
         userDto.setRole(user.getRole());
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
+        
 
 // Obtener la categoría seleccionada
         Integer categoriaId = productos.getCategoria().getId();
@@ -168,9 +178,13 @@ public class ProductoController {
         } else {
 
         }
+        
+        
         model.addAttribute("userDto", userDto);
         productos.setActivo(activo);
         productoService.save(productos);
+           // Agregar un mensaje de flash para mostrar en la vista
+    redirectAttributes.addFlashAttribute("exitoproducto", "Producto agregado con éxito");
         return "redirect:/productos";
     }
 
@@ -210,7 +224,7 @@ public class ProductoController {
     }
 
     @PostMapping("/update")
-    public String update(Productos producto, Model model, Authentication authentication, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("categoriaId") Integer categoriaId) throws IOException {
+    public String update(Productos producto, Model model, Authentication authentication, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("categoriaId") Integer categoriaId,RedirectAttributes redirectAttributes) throws IOException {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -254,11 +268,13 @@ public class ProductoController {
         model.addAttribute("userDto", userDto);
         producto.setUsuario(p.getUsuario());
         productoService.update(producto);
+         // Agregar un mensaje de flash para mostrar en la vista
+    redirectAttributes.addFlashAttribute("exitoproductoactualizado", "Producto actualizado con éxito");
         return "redirect:/productos";
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+    public String delete(@PathVariable Integer id, Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) {
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -293,7 +309,8 @@ public class ProductoController {
                 upload.deleteImage(p.getImagen());
             }
         }
-
+  // Agregar un mensaje de flash para mostrar en la vista
+    redirectAttributes.addFlashAttribute("exitoproductoeliminado", "Producto eliminado con éxito");
         return "redirect:/productos";
     }
 
@@ -331,7 +348,8 @@ public class ProductoController {
     }
 
     @PostMapping("/savecategoria")
-    public String saveCategoria(@ModelAttribute Categorias categoria, Model model, Principal principal, @RequestParam("activo") boolean activo) {
+    public String saveCategoria(@ModelAttribute @Valid Categorias categoria, BindingResult result, Model model, Principal principal,
+            @RequestParam("activo") boolean activo, RedirectAttributes redirectAttributes) {
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -362,7 +380,26 @@ public class ProductoController {
         categoria.setTipocategoria(tipoCategoria);
         model.addAttribute("userDto", userDto);
         categoria.setActivo(activo);
+
+        // Validar si hay errores en la validación
+        if (result.hasErrors()) {
+            // Agregar un mensaje de flash para mostrar en la vista
+            redirectAttributes.addFlashAttribute("validarformulario", "Por favor, completa todos los campos del formulario.");
+            return "redirect:/productos/crearcategoria";
+        }
+        // Verificar si ya existe una categoría con el mismo nombre
+        if (categoriasService.existsByNombre(categoria.getNombre())) {
+            // Agregar un mensaje de flash para mostrar en la vista
+            redirectAttributes.addFlashAttribute("errorcategoriaexist", "Ya existe una categoría con el mismo nombre.");
+            return "redirect:/productos/crearcategoria";
+        }
+
+        // Guardar la categoría
         categoriasService.save(categoria);
+
+        // Agregar un mensaje de flash para mostrar en la vista
+        redirectAttributes.addFlashAttribute("exitocategroia", "Categoría agregada con éxito");
+
         return "redirect:/productos";
     }
 
@@ -406,7 +443,7 @@ public class ProductoController {
     }
 
     @PostMapping("/updatecategoria")
-    public String updateCategoria(@ModelAttribute Categorias categoria, Model model, Principal principal) {
+    public String updateCategoria(@ModelAttribute Categorias categoria, Model model, Principal principal, RedirectAttributes redirectAttributes) {
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -436,12 +473,26 @@ public class ProductoController {
         // Establecer el tipo de categoría en la categoría
         categoria.setTipocategoria(tipoCategoria);
         model.addAttribute("userDto", userDto);
+
+        // Obtener la categoría actual de la base de datos
+        Categorias categoriaActual = categoriasService.get(categoria.getId()).orElse(null);
+
+        // Validar si el nombre ha cambiado y ya existe una categoría con el nuevo nombre
+        if (!categoriaActual.getNombre().equals(categoria.getNombre()) && categoriasService.existsByNombre(categoria.getNombre())) {
+            // Agregar un mensaje de flash para mostrar en la vista
+            redirectAttributes.addFlashAttribute("errorcategoriaexist", "Ya existe una categoría con el mismo nombre.");
+            return "redirect:/productos/editarcategoria/" + categoria.getId();
+
+        }
+
         categoriasService.update(categoria);
+        // Agregar un mensaje de flash para mostrar en la vista
+        redirectAttributes.addFlashAttribute("exitocategroiaactualizada", "Categoría actualizada con éxito");
         return "redirect:/productos";
     }
 
     @GetMapping("/deletecategoria/{id}")
-    public String deleteCategoria(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+    public String deleteCategoria(@PathVariable Integer id, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -465,6 +516,8 @@ public class ProductoController {
         userDto.setImagen("/images/" + user.getImagen());
         model.addAttribute("userDto", userDto);
         categoriasService.delete(id);
+        // Agregar un mensaje de flash para mostrar en la vista
+        redirectAttributes.addFlashAttribute("exitoeliminadocategroia", "Categoría eliminada con éxito");
         return "redirect:/productos";
     }
 
@@ -498,7 +551,7 @@ public class ProductoController {
     }
 
     @PostMapping("/saveservicio")
-    public String saveservicio(Servicios servicios, Model model, Authentication authentication, Principal principal, @RequestParam("activo") boolean activo) throws IOException {
+    public String saveservicio(Servicios servicios, Model model, Authentication authentication, Principal principal, @RequestParam("activo") boolean activo,RedirectAttributes redirectAttributes) throws IOException {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -523,6 +576,8 @@ public class ProductoController {
         model.addAttribute("userDto", userDto);
         servicios.setActivo(activo);
         serviciosService.save(servicios);
+         // Agregar un mensaje de flash para mostrar en la vista
+        redirectAttributes.addFlashAttribute("exitoservicio", "Tipo servicio agregado con éxito");
         return "redirect:/productos";
     }
 
@@ -557,11 +612,12 @@ public class ProductoController {
 
         model.addAttribute("userDto", userDto);
         model.addAttribute("servicio", servicio);
+        
         return "productos/editarservicio";
     }
 
     @PostMapping("/updateservicio")
-    public String updateservicio(Servicios servicio, Model model, Authentication authentication, Principal principal) throws IOException {
+    public String updateservicio(Servicios servicio, Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) throws IOException {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -592,11 +648,13 @@ public class ProductoController {
         serviciosService.update(servicio);
 
         model.addAttribute("userDto", userDto);
+         // Agregar un mensaje de flash para mostrar en la vista
+        redirectAttributes.addFlashAttribute("exitoservicioactualizado", "Tipo servicio actualizado con éxito");
         return "redirect:/productos";
     }
 
     @GetMapping("/deleteservicio/{id}")
-    public String deleteservicio(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+    public String deleteservicio(@PathVariable Integer id, Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -622,9 +680,17 @@ public class ProductoController {
 
         Servicios s = new Servicios();
         s = serviciosService.get(id).get();
+        
+           if (s != null) {
+            // Desactivar el producto en lugar de borrarlo
+            s.setActivos(false);
+            serviciosService.update(s);}
+        
 
         model.addAttribute("userDto", userDto);
-        serviciosService.delete(id);
+      
+         // Agregar un mensaje de flash para mostrar en la vista
+        redirectAttributes.addFlashAttribute("exitoservicioeliminado", "Tipo servicio eliminado con éxito");
         return "redirect:/productos";
     }
 
@@ -658,17 +724,13 @@ public class ProductoController {
     }
 
     @PostMapping("/savetipocategoria")
-    public String savetipocategoria(Tipocategoria tipocategoria, Model model, Authentication authentication, Principal principal, @RequestParam("activo") boolean activo) throws IOException {
-
-        // Obtener los detalles del usuario actual
+    public String savetipocategoria(Tipocategoria tipocategoria, Model model, Authentication authentication, Principal principal, @RequestParam("activo") boolean activo, RedirectAttributes redirectAttributes) throws IOException {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
-        // Obtener el nombre de usuario del usuario autenticado
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 
-        // Buscar el usuario en la base de datos por su nombre de usuario
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         User user = userService.findByUsername(username);
-        // Crear un objeto UserDto
+
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
@@ -682,7 +744,23 @@ public class ProductoController {
 
         model.addAttribute("userDto", userDto);
         tipocategoria.setActivo(activo);
-        tipocategoriaservice.save(tipocategoria);
+        // Verificar si ya existe una categoría con el mismo nombre
+        if (tipocategoriaservice.existsByNombre(tipocategoria.getNombre())) {
+            // Agregar un mensaje de flash para mostrar en la vista
+            redirectAttributes.addFlashAttribute("errortipocategoriaexist", "Ya existe un Tipo de categoría con el mismo nombre.");
+            return "redirect:/productos/creartipocategoria";
+        }
+
+        try {
+            tipocategoriaservice.save(tipocategoria);
+            // Agregar mensaje de éxito
+            redirectAttributes.addFlashAttribute("exitotipocategoria", "Tipo de categoría guardado con éxito.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Agregar mensaje de error
+            redirectAttributes.addFlashAttribute("errortipocategoria", "Error al guardar el tipo de categoría. Intente de nuevo.");
+        }
+
         return "redirect:/productos";
     }
 
@@ -721,19 +799,13 @@ public class ProductoController {
     }
 
     @PostMapping("/updatetipocategoria")
-    public String updatetipocategoria(Tipocategoria tipocategoria, Model model, Authentication authentication, Principal principal) throws IOException {
-
-        // Obtener los detalles del usuario actual
+    public String updatetipocategoria(Tipocategoria tipocategoria, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) throws IOException {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
 
-        // Obtener el nombre de usuario actual
         String username = authentication.getName();
-
-        // Buscar al usuario por su nombre de usuario
         User user = userService.findByUsername(username);
 
-        // Crear un objeto UserDto
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
@@ -744,31 +816,51 @@ public class ProductoController {
         userDto.setRole(user.getRole());
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
+        
+        
+        // Obtener la categoría actual de la base de datos
+        Tipocategoria categoriaActual = tipocategoriaservice.get(tipocategoria.getId()).orElse(null);
 
-        Tipocategoria t = new Tipocategoria();
-        t = tipocategoriaservice.get(tipocategoria.getId()).get();
+        // Validar si el nombre ha cambiado y ya existe una categoría con el nuevo nombre
+        if (!categoriaActual.getNombre().equals(tipocategoria.getNombre()) && tipocategoriaservice.existsByNombre(tipocategoria.getNombre())) {
+            // Agregar un mensaje de flash para mostrar en la vista
+            redirectAttributes.addFlashAttribute("errortipocategoriaexist", "Ya existe un tipo de categoría con el mismo nombre.");
+            return "redirect:/productos/editartipocategoria/" + tipocategoria.getId();
 
-        tipocategoria.setUsuario(t.getUsuario());
-        tipocategoriaservice.update(tipocategoria);
+        }
 
-        model.addAttribute("userDto", userDto);
+
+        try {
+            Tipocategoria t = tipocategoriaservice.get(tipocategoria.getId()).orElse(null);
+
+            if (t != null) {
+                tipocategoria.setUsuario(t.getUsuario());
+                tipocategoriaservice.update(tipocategoria);
+                // Agregar mensaje de éxito
+                redirectAttributes.addFlashAttribute("exitoupdatetipocategoria", "Tipo de categoría actualizado con éxito.");
+            } else {
+                // Agregar mensaje de error si no se encuentra el tipo de categoría
+                redirectAttributes.addFlashAttribute("errortiponoencontrado", "No se encontró el tipo de categoría para actualizar.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Agregar mensaje de error
+            redirectAttributes.addFlashAttribute("erroractualizartipocategoria", "Error al actualizar el tipo de categoría. Intente de nuevo.");
+        }
+
         return "redirect:/productos";
     }
 
     @GetMapping("/deletetipocategoria/{id}")
-    public String deletetipocategoria(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+    public String deletetipocategoria(@PathVariable Integer id, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
 
-        // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
 
-        // Obtener el nombre de usuario actual
         String username = authentication.getName();
 
-        // Buscar al usuario por su nombre de usuario
         User user = userService.findByUsername(username);
 
-        // Crear un objeto UserDto
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
@@ -780,13 +872,26 @@ public class ProductoController {
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
 
-        Tipocategoria t = new Tipocategoria();
-        t = tipocategoriaservice.get(id).get();
+        try {
+            Tipocategoria t = tipocategoriaservice.get(id).orElse(null);
 
-        model.addAttribute("userDto", userDto);
-        tipocategoriaservice.delete(id);
+            if (t != null) {
+                tipocategoriaservice.delete(id);
+                // Agregar mensaje de éxito
+                redirectAttributes.addFlashAttribute("exitoeliminartipocategoria", "Tipo de categoría eliminado con éxito.");
+            } else {
+                // Agregar mensaje de error si no se encuentra el tipo de categoría
+                redirectAttributes.addFlashAttribute("encontrareliminartipocategoria", "No se encontró el tipo de categoría para eliminar.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Agregar mensaje de error
+            redirectAttributes.addFlashAttribute("erroraleliminartipocategoria", "Error al eliminar el tipo de categoría. Intente de nuevo.");
+        }
+
         return "redirect:/productos";
     }
+
 
     /*servicio user */
     @GetMapping("/crearserviciouser")
@@ -827,7 +932,7 @@ public class ProductoController {
     }
 
     @PostMapping("/saveserviciouser")
-    public String saveserviciouser(@ModelAttribute ServiciosUser serviciosuser, Model model, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("activo") boolean activo) throws IOException {
+    public String saveserviciouser(@ModelAttribute ServiciosUser serviciosuser, Model model, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("activo") boolean activo, RedirectAttributes redirectAttributes) throws IOException {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -867,6 +972,8 @@ public class ProductoController {
         model.addAttribute("userDto", userDto);
         serviciosuser.setActivo(activo);
         serviciouserservice.save(serviciosuser);
+        // Agregar mensaje de error
+            redirectAttributes.addFlashAttribute("serviciocreado", "Servicio creado con exito");
         return "redirect:/productos";
     }
 
@@ -907,7 +1014,7 @@ public class ProductoController {
     }
 
     @PostMapping("/updateserviciouser")
-    public String updateserviciouser(ServiciosUser serviciosuser, Model model, Authentication authentication, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("categoriaId") Integer categoriaId) throws IOException {
+    public String updateserviciouser(ServiciosUser serviciosuser, Model model, Authentication authentication, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("categoriaId") Integer categoriaId, RedirectAttributes redirectAttributes) throws IOException {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -951,11 +1058,14 @@ public class ProductoController {
         model.addAttribute("userDto", userDto);
         serviciosuser.setUsuario(s.getUsuario());
         serviciouserservice.update(serviciosuser);
+        // Agregar mensaje de error
+            redirectAttributes.addFlashAttribute("servicioactualizado", "Servicio actualizado con exito");
+        
         return "redirect:/productos";
     }
 
     @GetMapping("/deleteserviciouser/{id}")
-    public String deleteserviciouser(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+    public String deleteserviciouser(@PathVariable Integer id, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -992,7 +1102,187 @@ public class ProductoController {
                 upload.deleteImage(s.getImagen());
             }
         }
+        
+        // Agregar mensaje de error
+            redirectAttributes.addFlashAttribute("servicioborrado", "Servicio eliminado con exito");
         return "redirect:/productos";
     }
 
+    /*metodo pago*/
+     
+    @GetMapping("/crearmetodopago")
+    public String createmetodopago(Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        model.addAttribute("userDto", userDto);
+        return "productos/agregarmetodopago";
+    }
+
+    @PostMapping("/savemetodopago")
+    public String savemetodopago(MetodoPago metodopago, Model model, Authentication authentication, Principal principal, @RequestParam("activo") boolean activo,RedirectAttributes redirectAttributes) throws IOException {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+        // Obtener el nombre de usuario del usuario autenticado
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+
+        // Buscar el usuario en la base de datos por su nombre de usuario
+        User user = userService.findByUsername(username);
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        model.addAttribute("userDto", userDto);
+        metodopago.setActivo(activo);
+        metodopagoservice.save(metodopago);
+         // Agregar un mensaje de flash para mostrar en la vista
+        redirectAttributes.addFlashAttribute("exitometodopago", "Tipo Metodo de pago agregado con éxito");
+        return "redirect:/productos";
+    }
+
+    @GetMapping("/editarmetodopago/{id}")
+    public String editarmetodopago(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        MetodoPago metodopago = new MetodoPago();
+        Optional<MetodoPago> optionalmetodopago = metodopagoservice.get(id);
+        metodopago = optionalmetodopago.get();
+
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("metodopago", metodopago);
+        
+        return "productos/editarmetodopago";
+    }
+
+    @PostMapping("/updatemetodopago")
+    public String updatemetodopago(MetodoPago metodopago, Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) throws IOException {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        MetodoPago m = new MetodoPago();
+        m = metodopagoservice.get(metodopago.getId()).get();
+
+        metodopago.setUsuario(m.getUsuario());
+        metodopagoservice.update(metodopago);
+
+        model.addAttribute("userDto", userDto);
+         // Agregar un mensaje de flash para mostrar en la vista
+        redirectAttributes.addFlashAttribute("exitometodopagoactualizado", "Tipo Metodo de pago actualizado con éxito");
+        return "redirect:/productos";
+    }
+
+    @GetMapping("/deletemetodopago/{id}")
+    public String deletemetodopago(@PathVariable Integer id, Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        MetodoPago m = new  MetodoPago();
+        m = metodopagoservice.get(id).get();
+        
+           if (m != null) {
+            // Desactivar el producto en lugar de borrarlo
+            m.setActivos(false);
+            metodopagoservice.update(m);}
+        
+
+        model.addAttribute("userDto", userDto);
+      
+         // Agregar un mensaje de flash para mostrar en la vista
+        redirectAttributes.addFlashAttribute("exitometodopagoeliminado", "Tipo metodo de pago eliminado con éxito");
+        return "redirect:/productos";
+    }
+
+    
 }
+
+

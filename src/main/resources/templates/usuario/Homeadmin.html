@@ -502,6 +502,9 @@
                                                                 <th scope="col">No. de Orden</th>
                                                                 <th scope="col">Fecha</th>
                                                                 <th scope="col">Valor</th>
+                                                                <th scope="col">Estado factura</th>
+                                                                <th scope="col">Nombre Cliente</th>
+                                                                <th scope="col">Teléfono Cliente</th>
                                                                 <th scope="col">Acción</th>
                                                             </tr>
                                                         </thead>
@@ -510,10 +513,17 @@
                                                                 <td th:text="${factura.numero}"></td>
                                                                 <td th:text="${factura.fecha}" ></td>
                                                                 <td th:text="${factura.total}" ></td>
+                                                                <td th:text="${factura.estadoPago}" ></td>
+
+                                                                <!-- Acceder al nombre y teléfono del cliente a través de la relación con UsuarioVentas -->
+                                                                <td th:text="${factura.usuarioventas.nombre}"></td>
+                                                                <td th:text="${factura.usuarioventas.telefono}"></td>
+
                                                                 <td><a th:href="@{/detalleadmin/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -735,7 +745,28 @@
                 });
             });
         </script>
+        <script th:if="${exito != null}">
+            Swal.fire({
+                icon: 'success',
+                title: 'Factura aprobada con éxito.',
 
+            });
+        </script>
+
+        <script th:if="${exitos != null}">
+            Swal.fire({
+                icon: 'success',
+                title: 'Compra efectuada con éxito.',
+
+            });
+        </script>
+        <script th:if="${errorcarritocompra != null}">
+            Swal.fire({
+                icon: 'error',
+                title: 'Factura cancelada debido a la falta de disponibilidad de la cantidad solicitada de productos..',
+
+            });
+        </script>
 
     </body>
 

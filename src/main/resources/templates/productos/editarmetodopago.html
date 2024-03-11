@@ -6,12 +6,13 @@
 <head th:replace="Plantillas/administrador :: head"></head>
 
 <body>
-<header id="header" class="header fixed-top d-flex align-items-center">
+
+   <header id="header" class="header fixed-top d-flex align-items-center">
 
             <div class="d-flex align-items-center justify-content-between">
                 <a href="index.html" class="logo d-flex align-items-center">
                     <img src="assets/img/logoGesVet.png">
-                    <span class="d-none d-lg-block">Tipo Categoria</span>
+                    <span class="d-none d-lg-block">GesVet</span>
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
             </div><!-- End Logo -->
@@ -314,7 +315,6 @@
                 <!-- End Dashboard Nav -->
             </ul>
         </aside>
-
     <main id="main" class="main" style="background-color: #5c5db4;">
 
         <div class="pagetitle">
@@ -323,8 +323,8 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
                     <li class="breadcrumb-item">Gestión Productos y Servicios</li>
-                    <li class="breadcrumb-item active">Categoria</li>
-                    <li class="breadcrumb-item active">Registrar</li>
+                    <li class="breadcrumb-item active">Productos</li>
+                    <li class="breadcrumb-item active">Modificar</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -339,55 +339,65 @@
 
                             <li class="nav-item">
                                 <button class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#profile-overview">Registro</button>
+                                        data-bs-target="#profile-overview">Modificar</button>
                             </li>
                         </ul>
                         <div class="tab-content pt-2">
 
                             <div class="container-fluid mt-2">
-                                <p class="textoNeon">Registrar Tipo Categoria</p>
+                                <p class="textoNeon">Modificar Tipo Metodo de pago</p>
                             </div>
 
                             <div class="container">
-                                <form th:action="@{/productos/savetipocategoria}" method="post" onsubmit="return validarFormulario()">
-                                    <div class="card">
+                                <form th:action="@{/productos/updatemetodopago}" object="" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" th:value="${metodopago.id}">
+                                        <div class="card">
 
-                                        <div class="form-group">
-                                            <div class="row my-2">
-                                                <div class="col-6 ">
-                                                    <label>Nombre:</label>
-                                                    <input type="text" name="nombre" field="" class="form-control">
+                                            <div class="form-group">
+                                                <div class="row my-2">
+                                                    <div class="col-6 ">
+                                                        <label>Nombre:</label>
+                                                        <input type="text" name="nombre" field="" th:value="${metodopago.nombre}" class="form-control" required autocomplete="off">
+                                                    </div>
+                                                    <div class="col-6 ">
+                                                        <label class="form-label">Estado:</label><br>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="activo" value="true" th:checked="${metodopago.activo}">
+                                                                    <label class="form-check-label">Activo</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="activo" value="false" th:checked="${!metodopago.activo}">
+                                                                    <label class="form-check-label">Inactivo</label>
+                                                            </div>
+                                                        
+                                                        
+                                                    </div>
                                                 </div>
-                                                <div class="col-6 ">
-                                                    <label class="form-label">Estado:</label><br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="activo" value="true" checked>
-                                                                <label class="form-check-label">Activo</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="activo" value="false">
-                                                                <label class="form-check-label">Inactivo</label>
-                                                        </div>
-                                                    
-                                                    
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row my-2">
+                                                    <div class="col-6 ">
+                                                        <label>Cuenta:</label>
+                                                        <input type="number" name="cuenta" field="" th:value="${metodopago.cuenta}" class="form-control" required autocomplete="off">
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+              
+
+
+
+                                            <div class="box-footer">
+                                                <div class="row my-2">
+                                                    <div class="d-grid gap-2 col-6">
+                                                        <button class="btn btn-success">Guardar</button>
+                                                    </div>
+                                                    <div class="d-grid gap-2 col-6">
+                                                        <a class="btn btn-danger" href="/productos">Cancelar</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-
-                                        <div class="box-footer">
-                                            <div class="row my-2">
-                                                <div class="d-grid gap-2 col-6">
-                                                    <button class="btn btn-success">Guardar</button>
-                                                </div>
-                                                <div class="d-grid gap-2 col-6">
-                                                    <a class="btn btn-danger" href="/productos">Cancelar</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -405,11 +415,5 @@
         <div th:replace="Plantillas/administrador :: scripts"></div>
 
     </main><!-- End #main -->
-    <script th:if="${errortipocategoriaexist != null}">
-        Swal.fire({
-            icon: 'error',
-            title: 'Ya existe un Tipo de categoría con el mismo nombre.',
-        });
-    </script>
 </body>
 </html>

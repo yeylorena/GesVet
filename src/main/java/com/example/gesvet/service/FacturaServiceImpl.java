@@ -83,4 +83,18 @@ public class FacturaServiceImpl implements IFacturaService {
         facturaRepository.save(factura);
     }
 
+
+    @Override
+    public void delete(Factura factura) {
+        facturaRepository.delete(factura);
+    }
+
+    @Override
+    public List<Object[]> obtenerTopProductosMasVendidos() {
+        return facturaRepository.findTopProductosMasVendidos();
+    }
+    
+   
+
+
 }
