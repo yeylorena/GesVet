@@ -1,12 +1,14 @@
 package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
+import com.example.gesvet.models.Categorias;
 import com.example.gesvet.models.DetalleFactura;
 import com.example.gesvet.models.Factura;
 import com.example.gesvet.models.MetodoPago;
 import com.example.gesvet.models.Productos;
 import com.example.gesvet.models.User;
 import com.example.gesvet.repository.UserRepository;
+import com.example.gesvet.service.ICategoriasService;
 import com.example.gesvet.service.IDetalleFactService;
 import com.example.gesvet.service.IFacturaService;
 import com.example.gesvet.service.IMetodoPagoService;
@@ -37,6 +39,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/")
 public class HomeController {
+    
+    @Autowired
+    ICategoriasService categoriasservice;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -67,8 +72,83 @@ public class HomeController {
 
     //datos de la factura
     Factura factura = new Factura();
-
+    
     @GetMapping("verhome")
+    public String homecategoria(Model model, Authentication authentication, Principal principal) {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+        
+        // Obtén las categorías asociadas al tipo "Producto"
+        List<Categorias> categoriasProducto = categoriasservice.findByTipoCategoria("Producto");
+
+        model.addAttribute("categoriasProducto", categoriasProducto);
+
+        model.addAttribute("userDto", userDto);
+       
+
+        return "usuario/Homecategoria";
+    }
+    
+    @GetMapping("productohomes/{id}")
+    public String productoHomes(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+       // Obtener la categoría por su ID
+    Categorias categoria = categoriasservice.findById(id);
+
+    // Obtener los productos asociados a la categoría
+    List<Productos> productos = productoService.findByCategoria(categoria);
+
+    model.addAttribute("categoria", categoria);
+    model.addAttribute("productos", productos);
+        model.addAttribute("userDto", userDto);
+     
+
+        return "usuario/Home";
+    }
+
+    @GetMapping("verproducto")
     public String home(Model model, Authentication authentication, Principal principal) {
 
         // Obtener los detalles del usuario actual

@@ -55,4 +55,8 @@ public class CategoriasServiceImpl implements ICategoriasService {
 
 
 
+
+    @Override
+    public Categorias findById(Integer id) {
+      return categoriasRepository.findById(id).orElse(null);}
 }

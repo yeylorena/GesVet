@@ -20,13 +20,23 @@ public interface IFacturaService {
 
     List<Factura> findByUser_Role(String role);
 
-public void update(Factura factura);
-void delete(Factura factura);
+    public void update(Factura factura);
 
-List<Object[]> obtenerTopProductosMasVendidos();
+    void delete(Factura factura);
 
+    List<Object[]> obtenerTopProductosMasVendidos();
 
+    /*
+  List<Object[]> findTotalVentasPorProducto();
+  Double findSumaTotalVentas();
+     */
+    List<Factura> findByUsuarioAndEstadoPago(User usuario, String estadoPago);
 
- 
-
+    //corresponde a las compras del usuario
+    List<Object[]> findDetallesCompras();
+    
+    //corresponde a las compras del usuario
+    List<Object[]> findDetallesVentas();
+//corresponde a la facturacio diaria
+ List<Object[]> findDetallesFactura();
 }

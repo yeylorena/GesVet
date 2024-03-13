@@ -1,5 +1,6 @@
 package com.example.gesvet.service;
 
+import com.example.gesvet.models.Categorias;
 import com.example.gesvet.models.Productos;
 import java.util.List;
 import java.util.Optional;
@@ -21,5 +22,5 @@ public interface IProductoService {
     
     List<Productos> getTopProductosConPocoStock(int limite, int minimoStock);
     
-
+ List<Productos> findByCategoria(Categorias categoria);
 }

@@ -1,5 +1,6 @@
 package com.example.gesvet.repository;
 
+import com.example.gesvet.models.Categorias;
 import com.example.gesvet.models.Productos;
 
 
@@ -22,4 +23,5 @@ public interface IProductoRepository extends JpaRepository<Productos, Integer> {
     List<Productos> findProductosConPocoStock(@Param("minimoStock") int minimoStock, Pageable pageable);
     
 
+    List<Productos> findByCategoria(Categorias categoria);
 }

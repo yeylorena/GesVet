@@ -30,6 +30,34 @@ List<Object[]> findTopProductosMasVendidos();
 
 
 
+List<Factura> findByUsuarioAndEstadoPago(User usuario, String estadoPago);
 
+//esta es para el total de compras que correponde alas compras que halla hecho el usuario
+@Query(value = "SELECT p.nombre, df.cantidad, p.precio, df.cantidad * p.precio as total " +
+               "FROM DetalleFactura df " +
+               "JOIN df.factura f " +
+               "JOIN df.productos p " +
+               "WHERE f.estadoPago = 'aprobado' " +
+               "AND f.role = 'USER'")
+List<Object[]> findDetallesCompras();
 
+//esta es para el total de Ventas que correponde a las ventas que halla hecho el adminitrador
+@Query(value = "SELECT p.nombre, df.cantidad, p.precio, df.cantidad * p.precio as total " +
+               "FROM DetalleFactura df " +
+               "JOIN df.factura f " +
+               "JOIN df.productos p " +
+               "WHERE f.estadoPago = 'aprobado' " +
+               "AND f.role = 'ADMIN'")
+List<Object[]> findDetallesVentas();
+
+//esta es para el total de Facturacion diaria que correponde a las ventas que se hallan hecho en el dia 
+
+//esta es para el total de Ventas que correponde a las ventas que halla hecho el adminitrador
+@Query(value = "SELECT p.nombre, df.cantidad, p.precio, df.cantidad * p.precio as total " +
+               "FROM DetalleFactura df " +
+               "JOIN df.factura f " +
+               "JOIN df.productos p " +
+               "WHERE f.estadoPago = 'aprobado' " +
+               "AND DATE(f.fecha) = CURRENT_DATE")
+List<Object[]> findDetallesFactura();
 }

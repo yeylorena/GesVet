@@ -365,54 +365,36 @@
             <div class="container py-4 ">
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4 justify-content-center">
-                    <div class="col">
-                        <div id="perfil" class="card h-93 card-img card-hover">
-                            <div class="card-body card-img  ">
-                                <h5 id="card-left" class="card-title ">97</h5>
-                                <p id="card-left" class="card-text small">Productos registrados </p>
-                            </div>
-                            <button id="masinfo" type="button" class="btn card-img-2">Mas Info <i
-                                    class="fa-solid fa-circle-down fa-rotate-270"></i></button>
-                        </div>
-                    </div>
+                    
                     <div class="col">
                         <div id="perfil" class="card h-93 img-green card-hover">
                             <div class="card-body img-green">
-                                <h5 id="card-left" class="card-title ">$2.200.000</h5>
+                                <h5 id="card-left" class="card-title " th:text="'$' + ${totalCompras}"></h5>
                                 <p id="card-left" class="card-text small">Total de las compras</p>
                             </div>
-                            <button id="masinfo" type="button" class="btn img-green-2">Mas Info <i
-                                    class="fa-solid fa-circle-down fa-rotate-270"></i></button>
+                            <a id="masinfo" th:href="@{/totalcompras}" type="button" class="btn img-green-2">Mas Info <i
+                                    class="fa-solid fa-circle-down fa-rotate-270" ></i></a>
                         </div>
                     </div>
                     <div class="col">
                         <div id="perfil" class="card h-93 img-yellow card-hover">
                             <div class="card-body img-yellow">
-                                <h5 id="card-left" class="card-title ">$3.200.100</h5>
+                                <h5 id="card-left" class="card-title " th:text="'$' + ${totalVentas}"></h5>
                                 <p id="card-left" class="card-text small"> Total de las Ventas</p>
                             </div>
-                            <button id="masinfo" type="button" class="btn img-yellow-2">Mas Info <i
-                                    class="fa-solid fa-circle-down fa-rotate-270"></i></button>
+                            <a id="masinfo" th:href="@{/totalventas}"  type="button" class="btn img-yellow-2">Mas Info <i
+                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
                         </div>
                     </div>
-                    <div class="col">
-                        <div id="perfil" class="card h-93 img-red card-hover">
-                            <div class="card-body img-red">
-                                <h5 id="card-left" class="card-title ">$2.900.000</h5>
-                                <p id="card-left" class="card-text small">Total de Ganancias</p>
-                            </div>
-                            <button id="masinfo" type="button" class="btn img-red-2">Mas Info <i
-                                    class="fa-solid fa-circle-down fa-rotate-270"></i></button>
-                        </div>
-                    </div>
+                    
                     <div class="col">
                         <div id="perfil" class="card h-93 img-gris card-hover">
                             <div class="card-body img-gris">
-                                <h5 id="card-left" class="card-title ">$0</h5>
+                                <h5 id="card-left" class="card-title " th:text="'$' + ${totalFacturas}"></h5>
                                 <p id="card-left" class="card-text small"> Facturación diaria</p>
                             </div>
-                            <button id="masinfo" type="button" class="btn img-gris-2">Mas Info<i
-                                    class="fa-solid fa-circle-down fa-rotate-270"></i></button>
+                            <a id="masinfo" th:href="@{/totalfacturas}" type="button" class="btn img-gris-2">Mas Info<i
+                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
                         </div>
                     </div>
 

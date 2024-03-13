@@ -1,5 +1,6 @@
 package com.example.gesvet.service;
 
+import com.example.gesvet.models.Categorias;
 import com.example.gesvet.models.Productos;
 import java.util.List;
 import java.util.Optional;
@@ -63,5 +64,9 @@ public void verificarYActualizarEstadoProductos() {
         Pageable pageRequest = PageRequest.of(0, limite);
         return productoRepository.findProductosConPocoStock(minimoStock, pageRequest);
     }
-
+    
+     @Override
+public List<Productos> findByCategoria(Categorias categoria) {
+    return productoRepository.findByCategoria(categoria);
+}
 }

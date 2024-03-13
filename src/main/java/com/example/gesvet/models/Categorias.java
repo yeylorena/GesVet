@@ -21,6 +21,15 @@ public class Categorias {
     private String tipo;
     private String descripcion;
     private boolean activo;
+    private String imagen;
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
     @ManyToOne()
     private User usuario;
 
@@ -32,7 +41,7 @@ public class Categorias {
         this.usuario = usuario;
     }
 
-    public Categorias(Integer id, String nombre, String tipo, String descripcion, boolean activo, User usuario) {
+    public Categorias(Integer id, String nombre, String tipo, String descripcion, boolean activo, User usuario, String imagen) {
         super();
         this.id = id;
         this.nombre = nombre;
@@ -40,6 +49,7 @@ public class Categorias {
         this.descripcion = descripcion;
         this.activo = activo;
         this.usuario = usuario;
+         this.imagen = imagen;
     }
 
     public Integer getId() {
@@ -84,8 +94,10 @@ public class Categorias {
 
     @Override
     public String toString() {
-        return "Categorias{" + "id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", descripcion=" + descripcion + ", activo=" + activo + ", usuario=" + usuario + ", productos=" + productos + ", tipocategoria=" + tipocategoria + '}';
+        return "Categorias{" + "id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", descripcion=" + descripcion + ", activo=" + activo + ", imagen=" + imagen + ", usuario=" + usuario + ", productos=" + productos + ", tipocategoria=" + tipocategoria + ", serviciosusers=" + serviciosusers + '}';
     }
+
+  
 
     public Categorias() {
 

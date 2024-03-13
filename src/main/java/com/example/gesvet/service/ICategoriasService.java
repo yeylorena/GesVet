@@ -19,6 +19,8 @@ public interface ICategoriasService {
     // Nuevo método para obtener categorías por tipo
      List<Categorias> findByTipoCategoria(String tipoCategoria);
       boolean existsByNombre(String nombre);
+      
+       Categorias findById(Integer id);
 }
 
 

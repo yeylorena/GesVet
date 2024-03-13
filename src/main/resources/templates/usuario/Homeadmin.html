@@ -405,23 +405,17 @@
                                                 <div class="card-body">
 
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-md-12 ">
-                                                            <form class="form-inline" method="post" th:action="@{/buscaradmin}">
-                                                                <div class="form-group">
-                                                                    <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off">
-
-                                                                    &nbsp;&nbsp;
-                                                                    <input id="buscar" type="submit" class="btn btn-outline-success" value="Buscar">
-
-                                                                </div>
-
-                                                            </form>
+                                                        <div class="col-lg-6 col-md-12">
+                                                            <div class="form-group">
+                                                                <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off" oninput="buscarProductos()">
+                                                            </div>
                                                         </div>
+
                                                     </div>
 
                                                     <div class="row mt-5">
                                                         <div class="col-12">
-                                                            <table class="table">
+                                                            <table class="table" id="tablaProductos">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Imagen</th>
@@ -544,35 +538,46 @@
                                             <div class="col">
                                                 <div class="card h-93 card-img card-hover filtroTodo">
                                                     <div class="card-body card-img ">
-                                                        <h5 id="card-left" class="card-title text-center">Todos</h5>
+                                                        <h3 id="card-left" class="card-title text-center">Total</h3>
+                                                        <br>
+                                                        <h6 class="text-center" th:text="${facturas.size()} + ' Total facturas'"></h6>
                                                     </div>
-                                                    <button id="masinfo" type="button" class="btn card-img-2">Consultar</button>
+
                                                 </div>
                                             </div>
+
 
                                             <div class="col">
                                                 <div class="card h-93 img-green card-hover filtroPendientes">
                                                     <div class="card-body img-green">
-                                                        <h5 id="card-left" class="card-title text-center">Pendientes</h5>
+                                                        <h3 id="card-left" class="card-title text-center">Pendientes</h3>
+                                                        <br>
+                                                        <h6 class="text-center " th:text="${pendingInvoiceCount} + ' Facturas pendientes'"></h6>
                                                     </div>
-                                                    <button id="masinfo" type="button" class="btn img-green-2">Consultar</button>
+
                                                 </div>
                                             </div>
+
 
                                             <div class="col">
                                                 <div  class="card h-93 img-yellow card-hover filtroEntregados">
                                                     <div class="card-body img-yellow">
-                                                        <h5 id="card-left" class="card-title text-center">Entregados</h5>
+                                                        <h3 id="card-left" class="card-title text-center">Entregados</h3>
+                                                        <br>
+                                                        <h6 class="text-center " th:text="${pendingInvoiceentregado} + ' Facturas entregadas'"></h6>
                                                     </div>
-                                                    <button id="masinfo" type="button" class="btn img-yellow-2">Consultar</button>
+
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="card h-93 img-red card-hover filtroCancelados">
                                                     <div class="card-body img-red ">
-                                                        <h5 id="card-left" class="card-title text-center">Cancelados</h5>
+                                                        <h3 id="card-left" class="card-title text-center">Cancelados</h3>
+
+                                                        <br>
+                                                        <h6 class="text-center " th:text="${pendingInvoicecancelado} + ' Facturas canceladas'"></h6>
                                                     </div>
-                                                    <button id="masinfo" type="button" class="btn img-red-2">Consultar</button>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -585,18 +590,15 @@
 
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-12">
-                                                            <form class="search-form d-flex align-items-center pb-3" method="POST" action="#">
-                                                                <input type="text" name="query" placeholder="Buscar" title="Enter search keyword">
-
-                                                                <button id="buscar" type="button" class="btn"><i class="bi bi-search"></i></button>
-
-
-                                                            </form>
+                                                            <div class="form-group">
+                                                                <input type="text" name="palabraFacturas" placeholder="Search" id="palabraFacturas" autocomplete="off" oninput="buscarFacturas()">
+                                                            </div>
                                                         </div>
                                                     </div>
 
+
                                                     <!-- Inicio Tabla facturas-->
-                                                    <table class="table table-striped table-hover text-start">
+                                                    <table  class="table table-striped table-hover text-start" id="facturaTable">
                                                         <thead>
                                                             <tr>
                                                                 <th scope="col">No. de Orden</th>
@@ -766,6 +768,78 @@
                 title: 'Factura cancelada debido a la falta de disponibilidad de la cantidad solicitada de productos..',
 
             });
+        </script>
+        <script>
+            function buscarProductos() {
+                // Obtén el valor del campo de búsqueda
+                var input = document.getElementById('palabra');
+                var filtro = input.value.toUpperCase();
+
+                // Obtén la tabla y las filas de la tabla
+                var tabla = document.getElementById('tablaProductos');
+                var filas = tabla.getElementsByTagName('tr');
+
+                // Itera sobre las filas y muestra u oculta según la coincidencia con el filtro
+                for (var i = 0; i < filas.length; i++) {
+                    var celdas = filas[i].getElementsByTagName('td');
+                    var mostrarFila = false;
+
+                    // Si es la primera fila (encabezado), siempre mostrarla
+                    if (i === 0) {
+                        mostrarFila = true;
+                    } else {
+                        for (var j = 0; j < celdas.length; j++) {
+                            if (celdas[j]) {
+                                var textoCelda = celdas[j].textContent || celdas[j].innerText;
+
+                                if (textoCelda.toUpperCase().indexOf(filtro) > -1) {
+                                    mostrarFila = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    filas[i].style.display = mostrarFila ? '' : 'none';
+                }
+            }
+
+        </script>
+
+        <script>
+            function buscarFacturas() {
+                // Obtén el valor del campo de búsqueda
+                var input = document.getElementById('palabraFacturas');
+                var filtro = input.value.toUpperCase();
+
+                // Obtén la tabla y las filas de la tabla de facturas
+                var tablaFacturas = document.getElementById('facturaTable');
+                var filasFacturas = tablaFacturas.getElementsByTagName('tr');
+
+                // Itera sobre las filas y muestra u oculta según la coincidencia con el filtro
+                for (var i = 0; i < filasFacturas.length; i++) {
+                    var celdasFacturas = filasFacturas[i].getElementsByTagName('td');
+                    var mostrarFilaFacturas = false;
+
+                    // Si es la primera fila (encabezado), siempre mostrarla
+                    if (i === 0) {
+                        mostrarFilaFacturas = true;
+                    } else {
+                        for (var j = 0; j < celdasFacturas.length; j++) {
+                            if (celdasFacturas[j]) {
+                                var textoCeldaFacturas = celdasFacturas[j].textContent || celdasFacturas[j].innerText;
+
+                                if (textoCeldaFacturas.toUpperCase().indexOf(filtro) > -1) {
+                                    mostrarFilaFacturas = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    filasFacturas[i].style.display = mostrarFilaFacturas ? '' : 'none';
+                }
+            }
         </script>
 
     </body>

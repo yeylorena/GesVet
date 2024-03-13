@@ -92,6 +92,16 @@ public class HomeControllerAdmin {
         //ESTA ES PARA EL USUARIO
         List<Factura> facturas = facturaService.findByUser_Role("USER");
 
+        // Calculate the count of pending invoices
+        long pendingInvoiceCount = facturas.stream().filter(f -> f.getEstadoPago().equals("Pendiente")).count();
+        long pendingInvoiceentregado = facturas.stream().filter(f -> f.getEstadoPago().equals("Aprobado")).count();
+        long pendingInvoicecancelado = facturas.stream().filter(f -> f.getEstadoPago().equals("Cancelado")).count();
+
+        // Add the count to the model
+        model.addAttribute("pendingInvoiceCount", pendingInvoiceCount);
+        model.addAttribute("pendingInvoiceentregado", pendingInvoiceentregado);
+        model.addAttribute("pendingInvoicecancelado", pendingInvoicecancelado);
+
         // Agrega las facturas al modelo
         model.addAttribute("facturas", facturas);
 
@@ -327,98 +337,98 @@ public class HomeControllerAdmin {
     }
 
     @PostMapping("/saveFactadmin")
-public String saveFactAdmin(Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes,
-        @RequestParam("nombre") String nombre,
-        @RequestParam("apellido") String apellido,
-        @RequestParam("documento") String documento,
-        @RequestParam("direccion") String direccion,
-        @RequestParam("telefono") String telefono,
-        @RequestParam("email") String email) {
+    public String saveFactAdmin(Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("apellido") String apellido,
+            @RequestParam("documento") String documento,
+            @RequestParam("direccion") String direccion,
+            @RequestParam("telefono") String telefono,
+            @RequestParam("email") String email) {
 
-    UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-    model.addAttribute("userdetail", userDetails);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
 
-    String username = authentication.getName();
-    User user = userService.findByUsername(username);
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
 
-    UserDto userDto = new UserDto();
-    userDto.setId(user.getId());
-    userDto.setUsername(user.getUsername());
-    userDto.setNombre(user.getNombre());
-    userDto.setApellido(user.getApellido());
-    userDto.setDireccion(user.getDireccion());
-    userDto.setTelefono(user.getTelefono());
-    userDto.setRole(user.getRole());
-    userDto.setAcercade(user.getAcercade());
-    userDto.setImagen("/images/" + user.getImagen());
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
 
-    UsuarioVentas usuarioVentas = new UsuarioVentas();
-    usuarioVentas.setNombre(nombre);
-    usuarioVentas.setApellido(apellido);
-    usuarioVentas.setDocumento(documento);
-    usuarioVentas.setDireccion(direccion);
-    usuarioVentas.setTelefono(telefono);
-    usuarioVentas.setEmail(email);
+        UsuarioVentas usuarioVentas = new UsuarioVentas();
+        usuarioVentas.setNombre(nombre);
+        usuarioVentas.setApellido(apellido);
+        usuarioVentas.setDocumento(documento);
+        usuarioVentas.setDireccion(direccion);
+        usuarioVentas.setTelefono(telefono);
+        usuarioVentas.setEmail(email);
+        factura.setRole(user.getRole());
 
-    serviceusuarioventas.save(usuarioVentas);
+        serviceusuarioventas.save(usuarioVentas);
 
-    Date fecha = new Date();
-    factura.setFecha(fecha);
-    factura.setNumero(facturaService.generarNumFactura());
-    factura.setUser(user);
-    factura.setUsuarioventas(usuarioVentas);
+        Date fecha = new Date();
+        factura.setFecha(fecha);
+        factura.setNumero(facturaService.generarNumFactura());
+        factura.setUser(user);
+        factura.setUsuarioventas(usuarioVentas);
 
-    facturaService.save(factura);
+        facturaService.save(factura);
 
-    boolean facturaCancelada = false;  // Variable para controlar si la factura debe cancelarse
+        boolean facturaCancelada = false;  // Variable para controlar si la factura debe cancelarse
 
-    for (DetalleFactura dt : detalles) {
-        dt.setFactura(factura);
-        detalleFactService.save(dt);
+        for (DetalleFactura dt : detalles) {
+            dt.setFactura(factura);
+            detalleFactService.save(dt);
 
-        // Lógica de descuento de productos
-        Productos producto = dt.getProductos(); // Cambiado para obtener el producto directamente del detalle
-        double cantidadVendida = dt.getCantidad();
+            // Lógica de descuento de productos
+            Productos producto = dt.getProductos(); // Cambiado para obtener el producto directamente del detalle
+            double cantidadVendida = dt.getCantidad();
 
-        // Obtener el producto de la base de datos para asegurarse de tener la cantidad más actualizada
-        Productos productoEnBD = productoService.findById(producto.getId());
+            // Obtener el producto de la base de datos para asegurarse de tener la cantidad más actualizada
+            Productos productoEnBD = productoService.findById(producto.getId());
 
-        // Verificar si hay suficientes productos disponibles antes de realizar el descuento
-        if (productoEnBD.getCantidad() >= cantidadVendida) {
-            productoEnBD.setCantidad((int) (productoEnBD.getCantidad() - cantidadVendida));
-            // Actualizar el producto en la base de datos
-            productoService.update(productoEnBD);
-        } else {
-            facturaCancelada = true;  // Marcar la factura como cancelada
-            detalles.clear();
-            // Agregar mensaje de éxito para mostrar en la página de destino
-            redirectAttributes.addFlashAttribute("errorcarritocompra", "Factura cancelada debido a la falta de disponibilidad de la cantidad solicitada de productos.");
-            break;  // Salir del bucle si la factura está cancelada
+            // Verificar si hay suficientes productos disponibles antes de realizar el descuento
+            if (productoEnBD.getCantidad() >= cantidadVendida) {
+                productoEnBD.setCantidad((int) (productoEnBD.getCantidad() - cantidadVendida));
+                // Actualizar el producto en la base de datos
+                productoService.update(productoEnBD);
+            } else {
+                facturaCancelada = true;  // Marcar la factura como cancelada
+                detalles.clear();
+                // Agregar mensaje de éxito para mostrar en la página de destino
+                redirectAttributes.addFlashAttribute("errorcarritocompra", "Factura cancelada debido a la falta de disponibilidad de la cantidad solicitada de productos.");
+                break;  // Salir del bucle si la factura está cancelada
+            }
         }
+
+        // Cambiar el estado de la factura a "Cancelada" si es necesario
+        if (facturaCancelada) {
+            factura.setEstadoPago("Cancelada");
+
+        } else {
+            // Si la factura no está cancelada, la guardamos como aprobada
+            factura.setEstadoPago("Aprobado");
+
+        }
+
+        // Guardar la factura después de procesar todos los detalles
+        facturaService.save(factura);
+
+        factura = new Factura();
+        detalles.clear();
+        model.addAttribute("userDto", userDto);
+
+        // Agregar mensaje de éxito para mostrar en la página de destino
+        redirectAttributes.addFlashAttribute("exitos", "Compra efectuada con éxito.");
+        return "redirect:/verhomeadmin";
     }
-
-    // Cambiar el estado de la factura a "Cancelada" si es necesario
-    if (facturaCancelada) {
-        factura.setEstadoPago("Cancelada");
-        
-    } else {
-        // Si la factura no está cancelada, la guardamos como aprobada
-        factura.setEstadoPago("Aprobado");
-        
-    }
-
-    // Guardar la factura después de procesar todos los detalles
-    facturaService.save(factura);
-
-    factura = new Factura();
-    detalles.clear();
-    model.addAttribute("userDto", userDto);
-
-    // Agregar mensaje de éxito para mostrar en la página de destino
-    redirectAttributes.addFlashAttribute("exitos", "Compra efectuada con éxito.");
-    return "redirect:/verhomeadmin";
-}
-
 
     @GetMapping("/cancelarcarrito")
     public String eliminardatosC(Model model) {
@@ -564,7 +574,7 @@ public String saveFactAdmin(Model model, Authentication authentication, Principa
         model.addAttribute("productos", productos);
         return "usuario/Homeadmin";
     }
-
+    
     /* detalles compras admin */
  /*
     

@@ -83,7 +83,6 @@ public class FacturaServiceImpl implements IFacturaService {
         facturaRepository.save(factura);
     }
 
-
     @Override
     public void delete(Factura factura) {
         facturaRepository.delete(factura);
@@ -93,8 +92,27 @@ public class FacturaServiceImpl implements IFacturaService {
     public List<Object[]> obtenerTopProductosMasVendidos() {
         return facturaRepository.findTopProductosMasVendidos();
     }
+
+    @Override
+    public List<Factura> findByUsuarioAndEstadoPago(User usuario, String estadoPago) {
+        // Lógica para buscar facturas por usuario y estado de pago
+        // Puedes utilizar el repositorio de facturas o realizar una lógica personalizada aquí
+        // Por ejemplo, si estás utilizando Spring Data JPA:
+        return facturaRepository.findByUsuarioAndEstadoPago(usuario, estadoPago);
+    }
+
+    @Override
+    public List<Object[]> findDetallesCompras() {
+        return facturaRepository.findDetallesCompras();
+    }
+
+    @Override
+    public List<Object[]> findDetallesVentas() {
+        return facturaRepository.findDetallesVentas();
+    }
     
-   
-
-
+    @Override
+    public List<Object[]> findDetallesFactura() {
+        return facturaRepository.findDetallesFactura();
+    }
 }
