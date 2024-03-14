@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
@@ -40,7 +41,7 @@ public class UserController {
     }
 
     @GetMapping("/home")
-    public String home(Model model, Principal principal) {
+    public String home(Model model, Principal principal, RedirectAttributes redirectAttributes) {
         String username = "";
 
         if (principal != null) {
@@ -66,6 +67,10 @@ public class UserController {
             userDto.setAcercade(user.getAcercade());
             userDto.setImagen("/images/" + user.getImagen()); // Asegúrate de tener la ruta correcta
 
+            if (!userService.usuarioDatosPersonalesCompletos(user)) {
+            // Si los datos personales no están completos, agrega el atributo a mostrarAlerta
+            model.addAttribute("mostrarAlerta", true);
+        }
             model.addAttribute("userDto", userDto);
         }
 

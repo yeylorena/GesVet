@@ -361,12 +361,12 @@
                             <span>Carrito de compras</span>
                         </a>
                     </li>
-                      <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/comprasUser}">
-                        <i class="bi bi-cart2"></i>
-                        <span>Compras</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" th:href="@{/comprasUser}">
+                            <i class="bi bi-cart2"></i>
+                            <span>Compras</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link collapsed" th:href="@{/ayudausuario}">
                             <i class="bi bi-question-circle"></i>
@@ -570,6 +570,23 @@
             <script src="assets/js/main.js"></script>
             <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
             <script src="./js/app.js"></script>
+
+
+            <!-- Agrega esto en Inicio_usu.html -->
+            <script th:if="${mostrarAlerta}">
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Completa tus datos',
+                    text: 'Por favor, completa tus datos personales para disfrutar de nuestros servicios.',
+                    showCancelButton: true,
+                    confirmButtonText: 'Completar ahora',
+                    cancelButtonText: 'Más tarde'
+                }).then((result) => {
+                    if (result.value) {
+                        window.location.href = '/completar-datos'; // Redirige a la página de completar datos
+                    }
+                });
+            </script>
 
         </body>
 

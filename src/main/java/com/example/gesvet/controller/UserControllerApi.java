@@ -19,11 +19,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
 public class UserControllerApi {
 
     @Autowired
@@ -107,12 +108,13 @@ public class UserControllerApi {
         return "Registro_Usu";
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<Object> registerSave(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, Model model) {
+     @PostMapping("/register")
+    public ResponseEntity<Object> registerSave(@RequestBody @Valid UserDto userDto, BindingResult bindingResult, Model model) {
+        
         if (bindingResult.hasErrors()) {
             //return "Registro_Usu"; // Devolver al formulario de registro si hay errores de validación
             var respuesta = new respuesta(
-                    "error",
+                    "error",    
                     "verificar  el formulario"
             );
 

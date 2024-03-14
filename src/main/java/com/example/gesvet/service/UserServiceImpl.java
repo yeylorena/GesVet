@@ -4,6 +4,7 @@ import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.User;
 import com.example.gesvet.repository.RecuperarContraseñausuRepository;
 import com.example.gesvet.repository.UserRepository;
+import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
@@ -134,5 +135,14 @@ public class UserServiceImpl implements UserService {
     public Optional<User> get(Integer id) {
         return userRepository.findById(id);
     }
+
+    public boolean usuarioDatosPersonalesCompletos(User user) {
+    return StringUtils.isNotBlank(user.getNombre())
+            && StringUtils.isNotBlank(user.getApellido())
+            && StringUtils.isNotBlank(user.getDireccion())
+            && StringUtils.isNotBlank(user.getTelefono())
+            && StringUtils.isNotBlank(user.getAcercade())
+            && StringUtils.isNotBlank(user.getImagen());
+}
 
 }

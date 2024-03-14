@@ -26,5 +26,7 @@ public interface UserService {
     public int countUsersByRole(String role);
 
     public Optional<User> get(Integer id);
+    
+     public boolean usuarioDatosPersonalesCompletos(User user);
 
 }
