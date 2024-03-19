@@ -377,7 +377,7 @@
                                                                                         <div class="tab-content pt-2">
 
                                                                                             <div class="container-fluid mt-2">
-                                                                                                <p class="textoNeonU">Facturación Diaria</p>
+                                                                                                <p class="textoNeonU">Total de Ventas</p>
                                                                                             </div>
 
 
@@ -402,7 +402,7 @@
                                                                                                             <tbody>
                                                                                                                 <!-- Filas de la tabla con los detalles de las ventas -->
                                                                                                                 <!-- Utiliza th:each para iterar sobre la lista de detallesVentas -->
-                                                                                                                <tr th:each="detalle, iterStat : ${detallesFacturas}">
+                                                                                                                <tr th:each="detalle, iterStat : ${detallesVentas}">
                                                                                                                     <td th:text="${iterStat.count}"></td>
 
 
@@ -416,9 +416,9 @@
                                                                                                                     <td></td>
                                                                                                                     <td></td>
                                                                                                                     <td></td>
-                                                                                                                    <td><strong>Total del dia:</strong></td>
+                                                                                                                    <td><strong>Total Ventas:</strong></td>
                                                                                                                     <!-- Mostrar el totalVentas calculado en el controlador -->
-                                                                                                                    <td id="precio3" th:text="${totalFacturas}"></td>
+                                                                                                                    <td id="precio3" th:text="${totalVentas}"></td>
                                                                                                                 </tr>
                                                                                                             </tbody>
                                                                                                         </table>
@@ -516,7 +516,8 @@
                                                                         });
                                                                         /*]]>*/
                                                                     </script>
-                                                                    <script th:inline="javascript">
+
+                                                                   <script th:inline="javascript">
                                                                         /*<![CDATA[*/
                                                                         document.addEventListener("DOMContentLoaded", function () {
                                                                             // Obtener todas las celdas con la clase "productoCantidad"

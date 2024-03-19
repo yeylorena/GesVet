@@ -421,6 +421,7 @@
                                                                         <th>Imagen</th>
                                                                         <th>Categoría</th>
                                                                         <th>Nombre</th>
+                                                                        <th>Precio</th>
                                                                         <th>Disponibilidad</th>
                                                                         <th>Opcion</th>
                                                                     </tr>
@@ -433,6 +434,7 @@
                                                                         </td>
                                                                         <td th:text="${producto.categoria != null ? producto.categoria.nombre : 'N/A'}"></td>
                                                                         <td th:text="${producto.nombre}"></td>
+                                                                        <td th:text="${producto.precio}"  class="precio2"></td>
                                                                         <td>
                                                                             <!-- Usar expresión Thymeleaf para mostrar "Activo" o "Inactivo" -->
                                                                             <span th:if="${producto.activo} == true">Disponible</span>
@@ -506,7 +508,7 @@
                                                             <tr th:each="factura: ${factura}">
                                                                 <td th:text="${factura.numero}"></td>
                                                                 <td th:text="${factura.fecha}" ></td>
-                                                                <td th:text="${factura.total}" ></td>
+                                                                <td th:text="${factura.total}"  class="precio3"></td>
                                                                 <td th:text="${factura.estadoPago}" ></td>
 
                                                                 <!-- Acceder al nombre y teléfono del cliente a través de la relación con UsuarioVentas -->
@@ -540,7 +542,7 @@
                                                     <div class="card-body card-img ">
                                                         <h3 id="card-left" class="card-title text-center">Total</h3>
                                                         <br>
-                                                        <h6 class="text-center" th:text="${facturas.size()} + ' Total facturas'"></h6>
+                                                        <h6 class="text-center" th:text="${facturas.size()} + ' Facturas'"></h6>
                                                     </div>
 
                                                 </div>
@@ -552,7 +554,7 @@
                                                     <div class="card-body img-green">
                                                         <h3 id="card-left" class="card-title text-center">Pendientes</h3>
                                                         <br>
-                                                        <h6 class="text-center " th:text="${pendingInvoiceCount} + ' Facturas pendientes'"></h6>
+                                                        <h6 class="text-center " th:text="${pendingInvoiceCount} + ' Facturas'"></h6>
                                                     </div>
 
                                                 </div>
@@ -564,7 +566,7 @@
                                                     <div class="card-body img-yellow">
                                                         <h3 id="card-left" class="card-title text-center">Entregados</h3>
                                                         <br>
-                                                        <h6 class="text-center " th:text="${pendingInvoiceentregado} + ' Facturas entregadas'"></h6>
+                                                        <h6 class="text-center " th:text="${pendingInvoiceentregado} + ' Facturas'"></h6>
                                                     </div>
 
                                                 </div>
@@ -575,7 +577,7 @@
                                                         <h3 id="card-left" class="card-title text-center">Cancelados</h3>
 
                                                         <br>
-                                                        <h6 class="text-center " th:text="${pendingInvoicecancelado} + ' Facturas canceladas'"></h6>
+                                                        <h6 class="text-center " th:text="${pendingInvoicecancelado} + ' Facturas'"></h6>
                                                     </div>
 
                                                 </div>
@@ -618,7 +620,7 @@
                                                                 <td th:text="${factura.usuario.nombre}"></td>
                                                                 <td th:text="${factura.usuario.telefono}"></td>
                                                                 <td th:text="${factura.fecha}" ></td>
-                                                                <td th:text="${factura.total}" ></td>
+                                                                <td th:text="${factura.total}" class="precio4" ></td>
 
                                                                 <td style="position: relative;">
                                                                     <img class="expandable-image" th:src="@{/images/{img} (img=${factura.imagen})}" alt="..." style="height: 80px; width: 100px;" data-toggle="modal" data-target="#myModal">
@@ -699,7 +701,7 @@
                                                                 <td th:text="${factura.usuario.nombre}"></td>
 
                                                                 <td th:text="${factura.fecha}" ></td>
-                                                                <td th:text="${factura.total}" ></td>
+                                                                <td th:text="${factura.total}"  class="precio5"></td>
 
                                                                 <td><a th:href="@{/detalleadmin/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a>
 
@@ -841,6 +843,104 @@
                 }
             }
         </script>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener("DOMContentLoaded", function () {
+                var precios = document.querySelectorAll('.precio2');
+
+                precios.forEach(function (precioElement) {
+                    var valorProducto = precioElement.textContent.trim();
+                    var valor = parseFloat(valorProducto);
+
+                    if (!isNaN(valor)) {
+                        valor = Math.round(valor);
+                        var valorFormateado = valor.toLocaleString('es-CO', {
+                            style: 'currency',
+                            currency: 'COP',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        });
+                        precioElement.textContent = valorFormateado;
+                    }
+                });
+            });
+            /*]]>*/
+        </script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener("DOMContentLoaded", function () {
+                var precios = document.querySelectorAll('.precio3');
+
+                precios.forEach(function (precioElement) {
+                    var valorProducto = precioElement.textContent.trim();
+                    var valor = parseFloat(valorProducto);
+
+                    if (!isNaN(valor)) {
+                        valor = Math.round(valor);
+                        var valorFormateado = valor.toLocaleString('es-CO', {
+                            style: 'currency',
+                            currency: 'COP',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        });
+                        precioElement.textContent = valorFormateado;
+                    }
+                });
+            });
+            /*]]>*/
+        </script>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener("DOMContentLoaded", function () {
+                var precios = document.querySelectorAll('.precio4');
+
+                precios.forEach(function (precioElement) {
+                    var valorProducto = precioElement.textContent.trim();
+                    var valor = parseFloat(valorProducto);
+
+                    if (!isNaN(valor)) {
+                        valor = Math.round(valor);
+                        var valorFormateado = valor.toLocaleString('es-CO', {
+                            style: 'currency',
+                            currency: 'COP',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        });
+                        precioElement.textContent = valorFormateado;
+                    }
+                });
+            });
+            /*]]>*/
+        </script>
+<script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener("DOMContentLoaded", function () {
+                var precios = document.querySelectorAll('.precio5');
+
+                precios.forEach(function (precioElement) {
+                    var valorProducto = precioElement.textContent.trim();
+                    var valor = parseFloat(valorProducto);
+
+                    if (!isNaN(valor)) {
+                        valor = Math.round(valor);
+                        var valorFormateado = valor.toLocaleString('es-CO', {
+                            style: 'currency',
+                            currency: 'COP',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        });
+                        precioElement.textContent = valorFormateado;
+                    }
+                });
+            });
+            /*]]>*/
+        </script>
+
+
+
+
 
     </body>
 

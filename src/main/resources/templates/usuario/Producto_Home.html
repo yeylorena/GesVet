@@ -340,7 +340,7 @@
                                                 <input type="hidden" th:value="${producto.id}" name="id"><!-- campo oculto -->
                                                     <h2 class="card-title" th:text="${producto.nombre}"></h2>
                                                     <ul class="list-group">
-                                                        <li class="list-group-item"><h5 th:text=" 'Precio: ' + ${producto.precio}"></h5></li>
+                                                        <li class="list-group-item"><h5 id="precioProducto" th:text="${producto.precio}"></h5></li> 
                                                         <li class="list-group-item"><p th:text=" 'Descripción: ' + ${producto.descripcion}"></p>
                                                         </li>
                                                          <li class="list-group-item">
@@ -389,6 +389,32 @@
             text: 'Excediste el limite de la cantidad del producto'
         });
     </script>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtén el elemento <h5> por su identificador único
+        var precioProducto = document.getElementById("precioProducto");
+
+        // Obtén el valor del producto del contenido del elemento <h5>
+        var valorProducto = precioProducto.textContent.trim();
+
+        // Parsea el valor del producto a un número flotante
+        var valor = parseFloat(valorProducto);
+
+        // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
+        if (!isNaN(valor)) {
+            valor = Math.round(valor); // Redondea al entero más cercano
+            var valorFormateado = valor.toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+            precioProducto.textContent = 'Precio: ' + valorFormateado;
+        }
+    });
+    /*]]>*/
+</script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 </html>

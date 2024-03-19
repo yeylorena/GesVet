@@ -356,9 +356,9 @@
                                                             <tbody>
                                                                 <tr th:each="dtfactura : ${cart}">
                                                                     <td th:text="${dtfactura.nombre}"></td>
-                                                                    <td th:text="${dtfactura.precio}"></td>
-                                                                    <td th:text="${dtfactura.cantidad}"></td>
-                                                                    <td th:text="${dtfactura.total}"></td>
+                                                                    <td th:text="${dtfactura.precio}" class="precio2"></td>
+                                                                    <td th:text="${dtfactura.cantidad}" class="cantidadProducto"></td>
+                                                                    <td th:text="${dtfactura.total}" class="precio2"></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -369,7 +369,8 @@
                                             <div class="col-lg-3">
                                                 <h2 class="card-title">Resumen Factura</h2>
                                                 <ul class="list-group">
-                                                    <li class="list-group-item"><h5 th:text=" 'Total: '+ ${factura.total} "></h5></li>
+                                                    <li class="list-group-item"><h5 id="precioProducto" th:text="${factura.total} "> </h5></li>
+
                                                     <li class="list-group-item">
                                                         <h6>Método de Pago:</h6>
                                                         <div class="form-check" th:each="metodoDePago : ${metodosDePago}">
@@ -478,4 +479,77 @@
     }
 </script>
 
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function () {
+        var precios = document.querySelectorAll('.precio2');
+
+        precios.forEach(function (precioElement) {
+            var valorProducto = precioElement.textContent.trim();
+            var valor = parseFloat(valorProducto);
+
+            if (!isNaN(valor)) {
+                valor = Math.round(valor);
+                var valorFormateado = valor.toLocaleString('es-CO', {
+                    style: 'currency',
+                    currency: 'COP',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                precioElement.textContent = valorFormateado;
+            }
+        });
+    });
+    /*]]>*/
+</script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtén el elemento <h5> por su identificador único
+        var precioProducto = document.getElementById("precioProducto");
+
+        // Obtén el valor del producto del contenido del elemento <h5>
+        var valorProducto = precioProducto.textContent.trim();
+
+        // Parsea el valor del producto a un número flotante
+        var valor = parseFloat(valorProducto);
+
+        // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
+        if (!isNaN(valor)) {
+            valor = Math.round(valor); // Redondea al entero más cercano
+            var valorFormateado = valor.toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+            precioProducto.textContent = 'Total Compra: ' + valorFormateado;
+        }
+    });
+    /*]]>*/
+</script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener todas las celdas con la clase "cantidadProducto"
+        var cantidadProductoCells = document.querySelectorAll('.cantidadProducto');
+
+        // Iterar sobre cada celda y aplicar el formateo
+        cantidadProductoCells.forEach(function (cell) {
+            // Obtener el valor de la cantidad del contenido de la celda
+            var valorCantidad = cell.textContent.trim();
+
+            // Parsear el valor de la cantidad a un número flotante
+            var valor = parseFloat(valorCantidad);
+
+            // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
+            if (!isNaN(valor)) {
+                var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
+                cell.textContent = valorSinDecimales;
+            }
+        });
+    });
+    /*]]>*/
+</script>
 </html>
