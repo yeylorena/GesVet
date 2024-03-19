@@ -8,824 +8,128 @@
 
     <!-- ======= Header ======= -->
     <header th:replace="~{Plantillas/administrador :: header}"></header><!-- End Header -->
-
     <!-- ======= Sidebar ======= -->
     <aside th:replace="~{Plantillas/administrador :: sidebar}"></aside><!-- End Sidebar-->
 
     <main id="main" class="main" >
-
         <div class="pagetitle">
             <h1>Citas</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
                     <li class="breadcrumb-item">citas</li>
-
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-
         <section class="section profile">
             <div class="col-xl-12">
-
                 <div class="card">
                     <div class="card-body pt-3">
                         <!-- Bordered Tabs -->
                         <ul class="nav nav-tabs nav-tabs-bordered">
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-rapida">Agendar</button>
-                            </li>
-
-                            <li class="nav-item">
-                                <button class="nav-link " data-bs-toggle="tab" data-bs-target="#profile-overview">Agendar</button>
-                            </li>
-
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#cita">Citas</button>
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#cita">Citas</button>
                             </li>
 
                             <li class="nav-item">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#facturas">Consultar Historial</button>
                             </li>
-
                         </ul>
-
                         <div class="tab-content pt-2">
-                            <div class="tab-pane show active fade profile-edit pt-3" id="profile-rapida">
-                                <!--agendar cita-->
+                            <div class="tab-pane fade show active pt-3" id="cita">
+                                <!--Citas del dia-->
                                 <div class="container-fluid mt-3">
-                                    <p style="background-color: #5DADE2;" class="textoNeon">Registro de citas rápidas</p>
+                                    <p style="background-color: #5DADE2;" class="textoNeon">Citas</p>
                                 </div>
-                                <form >
-
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <!-- Columna del formulario -->
-                                            <div class="col-12">
-                                                <div class="card-body" style="background-color:#D9D9D9;">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <br>
-                                                                <label for="dueño"><strong>Nombre de la cita:</strong></label>
-                                                                <input type="text" id="nombreCita" class="form-control custom-border custom-bg-fondo">
-
-
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <br>
-                                                                            <label for="medicos"><strong>Veterinario:</strong></label>
-                                                                            <select id="ve" class="form-select">
-                                                                                <option value="">Seleccionar...</option>
-                                                                                <!-- Iteramos sobre los usuarios y generamos las opciones del menú desplegable -->
-                                                                                <option th:each="usuario : ${usuarios}" 
-                                                                                        th:value="${usuario.id}" >
-
-                                                                                    <!-- Mostramos el nombre completo del usuario como texto de la opción -->
-                                                                                    <span th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></span>
-                                                                                </option>
-                                                                            </select>
-                                                                    </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col">
-                                                                            <br>
-                                                                                <label for="email"><strong>Tipo de mascota:</strong></label>
-                                                                                <select name="especie" class="form-select" required>
-                                                                                    <option value="">Selecciona una especie</option>
-                                                                                    <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}"></option>
-                                                                                </select>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <br>
-                                                                                <label for="email"><strong>Nombre de la mascota:</strong></label>
-                                                                                <input type="text" id="nombreMascota" class="form-control custom-border custom-bg-fondo" >
-
-                                                                                    </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-
-                                                                                        <div class="col">
-                                                                                            <br>
-                                                                                                <label for="email"><strong>Nombre del dueño:</strong></label>
-                                                                                                <input type="text" id="nombreDueño" class="form-control custom-border custom-bg-fondo" th:value="${email}">
-                                                                                                    </div>
-
-
-
-                                                                                                    <div class="col">
-                                                                                                        <br>
-                                                                                                            <label for="email"><strong>color:</strong></label>
-                                                                                                            <input type="text" id="colorMascota" class="form-control custom-border custom-bg-fondo" th:value="${email}">
-                                                                                                                </div>
-                                                                                                                </div>
-                                                                                                                <div class="row">
-                                                                                                                    <div class="col">
-                                                                                                                        <br>
-                                                                                                                            <label for="email"><strong>Precio:</strong></label>
-                                                                                                                            <input type="text" id="precio" class="form-control custom-border custom-bg-fondo" th:value="${email}">
-                                                                                                                                </div>
-                                                                                                                                <div class="col">
-
-                                                                                                                                    <label class="control-label">Fecha de inicio<span class="text-danger">*</span></label>
-                                                                                                                                    <div class='input-group date' name="start">
-                                                                                                                                        <input type='datetime-local' name="start" class="form-control" />
-                                                                                                                                        <span class="input-group-addon">
-                                                                                                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                                        </span>
-                                                                                                                                    </div>
-
-                                                                                                                                </div>
-                                                                                                                                </div>
-                                                                                                                                <div class="row">
-                                                                                                                                    <div class="col">
-                                                                                                                                        <label class="control-label">Fecha de fin<span class="text-danger">*</span></label>
-                                                                                                                                        <div class="form-group">
-
-                                                                                                                                            <div class='input-group date' name="end">
-                                                                                                                                                <input type='datetime-local' name="end" class="form-control" />
-                                                                                                                                                <span class="input-group-addon">
-                                                                                                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                                                </span>
-                                                                                                                                            </div>
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-
-                                                                                                                                </div>
-                                                                                                                                <div class="row">
-
-                                                                                                                                    <div class="col text-center">
-                                                                                                                                        <br>
-                                                                                                                                            <button type="submit" class="btn custom-negro "
-                                                                                                                                                    style="background-color: #979AD4;"><strong>Guardar</strong></button>
-
-                                                                                                                                    </div>
-                                                                                                                                </div>
-                                                                                                                                </div>
-                                                                                                                                </div>
-
-                                                                                                                                </div>
-                                                                                                                                </form>
-                                                                                                                                </div>
-                                                                                                                                </div>
-                                                                                                                                <!-- Fin citas rápidas -->
-
-
-                                                                                                                                <div class="tab-pane fade profile-edit pt-3" id="profile-overview">
-                                                                                                                                    <!--agendar cita-->
-                                                                                                                                    <div class="container-fluid mt-3">
-                                                                                                                                        <p style="background-color: #5DADE2;" class="textoNeon">Agendar cita</p>
-                                                                                                                                    </div>
-                                                                                                                                    <form>
-                                                                                                                                        <div class="container-fluid">
-                                                                                                                                            <div class="row">
-                                                                                                                                                <!-- Columna del formulario -->
-                                                                                                                                                <div class="col-8">
-                                                                                                                                                    <div class="card-body" style="background-color:#D9D9D9;">
-                                                                                                                                                        <div class="row">
-                                                                                                                                                            <div class="col">
-                                                                                                                                                                <br>
-                                                                                                                                                                    <label for="dueño"><strong>Dueño:</strong></label>
-                                                                                                                                                                    <select id="dueño" class="form-select" onchange="llenarCamposUsuario(this)">
-                                                                                                                                                                        <option value="">Seleccionar...</option>
-                                                                                                                                                                        <!-- Iteramos sobre los usuarios y generamos las opciones del menú desplegable -->
-                                                                                                                                                                        <option th:each="usuario : ${usuarios}" 
-                                                                                                                                                                                th:value="${usuario.id}" 
-                                                                                                                                                                                th:data-telefono="${usuario.telefono}" 
-                                                                                                                                                                                th:data-direccion="${usuario.direccion}" 
-                                                                                                                                                                                th:data-email="${usuario.username}"
-                                                                                                                                                                                th:data-mascotas="${usuario.mascotas}">
-
-                                                                                                                                                                            <!-- Mostramos el nombre completo del usuario como texto de la opción -->
-                                                                                                                                                                            <span th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></span>
-                                                                                                                                                                        </option>
-                                                                                                                                                                    </select>
-
-                                                                                                                                                            </div>
-                                                                                                                                                            <div class="col">
-                                                                                                                                                                <br>
-                                                                                                                                                                    <label for="telefono"><strong>Teléfono:</strong></label>
-                                                                                                                                                                    <input type="text" id="telefono" class="form-control custom-border custom-bg-fondo" th:value="${telefono}">
-                                                                                                                                                                        </div>
-                                                                                                                                                                        </div>
-                                                                                                                                                                        <div class="row">
-                                                                                                                                                                            <div class="col">
-                                                                                                                                                                                <br>
-                                                                                                                                                                                    <label for="direccion"><strong>Dirección:</strong></label>
-                                                                                                                                                                                    <input type="text" id="direccion" class="form-control custom-border custom-bg-fondo" th:value="${direccion}">
-
-                                                                                                                                                                                        </div>
-                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                            <br>
-                                                                                                                                                                                                <label for="email"><strong>Email:</strong></label>
-                                                                                                                                                                                                <input type="text" id="email" class="form-control custom-border custom-bg-fondo" th:value="${email}">
-
-                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                    <div class="row">
-
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="mascotas"><strong>Mascota:</strong></label>
-                                                                                                                                                                                                        <select id="mascotas" class="form-select">
-                                                                                                                                                                                                        <option value="">Seleccionar...</option>
-                                                                                                                                                                                                        <!-- Iterar sobre las mascotas del usuario seleccionado -->
-                                                                                                                                                                                                        <option th:each="mascota : ${mascotas}" th:value="${mascota.id}">
-                                                                                                                                                                                                        <span th:text="${mascota.nombre}"></span>
-                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                        </div>
-
-
-
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="email"><strong>Especie:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtdireccionEmail"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="medicos"><strong>Médico:</strong></label>
-                                                                                                                                                                                                        <select class="form-select">
-                                                                                                                                                                                                        <option>Ana Silvia</option>
-                                                                                                                                                                                                        <option>Herley Puentes</option>
-                                                                                                                                                                                                        <option>Angelica Ladino</option>
-                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="email"><strong>Raza</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtdireccionEmail"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <div class="form-group">
-                                                                                                                                                                                                        <label for="inputFecha">Fecha</label>
-                                                                                                                                                                                                        <input type="date" class="form-control" id="inputFecha" name="fecha">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <div class="form-group">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="inputHora">Hora</label>
-                                                                                                                                                                                                        <input type="time" class="form-control" id="inputHora" name="hora">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-
-                                                                                                                                                                                                        <div class="col text-center">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <button type="submit" class="btn custom-negro "
-                                                                                                                                                                                                        style="background-color: #979AD4;"><strong>Agendar</strong></button>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-4 calificar-container">
-                                                                                                                                                                                                        <div class="circulo-perro">
-                                                                                                                                                                                                        <img src="assets/img/perro.jpg" alt="Imagen del Veterinario">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <h4><strong>Hércules</strong> </h4>
-                                                                                                                                                                                                        <h5><strong>Perro-Macho</strong></h5>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </form>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        <!--Fin solicitar cita-->
-
-                                                                                                                                                                                                        <div class="tab-pane fade pt-3" id="cita">
-                                                                                                                                                                                                        <!--Citas del dia-->
-                                                                                                                                                                                                        <div class="container-fluid mt-3">
-                                                                                                                                                                                                        <p style="background-color: #5DADE2;" class="textoNeon">Citas</p>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <form>
-                                                                                                                                                                                                        <table class="table table-striped table-hover text-start">
-                                                                                                                                                                                                        <thead>
-                                                                                                                                                                                                        <tr class="table-secondary">
-                                                                                                                                                                                                        <th scope="col">Dueño</th>
-                                                                                                                                                                                                        <th scope="col">Mascota</th>
-                                                                                                                                                                                                        <th scope="col">Fecha</th>
-                                                                                                                                                                                                        <th scope="col">Hora</th>
-                                                                                                                                                                                                        <th scope="col">Tipo de Servicio</th>
-                                                                                                                                                                                                        <th scope="col">Tipo de cita</th>
-                                                                                                                                                                                                        <th scope="col">Médico</th>
-                                                                                                                                                                                                        <th scope="col">Estado</th>
-                                                                                                                                                                                                        <th scope="col">Opciones</th>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </thead>
-                                                                                                                                                                                                        <tbody>
-                                                                                                                                                                                                        <tr>
-
-                                                                                                                                                                                                        <td>Esteban carvajal</td>
-                                                                                                                                                                                                        <td>David</td>
-                                                                                                                                                                                                        <td>12/12/2023</td>
-                                                                                                                                                                                                        <td>10:20 AM</td>
-                                                                                                                                                                                                        <td>Presencial</td>
-                                                                                                                                                                                                        <td>Estetica</td>
-                                                                                                                                                                                                        <td>Herley Puentes</td>
-                                                                                                                                                                                                        <td style="color: red;">Pendiente</td>
-                                                                                                                                                                                                        <td>
-                                                                                                                                                                                                        <button onclick="eliminarcitah()" type="button" class="btn btn-danger"><i
-                                                                                                                                                                                                        class="bi bi-trash3"></i></button>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td>Esteban carvajal</td>
-                                                                                                                                                                                                        <td>David</td>
-                                                                                                                                                                                                        <td>12/12/2023</td>
-                                                                                                                                                                                                        <td>10:20 AM</td>
-                                                                                                                                                                                                        <td>Presencial</td>
-                                                                                                                                                                                                        <td>Estetica</td>
-                                                                                                                                                                                                        <td>Herley Puentes</td>
-                                                                                                                                                                                                        <td style="color: red;">Pendiente</td>
-                                                                                                                                                                                                        <td>
-
-                                                                                                                                                                                                        <button onclick="eliminarcitah()" type="button" class="btn btn-danger"><i
-                                                                                                                                                                                                        class="bi bi-trash3"></i></button>
-                                                                                                                                                                                                        </td>
-
-                                                                                                                                                                                                        </tr>
-
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td>Esteban carvajal</td>
-                                                                                                                                                                                                        <td>David</td>
-                                                                                                                                                                                                        <td>12/12/2023</td>
-                                                                                                                                                                                                        <td>10:20 AM</td>
-                                                                                                                                                                                                        <td>Presencial</td>
-                                                                                                                                                                                                        <td>Estetica</td>
-                                                                                                                                                                                                        <td>Herley Puentes</td>
-                                                                                                                                                                                                        <td style="color: red;">Pendiente</td>
-                                                                                                                                                                                                        <td>
-                                                                                                                                                                                                        <button onclick="eliminarcitah()" type="button" class="btn btn-danger"><i
-                                                                                                                                                                                                        class="bi bi-trash3"></i></button>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody>
-                                                                                                                                                                                                        </table>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </form>
-
-
-
-                                                                                                                                                                                                        <!--historial-->
-                                                                                                                                                                                                        <div class="tab-pane fade pt-3" id="facturas">
-                                                                                                                                                                                                        <div class="container-fluid mt-3">
-                                                                                                                                                                                                        <p style="background-color: #5DADE2;" class="textoNeon">Historial citas</p>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="search-bar">
-                                                                                                                                                                                                        <form class="search-form d-flex align-items-center" method="POST" action="#">
-                                                                                                                                                                                                        <input type="date" name="date"  title="Enter search keyword">
-                                                                                                                                                                                                        <button class="btn" type="submit" title="Search"><i class="bi bi-search"></i></button>
-                                                                                                                                                                                                        </form>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <!-- Inicio tabla histotial -->
-                                                                                                                                                                                                        <table class="table table-striped table-hover text-start">
-                                                                                                                                                                                                        <thead>
-                                                                                                                                                                                                        <tr class="table-secondary">
-
-                                                                                                                                                                                                        <th scope="col">Mascota</th>
-                                                                                                                                                                                                        <th scope="col">Fecha</th>
-                                                                                                                                                                                                        <th scope="col">Tipo Servicio</th>
-                                                                                                                                                                                                        <th scope="col">Tipo cita</th>
-                                                                                                                                                                                                        <th scope="col">Valor</th>
-                                                                                                                                                                                                        <th scope="col">Detalles</th>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </thead>
-                                                                                                                                                                                                        <tbody>
-                                                                                                                                                                                                        <tr>
-
-                                                                                                                                                                                                        <td>David</td>
-                                                                                                                                                                                                        <td>2023-10-10</td>
-                                                                                                                                                                                                        <td>Presencial</td>
-                                                                                                                                                                                                        <td>Urgencias</td>
-                                                                                                                                                                                                        <td>20.000</td>
-
-                                                                                                                                                                                                        <td>
-                                                                                                                                                                                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                                                                                                                                                                        data-bs-target="#staticBackdrop" data-target="staticBackdrop"><img
-                                                                                                                                                                                                        src="./img/imagen_cliente_cita/archivo.png" height="30px" width="30px">
-                                                                                                                                                                                                        </button>
-
-                                                                                                                                                                                                        <!-- Modal detalles  -->
-                                                                                                                                                                                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                                                                                                                                                                                                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                                                                                                                                                                        <div class="modal-dialog">
-                                                                                                                                                                                                        <div class="modal-content">
-                                                                                                                                                                                                        <div class="modal-header" style="background: #9FAFE8;">
-                                                                                                                                                                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalles
-                                                                                                                                                                                                        </h1>
-                                                                                                                                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                                                                                                                                                        aria-label="Close"></button>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="modal-body">
-
-                                                                                                                                                                                                        <img src="./img/imagen_cliente_cita/perro.png" class="mx-auto d-block img-fluid"
-                                                                                                                                                                                                        style="height: 100px; width: 100px;">
-                                                                                                                                                                                                        <div class="row my-2">
-
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Dueño:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Esteban Carvajal" readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Télefono:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="3214508730"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Dirección:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Cll 24 A #40-52" readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Email:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="estebancarvajal@gmail.com" readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Mascota:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="David"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Especie:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Perro"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Edad:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="1 año"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"> <strong>Color:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Cafe y blanco" readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Tipo de cita:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Urgencias"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Médico:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Herley Puentes" readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"> <strong>Tipo de servicio:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Domiclio"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Fecha:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="12/10/2023"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Hora:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="08:30 AM"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Estado:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Finalizado"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <!-- fin del modal detalles  -->
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-
-                                                                                                                                                                                                        <tr>
-
-                                                                                                                                                                                                        <td>Pelusa</td>
-                                                                                                                                                                                                        <td>2023-10-10</td>
-                                                                                                                                                                                                        <td>Presencial</td>
-                                                                                                                                                                                                        <td>Urgencias</td>
-                                                                                                                                                                                                        <td>30.000</td>
-                                                                                                                                                                                                        <td>
-                                                                                                                                                                                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                                                                                                                                                                        data-bs-target="#staticBackdrop" data-target="staticBackdrop"><img
-                                                                                                                                                                                                        src="./img/imagen_cliente_cita/archivo.png" height="30px" width="30px">
-                                                                                                                                                                                                        </button>
-
-                                                                                                                                                                                                        <!-- Modal detalles  -->
-                                                                                                                                                                                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                                                                                                                                                                                                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                                                                                                                                                                        <div class="modal-dialog">
-                                                                                                                                                                                                        <div class="modal-content">
-                                                                                                                                                                                                        <div class="modal-header" style="background: #9FAFE8;">
-                                                                                                                                                                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalles
-                                                                                                                                                                                                        </h1>
-                                                                                                                                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                                                                                                                                                        aria-label="Close"></button>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="modal-body">
-
-                                                                                                                                                                                                        <img src="./img/imagen_cliente_cita/perro.png" class="mx-auto d-block img-fluid"
-                                                                                                                                                                                                        style="height: 100px; width: 100px;">
-                                                                                                                                                                                                        <div class="row my-2">
-
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Dueño:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Esteban Carvajal" readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Télefono:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="3214508730"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Dirección:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Cll 24 A #40-52" readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Email:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="estebancarvajal@gmail.com" readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Mascota:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="David"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Especie:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Perro"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Edad:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="1 año"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"> <strong>Color:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Cafe y blanco" readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Tipo de cita:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Urgencias"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Médico:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Herley Puentes" readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"> <strong>Tipo de servicio:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Domiclio"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Fecha:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="12/10/2023"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Hora:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="08:30 AM"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Estado:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Finalizado"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <!-- fin del modal detalles  -->
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td>Paco</td>
-                                                                                                                                                                                                        <td>2023-10-12</td>
-                                                                                                                                                                                                        <td>Presencial</td>
-                                                                                                                                                                                                        <td>Urgencias</td>
-                                                                                                                                                                                                        <td>50.000</td>
-                                                                                                                                                                                                        <td>
-
-                                                                                                                                                                                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                                                                                                                                                                        data-bs-target="#staticBackdrop" data-target="staticBackdrop"><img
-                                                                                                                                                                                                        src="./img/imagen_cliente_cita/archivo.png" height="30px" width="30px">
-                                                                                                                                                                                                        </button>
-
-                                                                                                                                                                                                        <!-- Modal detalles  -->
-                                                                                                                                                                                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                                                                                                                                                                                                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                                                                                                                                                                        <div class="modal-dialog">
-                                                                                                                                                                                                        <div class="modal-content">
-                                                                                                                                                                                                        <div class="modal-header" style="background: #9FAFE8;">
-                                                                                                                                                                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalles
-                                                                                                                                                                                                        </h1>
-                                                                                                                                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                                                                                                                                                        aria-label="Close"></button>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="modal-body">
-
-                                                                                                                                                                                                        <img src="./img/imagen_cliente_cita/perro.png" class="mx-auto d-block img-fluid"
-                                                                                                                                                                                                        style="height: 100px; width: 100px;">
-                                                                                                                                                                                                        <div class="row my-2">
-
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Dueño:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Esteban Carvajal" readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Télefono:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="3214508730"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Dirección:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Cll 24 A #40-52" readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Email:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="estebancarvajal@gmail.com" readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Mascota:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="David"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Especie:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Perro"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Edad:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="1 año"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"> <strong>Color:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Cafe y blanco" readonly>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Tipo de cita:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Urgencias"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Médico:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId"
-                                                                                                                                                                                                        value="Herley Puentes" readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"> <strong>Tipo de servicio:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Domiclio"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Fecha:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="12/10/2023"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Hora:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="08:30 AM"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <label class="form-label"><strong>Estado:</strong></label>
-                                                                                                                                                                                                        <input class="form-control" type="text" name="txtId" id="txtId" value="Finalizado"
-                                                                                                                                                                                                        readonly>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <!-- fin del modal detalles  -->
-
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody>
-                                                                                                                                                                                                        </table>
-                                                                                                                                                                                                        </div>
-
-
-
-
-                                                                                                                                                                                                        </div><!-- End Bordered Tabs -->
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </section>
-                                                                                                                                                                                                        <div th:replace="~{Plantillas/administrador :: scripts}"></div>
-
-                                                                                                                                                                                                        </main><!-- End #main -->
-
-                                                                                                                                                                                                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                                                                                                                                                                        <script>
-                                                                                                                                                                                                        function llenarCamposUsuario(selectElement) {
-                                                                                                                                                                                                        var telefono = $(selectElement).find(':selected').data('telefono');
-                                                                                                                                                                                                        var direccion = $(selectElement).find(':selected').data('direccion');
-                                                                                                                                                                                                        var email = $(selectElement).find(':selected').data('email');
-                                                                                                                                                                                                        var mascotas = $(selectElement).find(':selected').data('mascotas');
-
-                                                                                                                                                                                                        $('#telefono').val(telefono);
-                                                                                                                                                                                                        $('#direccion').val(direccion);
-                                                                                                                                                                                                        $('#email').val(email);
-
-                                                                                                                                                                                                        // Convertir mascotas a un array si no lo es
-                                                                                                                                                                                                        mascotas = Array.isArray(mascotas) ? mascotas : [mascotas];
-
-                                                                                                                                                                                                        // Limpiar y volver a llenar el menú desplegable de mascotas
-                                                                                                                                                                                                        var selectMascotas = $('#mascotas');
-                                                                                                                                                                                                        selectMascotas.empty();
-                                                                                                                                                                                                        $.each(mascotas, function (index, value) {
-                                                                                                                                                                                                        selectMascotas.append($('<option>').text(value).attr('value', value));
-                                                                                                                                                                                                        });
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                        </script>
-
-                                                                                                                                                                                                        </body>
-
-                                                                                                                                                                                                        </html>
+                                <div class="table-responsive">
+                                    <table id="tabla-listar" class="table table-striped table-hover text-start">
+                                        <thead>
+                                            <tr class="table-secondary">
+                                                <th scope="col">N°</th>
+                                                <th scope="col">Dueño</th>
+                                                <th scope="col">Veterinario</th>
+                                                <th scope="col">Cita</th>
+                                                <th scope="col">Mascota</th>
+                                                <th scope="col">Precio</th>
+                                                <th scope="col">Fecha inicio</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Opción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="citas,iterStat : ${listadoCitas} "> <!-- "citas" es la variable que recibe cada uno de los onbjetos de la lista mandados desde el backend con la variable llamada listadoCitas -->
+                                                <td th:text="${iterStat.index + 1}"></td>
+                                                <td th:text="${citas.nombreDueño}"></td>
+                                                <td th:text="${citas.nombreVeterinario}"></td> <!-- Mostrar el nombre del veterinario -->
+                                                <td th:text="${citas.nombreCita}"></td>
+                                                <td th:text="${citas.nombreMascota}"></td>
+                                                <td th:text="${citas.precio}"></td>
+                                                <td th:text="${citas.formattedFecha}"></td>
+                                                <td th:text="${citas.estado}" th:classappend="${citas.estado eq 'completado' ? 'text-success' : 'text-danger' }"></td>
+                                                <td>
+                                                    <a  th:href="@{'/citasRapidas/finalizar/' + ${citas.id}}" class="btn btn-primary">Finalizado</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-- End citas -->
+                            <!-- Inicio historial -->
+                            <div class="tab-pane fade pt-3" id="facturas">
+                                <div class="container-fluid mt-3">
+                                    <p style="background-color: #5DADE2;" class="textoNeon">Historial citas rapidas</p>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="table-responsive">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="search-bar">
+                                                    <form class="search-form d-flex align-items-center" method="POST" action="#">
+                                                        <input type="date" name="date"  title="Enter search keyword">
+                                                            <button class="btn" type="submit" title="Search"><i class="bi bi-search"></i></button>
+                                                    </form>
+                                                </div>
+                                                <br>
+                                                    <!-- Inicio tabla histotial -->
+                                                    <table id="tabla-historial" class="table table-striped table-hover text-start">
+                                                        <thead>
+                                                            <tr class="table-secondary">
+                                                                <th scope="col">N°</th>
+                                                                <th scope="col">Dueño</th>
+                                                                <th scope="col">Cita</th>
+                                                                <th scope="col">Mascota</th>
+                                                                <th scope="col">Tipo</th>
+                                                                <th scope="col">Precio</th>
+                                                                <th scope="col">Fecha inicio</th>
+                                                                <th scope="col">Fecha Fin</th>
+                                                                <th scope="col">Estado</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr th:each="citas,iterStat : ${listadoCitas}">
+                                                                <td th:text="${iterStat.index + 1}"></td>
+                                                                <td th:text="${citas.nombreDueño}"></td>
+                                                                <td th:text="${citas.nombreCita}"></td>
+                                                                <td th:text="${citas.nombreMascota}"></td>
+                                                                <td th:text="${citas.especie.nombre}"></td>
+                                                                <td th:text="${citas.precio}"></td>
+                                                                <td th:text="${citas.formattedFecha}"></td>
+                                                                <td th:text="${citas.formattedFechaFin}"></td>
+                                                                <td style="color: green" th:text="${citas.estado}"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End tab-content-->
+                    </div>  <!-- End card-body pt-3-->
+                </div><!-- End card -->
+            </div>  <!-- End col-xl-12 -->
+        </section> <!-- End section -->
+        <div th:replace="~{Plantillas/administrador :: scripts}"></div>
+    </main><!-- End #main -->
+</body>
+</html>

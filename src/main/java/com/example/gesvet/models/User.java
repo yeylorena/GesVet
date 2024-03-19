@@ -35,6 +35,17 @@ public class User {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<citaRapida> citasRapidas;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<agendarcitaAdmin> agendarCitas;
+
+    public List<agendarcitaAdmin> getAgendarCitas() {
+        return agendarCitas;
+    }
+
+    public void setAgendarCitas(List<agendarcitaAdmin> agendarCitas) {
+        this.agendarCitas = agendarCitas;
+    }
+
     public List<citaRapida> getCitasRapidas() {
         return citasRapidas;
     }
@@ -190,7 +201,6 @@ public class User {
     }
 
     /* fin categorias v*/
-
     public List<Factura> getListaFacturas() {
         return listaFacturas;
     }

@@ -16,4 +16,6 @@ public interface IServiciosUserService {
 
     public List<ServiciosUser> findAll();
 
+    public ServiciosUser findById(Integer id);
+
 }

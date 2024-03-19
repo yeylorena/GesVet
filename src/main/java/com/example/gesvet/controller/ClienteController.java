@@ -3,7 +3,6 @@ package com.example.gesvet.controller;
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.Mascota;
 import com.example.gesvet.models.User;
-import com.example.gesvet.service.ClienteService;
 import com.example.gesvet.service.UserService;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -27,20 +26,17 @@ public class ClienteController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ClienteService clienteService;
-
     @GetMapping("")
     public String clientes(Model model, Principal principal) {
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
 
-        // Obtener la lista de usuarios con rol "USER"
-// Obtener la lista de usuarios con rol "USER" y activos
+        // Obtener la lista de usuarios con rol "USER" y activos
         List<User> usuarios = userService.findByRoleAndActivo("USER", true);
+        // Obtener la lista de usuarios con rol "ADMIN" y activos
 
-        // Preparar los datos de los usuarios para mostrarlos en la vista
+        // Preparar los datos de los usuarios con rol "USER" para mostrarlos en la vista
         List<UserDto> usuariosDto = new ArrayList<>();
         for (User user : usuarios) {
             UserDto userDto = new UserDto();

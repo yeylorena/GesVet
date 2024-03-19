@@ -4,10 +4,12 @@ import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.Especie;
 import com.example.gesvet.models.Evento;
 import com.example.gesvet.models.Mascota;
+import com.example.gesvet.models.ServiciosUser;
 import com.example.gesvet.models.User;
 import com.example.gesvet.models.citaRapida;
 import com.example.gesvet.repository.citaRapidaRepository;
 import com.example.gesvet.service.EspecieService;
+import com.example.gesvet.service.IServiciosUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.gesvet.service.UserService;
@@ -32,6 +34,9 @@ public class citaRapidaController {
 
     @Autowired
     private EspecieService especieService;
+
+    @Autowired
+    private IServiciosUserService serviciouserservice;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -81,28 +86,44 @@ public class citaRapidaController {
             userDto.setMascotas(nombresMascotas);
 
             usuariosDto.add(userDto);
-
         }
-        List<citaRapida> citas = citarapidaservice.findAll(); // Suponiendo que tienes un método para obtener todas las citas
 
+        List<Especie> especies = especieService.getAllEspecies();
+        model.addAttribute("especies", especies);
+
+        List<ServiciosUser> servicios = serviciouserservice.findAll();
+        model.addAttribute("servicios", servicios);
+
+        model.addAttribute("usuarios", usuariosDto);
+        List<citaRapida> citas = citarapidaservice.findAll();
+
+        model.addAttribute("citas", citas);
+
+        // Agregar las citas agendadas al modelo
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         // Formatear cada cita en la lista
         citas.forEach(cita -> cita.setFormattedFecha(cita.getInicio().format(formatter)));
 
-        List<Especie> especies = especieService.getAllEspecies();
-        model.addAttribute("listadoCitas", citarapidaservice.findAll()); //hago uso del objetio de la clase veterinarioService y hago referencia o llamo al metodo findAll, entonces se envia la variable denominada "listadoVeterinarios"y posteriormente se recibe en la vista
-        model.addAttribute("especies", especies);
-        model.addAttribute("usuarios", usuariosDto);
 
         return "citas/citasPresencial";
     }
 
     @PostMapping("/guardar")
-    public String saveM(citaRapida citarapida, Model model, int especie, @RequestParam("usuario") Integer idVeterinario, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
+    public String saveM(citaRapida citarapida, Model model, @RequestParam("servicio") Integer idServicio, int especie, @RequestParam("usuario") Integer idVeterinario, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
         // Obtener el usuario actual
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.findByUsername(userDetails.getUsername());
+
+        ServiciosUser servicio = serviciouserservice.findById(idServicio);
+        // Verificar si se encontró el servicio
+        if (servicio != null) {
+            // Obtener el nombre del servicio
+            String nombreServicio = servicio.getNombre(); // Suponiendo que el nombre del servicio se encuentra en el atributo 'nombre' de la entidad Servicio
+
+            // Asignar el nombre del servicio al atributo 'nombreCita' de la citaRapida
+            citarapida.setNombreCita(nombreServicio);
+        }
 
         // Obtener el veterinario seleccionado por su ID
         Optional<User> optionalVeterinario = userService.get(idVeterinario);
