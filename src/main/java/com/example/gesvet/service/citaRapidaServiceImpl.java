@@ -15,6 +15,7 @@ public class citaRapidaServiceImpl implements citaRapidaService {
 
     @Autowired //sirve para decir que estamos implementando a esta clase un objeto
     private citaRapidaRepository citaRapidaRepository;
+
     @Autowired //sirve para decir que estamos implementando a esta clase un objeto
     private UserService userService;
 
@@ -57,5 +58,11 @@ public class citaRapidaServiceImpl implements citaRapidaService {
 
         return !citaRapidaRepository.existsByUsuarioAndInicio(veterinario, inicio);
     }
+
+    @Override
+    public List<citaRapida> findPendientesByUsuario(User user) {
+        return citaRapidaRepository.findByUsuarioAndEstado(user, "pendiente");
+    }
+
 
 }

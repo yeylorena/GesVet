@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "citasRapidas")
@@ -29,6 +30,32 @@ public class citaRapida {
     private String formattedFechaFin; // Campo para almacenar la fecha y hora formateada
     private String veterinarioCita;
     private String nombreVeterinario;
+
+    // Mapeo de Especie
+    @ManyToOne
+    @JoinColumn(name = "especie_id")
+    private Especie especie;
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private User usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "servicio_id")
+    private ServiciosUser servicio;
+
+    // Relación con Mascota
+    @ManyToOne
+    @JoinColumn(name = "mascota_id")
+    private Mascota mascota;
+
+    public Mascota getMascota() {
+        return mascota;
+    }
+
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
+    }
 
     public String getNombreVeterinario() {
         return nombreVeterinario;
@@ -57,14 +84,6 @@ public class citaRapida {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    // Mapeo de Especie
-    @ManyToOne
-    @JoinColumn(name = "especie_id")
-    private Especie especie;
-
-    @ManyToOne
-    @JoinColumn(name = "admin_id")
-    private User usuario;
 
     public Especie getEspecie() {
         return especie;
@@ -162,7 +181,15 @@ public class citaRapida {
         this.formattedFechaFin = formattedFechaFin;
     }
 
-    public citaRapida(Long id, String nombreCita, String nombreMascota, String nombreDueño, String colorMascota, double precio, LocalDateTime inicio, LocalDateTime fin, String estado, String formattedFecha, String formattedFechaFin, String veterinarioCita, String nombreVeterinario, Especie especie, User usuario) {
+    public ServiciosUser getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(ServiciosUser servicio) {
+        this.servicio = servicio;
+    }
+
+    public citaRapida(Long id, String nombreCita, String nombreMascota, String nombreDueño, String colorMascota, double precio, LocalDateTime inicio, LocalDateTime fin, String estado, String formattedFecha, String formattedFechaFin, String veterinarioCita, String nombreVeterinario, Especie especie, User usuario, ServiciosUser servicio, Mascota mascota) {
         this.id = id;
         this.nombreCita = nombreCita;
         this.nombreMascota = nombreMascota;
@@ -178,11 +205,13 @@ public class citaRapida {
         this.nombreVeterinario = nombreVeterinario;
         this.especie = especie;
         this.usuario = usuario;
+        this.servicio = servicio;
+        this.mascota = mascota;
     }
 
     @Override
     public String toString() {
-        return "citaRapida{" + "id=" + id + ", nombreCita=" + nombreCita + ", nombreMascota=" + nombreMascota + ", nombreDue\u00f1o=" + nombreDueño + ", colorMascota=" + colorMascota + ", precio=" + precio + ", inicio=" + inicio + ", fin=" + fin + ", estado=" + estado + ", formattedFecha=" + formattedFecha + ", formattedFechaFin=" + formattedFechaFin + ", veterinarioCita=" + veterinarioCita + ", nombreVeterinario=" + nombreVeterinario + ", especie=" + especie + ", usuario=" + usuario + '}';
+        return "citaRapida{" + "id=" + id + ", nombreCita=" + nombreCita + ", nombreMascota=" + nombreMascota + ", nombreDue\u00f1o=" + nombreDueño + ", colorMascota=" + colorMascota + ", precio=" + precio + ", inicio=" + inicio + ", fin=" + fin + ", estado=" + estado + ", formattedFecha=" + formattedFecha + ", formattedFechaFin=" + formattedFechaFin + ", veterinarioCita=" + veterinarioCita + ", nombreVeterinario=" + nombreVeterinario + ", especie=" + especie + ", usuario=" + usuario + ", servicio=" + servicio + ", mascota=" + mascota + '}';
     }
 
 }

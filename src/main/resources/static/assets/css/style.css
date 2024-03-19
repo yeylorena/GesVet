@@ -32,7 +32,7 @@
 
 .calificar-container {
     text-align: center;
-    margin-top: 130px;
+    margin-top: 50px;
 }
 
 .circulo-imagen {
@@ -76,6 +76,16 @@
     text-align: center;
     object-fit: cover;
 }
+
+/* Estilo para imágenes circulares */
+.imagen-circular {
+    border-radius: 50%;
+    width: 100px; /* ajusta el tamaño según tus necesidades */
+    height: 100px; /* ajusta el tamaño según tus necesidades */
+    object-fit: cover; /* evita que la imagen se distorsione */
+    margin-right: 10px; /* ajusta el margen según tus necesidades */
+}
+
 
 :root {
     scroll-behavior: smooth;
@@ -747,7 +757,7 @@ h6 {
 }
 
 .logo img {
-    max-height: 70px;
+    max-height: 60px;
     margin-right: 8px;
 }
 

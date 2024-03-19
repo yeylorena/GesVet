@@ -22,6 +22,13 @@ public class ServiciosUser {
     private boolean activo;
     private boolean activos = true;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id") // Nombre de la columna en la tabla productos que contiene la clave foránea
+    private Categorias categoria;
+
+    @ManyToOne()
+    private User usuario;
+
     public boolean isActivos() {
         return activos;
     }
@@ -29,13 +36,6 @@ public class ServiciosUser {
     public void setActivos(boolean activos) {
         this.activos = activos;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "categoria_id") // Nombre de la columna en la tabla productos que contiene la clave foránea
-    private Categorias categoria;
-
-    @ManyToOne()
-    private User usuario;
 
     public Integer getId() {
         return id;
@@ -101,20 +101,20 @@ public class ServiciosUser {
         this.usuario = usuario;
     }
 
-    public ServiciosUser(Integer id, String nombre, String descripcion, String imagen, double precio, boolean activo, User usuario) {
+    public ServiciosUser(Integer id, String nombre, String descripcion, String imagen, double precio, boolean activo, Categorias categoria, User usuario) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.precio = precio;
         this.activo = activo;
+        this.categoria = categoria;
         this.usuario = usuario;
-        this.activos = true;
     }
 
     @Override
     public String toString() {
-        return "ServiciosUser{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", activo=" + activo + ", activos=" + activos + ", usuario=" + usuario + '}';
+        return "ServiciosUser{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", activo=" + activo + ", activos=" + activos + ", categoria=" + categoria + ", usuario=" + usuario + '}';
     }
 
     public ServiciosUser() {

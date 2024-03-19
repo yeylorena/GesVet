@@ -4,7 +4,7 @@
 
 <head th:replace="~{Plantillas/usuario :: head}"></head>
 
-<body style="background-color: #5DADE2;">
+<body style="background-color: #F4F4F4;">
 
     <!-- ======= Header ======= -->
     <header th:replace="~{Plantillas/usuario :: header}"></header><!-- End Header -->
@@ -16,14 +16,6 @@
 
         <div class="pagetitle">
             <h1>Servicio de citas</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="inicio.html">Inicio</a></li>
-                    <li class="breadcrumb-item">Citas</li>
-                    <li class="breadcrumb-item active">Consultar citas</li>
-                </ol>
-
-            </nav>
         </div><!-- End Page Title -->
 
         <section class="section profile">
@@ -37,639 +29,203 @@
 
                                 <li class="nav-item">
                                     <button class="nav-link active" data-bs-toggle="tab"
-                                            data-bs-target="#profile-overview">Consultar citas</button>
-                                </li>
-
-                                <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab"
                                             data-bs-target="#profile-edit">Solicitar cita</button>
                                 </li>
-
                                 <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab"
-                                            data-bs-target="#profile-settings">Modificar cita</button>
+                                            data-bs-target="#profile-overview">Consultar citas</button>
                                 </li>
-
-
                             </ul>
                             <div class="tab-content pt-2">
+                                <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
 
-                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                                    <!--Consultar citas-->
-                                    <br>
-                                        <div class="search-bar">
-                                            <form class="search-form d-flex align-items-center">
-                                                <input type="text" name="query" placeholder="Buscar mascota"
-                                                       title="Enter search keyword">
-                                                    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-                                            </form>
-                                        </div>
-                                        <br><!-- End Search Bar -->
-
-                                            <form>
-
-                                                <table class="table table-striped table-hover text-start">
-                                                    <thead>
-                                                        <tr class="table-secondary">
-
-                                                            <th scope="col">Mascota</th>
-                                                            <th scope="col">Fecha</th>
-                                                            <th scope="col">Hora</th>
-                                                            <th scope="col">Tipo de Servicio</th>
-                                                            <th scope="col">Tipo de cita</th>
-                                                            <th scope="col">Médico</th>
-                                                            <th scope="col">Estado</th>
-                                                            <th scope="col">Opciones</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-
-
-                                                            <td>David</td>
-                                                            <td>12/12/2023</td>
-                                                            <td>10:20 AM</td>
-                                                            <td>Presencial</td>
-                                                            <td>Estetica</td>
-                                                            <td>Herley Puentes</td>
-                                                            <td style="color: red;">Pendiente</td>
-                                                            <td>
-                                                                <button type="button" data-bs-toggle="modal"
-                                                                        data-bs-target="#staticBackdrop"
-                                                                        data-target="staticBackdrop">
-                                                                    <i class="bi bi-eye-fill"></i>
-                                                                </button>
-                                                                <button type="button" data-bs-toggle="modal"
-                                                                        data-bs-target="#modificar"
-                                                                        data-target="modificar">
-                                                                    <i class="bi bi-pencil-square"></i>
-                                                                </button>
-                                                                <!-- modal de detalles  -->
-                                                                <div class="modal fade" id="staticBackdrop"
-                                                                     data-bs-backdrop="static" data-bs-keyboard="false"
-                                                                     tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                                                     aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header"
-                                                                                 style="background: #9FAFE8;">
-                                                                                <h1 class="modal-title fs-5"
-                                                                                    id="staticBackdropLabel">
-                                                                                    Ver mascotas
-                                                                                </h1>
-                                                                                <button type="button" class="btn-close"
-                                                                                        data-bs-dismiss="modal"
-                                                                                        aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-
-                                                                                <img src="./img/productos_servicios/perro.jpg"
-                                                                                     class="mx-auto d-block img-fluid"
-                                                                                     style="height: 100px; width: 100px;">
-                                                                                    <div class="row my-2">
-
-                                                                                        <div class="col-6">
-                                                                                            <label
-                                                                                                class="form-label">Nombre:</label>
-                                                                                            <input class="form-control" type="text"
-                                                                                                   name="txtId" id="txtId"
-                                                                                                   value="David" readonly>
-                                                                                        </div>
-                                                                                        <div class="col-6">
-                                                                                            <label
-                                                                                                class="form-label">Especie:</label>
-                                                                                            <input class="form-control" type="text"
-                                                                                                   name="txtId" id="txtId"
-                                                                                                   value="Perro" readonly>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                    <div class="row my-2">
-                                                                                        <div class="col-6">
-                                                                                            <label class="form-label">Raza:</label>
-                                                                                            <input class="form-control" type="text"
-                                                                                                   name="txtId" id="txtId"
-                                                                                                   value="Bulldog" readonly>
-                                                                                        </div>
-                                                                                        <div class="col-6">
-                                                                                            <label class="form-label">Color:</label>
-                                                                                            <input class="form-control" type="text"
-                                                                                                   name="txtId" id="txtId"
-                                                                                                   value="Cafe y blanco" readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row my-2">
-                                                                                        <div class="col-6">
-                                                                                            <label
-                                                                                                class="form-label">Género:</label>
-                                                                                            <input class="form-control" type="text"
-                                                                                                   name="txtId" id="txtId"
-                                                                                                   value="Macho" readonly>
-                                                                                        </div>
-                                                                                        <div class="col-6">
-                                                                                            <label class="form-label">Edad:</label>
-                                                                                            <input class="form-control" type="text"
-                                                                                                   name="txtId" id="txtId"
-                                                                                                   value="3 años" readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row my-2">
-                                                                                        <div class="col-6">
-                                                                                            <label class="form-label">Detalle de la
-                                                                                                cita:</label>
-                                                                                            <input class="form-control" type="text"
-                                                                                                   name="txtId" id="txtId"
-                                                                                                   value="Baño y cepillado" readonly>
-                                                                                        </div>
-                                                                                        <div class="col-6">
-                                                                                            <label class="form-label">Fecha y hora
-                                                                                                de la
-                                                                                                cita:</label>
-                                                                                            <input class="form-control" type="text"
-                                                                                                   name="txtId" id="txtId"
-                                                                                                   value="12/12/2023 10:20 AM"
-                                                                                                   readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row my-2">
-                                                                                        <!-- boton de descargar el hsitorial medico  -->
-                                                                                        <div class="col-6">
-                                                                                            <div class="container mt-5">
-                                                                                                <h5>Historia médica</h5>
-                                                                                                <!-- Botón de descarga -->
-                                                                                                <a href="historialMascota.html"
-                                                                                                   class="btn btn-secondary"
-                                                                                                   id="descargarHistorial">Descargar</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
+                                    <!--Solicitar cita-->
+                                    <form id="agendarForm" method="post" action="/agendar">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <!-- Columna del formulario -->
+                                                <div class="col-8">
+                                                    <div class="card-body"> 
+                                                        <h6>Horario de atención:
+                                                            Lunes a Sábado: 9:00 AM - 6:00 PM.</h6>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <br>
+                                                                    <label for="mascota"><strong>Mascota:</strong></label>
+                                                                    <select class="form-select" name="mascota" required>
+                                                                        <option value="">Selecciona una mascota...</option>
+                                                                        <option th:each="mascota : ${mascotas}" th:value="${mascota.id}" th:data-imagen="${mascota.imagen}" th:text="${mascota.nombre}" ></option>
+                                                                    </select>
+                                                            </div>
+                                                            <div class="col">
+                                                                <br>
+                                                                    <label for="servicio"><strong>Tipo servicio:</strong></label>
+                                                                    <select class="form-select" name="servicio" required>
+                                                                        <option value="">Selecciona un servicio...</option>
+                                                                        <option th:each="servicio : ${servicios}" th:value="${servicio.id}" th:data-precio="${servicio.precio}"
+                                                                                th:text="${servicio.nombre}" ></option>                                                                    </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <br>
+                                                                    <label for="usuario"><strong>Veterinario:</strong></label>
+                                                                    <select class="form-select" name="usuario" required>
+                                                                        <option value="">Selecciona un veterinario...</option>
+                                                                        <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nombre} + ' ' + ${usuario.apellido}">
+                                                                    </select>                                                                        </div>
+                                                            <div class="col">
+                                                                <br>
+                                                                    <label for="precio"><strong>Precio:</strong></label>
+                                                                    <input type="text" name="precio" class="form-control custom-border custom-bg-fondo" required readonly>
+                                                                        <!-- El precio se autocompleta segun el servicio escogido -->
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="row mt-3">
+                                                                            <div class="col">
+                                                                                <label class="control-label"><strong>Fecha</strong><span class="text-danger">*</span></label>
+                                                                                <input type="datetime-local" name="inicio" id="fechaInicio" class="form-control" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" required />
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- modal modificar cita  -->
-                                                                <div class="modal fade" id="modificar" data-bs-backdrop="static"
-                                                                     data-bs-keyboard="false" tabindex="-1"
-                                                                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header"
-                                                                                 style="background: #9FAFE8;">
-                                                                                <h1 class="modal-title fs-5"
-                                                                                    id="staticBackdropLabel">
-                                                                                    Ver mascotas
-                                                                                </h1>
-                                                                                <button type="button" class="btn-close"
-                                                                                        data-bs-dismiss="modal"
-                                                                                        aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <!-- inicio de los cambios de modificar cita  -->
-                                                                                <form>
-                                                                                    <div class="container-fluid">
-                                                                                        <div class="row">
-                                                                                            <div class="col-8">
-                                                                                                <div class="card-body">
-                                                                                                    <h5>Ingrese los datos a actualizar y la razón de modificación de
-                                                                                                        la cita.</h5>
-                                                                                                    <div class="row">
-                                                                                                        <div class="col">
-                                                                                                            <br>
-                                                                                                                <label for="dueño"><strong>Dueño:</strong></label>
-                                                                                                                <input type="text" name="txtDueño"
-                                                                                                                       class="form-control custom-border custom-bg-fondo ">
-                                                                                                                    </div>
-                                                                                                                    <div class="col">
-                                                                                                                        <br>
-                                                                                                                            <label for="telefono"><strong>Teléfono:</strong></label>
-                                                                                                                            <input type="text" name="txtTelefono"
-                                                                                                                                   class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                </div>
-                                                                                                                                </div>
-                                                                                                                                <div class="row">
-                                                                                                                                    <div class="col">
-                                                                                                                                        <br>
-                                                                                                                                            <label
-                                                                                                                                                for="direccion"><strong>Dirección:</strong></label>
-                                                                                                                                            <input type="text" name="txtDireccion"
-                                                                                                                                                   class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="col">
-                                                                                                                                                    <br>
-                                                                                                                                                        <label for="email"><strong>Email:</strong></label>
-                                                                                                                                                        <input type="text" name="txtdireccionEmail"
-                                                                                                                                                               class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                            </div>
-                                                                                                                                                            </div>
-                                                                                                                                                            <div class="row">
-                                                                                                                                                                <div class="col">
-                                                                                                                                                                    <br>
-                                                                                                                                                                        <label for="mascotas"><strong>Mascota:</strong></label>
-                                                                                                                                                                        <select class="form-select">
-                                                                                                                                                                            <option>Hércules</option>
-                                                                                                                                                                            <option>Mateo</option>
-                                                                                                                                                                            <option>chanchito</option>
-                                                                                                                                                                        </select>
-                                                                                                                                                                </div>
-                                                                                                                                                                <div class="col">
-                                                                                                                                                                    <br>
-                                                                                                                                                                        <label for="tipocita"><strong>Tipo
-                                                                                                                                                                                cita:</strong></label>
-                                                                                                                                                                        <select class="form-select">
-                                                                                                                                                                            <option>Traumatología</option>
-                                                                                                                                                                            <option>Examenes</option>
-                                                                                                                                                                            <option>Laboratorio</option>
-                                                                                                                                                                        </select>
-                                                                                                                                                                </div>
-                                                                                                                                                            </div>
-                                                                                                                                                            <div class="row">
-                                                                                                                                                                <div class="col">
-                                                                                                                                                                    <br>
-                                                                                                                                                                        <label for="medico"><strong>Médico:</strong></label>
-                                                                                                                                                                        <input type="text" name="txtMedico"
-                                                                                                                                                                               class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="col">
-                                                                                                                                                                                <br>
-                                                                                                                                                                                    <label for="servicio"><strong>Servicio:</strong></label>
-                                                                                                                                                                                    <select class="form-select">
-                                                                                                                                                                                        <option>Domicilio</option>
-                                                                                                                                                                                        <option>Presencial</option>
-                                                                                                                                                                                    </select>
-                                                                                                                                                                            </div>
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="row">
-                                                                                                                                                                                <div class="col">
-                                                                                                                                                                                    <br>
-                                                                                                                                                                                        <div class="form-group">
-                                                                                                                                                                                            <label
-                                                                                                                                                                                                for="inputFecha"><strong>Fecha:</strong></label>
-                                                                                                                                                                                            <input type="date" class="form-control"
-                                                                                                                                                                                                   id="inputFecha" name="fecha">
-                                                                                                                                                                                        </div>
-                                                                                                                                                                                </div>
-                                                                                                                                                                                <div class="col">
-                                                                                                                                                                                    <div class="form-group">
-                                                                                                                                                                                        <br>
-                                                                                                                                                                                            <label
-                                                                                                                                                                                                for="inputHora"><strong>Hora:</strong></label>
-                                                                                                                                                                                            <input type="time" class="form-control"
-                                                                                                                                                                                                   id="inputHora" name="hora">
-                                                                                                                                                                                                </div>
-                                                                                                                                                                                                </div>
-                                                                                                                                                                                                </div>
-                                                                                                                                                                                                <div class="row">
-                                                                                                                                                                                                    <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for=""><strong>Motivo:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtDireccion"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-4 calificar-container">
-                                                                                                                                                                                                        <div class="circulo-imagen">
-                                                                                                                                                                                                        <img src="assets/img/perro.jpg" alt="Imagen del Veterinario">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <h4><strong>Hércules</strong> </h4>
-                                                                                                                                                                                                        <h5><strong>Perro-Macho</strong></h5>
-                                                                                                                                                                                                        <div class="col text-center">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <button type="submit" class="btn custom-negro "
-                                                                                                                                                                                                        style="background-color: #979AD4;"><strong>Modificar</strong></button>
+                                                                        <div th:if="${error != null}" class="alert alert-danger mt-3" role="alert">
+                                                                            <strong>Error:</strong> <span th:text="${error}"></span>
+                                                                        </div>
 
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </form>                                                          
-
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row my-2">
-                                                                                                                                                                                                        <!-- boton de descargar el hsitorial medico  -->
-                                                                                                                                                                                                        <div class="col-6">
-                                                                                                                                                                                                        <div class="container mt-5">
-                                                                                                                                                                                                        <h5>Historia médica</h5>
-                                                                                                                                                                                                        <!-- Botón de descarga -->
-                                                                                                                                                                                                        <a href="historialMascota.html"
-                                                                                                                                                                                                        class="btn btn-secondary"
-                                                                                                                                                                                                        id="descargarHistorial">Descargar</a>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-
-                                                                                                                                                                                                        <tr>
-
-                                                                                                                                                                                                        <td>David</td>
-                                                                                                                                                                                                        <td>12/12/2023</td>
-                                                                                                                                                                                                        <td>10:20 AM</td>
-                                                                                                                                                                                                        <td>Presencial</td>
-                                                                                                                                                                                                        <td>Estetica</td>
-                                                                                                                                                                                                        <td>Herley Puentes</td>
-                                                                                                                                                                                                        <td style="color: red;">Cancelada</td>
-                                                                                                                                                                                                        <td>
-                                                                                                                                                                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                                                                                                                                                                                        data-target="staticBackdrop">
-                                                                                                                                                                                                        <i class="bi bi-eye-fill"></i>
-                                                                                                                                                                                                        </button>
-                                                                                                                                                                                                        <!-- modal de modificar cita -->
-                                                                                                                                                                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                                                                                                                                                                                        data-target="staticBackdrop">
-                                                                                                                                                                                                        <i class="bi bi-pencil-square"></i>
-                                                                                                                                                                                                        </button>
-                                                                                                                                                                                                        </td>
-
-                                                                                                                                                                                                        </tr>
-
-                                                                                                                                                                                                        <tr>
-
-                                                                                                                                                                                                        <td>David</td>
-                                                                                                                                                                                                        <td>12/12/2023</td>
-                                                                                                                                                                                                        <td>10:20 AM</td>
-                                                                                                                                                                                                        <td>Presencial</td>
-                                                                                                                                                                                                        <td>Estetica</td>
-                                                                                                                                                                                                        <td>Herley Puentes</td>
-                                                                                                                                                                                                        <td style="color: red;">Finalizado</td>
-                                                                                                                                                                                                        <td>
-                                                                                                                                                                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                                                                                                                                                                                        data-target="staticBackdrop">
-                                                                                                                                                                                                        <i class="bi bi-eye-fill"></i>
-                                                                                                                                                                                                        </button>
-
-                                                                                                                                                                                                        <!-- modal de detalles  -->
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody>
-                                                                                                                                                                                                        </table>
-
-                                                                                                                                                                                                        </form>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <!--Fin consultar citas-->
-
-
-                                                                                                                                                                                                        <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-                                                                                                                                                                                                        <!--Solicitar cita-->
-                                                                                                                                                                                                        <form>
-                                                                                                                                                                                                        <div class="container-fluid">
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <!-- Columna del formulario -->
-                                                                                                                                                                                                        <div class="col-8">
-                                                                                                                                                                                                        <div class="card-body" style="background-color:#D9D9D9;">
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="dueño"><strong>Dueño:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtDueño"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="telefono"><strong>Teléfono:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtTelefono"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="direccion"><strong>Dirección:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtDireccion"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="email"><strong>Email:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtdireccionEmail"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="mascotas"><strong>Mascota:</strong></label>
-                                                                                                                                                                                                        <select class="form-select">
-                                                                                                                                                                                                        <option>Hércules</option>
-                                                                                                                                                                                                        <option>Mateo</option>
-                                                                                                                                                                                                        <option>chanchito</option>
-                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="tipocita"><strong>Tipo
-                                                                                                                                                                                                        cita:</strong></label>
-                                                                                                                                                                                                        <select class="form-select">
-                                                                                                                                                                                                        <option>Traumatología</option>
-                                                                                                                                                                                                        <option>Examenes</option>
-                                                                                                                                                                                                        <option>Laboratorio</option>
-                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="medico"><strong>Médico:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtMedico"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="servicio"><strong>Servicio:</strong></label>
-                                                                                                                                                                                                        <select class="form-select">
-                                                                                                                                                                                                        <option>Domicilio</option>
-                                                                                                                                                                                                        <option>Presencial</option>
-                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <div class="form-group">
-                                                                                                                                                                                                        <label for="inputFecha">Fecha</label>
-                                                                                                                                                                                                        <input type="date" class="form-control" id="inputFecha"
-                                                                                                                                                                                                        name="fecha">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <div class="form-group">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="inputHora">Hora</label>
-                                                                                                                                                                                                        <input type="time" class="form-control" id="inputHora"
-                                                                                                                                                                                                        name="hora">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="valor"><strong>Valor:</strong></label>
-                                                                                                                                                                                                        <p>20.000 *Incluye domicilio</p>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col text-center">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <button type="submit" class="btn custom-negro "
-                                                                                                                                                                                                        style="background-color: #979AD4;"><strong>Solicitar</strong></button>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-4 calificar-container">
-                                                                                                                                                                                                        <div class="circulo-perro">
-                                                                                                                                                                                                        <img src="assets/img/perro.jpg" alt="Imagen del Veterinario">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <h4><strong>Hércules</strong> </h4>
-                                                                                                                                                                                                        <h5><strong>Perro-Macho</strong></h5>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </form>
-                                                                                                                                                                                                        <!--Fin solicitar cita-->
-
-                                                                                                                                                                                                        <div class="tab-pane fade pt-3" id="profile-settings">
-                                                                                                                                                                                                        <!--Modificar cita-->
-                                                                                                                                                                                                        <form>
-                                                                                                                                                                                                        <div class="container-fluid">
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col-8">
-                                                                                                                                                                                                        <div class="card-body">
-                                                                                                                                                                                                        <h5>Ingrese los datos a actualizar y la razón de modificación de
-                                                                                                                                                                                                        la cita.</h5>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="dueño"><strong>Dueño:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtDueño"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="telefono"><strong>Teléfono:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtTelefono"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="direccion"><strong>Dirección:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtDireccion"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="email"><strong>Email:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtdireccionEmail"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="mascotas"><strong>Mascota:</strong></label>
-                                                                                                                                                                                                        <select class="form-select">
-                                                                                                                                                                                                        <option>Hércules</option>
-                                                                                                                                                                                                        <option>Mateo</option>
-                                                                                                                                                                                                        <option>chanchito</option>
-                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="tipocita"><strong>Tipo
-                                                                                                                                                                                                        cita:</strong></label>
-                                                                                                                                                                                                        <select class="form-select">
-                                                                                                                                                                                                        <option>Traumatología</option>
-                                                                                                                                                                                                        <option>Examenes</option>
-                                                                                                                                                                                                        <option>Laboratorio</option>
-                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="medico"><strong>Médico:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtMedico"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="servicio"><strong>Servicio:</strong></label>
-                                                                                                                                                                                                        <select class="form-select">
-                                                                                                                                                                                                        <option>Domicilio</option>
-                                                                                                                                                                                                        <option>Presencial</option>
-                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <div class="form-group">
-                                                                                                                                                                                                        <label for="inputFecha"><strong>Fecha:</strong></label>
-                                                                                                                                                                                                        <input type="date" class="form-control" id="inputFecha"
-                                                                                                                                                                                                        name="fecha">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <div class="form-group">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for="inputHora"><strong>Hora:</strong></label>
-                                                                                                                                                                                                        <input type="time" class="form-control" id="inputHora"
-                                                                                                                                                                                                        name="hora">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                        <div class="col">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <label for=""><strong>Motivo:</strong></label>
-                                                                                                                                                                                                        <input type="text" name="txtDireccion"
-                                                                                                                                                                                                        class="form-control custom-border custom-bg-fondo ">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div class="col-4 calificar-container">
-                                                                                                                                                                                                        <div class="circulo-imagen">
-                                                                                                                                                                                                        <img src="assets/img/perro.jpg" alt="Imagen del Veterinario">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <h4><strong>Hércules</strong> </h4>
-                                                                                                                                                                                                        <h5><strong>Perro-Macho</strong></h5>
-                                                                                                                                                                                                        <div class="col text-center">
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        <button type="submit" class="btn custom-negro "
-                                                                                                                                                                                                        style="background-color: #979AD4;"><strong>Modificar</strong></button>
-
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </form>
-                                                                                                                                                                                                        <!--Fin modificar cita-->
-                                                                                                                                                                                                        </div><!-- End Bordered Tabs -->
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </section>
-                                                                                                                                                                                                        <div th:replace="~{Plantillas/usuario :: scripts}"></div>
-
-
-                                                                                                                                                                                                        </main><!-- End #main -->
+                                                                        <div class="text-center mt-4">
+                                                                            <button id="agendarButton" type="submit" class="btn btn-success" style="background-color: #2FD6B4;">Agendar</button>
+                                                                        </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="col-4 calificar-container">
+                                                                            <img id="imagenMascota" src="./img/perrodefecto.jpg" alt="Imagen del Veterinario" style="             border-radius: 50%;
+                                                                                 max-width: 80%; /* Permitir que la imagen se expanda */
+                                                                                 object-fit: cover; /* Evitar que la imagen se distorsione */
+                                                                                 height: 200px">
+                                                                        </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        </form>
+                                                                        </div>
 
 
 
-                                                                                                                                                                                                        </body>
+                                                                        <div class="tab-pane fade  profile-overview" id="profile-overview">
+                                                                            <!--Consultar citas-->
+                                                                            <br>
+                                                                                <div class="search-bar">
+                                                                                    <form class="search-form d-flex align-items-center">
+                                                                                        <input type="text" name="query" placeholder="Buscar mascota"
+                                                                                               title="Enter search keyword">
+                                                                                            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                                                                                    </form>
+                                                                                </div>
+                                                                                <br><!-- End Search Bar -->
 
-                                                                                                                                                                                                        </html>
+
+
+                                                                                    <table class="table table-striped table-hover text-start">
+                                                                                        <thead>
+                                                                                            <tr class="table-secondary">
+                                                                                                <th scope="col">N°</th>
+                                                                                                <th scope="col">Mascota</th>
+                                                                                                <th scope="col">Fecha</th>                                                                             
+                                                                                                <th scope="col">Tipo de cita</th>
+                                                                                                <th scope="col">Veterinario</th>
+                                                                                                <th scope="col">Estado</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr th:each="cita, iterStat : ${citasPendientes}">
+                                                                                                <td th:text="${iterStat.index + 1}"></td>
+                                                                                                <td th:text="${cita.nombreMascota}"></td> <!-- Mostrar el nombre de la mascota -->
+                                                                                                <td th:text="${cita.formattedFecha}"></td>
+                                                                                                <td th:text="${cita.nombreCita}"></td> <!-- Mostrar el tipo de cita -->
+                                                                                                <td th:text="${cita.nombreVeterinario}"></td> <!-- Mostrar el nombre del veterinario -->
+                                                                                                <td style="color: red"  th:text="${cita.estado}"></td> <!-- Mostrar el estado de la cita -->
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+
+
+                                                                                    </div>
+                                                                                    <!--Fin consultar citas-->
+
+
+                                                                                    </div><!-- End Bordered Tabs -->
+                                                                                    </div>
+                                                                                    </div>
+                                                                                    </div>
+                                                                                    </section>
+                                                                                    <div th:replace="~{Plantillas/usuario :: scripts}"></div>
+
+
+                                                                                    </main><!-- End #main -->
+                                                                                    <script th:if="${success}">
+                                                                                        Swal.fire({
+                                                                                            icon: 'success',
+                                                                                            title: '¡Cita agendada!',
+                                                                                            text: 'La cita se ha agendado correctamente.'
+                                                                                        });
+                                                                                    </script>
+                                                                                    <script>
+                                                                                        document.addEventListener('DOMContentLoaded', function () {
+                                                                                            // Obtener el selector de servicios
+                                                                                            var servicioSelect = document.querySelector('select[name="servicio"]');
+                                                                                            // Obtener el campo de precio
+                                                                                            var precioInput = document.querySelector('input[name="precio"]');
+
+                                                                                            // Manejar el evento de cambio en el selector de servicios
+                                                                                            servicioSelect.addEventListener('change', function () {
+                                                                                                // Obtener el precio del servicio seleccionado
+                                                                                                var precio = parseFloat(this.options[this.selectedIndex].getAttribute('data-precio'));
+                                                                                                // Comprobar si el precio es válido
+                                                                                                if (!isNaN(precio)) {
+                                                                                                    // Autocompletar el campo de precio
+                                                                                                    precioInput.value = precio;
+                                                                                                } else {
+                                                                                                    // Limpiar el campo de precio si no se encuentra un precio válido
+                                                                                                    precioInput.value = '';
+                                                                                                }
+                                                                                            });
+                                                                                        });
+                                                                                    </script>
+
+
+                                                                                    <script>
+                                                                                        document.addEventListener('DOMContentLoaded', function () {
+                                                                                            // Obtener el selector de mascotas
+                                                                                            var mascotaSelect = document.querySelector('select[name="mascota"]');
+                                                                                            // Obtener la imagen de la mascota
+                                                                                            var imagenMascota = document.getElementById('imagenMascota');
+
+                                                                                            // Función para mostrar la imagen de la mascota seleccionada o la imagen por defecto
+                                                                                            function mostrarImagenMascota() {
+                                                                                                // Obtener la opción seleccionada
+                                                                                                var selectedOption = mascotaSelect.options[mascotaSelect.selectedIndex];
+                                                                                                // Obtener el nombre de la imagen de la mascota
+                                                                                                var imagenNombre = selectedOption.getAttribute('data-imagen');
+
+                                                                                                // Si hay un nombre de imagen, mostrar la imagen correspondiente
+                                                                                                if (imagenNombre) {
+                                                                                                    // Construir la URL completa de la imagen
+                                                                                                    var imagenUrl = '/images/' + imagenNombre;
+                                                                                                    // Establecer la URL de la imagen en el elemento img
+                                                                                                    imagenMascota.src = imagenUrl;
+                                                                                                } else {
+                                                                                                    // Si no hay nombre de imagen (por ejemplo, opción vacía), mostrar la imagen por defecto
+                                                                                                    imagenMascota.src = './img/perrodefecto.jpg';
+                                                                                                }
+                                                                                            }
+
+                                                                                            // Manejar el evento de cambio en el selector de mascotas
+                                                                                            mascotaSelect.addEventListener('change', mostrarImagenMascota);
+
+                                                                                            // Mostrar la imagen de la mascota al cargar la página
+                                                                                            mostrarImagenMascota();
+                                                                                        });
+                                                                                    </script>
+
+
+                                                                                    </body>
+
+                                                                                    </html>

@@ -9,10 +9,6 @@ import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Table;
 
-/**
- *
- * @author sofia
- */
 @Entity
 @Table(name = "Mascotas")
 public class Mascota {

@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"/>
-
 <head>
     <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
             <title>Perfil</title>
             <meta content="" name="description">
                 <meta content="" name="keywords">
-
-
                     <!-- Google Fonts -->
                     <link href="https://fonts.gstatic.com" rel="preconnect">
                         <link
                             href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
                             rel="stylesheet">
-
                             <!-- Vendor CSS Files -->
                             <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
                                 <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -25,17 +20,14 @@
                                             <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
                                                 <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
                                                     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
                                                         <!-- Template Main CSS File -->
                                                         <link href="assets/css/style.css" rel="stylesheet">
                                                             <!-- Favicons -->
                                                             <link href="../img/productos_servicios/logo.png" rel="icon">
                                                                 <!-- SweetAlert2 CSS -->
                                                                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
                                                                     <!-- SweetAlert2 JS -->
                                                                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
                                                                     <!-- Estilos letras-->
                                                                     <style>
                                                                         .card-hover:hover {
@@ -47,12 +39,9 @@
                                                                             scroll-behavior: smooth;
                                                                             scroll-padding: 10rem;
                                                                         }
-
                                                                         .card-hover {
                                                                             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-
                                                                         }
-
                                                                         .card-hover:hover {
                                                                             transform: scale(1.05);
                                                                             box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.8);
@@ -63,13 +52,11 @@
                                                                             font-weight: 300;
                                                                             font-style: normal;
                                                                         }
-
                                                                         .inria-sans-regular {
                                                                             font-family: "Inria Sans", sans-serif;
                                                                             font-weight: 400;
                                                                             font-style: normal;
                                                                         }
-
                                                                         .inria-sans-bold {
                                                                             font-family: "Inria Sans", sans-serif;
                                                                             font-weight: 700;
@@ -86,42 +73,33 @@
                                                                             font-size: 20px;
                                                                             line-height: 50px;
                                                                         }
-
                                                                         .inria-sans-light-italic {
                                                                             font-family: "Inria Sans", sans-serif;
                                                                             font-weight: 300;
                                                                             font-style: italic;
                                                                         }
-
                                                                         .inria-sans-regular-italic {
                                                                             font-family: "Inria Sans", sans-serif;
                                                                             font-weight: 400;
                                                                             font-style: italic;
                                                                         }
-
                                                                         .inria-sans-bold-italic {
                                                                             font-family: "Inria Sans", sans-serif;
                                                                             font-weight: 700;
                                                                             font-style: italic;
                                                                         }
-
                                                                         .texto {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
                                                                             font-size: 20px;
                                                                             margin: 0 0 20px;
                                                                             padding: 0;
-
-
                                                                         }
                                                                         .texto2 {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
                                                                             font-size: 15px;
                                                                             margin: 0 0 20px;
                                                                             padding: 0;
-
-
                                                                         }
-
                                                                         .titulo {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
                                                                             font-size: 18px;
@@ -129,7 +107,6 @@
                                                                             margin-right: 100px;
                                                                             line-height: 50px;
                                                                             color: #444444
-
                                                                         }
                                                                         .botones{
                                                                             font-family: 'Montserrat', Arial, sans-serif;
@@ -159,7 +136,6 @@
                                                                         .custom-btn {
                                                                             color: white !important; /* Color del texto blanco */
                                                                         }
-
                                                                         .encabezados {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
                                                                             font-size: 30px;
@@ -168,8 +144,6 @@
                                                                             line-height: 50px;
                                                                             color: #FFFFFF;
                                                                             text-align: center;
-
-
                                                                         }
                                                                         .titlecartas {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
@@ -177,30 +151,24 @@
                                                                             font-weight: 600;
                                                                             line-height: 50px;
                                                                             color: #FFFFFF;
-
                                                                         }
                                                                         .titlecartass{
                                                                             font-family: 'Montserrat', Arial, sans-serif;
                                                                             font-size: 20px;
                                                                             font-weight: 500;
-
                                                                         }
                                                                         .textcartas {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
                                                                             font-size: 19px;
                                                                             font-weight: 300;
                                                                             color: #000000;
-
                                                                         }
-
                                                                         .titleGesvet {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
                                                                             font-size: 40px;
                                                                             font-weight: 500;
                                                                             line-height: 50px;
                                                                             color: #FFFFFF;
-
-
                                                                         }
                                                                         .titlecartasDos {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
@@ -208,7 +176,6 @@
                                                                             font-weight: 600;
                                                                             line-height: 50px;
                                                                             color: #FFFFFF;
-
                                                                         }
                                                                         .titlecartaSel {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
@@ -216,7 +183,6 @@
                                                                             font-weight: 600;
                                                                             line-height: 50px;
                                                                             color: #000000;
-
                                                                         }
                                                                         .titlecartaUna {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
@@ -224,7 +190,6 @@
                                                                             font-weight: 500;
                                                                             line-height: 50px;
                                                                             color: #000000;
-
                                                                         }
                                                                         .titlecartaSel2 {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
@@ -232,7 +197,6 @@
                                                                             font-weight: 600;
                                                                             line-height: 20px;
                                                                             color: #000000;
-
                                                                         }
                                                                         .encabezadosCategoria {
                                                                             font-family: 'Montserrat', Arial, sans-serif;
@@ -242,37 +206,26 @@
                                                                             line-height: 50px;
                                                                             color: #FFFFFF;
                                                                             text-align: center;
-
                                                                             .titlecartaLetra{
                                                                                 font-family: 'Montserrat', Arial, sans-serif;
                                                                                 font-size: 15px;
                                                                                 font-weight: 500;
                                                                                 line-height: 20px;
                                                                                 color: #000000;
-
                                                                             }
-
                                                                         </style>
                                                                         </head>
-
-                                                                        <body style="background-color: #2FC0D5;">
-
+                                                                        <body style="background-color: #F4F4F4;">
                                                                             <!-- ======= Header ======= -->
                                                                             <header id="header" class="header fixed-top d-flex align-items-center">
-
                                                                                 <div class="d-flex align-items-center justify-content-between">
-                                                                                    <a href="index.html" class="logo d-flex align-items-center">
-                                                                                        <img src="assets/img/logoGesVet.png">
-                                                                                            <span class="d-none d-lg-block">GesVet</span>
+                                                                                    <a class="logo d-flex align-items-center">
+                                                                                        <img src="./assets/img/logo.svg" alt="" width="200px" heigth="300px">
                                                                                     </a>
                                                                                     <i class="bi bi-list toggle-sidebar-btn"></i>
                                                                                 </div><!-- End Logo -->
-
-
-
                                                                                 <nav class="header-nav ms-auto">
                                                                                     <ul class="d-flex align-items-center">
-
                                                                                         <li class="nav-item d-block d-lg-none">
                                                                                             <a class="nav-link nav-icon search-bar-toggle " href="#">
                                                                                                 <i class="bi bi-search"></i>
@@ -286,31 +239,19 @@
                                                                                             <i class="bi bi-whatsapp"></i>   
                                                                                             <span class="badge bg-primary badge-number"></span>
                                                                                         </a>
-
-
-
-
                                                                                         <li class="nav-item dropdown pe-3">
-
                                                                                             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                                                                                                 <img th:src="@{'/images/' + ${userDto.imagen}}" th:alt="${userDto.imagen}" class="rounded-circle"/>
-
-
-
-
                                                                                                 <span class="d-none d-md-block dropdown-toggle ps-2"th:text="${userdetail.nombre}"></span>
                                                                                             </a><!-- End Profile Iamge Icon -->
-
                                                                                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                                                                                 <li class="dropdown-header">
                                                                                                     <h6  th:text="${userdetail.nombre}"></h6>
                                                                                                     <span>Usuario</span>
                                                                                                 </li>
-
                                                                                                 <li>
                                                                                                     <hr class="dropdown-divider">
                                                                                                 </li>
-
                                                                                                 <li>
                                                                                                     <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
                                                                                                         <i class="bi bi-person"></i>
@@ -320,7 +261,6 @@
                                                                                                 <li>
                                                                                                     <hr class="dropdown-divider">
                                                                                                 </li>
-
                                                                                                 <li>
                                                                                                     <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
                                                                                                         <i class="bi bi-gear"></i>
@@ -330,7 +270,6 @@
                                                                                                 <li>
                                                                                                     <hr class="dropdown-divider">
                                                                                                 </li>
-
                                                                                                 <li>
                                                                                                     <a class="dropdown-item d-flex align-items-center" href="#">
                                                                                                         <i class="bi bi-question-circle"></i>
@@ -340,27 +279,20 @@
                                                                                                 <li>
                                                                                                     <hr class="dropdown-divider">
                                                                                                 </li>
-
                                                                                                 <li>
                                                                                                     <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
                                                                                                         <i class="bi bi-box-arrow-right"></i>
                                                                                                         <span>Salir</span>
                                                                                                     </a>
                                                                                                 </li>
-
                                                                                             </ul><!-- End Profile Dropdown Items -->
                                                                                         </li><!-- End Profile Nav -->
-
                                                                                     </ul>
                                                                                 </nav><!-- End Icons Navigation -->
-
                                                                             </header><!-- End Header -->
-
                                                                             <!-- ======= Sidebar ======= -->
                                                                             <aside id="sidebar" class="sidebar">
-
                                                                                 <ul class="sidebar-nav" id="sidebar-nav">
-
                                                                                     <li class="nav-item">
                                                                                         <a class="nav-link collapsed" th:href="@{/home}">
                                                                                             <i class="bi bi-house"></i>
@@ -393,8 +325,13 @@
                                                                                     </li>
                                                                                     <li class="nav-item">
                                                                                         <a class="nav-link collapsed" th:href="@{/getCart}">
-                                                                                            <i class="bi bi-cart2"></i>
+                                                                                            <i class="bi bi-cart4"></i>
                                                                                             <span>Carrito de compras</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li class="nav-item">
+                                                                                        <a class="nav-link collapsed" th:href="@{/comprasUser}">
+                                                                                            <i class="bi bi-bag-check"></i>                                                                                            <span>Compras</span>
                                                                                         </a>
                                                                                     </li>
                                                                                     <li class="nav-item">
@@ -403,113 +340,64 @@
                                                                                             <span>Centro de ayuda</span>
                                                                                         </a>
                                                                                     </li><!-- End Dashboard Nav -->
-
-
                                                                                 </ul>
                                                                             </aside>
-
-
-                                                                            <main id="main" class="main">
-
-                                                                                <div class="pagetitle">
-
-                                                                                    <nav>
-                                                                                        <ol class="breadcrumb">
-                                                                                            <li class="breadcrumb-item titlecartaSel "><a href="inicio.html">Inicio</a></li>
-                                                                                            <li class="breadcrumb-item titlecartaSel ">Perfil</li>
-                                                                                        </ol>
-                                                                                    </nav>
-                                                                                </div><!-- End Page Title -->
-
-                                                                                <div class="pagetitle">
-
-                                                                                    <nav>
-
-                                                                                    </nav>
-                                                                                </div><!-- End Page Title -->
-
+                                                                            <main id="main" class="main">          
                                                                                 <section class="section profile">
                                                                                     <div class="row">
                                                                                         <div class="col-xl-4">
-
                                                                                             <div class="card">
                                                                                                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                                                                                                     <img th:src="@{'/images/' + ${userDto.imagen}}" th:alt="${userDto.imagen}" class="rounded-circle"/>
-
-
-
-
                                                                                                     <h2 th:text="${userdetail.nombre}"></h2>
                                                                                                     <h3>Usuario</h3>
-
                                                                                                 </div>
                                                                                             </div>
-
                                                                                         </div>
-
                                                                                         <div class="col-xl-8">
-
                                                                                             <div class="card">
                                                                                                 <div class="card-body pt-3">
                                                                                                     <!-- Bordered Tabs -->
                                                                                                     <ul class="nav nav-tabs nav-tabs-bordered">
-
                                                                                                         <li class="nav-item titlecartaSel2">
                                                                                                             <button class="nav-link active " data-bs-toggle="tab"
                                                                                                                     data-bs-target="#profile-overview">Perfil</button>
                                                                                                         </li>
-
                                                                                                         <li class="nav-item  titlecartaSel2">
                                                                                                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Modificar</button>
                                                                                                         </li>
-
                                                                                                         <li class="nav-item  titlecartaSel2 ">
                                                                                                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Cambiar
                                                                                                                 contraseña</button>
                                                                                                         </li>
-
                                                                                                         <li class="nav-item  titlecartaSel2">
                                                                                                             <button class="nav-link" data-bs-toggle="tab"
                                                                                                                     data-bs-target="#profile-change-password">Eliminar</button>
                                                                                                         </li>
-
                                                                                                     </ul>
                                                                                                     <div class="tab-content pt-2">
-
                                                                                                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
                                                                                                             <h5 class="titlecartaUna">Acerca de</h5>
                                                                                                             <p class="small fst-italic texto2" th:text="${userdetail.acercade}"></p>
-
                                                                                                             <h5 class="textcartas">Detalles del perfil</h5>
-
                                                                                                             <div class="row align-items-center">
                                                                                                                 <div class="col-lg-3 col-md-4 titlecartaUna">Nombre</div>
                                                                                                                 <div class="col-lg-9 col-md-8" th:text="${userdetail.nombre}"></div>
                                                                                                             </div>
-
                                                                                                             <div class="row align-items-center">
                                                                                                                 <div class="col-lg-3 col-md-4 titlecartaUna">Apellidos</div>
                                                                                                                 <div  class="col-lg-9 col-md-8" th:text="${userdetail.apellido}"></div>
                                                                                                             </div>
-
                                                                                                             <div class="row align-items-center">
                                                                                                                 <div class="col-lg-3 col-md-4 titlecartaUna">Dirección</div>
                                                                                                                 <div class="col-lg-9 col-md-8"th:text="${userdetail.direccion}"></div>
                                                                                                             </div>
-
                                                                                                             <div class="row align-items-center">
                                                                                                                 <div class="col-lg-3 col-md-4 titlecartaUna">Teléfono</div>
                                                                                                                 <div  class="col-lg-9 col-md-8" th:text="${userdetail.telefono}"></div>
                                                                                                             </div>
-
-
-
-
-
                                                                                                         </div>
-
                                                                                                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
                                                                                                             <!-- Profile Edit Form -->
                                                                                                             <form th:action="@{/perfil/editar}" th:object="${userDto}" enctype="multipart/form-data"  method="post" onsubmit="return validarFormulario()">
                                                                                                                 <!-- ... (otros campos) -->
@@ -520,20 +408,15 @@
                                                                                                                     <div class="col-md-8 col-lg-9">
                                                                                                                         <img th:src="@{'/images/' + ${userDto.imagen}}" th:alt="${userDto.imagen}" class="rounded-circle"/>
                                                                                                                         <div class="pt-2">
-
                                                                                                                             <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);">
                                                                                                                                 <input type="image" src="./img/image 90.png" alt="" style="width: 25px;" onclick="document.getElementById('imagen').click(); return false;">
                                                                                                                                     <!-- Agrega este elemento img para mostrar la vista previa -->
                                                                                                                                     <img id="vistaPrevia" src="#" alt="Vista Previa de la Imagen" style="display: none;
                                                                                                                                          max-width: 100%;" />
-
-
-                                                                                                                                    <!--     <a href="#" class="btn  btn-sm" title="Remove my profile image"><img class=""
-                                                                                                                                                                                                        src="./img/image 57.png" alt="" style="width: 15px ;"></a> -->
+                                                                                                                                    <!--     <a href="#" class="btn  btn-sm" title="Remove my profile image"><img class=""                                                                                                                                                                                                  src="./img/image 57.png" alt="" style="width: 15px ;"></a> -->
                                                                                                                                     </div>
                                                                                                                                     </div>
                                                                                                                                     </div>
-
                                                                                                                                     <div class="row mb-3">
                                                                                                                                         <label for="about" class="col-md-4 col-lg-3 col-form-label titlecartaUna" style="color:#000000">Acerca de</label>
                                                                                                                                             <div class="col-md-8 col-lg-9">
@@ -541,7 +424,6 @@
                                                                                                                                                 <small id="errorAcercade" class="texto2"></small>
                                                                                                                                             </div>
                                                                                                                                         </div>
-
                                                                                                                                         <div class="row mb-3  align-items-center ">
                                                                                                                                             <label for="fullName" class="col-md-4 col-lg-3 col-form-label titlecartaUna" style="color: black;">Nombres</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
@@ -549,7 +431,6 @@
                                                                                                                                             <small id="errorNombre" class="text-danger"></small>
                                                                                                                                         </div>
                                                                                                                                     </div>
-
                                                                                                                                     <div class="row mb-3  align-items-center">
                                                                                                                                         <label for="company" class="col-md-4 col-lg-3 col-form-label titlecartaUna" style="color: black;">Apellidos</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
@@ -557,7 +438,6 @@
                                                                                                                                             <small id="errorApellido" class="text-danger"></small>
                                                                                                                                         </div>
                                                                                                                                     </div>
-
                                                                                                                                     <div class="row mb-3  align-items-center">
                                                                                                                                         <label for="company" class="col-md-4 col-lg-3 col-form-label titlecartaUna" style="color: black;">Dirección</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
@@ -565,7 +445,6 @@
                                                                                                                                             <small id="errorDireccion" class="text-danger"></small>
                                                                                                                                         </div>
                                                                                                                                     </div>
-
                                                                                                                                     <div class="row mb-3  align-items-center">
                                                                                                                                         <label for="Job" class="col-md-4 col-lg-3 col-form-label titlecartaUna" style="color: black;">Teléfono</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
@@ -573,9 +452,6 @@
                                                                                                                                             <small id="errorTelefono" class="text-danger"></small>
                                                                                                                                         </div>
                                                                                                                                     </div>
-
-
-
                                                                                                                                     <div class="text-center">
                                                                                                                                         <button type="submit" class="btn c w-50 texto2" style="background-color: #2FD6B4;
                                                                                                                                                 color: black;
@@ -586,12 +462,8 @@
                                                                                                                                                 padding: 10px;"><strong>Modificar</strong></button>
                                                                                                                                     </div>
                                                                                                                                     </form>
-
-
                                                                                                                                     </div>
-
                                                                                                                                     <div class="tab-pane fade pt-3" id="profile-settings">
-
                                                                                                                                         <form action="/perfil/cambiar-contrasena" method="post" onsubmit="return validarContrasena()">
                                                                                                                                             <div class="row mb-3 align-items-center">
                                                                                                                                                 <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label titlecartaLetra">Contraseña actual</label>
@@ -599,22 +471,18 @@
                                                                                                                                                     <input name="currentPassword" type="password" class="form-control col-sm-6" id="currentPassword" required>
                                                                                                                                                 </div>
                                                                                                                                             </div>
-
-
                                                                                                                                             <div class="row mb-3 align-items-center">
                                                                                                                                                 <label for="newPassword" class="col-md-4 col-lg-3 col-form-label titlecartaLetra">Contraseña nueva</label>
                                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                                     <input name="newPassword" type="password" class="form-control" id="newPassword" required>
                                                                                                                                                 </div>
                                                                                                                                             </div>
-
                                                                                                                                             <div class="row mb-3 align-items-center">
                                                                                                                                                 <label for="confirmNewPassword" class="col-md-4 col-lg-3 col-form-label titlecartaLetra">Confirmar contraseña</label>
                                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                                     <input name="confirmNewPassword" type="password" class="form-control" id="confirmNewPassword" required>
                                                                                                                                                 </div>
                                                                                                                                             </div>
-
                                                                                                                                             <div class="text-center">
                                                                                                                                                 <button type="submit" class="btn c w-50 texto2" style="background-color: #2FD6B4;
                                                                                                                                                         color: black;
@@ -625,13 +493,10 @@
                                                                                                                                                         padding: 10px;"><strong>Cambiar contraseña</strong></button>
                                                                                                                                             </div>
                                                                                                                                         </form><!-- End Change Password Form -->
-
                                                                                                                                     </div>
-
                                                                                                                                     <div class="tab-pane fade pt-3" id="profile-change-password">
                                                                                                                                         <!-- Change Password Form -->
                                                                                                                                         <form id="eliminarCuentaForm" action="/perfil/eliminar-cuenta" method="post">
-
                                                                                                                                             <div class="row mb-3  align-items-center">
                                                                                                                                                 <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label titlecartaSel2"
                                                                                                                                                        style="text-align: center;">¿Desea eliminar la cuenta?</label>
@@ -639,21 +504,16 @@
                                                                                                                                                     <button type="button" class="btn btn-danger" style="color: black;" onclick="confirmarEliminacion()">Eliminar Cuenta</button>
                                                                                                                                                 </div>
                                                                                                                                             </div>
-
                                                                                                                                             <p class="small  texto2" style="color: black;">🚨 Advertencia importante: Eliminación de cuenta 🚨
                                                                                                                                                 <br>
                                                                                                                                                     <br>
-
                                                                                                                                                         Estimado usuario:
                                                                                                                                                         <br>
                                                                                                                                                             <br>
-
-
                                                                                                                                                                 Al optar por eliminar tu cuenta, queremos informarte que esta será desactivada 
                                                                                                                                                                 y no se eliminará por completo de nuestra plataforma. Esto significa que tus datos y perfil no
                                                                                                                                                                 serán accesibles para otros usuarios, pero permanecerán en nuestra base de datos. 
                                                                                                                                                                 <br>
-
                                                                                                                                                                     Si en algún momento decides regresar, podrás activar tu cuenta nuevamente simplemente 
                                                                                                                                                                     iniciando sesión con tus credenciales anteriores. Sin embargo, para garantizar la seguridad
                                                                                                                                                                     de tu cuenta y proteger tu información, requerimos que solicites la activación de tu cuenta 
@@ -661,42 +521,29 @@
                                                                                                                                                                         href="mailto:soportegesvet@gmail.com">soportegesvet@gmail.com</a> antes de iniciar sesión. Esta opción te permite volver a 
                                                                                                                                                                     utilizar nuestros servicios sin perder tu historial o configuraciones previas.
                                                                                                                                                                     <br>
-
                                                                                                                                                                         Si en algún momento decides regresar, podrás activar tu cuenta nuevamente simplemente
                                                                                                                                                                         iniciando sesión con tus credenciales anteriores. Esta opción te permite volver a utilizar
                                                                                                                                                                         nuestros servicios sin perder tu historial o configuraciones previas.
                                                                                                                                                                         <br>
                                                                                                                                                                             <br>
-
                                                                                                                                                                                 Agradecemos tu comprensión y te recordamos que siempre estaremos aquí para ayudarte si cambias de opinión o necesitas asistencia.
                                                                                                                                                                                 <br>
                                                                                                                                                                                     <br>
-
                                                                                                                                                                                         Atentamente,
                                                                                                                                                                                         <br>
                                                                                                                                                                                             El equipo de soporte.
                                                                                                                                                                                             </p>
-
-
                                                                                                                                                                                             </form><!-- End Change Password Form -->
-
                                                                                                                                                                                             </div>
-
                                                                                                                                                                                             </div><!-- End Bordered Tabs -->
-
                                                                                                                                                                                             </div>
                                                                                                                                                                                             </div>
-
                                                                                                                                                                                             </div>
                                                                                                                                                                                             </div>
                                                                                                                                                                                             </section>
-
                                                                                                                                                                                             </main><!-- End #main -->
-
-
                                                                                                                                                                                             <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                                                                                                                                                                                                     class="bi bi-arrow-up-short"></i></a>
-
                                                                                                                                                                                             <!-- Vendor JS Files -->
                                                                                                                                                                                             <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
                                                                                                                                                                                             <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -716,7 +563,6 @@
                                                                                                                                                             text: 'Datos modificados correctamente'
                                                                                                                                                         });
                                                                                                                                                                                             </script>
-
                                                                                                                                                                                             <script th:if="${errorModificacion}">
                                                                                                                                                                                                 Swal.fire({
                                                                                                                                                                                                     icon: 'error',
@@ -724,7 +570,6 @@
                                                                                                                                                                                                     text: 'Hubo un problema al modificar los datos'
                                                                                                                                                                                                 });
                                                                                                                                                                                             </script>
-
                                                                                                                                                                                             <script th:if="${errorContrasena}" >
                                                                                                                                                                                                 Swal.fire({
                                                                                                                                                                                                     icon: 'error',
@@ -732,7 +577,6 @@
                                                                                                                                                                                                     text: 'Contraseña actual incorrecta',
                                                                                                                                                                                                 });
                                                                                                                                                                                             </script>
-
                                                                                                                                                                                             <script th:if="${errorContrasenaConfirmacion}">
                                                                                                                                                                                                 Swal.fire({
                                                                                                                                                                                                     icon: 'error',
@@ -759,15 +603,12 @@
                                                                                                                                                                                                 function mostrarVistaPrevia(input) {
                                                                                                                                                                                                     var vistaPrevia = document.getElementById('vistaPrevia');
                                                                                                                                                                                                     var file = input.files[0];
-
                                                                                                                                                                                                     if (file) {
                                                                                                                                                                                                         var reader = new FileReader();
-
                                                                                                                                                                                                         reader.onload = function (e) {
                                                                                                                                                                                                             vistaPrevia.src = e.target.result;
                                                                                                                                                                                                             vistaPrevia.style.display = 'block';
                                                                                                                                                                                                         };
-
                                                                                                                                                                                                         reader.readAsDataURL(file);
                                                                                                                                                                                                     }
                                                                                                                                                                                                 }
@@ -780,12 +621,5 @@
                                                                                                                                                                                                 });
                                                                                                                                                                                             </script>
                                                                                                                                                                                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-
-
-
-
-
                                                                                                                                                                                             </body>
-
                                                                                                                                                                                             </html>
