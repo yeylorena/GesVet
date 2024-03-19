@@ -366,10 +366,10 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr th:each="detalle:${detalles}">
-                                                            <td  th:text="${detalle.cantidad}"></td>
+                                                            <td  th:text="${detalle.cantidad}" class="cantidadProducto"></td>
                                                             <td th:text="${detalle.nombre}"></td>
-                                                            <td th:text="${detalle.precio}"></td>
-                                                            <td th:text="${detalle.total}"></td>
+                                                            <td th:text="${detalle.precio}" class="precio5"></td>
+                                                            <td th:text="${detalle.total}" class="precio4"></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -394,5 +394,76 @@
         <div th:replace="Plantillas/usuario :: scripts"></div>
 
     </main><!-- End #main -->
+    
+    <script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener("DOMContentLoaded", function () {
+                var precios = document.querySelectorAll('.precio4');
+
+                precios.forEach(function (precioElement) {
+                    var valorProducto = precioElement.textContent.trim();
+                    var valor = parseFloat(valorProducto);
+
+                    if (!isNaN(valor)) {
+                        valor = Math.round(valor);
+                        var valorFormateado = valor.toLocaleString('es-CO', {
+                            style: 'currency',
+                            currency: 'COP',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        });
+                        precioElement.textContent = valorFormateado;
+                    }
+                });
+            });
+            /*]]>*/
+        </script>
+<script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener("DOMContentLoaded", function () {
+                var precios = document.querySelectorAll('.precio5');
+
+                precios.forEach(function (precioElement) {
+                    var valorProducto = precioElement.textContent.trim();
+                    var valor = parseFloat(valorProducto);
+
+                    if (!isNaN(valor)) {
+                        valor = Math.round(valor);
+                        var valorFormateado = valor.toLocaleString('es-CO', {
+                            style: 'currency',
+                            currency: 'COP',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        });
+                        precioElement.textContent = valorFormateado;
+                    }
+                });
+            });
+            /*]]>*/
+        </script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener todas las celdas con la clase "cantidadProducto"
+        var cantidadProductoCells = document.querySelectorAll('.cantidadProducto');
+
+        // Iterar sobre cada celda y aplicar el formateo
+        cantidadProductoCells.forEach(function (cell) {
+            // Obtener el valor de la cantidad del contenido de la celda
+            var valorCantidad = cell.textContent.trim();
+
+            // Parsear el valor de la cantidad a un número flotante
+            var valor = parseFloat(valorCantidad);
+
+            // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
+            if (!isNaN(valor)) {
+                var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
+                cell.textContent = valorSinDecimales;
+            }
+        });
+    });
+    /*]]>*/
+</script>
+
 </body>
 </html>

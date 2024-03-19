@@ -357,7 +357,7 @@
 
                                                                         <div class="pagetitle">
 
-                                                                            
+
                                                                         </div><!-- End Page Title -->
 
                                                                         <div class="pagetitle">
@@ -407,9 +407,9 @@
 
 
                                                                                                                     <td th:text="${detalle[0]}"></td>
-                                                                                                                    <td th:text="${detalle[1]}"></td>
-                                                                                                                    <td th:text="${detalle[2]}"></td>
-                                                                                                                    <td th:text="${detalle[3]}"></td>
+                                                                                                                    <td class="productoCantidad" th:text="${detalle[1]}"></td>
+                                                                                                                    <td id="precio5" th:text="${detalle[2]}"></td>
+                                                                                                                    <td id="precio5" th:text="${detalle[3]}"></td>
                                                                                                                 </tr>
                                                                                                                 <!-- Fila con el total de ventas -->
                                                                                                                 <tr>
@@ -418,7 +418,7 @@
                                                                                                                     <td></td>
                                                                                                                     <td><strong>Total del dia:</strong></td>
                                                                                                                     <!-- Mostrar el totalVentas calculado en el controlador -->
-                                                                                                                    <td th:text="${totalFacturas}"></td>
+                                                                                                                    <td id="precio3" th:text="${totalFacturas}"></td>
                                                                                                                 </tr>
                                                                                                             </tbody>
                                                                                                         </table>
@@ -462,6 +462,83 @@
                                                                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
                                                                     <!-- Template Main JS File -->
                                                                     <script src="assets/js/main.js"></script>
+                                                                    <script th:inline="javascript">
+                                                                        /*<![CDATA[*/
+                                                                        document.addEventListener("DOMContentLoaded", function () {
+                                                                            // Obtén todos los elementos con el ID 'precio5'
+                                                                            var precioElements = document.querySelectorAll('#precio5');
+
+                                                                            // Itera sobre cada elemento y formatea su contenido
+                                                                            precioElements.forEach(function (precioElement) {
+                                                                                // Obtén el valor de la venta total del contenido del elemento <td>
+                                                                                var valorProducto = precioElement.textContent.trim();
+                                                                                var valor = parseFloat(valorProducto);
+
+                                                                                // Si el valor es válido, formatea y actualiza el contenido del elemento <td>
+                                                                                if (!isNaN(valor)) {
+                                                                                    valor = Math.round(valor);
+                                                                                    var valorFormateado = valor.toLocaleString('es-CO', {
+                                                                                        style: 'currency',
+                                                                                        currency: 'COP',
+                                                                                        minimumFractionDigits: 0,
+                                                                                        maximumFractionDigits: 0
+                                                                                    });
+                                                                                    precioElement.textContent = valorFormateado;
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                        /*]]>*/
+                                                                    </script>
+                                                                    <script th:inline="javascript">
+                                                                        /*<![CDATA[*/
+                                                                        document.addEventListener("DOMContentLoaded", function () {
+                                                                            // Obtén todos los elementos con el ID 'precio5'
+                                                                            var precioElements = document.querySelectorAll('#precio3');
+
+                                                                            // Itera sobre cada elemento y formatea su contenido
+                                                                            precioElements.forEach(function (precioElement) {
+                                                                                // Obtén el valor de la venta total del contenido del elemento <td>
+                                                                                var valorProducto = precioElement.textContent.trim();
+                                                                                var valor = parseFloat(valorProducto);
+
+                                                                                // Si el valor es válido, formatea y actualiza el contenido del elemento <td>
+                                                                                if (!isNaN(valor)) {
+                                                                                    valor = Math.round(valor);
+                                                                                    var valorFormateado = valor.toLocaleString('es-CO', {
+                                                                                        style: 'currency',
+                                                                                        currency: 'COP',
+                                                                                        minimumFractionDigits: 0,
+                                                                                        maximumFractionDigits: 0
+                                                                                    });
+                                                                                    precioElement.textContent = valorFormateado;
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                        /*]]>*/
+                                                                    </script>
+                                                                    <script th:inline="javascript">
+                                                                        /*<![CDATA[*/
+                                                                        document.addEventListener("DOMContentLoaded", function () {
+                                                                            // Obtener todas las celdas con la clase "productoCantidad"
+                                                                            var productoCantidadCells = document.querySelectorAll('.productoCantidad');
+
+                                                                            // Iterar sobre cada celda y aplicar el formateo
+                                                                            productoCantidadCells.forEach(function (cell) {
+                                                                                // Obtener el valor del producto del contenido de la celda
+                                                                                var valorProducto = cell.textContent.trim();
+
+                                                                                // Parsear el valor del producto a un número flotante
+                                                                                var valor = parseFloat(valorProducto);
+
+                                                                                // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
+                                                                                if (!isNaN(valor)) {
+                                                                                    var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
+                                                                                    cell.textContent = valorSinDecimales;
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                        /*]]>*/
+                                                                    </script>
 
 
                                                                 </body>

@@ -373,7 +373,7 @@
                                                 </div>
                                                 <div class="col-6 ">
                                                     <label>Precio:</label>
-                                                     <input type="number" name="precio" field="" class="form-control" step="0.01" min="0" required autocomplete="off">
+                                                     <input type="number" name="precio" field="" class="form-control" id="precioInput" step="0.01" min="0" required autocomplete="off">
                                                 </div>
                                             </div>
                                         </div>
@@ -438,5 +438,44 @@
         <div th:replace="Plantillas/administrador :: scripts"></div>
 
     </main><!-- End #main -->
+           <script>
+            // Función para formatear el número visualmente mientras se escribe
+            function formatNumberVisual(inputValue) {
+                // Eliminar todos los caracteres no numéricos
+                let numericValue = inputValue.replace(/\D/g, '');
+                // Agregar puntos de mil al valor numérico
+                return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
+            // Función para obtener el valor numérico sin formato
+            function getNumericValue(inputValue) {
+                return inputValue.replace(/\D/g, '');
+            }
+
+            // Obtener el campo de entrada
+            const precioInput = document.getElementById('precioInput');
+
+            // Evento input para detectar cambios en el campo
+            precioInput.addEventListener('input', function (e) {
+                // Obtener el valor del campo
+                let inputValue = e.target.value;
+                // Obtener el valor numérico sin formato
+                let numericValue = getNumericValue(inputValue);
+                // Formatear el valor visualmente
+                let formattedValue = formatNumberVisual(numericValue);
+                // Asignar el valor formateado de nuevo al campo
+                e.target.value = formattedValue;
+            });
+
+            // Evento submit del formulario
+            document.querySelector('form').addEventListener('submit', function (e) {
+                // Obtener el campo de entrada
+                const precioInput = document.getElementById('precioInput');
+                // Obtener el valor numérico sin formato
+                let numericValue = getNumericValue(precioInput.value);
+                // Asignar el valor numérico sin formato al campo antes de enviar el formulario
+                precioInput.value = numericValue;
+            });
+        </script>
 </body>
 </html>

@@ -372,11 +372,10 @@
                                                         <label>Imagen:</label>
                                                         <input type="file" name="img" field="" id="img" class="form-control" >
                                                     </div>
-                                                    <div class="col-6 ">
-                                                        <label>Precio:</label>
-                                                        <input type="number" name="precio" field="" th:value="${serviciouser.precio}" class="form-control" required autocomplete="off">
-                                                            
-                                                    </div>
+                                                  <div class="col-6">
+    <label for="precio">Precio:</label>
+    <input type="text" id="precio" name="precio" th:value="${serviciouser.precio}" class="form-control" required autocomplete="off">
+</div>
                                                 </div>
                                             </div>
 
@@ -443,5 +442,58 @@
         <div th:replace="Plantillas/administrador :: scripts"></div>
 
     </main><!-- End #main -->
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    // Función para formatear el número visualmente mientras se escribe
+    function formatNumberVisual(inputValue) {
+        // Eliminar todos los caracteres no numéricos
+        let numericValue = inputValue.replace(/\D/g, '');
+        // Agregar puntos de mil al valor numérico
+        return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // Función para obtener el valor numérico sin formato
+    function getNumericValue(inputValue) {
+        return inputValue.replace(/\D/g, '');
+    }
+
+    // Obtén el elemento input por su identificador único
+    var precioInput = document.getElementById("precio");
+
+    // Evento input para detectar cambios en el campo
+    precioInput.addEventListener('input', function (e) {
+        // Obtener el valor del campo
+        let inputValue = e.target.value;
+        // Formatear el valor visualmente
+        let formattedValue = formatNumberVisual(inputValue);
+        // Asignar el valor formateado de nuevo al campo
+        e.target.value = formattedValue;
+    });
+
+    // Evento submit del formulario
+    document.querySelector('form').addEventListener('submit', function (e) {
+        // Obtener el campo de entrada
+        const precioInput = document.getElementById('precio');
+        // Obtener el valor numérico sin formato
+        let numericValue = getNumericValue(precioInput.value);
+        // Asignar el valor numérico sin formato al campo antes de enviar el formulario
+        precioInput.value = numericValue;
+    });
+
+    // Ejecutar la función de formateo visual al cargar la página
+    var valorServicio = precioInput.value.trim();
+    var valor = parseFloat(valorServicio);
+    if (!isNaN(valor)) {
+        valor = Math.round(valor); // Redondea al entero más cercano
+        var valorFormateado = valor.toLocaleString('es-CO', {
+            style: 'currency',
+            currency: 'COP',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+        precioInput.value = valorFormateado;
+    }
+    /*]]>*/
+</script>
 </body>
 </html>

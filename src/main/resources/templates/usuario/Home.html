@@ -351,6 +351,7 @@
                                                                                 <div class="card-body">
                                                                                     <h5 class="card-title text-center" th:text="${producto.categoria != null ? producto.categoria.nombre : 'N/A'}"></h5>
                                                                                     <p class="card-text text-center" th:text="${producto.nombre}"> </p>
+                                                                                    <p class="precioProducto card-text text-center" th:text="${producto.precio}"></p>
                                                                                     <p class="card-stock text-center">
                                                                                         <!-- Usar expresión Thymeleaf para mostrar "Activo" o "Inactivo" -->
                                                                                         <span th:if="${producto.activo}">Disponible</span>
@@ -387,6 +388,33 @@
 
                                                                 });
                                                             </script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener todas las etiquetas <p> con la clase "precioProducto"
+        var precioProductoElements = document.querySelectorAll('.precioProducto');
+
+        // Iterar sobre cada etiqueta y aplicar el formateo
+        precioProductoElements.forEach(function (element) {
+            // Obtener el valor del precio del contenido de la etiqueta <p>
+            var valorPrecio = element.textContent.trim();
+
+            // Parsear el valor del precio a un número flotante
+            var valor = parseFloat(valorPrecio);
+
+            // Si el valor es válido, formatear y actualizar el contenido de la etiqueta <p>
+            if (!isNaN(valor)) {
+                var valorFormateado = valor.toLocaleString('es-CO', {
+                    style: 'decimal',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                element.textContent = valorFormateado;
+            }
+        });
+    });
+    /*]]>*/
+</script>
 
                                                                 </main><!-- End #main -->
                                                                 </body>

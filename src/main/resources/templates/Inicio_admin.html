@@ -336,9 +336,9 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/compras}">
+                    <a class="nav-link collapsed" th:href="@{/getCartadmin}">
                         <i class="bi bi-bag-plus"></i>
-                        <span>Gestión compras</span>
+                        <span>Carrito</span>
                     </a>
                 </li>
 
@@ -362,48 +362,9 @@
         <main id="main" class="main">
 
 
-            <div class="container py-4 ">
+          
 
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4 justify-content-center">
-                    
-                    <div class="col">
-                        <div id="perfil" class="card h-93 img-green card-hover">
-                            <div class="card-body img-green">
-                                <h5 id="card-left" class="card-title " th:text="'$' + ${totalCompras}"></h5>
-                                <p id="card-left" class="card-text small">Total de las compras</p>
-                            </div>
-                            <a id="masinfo" th:href="@{/totalcompras}" type="button" class="btn img-green-2">Mas Info <i
-                                    class="fa-solid fa-circle-down fa-rotate-270" ></i></a>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div id="perfil" class="card h-93 img-yellow card-hover">
-                            <div class="card-body img-yellow">
-                                <h5 id="card-left" class="card-title " th:text="'$' + ${totalVentas}"></h5>
-                                <p id="card-left" class="card-text small"> Total de las Ventas</p>
-                            </div>
-                            <a id="masinfo" th:href="@{/totalventas}"  type="button" class="btn img-yellow-2">Mas Info <i
-                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="col">
-                        <div id="perfil" class="card h-93 img-gris card-hover">
-                            <div class="card-body img-gris">
-                                <h5 id="card-left" class="card-title " th:text="'$' + ${totalFacturas}"></h5>
-                                <p id="card-left" class="card-text small"> Facturación diaria</p>
-                            </div>
-                            <a id="masinfo" th:href="@{/totalfacturas}" type="button" class="btn img-gris-2">Mas Info<i
-                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- ... (resto de las tarjetas) -->
-                </div>
-            </div>
-
-
-            <divc class="row py-3">
+            <div class="row py-3">
                 <div class="col-lg-12">
                     <div id="carouselExample" class="carousel slide">
                         <div class="carousel-inner">
@@ -416,6 +377,46 @@
                     </div>
                 </div>
                 </div>
+            
+  <div class="container py-4 ">
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-4 justify-content-center">
+                    
+                    <div class="col">
+                        <div id="perfil" class="card h-93 img-green card-hover">
+                            <div class="card-body img-green">
+                                <h5 id="card-left" class="card-title "  th:text=" ${totalCompras}"></h5>
+                                <p id="card-left" class="card-text small">Total de las compras</p>
+                            </div>
+                            <a id="masinfo" th:href="@{/totalcompras}" type="button" class="btn img-green-2">Mas Info <i
+                                    class="fa-solid fa-circle-down fa-rotate-270" ></i></a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div id="perfil" class="card h-93 img-yellow card-hover">
+                            <div class="card-body img-yellow">
+                                <h5 name="totalVentas" id="card-left" class="card-title " th:text="${totalVentas}"></h5>
+                                <p id="card-left" class="card-text small"> Total de las Ventas</p>
+                            </div>
+                            <a id="masinfo" th:href="@{/totalventas}"  type="button" class="btn img-yellow-2">Mas Info <i
+                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <div id="perfil" class="card h-93 img-gris card-hover">
+                            <div class="card-body img-gris">
+                                <h5 name="totalFacturas" id="card-left" class="card-title " th:text=" ${totalFacturas}"></h5>
+                                <p id="card-left" class="card-text small"> Facturación diaria</p>
+                            </div>
+                            <a id="masinfo" th:href="@{/totalfacturas}" type="button" class="btn img-gris-2">Mas Info<i
+                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- ... (resto de las tarjetas) -->
+                </div>
+            </div>
 
                 <div class="row py-4 justify-content-center">
                     <div class="col-lg-6 justify-content-center">
@@ -443,9 +444,10 @@
     <tbody>
         <tr th:each="producto, iterStat : ${productosMasVendidos}">
             <td th:text="${iterStat.count}"></td>
-            <td th:text="${producto[1]}"></td>
-            <td th:text="${producto[2]}"></td>
-            <td th:text="${producto[3]}"></td> <!-- Venta Total -->
+            <td  th:text="${producto[1]}"></td>
+            <td id="producto1" th:text="${producto[2]}"></td>
+            <td id="precio5" th:text="${producto[3]}"></td> <!-- Venta Total -->
+
             <!-- Añade más columnas según sea necesario -->
         </tr>
     </tbody>
@@ -511,5 +513,131 @@
         <script src="assets/js/main.js"></script>
         <script src="./js/inicio.js"></script>
     </body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtén el elemento <h5> por su identificador único
+        var cardLeftElement = document.getElementById("card-left");
+
+        // Obtén el valor total de compras del contenido del elemento <h5>
+        var valorTotalCompras = cardLeftElement.textContent.trim();
+
+        // Parsea el valor total de compras a un número flotante
+        var totalCompras = parseFloat(valorTotalCompras);
+
+        // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
+        if (!isNaN(totalCompras)) {
+            totalCompras = Math.round(totalCompras); // Redondea al entero más cercano
+            var totalComprasFormateado = totalCompras.toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+            cardLeftElement.textContent = totalComprasFormateado;
+        }
+    });
+    /*]]>*/
+</script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function() {
+        // Selecciona el elemento <h5> por su atributo name
+        var cardLeftElement = document.getElementsByName("totalVentas")[0];
+
+        // Obtén el valor total de ventas del contenido del elemento <h5>
+        var valorTotalVentas = cardLeftElement.textContent.trim();
+
+        // Parsea el valor total de ventas a un número flotante
+        var totalVentas = parseFloat(valorTotalVentas);
+
+        // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
+        if (!isNaN(totalVentas)) {
+            totalVentas = Math.round(totalVentas); // Redondea al entero más cercano
+            var totalVentasFormateado = totalVentas.toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+            cardLeftElement.textContent = totalVentasFormateado;
+        }
+    });
+    /*]]>*/
+</script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function() {
+        // Selecciona el elemento <h5> por su atributo name
+        var cardLeftElement = document.getElementsByName("totalFacturas")[0];
+
+        // Obtén el valor total de ventas del contenido del elemento <h5>
+        var valorTotalVentas = cardLeftElement.textContent.trim();
+
+        // Parsea el valor total de ventas a un número flotante
+        var totalVentas = parseFloat(valorTotalVentas);
+
+        // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
+        if (!isNaN(totalVentas)) {
+            totalVentas = Math.round(totalVentas); // Redondea al entero más cercano
+            var totalVentasFormateado = totalVentas.toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+            cardLeftElement.textContent = totalVentasFormateado;
+        }
+    });
+    /*]]>*/
+</script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtén todos los elementos con el ID 'precio5'
+        var precioElements = document.querySelectorAll('#precio5');
+
+        // Itera sobre cada elemento y formatea su contenido
+        precioElements.forEach(function (precioElement) {
+            // Obtén el valor de la venta total del contenido del elemento <td>
+            var valorProducto = precioElement.textContent.trim();
+            var valor = parseFloat(valorProducto);
+
+            // Si el valor es válido, formatea y actualiza el contenido del elemento <td>
+            if (!isNaN(valor)) {
+                valor = Math.round(valor);
+                var valorFormateado = valor.toLocaleString('es-CO', {
+                    style: 'currency',
+                    currency: 'COP',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                precioElement.textContent = valorFormateado;
+            }
+        });
+    });
+    /*]]>*/
+</script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener el elemento <td> por su ID
+        var producto1Cell = document.getElementById('producto1');
+
+        // Obtener el valor del producto del contenido del elemento <td>
+        var valorProducto = producto1Cell.textContent.trim();
+
+        // Parsear el valor del producto a un número flotante
+        var valor = parseFloat(valorProducto);
+
+        // Si el valor es válido, eliminar los decimales y actualizar el contenido del elemento <td>
+        if (!isNaN(valor)) {
+            var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
+            producto1Cell.textContent = valorSinDecimales;
+        }
+    });
+    /*]]>*/
+</script>
 
 </html>
