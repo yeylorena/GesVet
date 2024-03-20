@@ -1,643 +1,407 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"/>
-
-    <head>
-        <meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-        <title>Admin/Inicio</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
-
-
-        <!-- Google Fonts -->
-        <link href="https://fonts.gstatic.com" rel="preconnect">
-        <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
-
-        <!-- Vendor CSS Files -->
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-        <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-        <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-        <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-        <!-- Template Main CSS File -->
-        <link href="assets/css/style.css" rel="stylesheet">
-        <link href="./css/styles.css" rel="stylesheet">
-        <!-- Favicons -->
-        <link href="../img/productos_servicios/logo.png" rel="icon">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
-
-    <body style="background-color: #2FC0D5;">
-
-        <!-- ======= Header ======= -->
-        <header id="header" class="header fixed-top d-flex align-items-center">
-
-            <div class="d-flex align-items-center justify-content-between">
-                <a href="index.html" class="logo d-flex align-items-center">
-                    <img src="assets/img/logoGesVet.png">
-                    <span class="d-none d-lg-block">GesVet</span>
-                </a>
-                <i class="bi bi-list toggle-sidebar-btn"></i>
-            </div><!-- End Logo -->
-
-
-
-            <nav class="header-nav ms-auto">
-                <ul class="d-flex align-items-center">
-
-                    <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link nav-icon search-bar-toggle " href="#">
-                            <i class="bi bi-search"></i>
-                        </a>
-                    </li><!-- End Search Icon-->
-                    <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
-                        <i class="bi bi-journal-bookmark-fill"></i>
-                        <span class="badge bg-primary badge-number"></span>
-                    </a>
-                    <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
-                        <i class="bi bi-whatsapp"></i>   
-                        <span class="badge bg-primary badge-number"></span>
-                    </a>
-
-                    <!-- comment   <li class="nav-item dropdown">
- 
-                         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                             <i class="bi bi-bell"></i>
-                             <span class="badge bg-primary badge-number">4</span>
-                         </a><!-- End Notification Icon 
- 
-                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                             <li class="dropdown-header">
-                                 Tienes 4 nuevas notificaciones
-                                 <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                             </li>
-                             <li>
-                                 <hr class="dropdown-divider">
-                             </li>
- 
-                             <li class="notification-item">
-                                 <i class="bi bi-exclamation-circle text-warning"></i>
-                                 <div>
-                                     <h4>Lorem Ipsum</h4>
-                                     <p>Quae dolorem earum veritatis oditseno</p>
-                                     <p>30 min. ago</p>
-                                 </div>
-                             </li>
- 
-                             <li>
-                                 <hr class="dropdown-divider">
-                             </li>
- 
-                             <li class="notification-item">
-                                 <i class="bi bi-x-circle text-danger"></i>
-                                 <div>
-                                     <h4>Atque rerum nesciunt</h4>
-                                     <p>Quae dolorem earum veritatis oditseno</p>
-                                     <p>1 hr. ago</p>
-                                 </div>
-                             </li>
- 
-                             <li>
-                                 <hr class="dropdown-divider">
-                             </li>
- 
-                             <li class="notification-item">
-                                 <i class="bi bi-check-circle text-success"></i>
-                                 <div>
-                                     <h4>Sit rerum fuga</h4>
-                                     <p>Quae dolorem earum veritatis oditseno</p>
-                                     <p>2 hrs. ago</p>
-                                 </div>
-                             </li>
- 
-                             <li>
-                                 <hr class="dropdown-divider">
-                             </li>
- 
-                             <li class="notification-item">
-                                 <i class="bi bi-info-circle text-primary"></i>
-                                 <div>
-                                     <h4>Dicta reprehenderit</h4>
-                                     <p>Quae dolorem earum veritatis oditseno</p>
-                                     <p>4 hrs. ago</p>
-                                 </div>
-                             </li>
- 
-                             <li>
-                                 <hr class="dropdown-divider">
-                             </li>
-                             <li class="dropdown-footer">
-                                 <a href="#">Show all notifications</a>
-                             </li>
- 
-                         </ul> End Notification Dropdown Items
- 
-                     </li> End Notification Nav 
- 
-                     <li class="nav-item dropdown">
- 
-                         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                             <i class="bi bi-chat-left-text"></i>
-                             <span class="badge bg-success badge-number">3</span>
-                         </a><!-- End Messages Icon 
- 
-                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                             <li class="dropdown-header">
-                                 You have 3 new messages
-                                 <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                             </li>
-                             <li>
-                                 <hr class="dropdown-divider">
-                             </li>
- 
-                             <li class="message-item">
-                                 <a href="#">
-                                     <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                                     <div>
-                                         <h4>Maria Hudson</h4>
-                                         <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                         <p>4 hrs. ago</p>
-                                     </div>
-                                 </a>
-                             </li>
-                             <li>
-                                 <hr class="dropdown-divider">
-                             </li>
- 
-                             <li class="message-item">
-                                 <a href="#">
-                                     <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                     <div>
-                                         <h4>Anna Nelson</h4>
-                                         <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                         <p>6 hrs. ago</p>
-                                     </div>
-                                 </a>
-                             </li>
-                             <li>
-                                 <hr class="dropdown-divider">
-                             </li>
- 
-                             <li class="message-item">
-                                 <a href="#">
-                                     <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                                     <div>
-                                         <h4>David Muldon</h4>
-                                         <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                         <p>8 hrs. ago</p>
-                                     </div>
-                                 </a>
-                             </li>
-                             <li>
-                                 <hr class="dropdown-divider">
-                             </li>
- 
-                             <li class="dropdown-footer">
-                                 <a href="#">Show all messages</a>
-                             </li>
- 
-                         </ul> End Messages Dropdown Items
- 
-                     </li> End Messages Nav --> 
-
-                    <li class="nav-item dropdown pe-3">
-
-                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <img th:src="${userDto.imagen}" th:alt="${userDto.imagen}" class="rounded-circle"/>
-                            <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${userdetail.nombre}"></span>
-                        </a><!-- End Profile Iamge Icon -->
-
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                            <li class="dropdown-header">
-                                <h6 th:text="${userdetail.nombre}"></h6>
-                                <span>Administrador</span>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center"  th:href="@{/perfil_admin}">
-                                    <i class="bi bi-person"></i>
-                                    <span>Mi perfil</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Configuracion de la Cuenta</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <i class="bi bi-question-circle"></i>
-                                    <span>Nesecitas ayuda?</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    <span>Salir</span>
-                                </a>
-                            </li>
-
-                        </ul><!-- End Profile Dropdown Items -->
-                    </li><!-- End Profile Nav -->
-
-                </ul>
-            </nav><!-- End Icons Navigation -->
-
-        </header><!-- End Header -->
-
-        <!-- ======= Sidebar ======= -->
-        <aside id="sidebar" class="sidebar">
-
-            <ul class="sidebar-nav" id="sidebar-nav">
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/homes}">
-                        <i class="bi bi-house"></i>
-                        <span>Inicio</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/perfil_admin}">
-                        <i class="bi bi-person"></i>
-                        <span>Mi perfil</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/cliente}">
-                        <i class="bi bi-people"></i>
-                        <span>Clientes</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/razas}">
-                        <i class="bi bi-people"></i>
-                        <span>Gestión mascotas</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="atencion_cita.html">
-                        <i class="bi bi-people"></i>
-                        <span>Seguimiento médico</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/citasRapidas}">
-                        <i class="bi bi-calendar-event"></i>
-                        <span>Citas Rápidas</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/listado}">
-                        <i class="bi bi-calendar-event"></i>
-                        <span>Gestión citas</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/admin}">
-                        <i class="bi bi-box2-heart"></i>
-                        <span>Ver Tienda</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/productos}">
-                        <i class="bi bi-box2-heart"></i>
-                        <span>Gestión productos_servicios</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/getCartadmin}">
-                        <i class="bi bi-bag-plus"></i>
-                        <span>Carrito</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/verhomeadmin}">
-                        <i class="bi bi-bag-plus"></i>
-                        <span>Gestión ventas</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/ayuda}">
-                        <i class="bi bi-question-circle"></i>
-                        <span>Ayuda y soporte</span>
-                    </a>
-                </li>
-                <!-- End Dashboard Nav -->
-            </ul>
-        </aside>
-
-        <main id="main" class="main">
-
-
-          
-
-            <div class="row py-3">
-                <div class="col-lg-12">
-                    <div id="carouselExample" class="carousel slide">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="./img/imagenes_inicio/Diseño sin título (34).png" class="d-block w-100" alt="...">
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-                </div>
-            
-  <div class="container py-4 ">
-
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-4 justify-content-center">
-                    
-                    <div class="col">
-                        <div id="perfil" class="card h-93 img-green card-hover">
-                            <div class="card-body img-green">
-                                <h5 id="card-left" class="card-title "  th:text=" ${totalCompras}"></h5>
-                                <p id="card-left" class="card-text small">Total de las compras</p>
-                            </div>
-                            <a id="masinfo" th:href="@{/totalcompras}" type="button" class="btn img-green-2">Mas Info <i
-                                    class="fa-solid fa-circle-down fa-rotate-270" ></i></a>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div id="perfil" class="card h-93 img-yellow card-hover">
-                            <div class="card-body img-yellow">
-                                <h5 name="totalVentas" id="card-left" class="card-title " th:text="${totalVentas}"></h5>
-                                <p id="card-left" class="card-text small"> Total de las Ventas</p>
-                            </div>
-                            <a id="masinfo" th:href="@{/totalventas}"  type="button" class="btn img-yellow-2">Mas Info <i
-                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="col">
-                        <div id="perfil" class="card h-93 img-gris card-hover">
-                            <div class="card-body img-gris">
-                                <h5 name="totalFacturas" id="card-left" class="card-title " th:text=" ${totalFacturas}"></h5>
-                                <p id="card-left" class="card-text small"> Facturación diaria</p>
-                            </div>
-                            <a id="masinfo" th:href="@{/totalfacturas}" type="button" class="btn img-gris-2">Mas Info<i
-                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- ... (resto de las tarjetas) -->
-                </div>
-            </div>
-
-                <div class="row py-4 justify-content-center">
-                    <div class="col-lg-6 justify-content-center">
-
-
-
-                        
-                       <table class="table  table-striped table-hover">
-    <thead class="thead-dark bg-black">
-        <tr>
-            <th id="idmaximizar" scope="col" colspan="4">
-                Los 10 productos más vendidos
-                <a id="toggleButton" onclick="toggleTable()">
-                    <i id="toggleIcon" class="fa-solid fa-minus"></i>
-                </a>
-            </th>
-        </tr>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Producto</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Venta</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="producto, iterStat : ${productosMasVendidos}">
-            <td th:text="${iterStat.count}"></td>
-            <td  th:text="${producto[1]}"></td>
-            <td id="producto1" th:text="${producto[2]}"></td>
-            <td id="precio5" th:text="${producto[3]}"></td> <!-- Venta Total -->
-
-            <!-- Añade más columnas según sea necesario -->
-        </tr>
-    </tbody>
-</table>
-
-                    </div>
-
-                    <div class="col-lg-6 justify-content-end">
-                        
-
-    <!-- Encabezados de la tabla -->
-     <table class="table  table-striped table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th id="idmaximizar2" scope="col" colspan="4">
-                Productos con poco Stock
-                <a id="toggleButton2" onclick="toggleTable2()">
-                    <i id="toggleIcon2" class="fa-solid fa-minus"></i>
-                </a>
-            </th>
-        </tr>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Producto</th>
-            <th scope="col">Stock Actual</th>
-            
-        </tr>
-    </thead>
-    <!-- Cuerpo de la tabla -->
-    <tbody id="tbody2">
-        <!-- Iterar sobre la lista de productos con poco stock -->
-        <tr th:each="producto, iterStat : ${productosConPocoStock}">
-        <td scope="row" th:text="${iterStat.count}"></td>
-            <td th:text="${producto.nombre}"></td>
-            <td th:text="${producto.cantidad} + ' Und(s)'"></td>
-            
-        </tr>
-    </tbody>
-</table>
-
-
-                    </div>
-
-                </div>
-
-        </main><!-- End #main -->
-
-
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                class="bi bi-arrow-up-short"></i></a>
-
-        <!-- Vendor JS Files -->
-        <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/chart.js/chart.umd.js"></script>
-        <script src="assets/vendor/echarts/echarts.min.js"></script>
-        <script src="assets/vendor/quill/quill.min.js"></script>
-        <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-        <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
-
-        <!-- Template Main JS File -->
-        <script src="assets/js/main.js"></script>
-        <script src="./js/inicio.js"></script>
-    </body>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtén el elemento <h5> por su identificador único
-        var cardLeftElement = document.getElementById("card-left");
-
-        // Obtén el valor total de compras del contenido del elemento <h5>
-        var valorTotalCompras = cardLeftElement.textContent.trim();
-
-        // Parsea el valor total de compras a un número flotante
-        var totalCompras = parseFloat(valorTotalCompras);
-
-        // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
-        if (!isNaN(totalCompras)) {
-            totalCompras = Math.round(totalCompras); // Redondea al entero más cercano
-            var totalComprasFormateado = totalCompras.toLocaleString('es-CO', {
-                style: 'currency',
-                currency: 'COP',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            });
-            cardLeftElement.textContent = totalComprasFormateado;
-        }
-    });
-    /*]]>*/
-</script>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    document.addEventListener("DOMContentLoaded", function() {
-        // Selecciona el elemento <h5> por su atributo name
-        var cardLeftElement = document.getElementsByName("totalVentas")[0];
-
-        // Obtén el valor total de ventas del contenido del elemento <h5>
-        var valorTotalVentas = cardLeftElement.textContent.trim();
-
-        // Parsea el valor total de ventas a un número flotante
-        var totalVentas = parseFloat(valorTotalVentas);
-
-        // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
-        if (!isNaN(totalVentas)) {
-            totalVentas = Math.round(totalVentas); // Redondea al entero más cercano
-            var totalVentasFormateado = totalVentas.toLocaleString('es-CO', {
-                style: 'currency',
-                currency: 'COP',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            });
-            cardLeftElement.textContent = totalVentasFormateado;
-        }
-    });
-    /*]]>*/
-</script>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    document.addEventListener("DOMContentLoaded", function() {
-        // Selecciona el elemento <h5> por su atributo name
-        var cardLeftElement = document.getElementsByName("totalFacturas")[0];
-
-        // Obtén el valor total de ventas del contenido del elemento <h5>
-        var valorTotalVentas = cardLeftElement.textContent.trim();
-
-        // Parsea el valor total de ventas a un número flotante
-        var totalVentas = parseFloat(valorTotalVentas);
-
-        // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
-        if (!isNaN(totalVentas)) {
-            totalVentas = Math.round(totalVentas); // Redondea al entero más cercano
-            var totalVentasFormateado = totalVentas.toLocaleString('es-CO', {
-                style: 'currency',
-                currency: 'COP',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            });
-            cardLeftElement.textContent = totalVentasFormateado;
-        }
-    });
-    /*]]>*/
-</script>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    document.addEventListener("DOMContentLoaded", function () {
-        // Obtén todos los elementos con el ID 'precio5'
-        var precioElements = document.querySelectorAll('#precio5');
-
-        // Itera sobre cada elemento y formatea su contenido
-        precioElements.forEach(function (precioElement) {
-            // Obtén el valor de la venta total del contenido del elemento <td>
-            var valorProducto = precioElement.textContent.trim();
-            var valor = parseFloat(valorProducto);
-
-            // Si el valor es válido, formatea y actualiza el contenido del elemento <td>
-            if (!isNaN(valor)) {
-                valor = Math.round(valor);
-                var valorFormateado = valor.toLocaleString('es-CO', {
-                    style: 'currency',
-                    currency: 'COP',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                });
-                precioElement.textContent = valorFormateado;
-            }
-        });
-    });
-    /*]]>*/
-</script>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    document.addEventListener("DOMContentLoaded", function () {
-        // Obtener el elemento <td> por su ID
-        var producto1Cell = document.getElementById('producto1');
-
-        // Obtener el valor del producto del contenido del elemento <td>
-        var valorProducto = producto1Cell.textContent.trim();
-
-        // Parsear el valor del producto a un número flotante
-        var valor = parseFloat(valorProducto);
-
-        // Si el valor es válido, eliminar los decimales y actualizar el contenido del elemento <td>
-        if (!isNaN(valor)) {
-            var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
-            producto1Cell.textContent = valorSinDecimales;
-        }
-    });
-    /*]]>*/
-</script>
-
-</html>
+            <title>Inicio</title>
+            <meta content="" name="description">
+                <meta content="" name="keywords">
+                    <!-- Google Fonts -->
+                    <link href="https://fonts.gstatic.com" rel="preconnect">
+                        <link
+                            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+                            rel="stylesheet">
+                            <!-- Vendor CSS Files -->
+                            <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+                                <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+                                    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+                                        <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+                                            <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+                                                <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+                                                    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+                                                        <!-- Template Main CSS File -->
+                                                        <link href="assets/css/style.css" rel="stylesheet">
+                                                            <link href="./css/styles.css" rel="stylesheet">
+                                                                <!-- Favicons -->
+                                                                <link href="../img/favicon.png" rel="icon">
+                                                                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+                                                                          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+                                                                          crossorigin="anonymous" referrerpolicy="no-referrer" />
+                                                                    </head>
+                                                                    <body style="background-color: #F4F4F4;">
+                                                                        <!-- ======= Header ======= -->
+                                                                        <header id="header" class="header fixed-top d-flex align-items-center">
+                                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                                <a th:href="@{/homes}" class="logo d-flex align-items-center">
+                                                                                    <img src="./assets/img/logo.svg" alt="" width="200px" heigth="300px">
+                                                                                </a>
+                                                                                <i class="bi bi-list toggle-sidebar-btn"></i>
+                                                                            </div><!-- End Logo -->
+                                                                            <nav class="header-nav ms-auto">
+                                                                                <ul class="d-flex align-items-center">
+                                                                                    <li class="nav-item d-block d-lg-none">
+                                                                                        <a class="nav-link nav-icon search-bar-toggle " href="#">
+                                                                                            <i class="bi bi-search"></i>
+                                                                                        </a>
+                                                                                    </li><!-- End Search Icon-->
+                                                                                    <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
+                                                                                        <i class="bi bi-journal-bookmark-fill"></i>
+                                                                                        <span class="badge bg-primary badge-number"></span>
+                                                                                    </a>
+                                                                                    <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                                                                                        <i class="bi bi-whatsapp"></i>   
+                                                                                        <span class="badge bg-primary badge-number"></span>
+                                                                                    </a>
+                                                                                    <li class="nav-item dropdown pe-3">
+                                                                                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                                                                                            <img th:src="${userDto.imagen}" th:alt="${userDto.imagen}" class="rounded-circle"/>
+                                                                                            <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${userdetail.nombre}"></span>
+                                                                                        </a><!-- End Profile Iamge Icon -->
+                                                                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                                                                                            <li class="dropdown-header">
+                                                                                                <h6 th:text="${userdetail.nombre}"></h6>
+                                                                                                <span>Administrador</span>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <hr class="dropdown-divider">
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a class="dropdown-item d-flex align-items-center"  th:href="@{/perfil_admin}">
+                                                                                                    <i class="bi bi-person"></i>
+                                                                                                    <span>Mi perfil</span>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <hr class="dropdown-divider">
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
+                                                                                                    <i class="bi bi-gear"></i>
+                                                                                                    <span>Configuracion de la Cuenta</span>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <hr class="dropdown-divider">
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                                                                                    <i class="bi bi-question-circle"></i>
+                                                                                                    <span>Nesecitas ayuda?</span>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <hr class="dropdown-divider">
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
+                                                                                                    <i class="bi bi-box-arrow-right"></i>
+                                                                                                    <span>Cerrar sesión</span>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                        </ul><!-- End Profile Dropdown Items -->
+                                                                                    </li><!-- End Profile Nav -->
+                                                                                </ul>
+                                                                            </nav><!-- End Icons Navigation -->
+                                                                        </header><!-- End Header -->
+                                                                        <!-- ======= Sidebar ======= -->
+                                                                        <aside id="sidebar" class="sidebar">
+                                                                            <ul class="sidebar-nav" id="sidebar-nav">
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/homes}">
+                                                                                        <i class="bi bi-house"></i>
+                                                                                        <span>Inicio</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/perfil_admin}">
+                                                                                        <i class="bi bi-person"></i>
+                                                                                        <span>Mi perfil</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/cliente}">
+                                                                                        <i class="bi bi-people"></i>
+                                                                                        <span>Clientes</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/razas}">
+                                                                                        <i class="bi bi-hearts"></i>
+                                                                                        <span>Gestión mascotas</span>
+                                                                                    </a>
+                                                                                </li>                                       
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/citasRapidas}">
+                                                                                        <i class="bi bi-calendar-plus"></i>
+                                                                                        <span>Citas Rápidas</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/listado}">
+                                                                                        <i class="bi bi-calendar-event"></i>
+                                                                                        <span>Gestión citas</span>
+                                                                                    </a>
+                                                                                </li>                       
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/productos}">
+                                                                                        <i class="bi bi-clipboard-plus"></i>
+                                                                                        <span>Gestión productos y servicios</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/getCartadmin}">
+                                                                                        <i class="bi bi-bag-plus"></i>
+                                                                                        <span>Carrito</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/verhomeadmin}">
+                                                                                        <i class="bi bi-coin"></i>
+                                                                                        <span>Gestión ventas</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link collapsed" th:href="@{/ayuda}">
+                                                                                        <i class="bi bi-question-circle"></i>
+                                                                                        <span>Ayuda y soporte</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <!-- End Dashboard Nav -->
+                                                                            </ul>
+                                                                        </aside>
+                                                                        <main id="main" class="main">
+                                                                            <div class="row py-3">
+                                                                                <div class="col-lg-12">
+                                                                                    <div id="carouselExample" class="carousel slide">
+                                                                                        <div class="carousel-inner">
+                                                                                            <div class="carousel-item active">
+                                                                                                <img src="./img/fondoadmin.jpg" class="d-block w-100" alt="...">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="container py-4 ">
+                                                                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-4 justify-content-center">
+                                                                                    <div class="col">
+                                                                                        <div id="perfil" class="card h-93 img-green card-hover">
+                                                                                            <div class="card-body img-green">
+                                                                                                <h5 id="card-left" class="card-title "  th:text=" ${totalCompras}"></h5>
+                                                                                                <p id="card-left" class="card-text small">Total de compras</p>
+                                                                                            </div>
+                                                                                            <a id="masinfo" th:href="@{/totalcompras}" type="button" class="btn img-green-2">Mas Info <i
+                                                                                                    class="fa-solid fa-circle-down fa-rotate-270" ></i></a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col">
+                                                                                        <div id="perfil" class="card h-93 img-yellow card-hover">
+                                                                                            <div class="card-body img-yellow">
+                                                                                                <h5 name="totalVentas" id="card-left" class="card-title " th:text="${totalVentas}"></h5>
+                                                                                                <p id="card-left" class="card-text small"> Total de ventas</p>
+                                                                                            </div>
+                                                                                            <a id="masinfo" th:href="@{/totalventas}"  type="button" class="btn img-yellow-2">Mas Info <i
+                                                                                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col">
+                                                                                        <div id="perfil" class="card h-93 img-gris card-hover">
+                                                                                            <div class="card-body img-gris">
+                                                                                                <h5 name="totalFacturas" id="card-left" class="card-title " th:text=" ${totalFacturas}"></h5>
+                                                                                                <p id="card-left" class="card-text small"> Facturación diaria</p>
+                                                                                            </div>
+                                                                                            <a id="masinfo" th:href="@{/totalfacturas}" type="button" class="btn img-gris-2">Más Info<i
+                                                                                                    class="fa-solid fa-circle-down fa-rotate-270"></i></a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- ... (resto de las tarjetas) -->
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row py-4 justify-content-center">
+                                                                                <div class="col-lg-6 justify-content-center">
+                                                                                    <table class="table  table-striped table-hover">
+                                                                                        <thead class="thead-dark bg-black">
+                                                                                            <tr>
+                                                                                                <th id="idmaximizar" scope="col" colspan="4">
+                                                                                                    Los 10 productos más vendidos
+                                                                                                    <a id="toggleButton" onclick="toggleTable()">
+                                                                                                        <i id="toggleIcon" class="fa-solid fa-minus"></i>
+                                                                                                    </a>
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th scope="col">#</th>
+                                                                                                <th scope="col">Producto</th>
+                                                                                                <th scope="col">Cantidad</th>
+                                                                                                <th scope="col">Venta</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr th:each="producto, iterStat : ${productosMasVendidos}">
+                                                                                                <td th:text="${iterStat.count}"></td>
+                                                                                                <td  th:text="${producto[1]}"></td>
+                                                                                                <td id="producto1" th:text="${producto[2]}"></td>
+                                                                                                <td id="precio5" th:text="${producto[3]}"></td> <!-- Venta Total -->
+                                                                                                <!-- Añade más columnas según sea necesario -->
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <div class="col-lg-6 justify-content-end">
+                                                                                    <!-- Encabezados de la tabla -->
+                                                                                    <table class="table  table-striped table-hover">
+                                                                                        <thead class="thead-dark">
+                                                                                            <tr>
+                                                                                                <th id="idmaximizar2" scope="col" colspan="4">
+                                                                                                    Productos con poco stock
+                                                                                                    <a id="toggleButton2" onclick="toggleTable2()">
+                                                                                                        <i id="toggleIcon2" class="fa-solid fa-minus"></i>
+                                                                                                    </a>
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th scope="col">#</th>
+                                                                                                <th scope="col">Producto</th>
+                                                                                                <th scope="col">Stock actual</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <!-- Cuerpo de la tabla -->
+                                                                                        <tbody id="tbody2">
+                                                                                            <!-- Iterar sobre la lista de productos con poco stock -->
+                                                                                            <tr th:each="producto, iterStat : ${productosConPocoStock}">
+                                                                                                <td scope="row" th:text="${iterStat.count}"></td>
+                                                                                                <td th:text="${producto.nombre}"></td>
+                                                                                                <td th:text="${producto.cantidad} + ' Und(s)'"></td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </main><!-- End #main -->
+                                                                        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                                                                                class="bi bi-arrow-up-short"></i></a>
+                                                                        <!-- Vendor JS Files -->
+                                                                        <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+                                                                        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                                                                        <script src="assets/vendor/chart.js/chart.umd.js"></script>
+                                                                        <script src="assets/vendor/echarts/echarts.min.js"></script>
+                                                                        <script src="assets/vendor/quill/quill.min.js"></script>
+                                                                        <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+                                                                        <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+                                                                        <script src="assets/vendor/php-email-form/validate.js"></script>
+                                                                        <!-- Template Main JS File -->
+                                                                        <script src="assets/js/main.js"></script>
+                                                                        <script src="./js/inicio.js"></script>
+                                                                    </body>
+                                                                    <script th:inline="javascript">
+                                                                                                        /*<![CDATA[*/
+                                                                                                        document.addEventListener("DOMContentLoaded", function () {
+                                                                                                            // Obtén el elemento <h5> por su identificador único
+                                                                                                            var cardLeftElement = document.getElementById("card-left");
+                                                                                                            // Obtén el valor total de compras del contenido del elemento <h5>
+                                                                                                            var valorTotalCompras = cardLeftElement.textContent.trim();
+                                                                                                            // Parsea el valor total de compras a un número flotante
+                                                                                                            var totalCompras = parseFloat(valorTotalCompras);
+                                                                                                            // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
+                                                                                                            if (!isNaN(totalCompras)) {
+                                                                                                                totalCompras = Math.round(totalCompras); // Redondea al entero más cercano
+                                                                                                                var totalComprasFormateado = totalCompras.toLocaleString('es-CO', {
+                                                                                                                    style: 'currency',
+                                                                                                                    currency: 'COP',
+                                                                                                                    minimumFractionDigits: 0,
+                                                                                                                    maximumFractionDigits: 0
+                                                                                                                });
+                                                                                                                cardLeftElement.textContent = totalComprasFormateado;
+                                                                                                            }
+                                                                                                        });
+                                                                                                        /*]]>*/
+                                                                    </script>
+                                                                    <script th:inline="javascript">
+                                                                        /*<![CDATA[*/
+                                                                        document.addEventListener("DOMContentLoaded", function () {
+                                                                            // Selecciona el elemento <h5> por su atributo name
+                                                                            var cardLeftElement = document.getElementsByName("totalVentas")[0];
+                                                                            // Obtén el valor total de ventas del contenido del elemento <h5>
+                                                                            var valorTotalVentas = cardLeftElement.textContent.trim();
+                                                                            // Parsea el valor total de ventas a un número flotante
+                                                                            var totalVentas = parseFloat(valorTotalVentas);
+                                                                            // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
+                                                                            if (!isNaN(totalVentas)) {
+                                                                                totalVentas = Math.round(totalVentas); // Redondea al entero más cercano
+                                                                                var totalVentasFormateado = totalVentas.toLocaleString('es-CO', {
+                                                                                    style: 'currency',
+                                                                                    currency: 'COP',
+                                                                                    minimumFractionDigits: 0,
+                                                                                    maximumFractionDigits: 0
+                                                                                });
+                                                                                cardLeftElement.textContent = totalVentasFormateado;
+                                                                            }
+                                                                        });
+                                                                        /*]]>*/
+                                                                    </script>
+                                                                    <script th:inline="javascript">
+                                                                        /*<![CDATA[*/
+                                                                        document.addEventListener("DOMContentLoaded", function () {
+                                                                            // Selecciona el elemento <h5> por su atributo name
+                                                                            var cardLeftElement = document.getElementsByName("totalFacturas")[0];
+                                                                            // Obtén el valor total de ventas del contenido del elemento <h5>
+                                                                            var valorTotalVentas = cardLeftElement.textContent.trim();
+                                                                            // Parsea el valor total de ventas a un número flotante
+                                                                            var totalVentas = parseFloat(valorTotalVentas);
+                                                                            // Si el valor es válido, formatea y actualiza el contenido del elemento <h5>
+                                                                            if (!isNaN(totalVentas)) {
+                                                                                totalVentas = Math.round(totalVentas); // Redondea al entero más cercano
+                                                                                var totalVentasFormateado = totalVentas.toLocaleString('es-CO', {
+                                                                                    style: 'currency',
+                                                                                    currency: 'COP',
+                                                                                    minimumFractionDigits: 0,
+                                                                                    maximumFractionDigits: 0
+                                                                                });
+                                                                                cardLeftElement.textContent = totalVentasFormateado;
+                                                                            }
+                                                                        });
+                                                                        /*]]>*/
+                                                                    </script>
+                                                                    <script th:inline="javascript">
+                                                                        /*<![CDATA[*/
+                                                                        document.addEventListener("DOMContentLoaded", function () {
+                                                                            // Obtén todos los elementos con el ID 'precio5'
+                                                                            var precioElements = document.querySelectorAll('#precio5');
+                                                                            // Itera sobre cada elemento y formatea su contenido
+                                                                            precioElements.forEach(function (precioElement) {
+                                                                                // Obtén el valor de la venta total del contenido del elemento <td>
+                                                                                var valorProducto = precioElement.textContent.trim();
+                                                                                var valor = parseFloat(valorProducto);
+                                                                                // Si el valor es válido, formatea y actualiza el contenido del elemento <td>
+                                                                                if (!isNaN(valor)) {
+                                                                                    valor = Math.round(valor);
+                                                                                    var valorFormateado = valor.toLocaleString('es-CO', {
+                                                                                        style: 'currency',
+                                                                                        currency: 'COP',
+                                                                                        minimumFractionDigits: 0,
+                                                                                        maximumFractionDigits: 0
+                                                                                    });
+                                                                                    precioElement.textContent = valorFormateado;
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                        /*]]>*/
+                                                                    </script>
+                                                                    <script th:inline="javascript">
+                                                                        /*<![CDATA[*/
+                                                                        document.addEventListener("DOMContentLoaded", function () {
+                                                                            // Obtener el elemento <td> por su ID
+                                                                            var producto1Cell = document.getElementById('producto1');
+                                                                            // Obtener el valor del producto del contenido del elemento <td>
+                                                                            var valorProducto = producto1Cell.textContent.trim();
+                                                                            // Parsear el valor del producto a un número flotante
+                                                                            var valor = parseFloat(valorProducto);
+                                                                            // Si el valor es válido, eliminar los decimales y actualizar el contenido del elemento <td>
+                                                                            if (!isNaN(valor)) {
+                                                                                var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
+                                                                                producto1Cell.textContent = valorSinDecimales;
+                                                                            }
+                                                                        });
+                                                                        /*]]>*/
+                                                                    </script>
+                                                                    </html>

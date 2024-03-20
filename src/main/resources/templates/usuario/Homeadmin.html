@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-        <title>Admin/Gestión_Ventas</title>
+        <title>Gestión Ventas</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
-
         <!--SweetAlert-->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
         <!-- Favicons -->
-        <link href="../img/productos_servicios/logo.png" rel="icon">
+        <link href="../img/favicon.png" rel="icon">
         <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
         <!-- Google Fonts -->
         <link href="https://fonts.gstatic.com" rel="preconnect">
         <link
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
             rel="stylesheet">
-
         <!-- Vendor CSS Files -->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,11 +27,8 @@
         <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-
-
         <!-- Template Main CSS File -->
         <link href="assets/css/style.css" rel="stylesheet">
-
         <!-- =======================================================
         * Template Name: NiceAdmin
         * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -46,25 +37,17 @@
         * License: https://bootstrapmade.com/license/
         ======================================================== -->
     </head>
-
-    <body>
-
+    <body style="background-color: #F4F4F4;">
         <!-- ======= Header ======= -->
         <header id="header" class="header fixed-top d-flex align-items-center">
-
             <div class="d-flex align-items-center justify-content-between">
-                <a href="index.html" class="logo d-flex align-items-center">
-                    <img src="assets/img/logoGesVet.png">
-                    <span class="d-none d-lg-block">GesVet</span>
+                <a th:href="@{/homes}" class="logo d-flex align-items-center">
+                    <img src="./assets/img/logo.svg" alt="" width="200px" heigth="300px">
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
             </div><!-- End Logo -->
-
-
-
             <nav class="header-nav ms-auto">
                 <ul class="d-flex align-items-center">
-
                     <li class="nav-item d-block d-lg-none">
                         <a class="nav-link nav-icon search-bar-toggle " href="#">
                             <i class="bi bi-search"></i>
@@ -74,155 +57,15 @@
                         <i class="bi bi-journal-bookmark-fill"></i>
                         <span class="badge bg-primary badge-number"></span>
                     </a>
-
-                    <li class="nav-item dropdown">
-
-                        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-bell"></i>
-                            <span class="badge bg-primary badge-number">4</span>
-                        </a><!-- End Notification Icon -->
-
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                            <li class="dropdown-header">
-                                Tienes 4 nuevas notificaciones
-                                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li class="notification-item">
-                                <i class="bi bi-exclamation-circle text-warning"></i>
-                                <div>
-                                    <h4>Lorem Ipsum</h4>
-                                    <p>Quae dolorem earum veritatis oditseno</p>
-                                    <p>30 min. ago</p>
-                                </div>
-                            </li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li class="notification-item">
-                                <i class="bi bi-x-circle text-danger"></i>
-                                <div>
-                                    <h4>Atque rerum nesciunt</h4>
-                                    <p>Quae dolorem earum veritatis oditseno</p>
-                                    <p>1 hr. ago</p>
-                                </div>
-                            </li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li class="notification-item">
-                                <i class="bi bi-check-circle text-success"></i>
-                                <div>
-                                    <h4>Sit rerum fuga</h4>
-                                    <p>Quae dolorem earum veritatis oditseno</p>
-                                    <p>2 hrs. ago</p>
-                                </div>
-                            </li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li class="notification-item">
-                                <i class="bi bi-info-circle text-primary"></i>
-                                <div>
-                                    <h4>Dicta reprehenderit</h4>
-                                    <p>Quae dolorem earum veritatis oditseno</p>
-                                    <p>4 hrs. ago</p>
-                                </div>
-                            </li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li class="dropdown-footer">
-                                <a href="#">Show all notifications</a>
-                            </li>
-
-                        </ul><!-- End Notification Dropdown Items -->
-
-                    </li><!-- End Notification Nav -->
-
-                    <li class="nav-item dropdown">
-
-                        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-chat-left-text"></i>
-                            <span class="badge bg-success badge-number">3</span>
-                        </a><!-- End Messages Icon -->
-
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                            <li class="dropdown-header">
-                                You have 3 new messages
-                                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li class="message-item">
-                                <a href="#">
-                                    <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                                    <div>
-                                        <h4>Maria Hudson</h4>
-                                        <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                        <p>4 hrs. ago</p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li class="message-item">
-                                <a href="#">
-                                    <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                    <div>
-                                        <h4>Anna Nelson</h4>
-                                        <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                        <p>6 hrs. ago</p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li class="message-item">
-                                <a href="#">
-                                    <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                                    <div>
-                                        <h4>David Muldon</h4>
-                                        <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                        <p>8 hrs. ago</p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li class="dropdown-footer">
-                                <a href="#">Show all messages</a>
-                            </li>
-
-                        </ul><!-- End Messages Dropdown Items -->
-
-                    </li><!-- End Messages Nav -->
-
+                    <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                        <i class="bi bi-whatsapp"></i>   
+                        <span class="badge bg-primary badge-number"></span>
+                    </a>
                     <li class="nav-item dropdown pe-3">
-
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                             <img th:src="${userDto.imagen}" th:alt="${userDto.imagen}" class="rounded-circle"/>
                             <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${userdetail.nombre}"></span>
                         </a><!-- End Profile Iamge Icon -->
-
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li class="dropdown-header">
                                 <h6 th:text="${userdetail.nombre}"></h6>
@@ -231,7 +74,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center"  th:href="@{/perfil_admin}">
                                     <i class="bi bi-person"></i>
@@ -241,19 +83,8 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Configuracion de la Cuenta</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/ayuda}">
                                     <i class="bi bi-question-circle"></i>
                                     <span>Nesecitas ayuda?</span>
                                 </a>
@@ -261,25 +92,19 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
                                     <i class="bi bi-box-arrow-right"></i>
-                                    <span>Salir</span>
+                                    <span>Cerrar sesión</span>
                                 </a>
                             </li>
-
                         </ul><!-- End Profile Dropdown Items -->
                     </li><!-- End Profile Nav -->
-
                 </ul>
             </nav><!-- End Icons Navigation -->
-
         </header><!-- End Header -->
-
         <!-- ======= Sidebar ======= -->
         <aside id="sidebar" class="sidebar">
-
             <ul class="sidebar-nav" id="sidebar-nav">
                 <li class="nav-item">
                     <a class="nav-link collapsed" th:href="@{/homes}">
@@ -293,87 +118,66 @@
                         <span>Mi perfil</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link collapsed" th:href="@{/cliente}">
                         <i class="bi bi-people"></i>
                         <span>Clientes</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link collapsed" th:href="@{/razas}">
-                        <i class="bi bi-people"></i>
+                        <i class="bi bi-hearts"></i>
                         <span>Gestión mascotas</span>
                     </a>
-                </li>
-
+                </li> 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="atencion_cita.html">
-                        <i class="bi bi-people"></i>
-                        <span>Seguimiento médico</span>
+                    <a class="nav-link collapsed" th:href="@{/citasRapidas}">
+                        <i class="bi bi-calendar-plus"></i>
+                        <span>Citas Rápidas</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/citas}">
+                    <a class="nav-link collapsed" th:href="@{/listado}">
                         <i class="bi bi-calendar-event"></i>
                         <span>Gestión citas</span>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/admin}">
-                        <i class="bi bi-box2-heart"></i>
-                        <span>Ver Tienda</span>
-                    </a>
-                </li>
-
+                </li> 
                 <li class="nav-item">
                     <a class="nav-link collapsed" th:href="@{/productos}">
-                        <i class="bi bi-box2-heart"></i>
-                        <span>Gestión productos_servicios</span>
+                        <i class="bi bi-clipboard-plus"></i>
+                        <span>Gestión productos y servicios</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link collapsed" th:href="@{/compras}">
-                        <i class="bi bi-bag-plus"></i>
-                        <span>Gestión compras</span>
+                    <a class="nav-link collapsed" th:href="@{/getCartadmin}">
+                        <i class="bi bi-cart4"></i>
+                        <span>Carrito</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link collapsed" th:href="@{/verhomeadmin}">
-                        <i class="bi bi-bag-plus"></i>
+                        <i class="bi bi-coin"></i>
                         <span>Gestión ventas</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link collapsed" th:href="@{/ayuda}">
                         <i class="bi bi-question-circle"></i>
                         <span>Ayuda y soporte</span>
                     </a>
                 </li>
-                <!-- End Dashboard Nav -->
             </ul>
         </aside>
-
-        <main id="main" class="main" style="background-color: #5c5db4;">
-
+        <main id="main" class="main">
             <div class="pagetitle">
-                <h1>Gestion Ventas</h1>
-
+                <h1>Gestión ventas</h1>
             </div><!-- End Page Title -->
-
             <section class="section profile">
                 <div class="col-xl-12">
-
                     <div class="card">
                         <div class="card-body pt-3">
                             <!-- Bordered Tabs -->
                             <ul class="nav nav-tabs nav-tabs-bordered">
-
                                 <li class="nav-item">
                                     <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Registrar Venta
                                     </button>
@@ -389,30 +193,22 @@
                                 </li>
                             </ul>
                             <div class="tab-content pt-2">
-
-
                                 <!--Registrar venta-->
                                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
-
-                                    <div class="container-fluid mt-2">
-                                        <p class="textoNeonU">Gestion Ventas</p>
+                                    <div class="container-fluid mt-1">
+                                        <p class="textoNeonU">Gestión Ventas</p>
                                     </div>
-
                                     <div class="container-fluid">
                                         <div>
-
                                             <div class="table-responsive">
                                                 <div class="card-body">
-
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-12">
                                                             <div class="form-group">
                                                                 <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off" oninput="buscarProductos()">
                                                             </div>
                                                         </div>
-
                                                     </div>
-
                                                     <div class="row mt-5">
                                                         <div class="col-12">
                                                             <table class="table" id="tablaProductos">
@@ -423,7 +219,7 @@
                                                                         <th>Nombre</th>
                                                                         <th>Precio</th>
                                                                         <th>Disponibilidad</th>
-                                                                        <th>Opcion</th>
+                                                                        <th class="text-center">Opción</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -448,59 +244,38 @@
                                                             </table>
                                                         </div>
                                                     </div>
-
-
-
-
-
-
                                                 </div>
-
                                             </div>
                                         </div>
-
-
-
-
-
                                     </div>
                                 </div>
-
-
                                 <!--Listar ventas-->
                                 <div class="tab-pane fade pt-2" id="ventas">
-
                                     <div class="container-fluid mt-3">
                                         <p class="textoNeon">Historial Ventas</p>
                                     </div>
-
                                     <div class="container-fluid">
                                         <div class="div">
                                             <div class="table-responsive">
                                                 <div class="card-body">
-
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-12">
                                                             <form class="search-form d-flex align-items-center pb-3" method="POST" action="#">
                                                                 <input type="text" name="query" placeholder="Buscar" title="Enter search keyword">
-
                                                                 <button id="buscar" type="button" class="btn"><i class="bi bi-search"></i></button>
-
-
                                                             </form>
                                                         </div>
                                                     </div>
-
                                                     <!-- Inicio Tabla facturas-->
                                                     <table class="table table-striped table-hover text-start">
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col">No. de Orden</th>
+                                                                <th scope="col">No. de orden</th>
                                                                 <th scope="col">Fecha</th>
                                                                 <th scope="col">Valor</th>
                                                                 <th scope="col">Estado factura</th>
-                                                                <th scope="col">Nombre Cliente</th>
-                                                                <th scope="col">Teléfono Cliente</th>
+                                                                <th scope="col">Nombre cliente</th>
+                                                                <th scope="col">Teléfono cliente</th>
                                                                 <th scope="col">Acción</th>
                                                             </tr>
                                                         </thead>
@@ -510,32 +285,24 @@
                                                                 <td th:text="${factura.fecha}" ></td>
                                                                 <td th:text="${factura.total}"  class="precio3"></td>
                                                                 <td th:text="${factura.estadoPago}" ></td>
-
                                                                 <!-- Acceder al nombre y teléfono del cliente a través de la relación con UsuarioVentas -->
                                                                 <td th:text="${factura.usuarioventas.nombre}"></td>
                                                                 <td th:text="${factura.usuarioventas.telefono}"></td>
-
                                                                 <td><a th:href="@{/detalleadmin/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                                 <!--Pedidos-->
                                 <div class="tab-pane fade pt-2" id="pedidos">
-
                                     <div class="container-fluid mt-3">
                                         <p class="textoNeon">Pedidos</p>
                                     </div>
-
                                     <div class="container py-4 ">
-
                                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4 justify-content-center">
                                             <div class="col">
                                                 <div class="card h-93 card-img card-hover filtroTodo">
@@ -544,11 +311,8 @@
                                                         <br>
                                                         <h6 class="text-center" th:text="${facturas.size()} + ' Facturas'"></h6>
                                                     </div>
-
                                                 </div>
                                             </div>
-
-
                                             <div class="col">
                                                 <div class="card h-93 img-green card-hover filtroPendientes">
                                                     <div class="card-body img-green">
@@ -556,11 +320,8 @@
                                                         <br>
                                                         <h6 class="text-center " th:text="${pendingInvoiceCount} + ' Facturas'"></h6>
                                                     </div>
-
                                                 </div>
                                             </div>
-
-
                                             <div class="col">
                                                 <div  class="card h-93 img-yellow card-hover filtroEntregados">
                                                     <div class="card-body img-yellow">
@@ -568,28 +329,23 @@
                                                         <br>
                                                         <h6 class="text-center " th:text="${pendingInvoiceentregado} + ' Facturas'"></h6>
                                                     </div>
-
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="card h-93 img-red card-hover filtroCancelados">
                                                     <div class="card-body img-red ">
                                                         <h3 id="card-left" class="card-title text-center">Cancelados</h3>
-
                                                         <br>
                                                         <h6 class="text-center " th:text="${pendingInvoicecancelado} + ' Facturas'"></h6>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="container-fluid">
                                         <div class="div">
                                             <div class="table-responsive">
                                                 <div class="card-body">
-
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-12">
                                                             <div class="form-group">
@@ -597,15 +353,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-
                                                     <!-- Inicio Tabla facturas-->
                                                     <table  class="table table-striped table-hover text-start" id="facturaTable">
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col">No. de Orden</th>
+                                                                <th scope="col">No. de orden</th>
                                                                 <th scope="col">Usuario</th>
-                                                                <th scope="col">Telefono</th>
+                                                                <th scope="col">Teléfono</th>
                                                                 <th scope="col">Fecha</th>
                                                                 <th scope="col">Valor</th>
                                                                 <th scope="col">Comprobante</th>
@@ -635,12 +389,11 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <img id="modalImage" src="" alt="Factura">
+                                                                        <img id="modalImage" style="height: 1664px; width: 465px;" src="" alt="Factura">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <td th:text="${factura.estadoPago}"></td>
                                                         <td th:text="${factura.estadoEnvio}"></td>
                                                         <td>
@@ -648,50 +401,36 @@
                                                         </tr>
                                                         </tbody>
                                                     </table>
-
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                                 <!--Listar Pedidos-->
                                 <div class="tab-pane fade pt-2" id="historial">
-
                                     <div class="container-fluid mt-3">
                                         <p class="textoNeon">Historial Pedidos</p>
                                     </div>
-
                                     <div class="container-fluid">
                                         <div class="div">
                                             <div class="table-responsive">
                                                 <div class="card-body">
-
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-12">
                                                             <form class="search-form d-flex align-items-center pb-3" method="POST" action="#">
                                                                 <input type="text" name="query" placeholder="Buscar" title="Enter search keyword">
-
                                                                 <button id="buscar" type="button" class="btn"><i class="bi bi-search"></i></button>
-
-
                                                             </form>
                                                         </div>
                                                     </div>
-
-                                                    <!-- Inicio Tabla facturas-->
                                                     <!-- Inicio Tabla facturas-->
                                                     <table class="table table-striped table-hover text-start">
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col">No. de Orden</th>
+                                                                <th scope="col">No. de orden</th>
                                                                 <th scope="col">Usuario</th>
-
                                                                 <th scope="col">Fecha</th>
                                                                 <th scope="col">Valor</th>
-
                                                                 <th scope="col">Acción</th>
                                                             </tr>
                                                         </thead>
@@ -699,12 +438,9 @@
                                                             <tr th:each="factura: ${facturas}" th:if="${factura.usuario.role == 'USER'}">
                                                                 <td th:text="${factura.numero}"></td>
                                                                 <td th:text="${factura.usuario.nombre}"></td>
-
                                                                 <td th:text="${factura.fecha}" ></td>
                                                                 <td th:text="${factura.total}"  class="precio5"></td>
-
                                                                 <td><a th:href="@{/detalleadmin/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a>
-
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -715,17 +451,12 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </section>
-
         </main><!-- End #main -->
-
-
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                 class="bi bi-arrow-up-short"></i></a>
-
         <!-- Vendor JS Files -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
         <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -735,11 +466,8 @@
         <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
         <script src="assets/vendor/tinymce/tinymce.min.js"></script>
         <script src="assets/vendor/php-email-form/validate.js"></script>
-
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
-
-
         <script>
             $(document).ready(function () {
                 $('.expandable-image').click(function () {
@@ -752,22 +480,21 @@
         <script th:if="${exito != null}">
             Swal.fire({
                 icon: 'success',
-                title: 'Factura aprobada con éxito.',
+                title: 'Factura aprobada con éxito.'
 
             });
         </script>
-
         <script th:if="${exitos != null}">
             Swal.fire({
                 icon: 'success',
-                title: 'Compra efectuada con éxito.',
+                title: 'Compra efectuada con éxito.'
 
             });
         </script>
         <script th:if="${errorcarritocompra != null}">
             Swal.fire({
                 icon: 'error',
-                title: 'Factura cancelada debido a la falta de disponibilidad de la cantidad solicitada de productos..',
+                title: 'Factura cancelada debido a la falta de disponibilidad de la cantidad solicitada de productos..'
 
             });
         </script>
@@ -776,16 +503,13 @@
                 // Obtén el valor del campo de búsqueda
                 var input = document.getElementById('palabra');
                 var filtro = input.value.toUpperCase();
-
                 // Obtén la tabla y las filas de la tabla
                 var tabla = document.getElementById('tablaProductos');
                 var filas = tabla.getElementsByTagName('tr');
-
                 // Itera sobre las filas y muestra u oculta según la coincidencia con el filtro
                 for (var i = 0; i < filas.length; i++) {
                     var celdas = filas[i].getElementsByTagName('td');
                     var mostrarFila = false;
-
                     // Si es la primera fila (encabezado), siempre mostrarla
                     if (i === 0) {
                         mostrarFila = true;
@@ -793,7 +517,6 @@
                         for (var j = 0; j < celdas.length; j++) {
                             if (celdas[j]) {
                                 var textoCelda = celdas[j].textContent || celdas[j].innerText;
-
                                 if (textoCelda.toUpperCase().indexOf(filtro) > -1) {
                                     mostrarFila = true;
                                     break;
@@ -801,28 +524,22 @@
                             }
                         }
                     }
-
                     filas[i].style.display = mostrarFila ? '' : 'none';
                 }
             }
-
         </script>
-
         <script>
             function buscarFacturas() {
                 // Obtén el valor del campo de búsqueda
                 var input = document.getElementById('palabraFacturas');
                 var filtro = input.value.toUpperCase();
-
                 // Obtén la tabla y las filas de la tabla de facturas
                 var tablaFacturas = document.getElementById('facturaTable');
                 var filasFacturas = tablaFacturas.getElementsByTagName('tr');
-
                 // Itera sobre las filas y muestra u oculta según la coincidencia con el filtro
                 for (var i = 0; i < filasFacturas.length; i++) {
                     var celdasFacturas = filasFacturas[i].getElementsByTagName('td');
                     var mostrarFilaFacturas = false;
-
                     // Si es la primera fila (encabezado), siempre mostrarla
                     if (i === 0) {
                         mostrarFilaFacturas = true;
@@ -838,21 +555,17 @@
                             }
                         }
                     }
-
                     filasFacturas[i].style.display = mostrarFilaFacturas ? '' : 'none';
                 }
             }
         </script>
-
         <script th:inline="javascript">
             /*<![CDATA[*/
             document.addEventListener("DOMContentLoaded", function () {
                 var precios = document.querySelectorAll('.precio2');
-
                 precios.forEach(function (precioElement) {
                     var valorProducto = precioElement.textContent.trim();
                     var valor = parseFloat(valorProducto);
-
                     if (!isNaN(valor)) {
                         valor = Math.round(valor);
                         var valorFormateado = valor.toLocaleString('es-CO', {
@@ -871,11 +584,9 @@
             /*<![CDATA[*/
             document.addEventListener("DOMContentLoaded", function () {
                 var precios = document.querySelectorAll('.precio3');
-
                 precios.forEach(function (precioElement) {
                     var valorProducto = precioElement.textContent.trim();
                     var valor = parseFloat(valorProducto);
-
                     if (!isNaN(valor)) {
                         valor = Math.round(valor);
                         var valorFormateado = valor.toLocaleString('es-CO', {
@@ -890,16 +601,13 @@
             });
             /*]]>*/
         </script>
-
         <script th:inline="javascript">
             /*<![CDATA[*/
             document.addEventListener("DOMContentLoaded", function () {
                 var precios = document.querySelectorAll('.precio4');
-
                 precios.forEach(function (precioElement) {
                     var valorProducto = precioElement.textContent.trim();
                     var valor = parseFloat(valorProducto);
-
                     if (!isNaN(valor)) {
                         valor = Math.round(valor);
                         var valorFormateado = valor.toLocaleString('es-CO', {
@@ -914,15 +622,13 @@
             });
             /*]]>*/
         </script>
-<script th:inline="javascript">
+        <script th:inline="javascript">
             /*<![CDATA[*/
             document.addEventListener("DOMContentLoaded", function () {
                 var precios = document.querySelectorAll('.precio5');
-
                 precios.forEach(function (precioElement) {
                     var valorProducto = precioElement.textContent.trim();
                     var valor = parseFloat(valorProducto);
-
                     if (!isNaN(valor)) {
                         valor = Math.round(valor);
                         var valorFormateado = valor.toLocaleString('es-CO', {
@@ -937,11 +643,5 @@
             });
             /*]]>*/
         </script>
-
-
-
-
-
     </body>
-
 </html>

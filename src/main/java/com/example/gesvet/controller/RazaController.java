@@ -1,13 +1,20 @@
 package com.example.gesvet.controller;
 
+import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.Especie;
 import com.example.gesvet.models.Mascota;
 import com.example.gesvet.models.Raza;
+import com.example.gesvet.models.User;
 import com.example.gesvet.service.EspecieService;
 import com.example.gesvet.service.RazaService;
+import com.example.gesvet.service.UserService;
+import java.security.Principal;
 import java.util.Optional;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,26 +34,122 @@ public class RazaController {
     @Autowired
     private EspecieService especieService;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private UserService userService;
+
     @GetMapping("")
-    public String razasAndEspecies(Model model) {
+    public String razasAndEspecies(Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+        model.addAttribute("userDto", userDto);
+
         model.addAttribute("razas", razaService.findAll());
         model.addAttribute("especies", especieService.findAll());
+
         return "mascotas/razaEspecie";
     }
 
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+        model.addAttribute("userDto", userDto);
         return "mascotas/create";
     }
 
     @GetMapping("/createEs")
-    public String creates() {
+    public String creates(Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+        model.addAttribute("userDto", userDto);
         return "mascotas/CreateEspecie";
     }
 
     // metodo para guardar la raza en la base de datos 
     @PostMapping("/save")
-    public String save(Raza raza) {
+    public String save(Raza raza, Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+        model.addAttribute("userDto", userDto);
         LOGGER.info("Este es el objeto de la raza: {}", raza);
         Mascota m = new Mascota(1, "", "", "", "", "", "");
         raza.addMascota(m);
@@ -55,7 +158,29 @@ public class RazaController {
     }
 
     @PostMapping("/saveEspecie")
-    public String saveEspecie(Especie especie) {
+    public String saveEspecie(Especie especie, Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+        model.addAttribute("userDto", userDto);
         LOGGER.info("Este es el objeto de la especie: {}", especie);
         especieService.save(especie);
         return "redirect:/razas";
@@ -63,7 +188,29 @@ public class RazaController {
 
     // metodo para editar la raza 
     @GetMapping("/editarRaza/{id}")
-    public String editar(@PathVariable Integer id, Model model) {
+    public String editar(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+        model.addAttribute("userDto", userDto);
         Raza raza = new Raza();
         Optional<Raza> optionalRaza = razaService.get(id);
         raza = optionalRaza.get();
@@ -72,7 +219,29 @@ public class RazaController {
     }
 
     @GetMapping("/editarEspecie/{id}")
-    public String editarEs(@PathVariable Integer id, Model model) {
+    public String editarEs(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
+
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+        model.addAttribute("userDto", userDto);
         Especie especie = new Especie();
         Optional<Especie> optionalEspecie = especieService.get(id);
         especie = optionalEspecie.get();

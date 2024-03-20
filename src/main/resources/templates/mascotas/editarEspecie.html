@@ -223,24 +223,158 @@
 
     </head>
 
-    <body style="background-color: #2FC0D5;">
+    <body style="background-color: #F4F4F4;">
 
-        <header th:replace="Plantillas/administrador :: header"></header> 
+        <header id="header" class="header fixed-top d-flex align-items-center">
 
-        <aside th:replace="Plantillas/administrador :: sidebar"></aside>
+            <div class="d-flex align-items-center justify-content-between">
+                <a th:href="@{/homes}" class="logo d-flex align-items-center">
+                    <img src="./assets/img/logo.svg" alt="Logo" width="200px" height="300px">
+                </a>
+                <i class="bi bi-list toggle-sidebar-btn"></i>
+            </div><!-- End Logo -->
+
+            <nav class="header-nav ms-auto">
+                <ul class="d-flex align-items-center">
+                    <li class="nav-item d-block d-lg-none">
+                        <a class="nav-link nav-icon search-bar-toggle" href="#">
+                            <i class="bi bi-search"></i>
+                        </a>
+                    </li><!-- End Search Icon-->
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
+                            <i class="bi bi-journal-bookmark-fill"></i>
+                            <span class="badge bg-primary badge-number"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                            <i class="bi bi-whatsapp"></i>   
+                            <span class="badge bg-primary badge-number"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown pe-3">
+                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                            <img th:src="${userDto.imagen}" th:alt="${userDto.imagen}" class="rounded-circle"/>
+                            <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${userdetail.nombre}"></span>
+                        </a><!-- End Profile Image Icon -->
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                            <li class="dropdown-header">
+                                <h6 th:text="${userdetail.nombre}"></h6>
+                                <span>Administrador</span>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
+                                    <i class="bi bi-person"></i>
+                                    <span>Mi perfil</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
+                                    <i class="bi bi-gear"></i>
+                                    <span>Configuracion de la Cuenta</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <i class="bi bi-question-circle"></i>
+                                    <span>¿Necesitas ayuda?</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>Salir</span>
+                                </a>
+                            </li>
+                        </ul><!-- End Profile Dropdown Items -->
+                    </li><!-- End Profile Nav -->
+                </ul>
+            </nav><!-- End Icons Navigation -->
+        </header><!-- End Header -->
+
+        <!-- ======= Sidebar ======= -->
+        <aside id="sidebar" class="sidebar">
+            <ul class="sidebar-nav" id="sidebar-nav">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/homes}">
+                        <i class="bi bi-house"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/perfil_admin}">
+                        <i class="bi bi-person"></i>
+                        <span>Mi perfil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/cliente}">
+                        <i class="bi bi-people"></i>
+                        <span>Clientes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/razas}">
+                        <i class="bi bi-hearts"></i>
+                        <span>Gestión mascotas</span>
+                    </a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/citasRapidas}">
+                        <i class="bi bi-calendar-plus"></i>
+                        <span>Citas Rápidas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/listado}">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Gestión citas</span>
+                    </a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/productos}">
+                        <i class="bi bi-clipboard-plus"></i>
+                        <span>Gestión productos y servicios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/getCartadmin}">
+                        <i class="bi bi-cart4"></i>
+                        <span>Carrito</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/verhomeadmin}">
+                        <i class="bi bi-coin"></i>
+                        <span>Gestión ventas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/ayuda}">
+                        <i class="bi bi-question-circle"></i>
+                        <span>Ayuda y soporte</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
 
         <main id="main" class="main">
 
             <div class="pagetitle">
-                <h1>Gestion Especies</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
-                        <li class="breadcrumb-item">Gestión Especie</li>
-                        <li class="breadcrumb-item active">Modificar</li>
-
-                    </ol>
-                </nav>
+                <h1>Gestión Especies</h1>
             </div><!-- End Page Title -->
 
             <section class="section profile">
@@ -288,8 +422,8 @@
                                                         <div class="col-6 ">
                                                             <label>Estado:</label>
                                                             <select name="estado" class="form-control" th:value="${especieEdit.estado}">
-                                                                <option value="activo">Activo</option>
-                                                                <option value="inactivo">Inactivo</option>
+                                                                <option value="Activo">Activo</option>
+                                                                <option value="Inactivo">Inactivo</option>
                                                             </select>
                                                         </div>
                                                     </div>

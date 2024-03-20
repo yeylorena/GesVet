@@ -70,7 +70,7 @@ public class mascotaUsuarioController {
         userDto.setTelefono(user.getTelefono());
         userDto.setRole(user.getRole());
         userDto.setAcercade(user.getAcercade());
-        userDto.setImagen(user.getImagen());
+        userDto.setImagen("/images/" + user.getImagen());
 
         model.addAttribute("userDto", userDto);
 
@@ -105,6 +105,7 @@ public class mascotaUsuarioController {
         // Obtener el usuario actual
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.findByUsername(userDetails.getUsername());
+
         //traer id de usuario
         mascota.setUsuario(user);
         try {
@@ -141,7 +142,24 @@ public class mascotaUsuarioController {
 
     // metodo para editar la mascota 
     @GetMapping("/editarMascota/{id}")
-    public String edit(@PathVariable Integer id, Model model) {   //PathVariable esta anotacion mapea el id o la variable que viene en la url y pasarla a la variable que esta contigua a la anotacion pathVaribale
+    public String edit(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {   //PathVariable esta anotacion mapea el id o la variable que viene en la url y pasarla a la variable que esta contigua a la anotacion pathVaribale
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());  // Aquí estás obteniendo el ID del usuario
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        model.addAttribute("userDto", userDto);
         Mascota mascota = new Mascota();
         Optional<Mascota> optionalMascota = mascotaService.get(id);
         mascota = optionalMascota.get();  //trae el veterinario que hemos mandado a buscar

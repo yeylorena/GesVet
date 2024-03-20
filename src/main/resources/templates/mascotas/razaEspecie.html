@@ -227,26 +227,157 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
 
     </head>
-    <body style="background-color: #2FC0D5;">
-        <header th:replace="~{Plantillas/administrador :: header}">
+    <body style="background-color: #F4F4F4;">
+        <header id="header" class="header fixed-top d-flex align-items-center">
 
+            <div class="d-flex align-items-center justify-content-between">
+                <a th:href="@{/homes}" class="logo d-flex align-items-center">
+                    <img src="./assets/img/logo.svg" alt="Logo" width="200px" height="300px">
+                </a>
+                <i class="bi bi-list toggle-sidebar-btn"></i>
+            </div><!-- End Logo -->
+
+            <nav class="header-nav ms-auto">
+                <ul class="d-flex align-items-center">
+                    <li class="nav-item d-block d-lg-none">
+                        <a class="nav-link nav-icon search-bar-toggle" href="#">
+                            <i class="bi bi-search"></i>
+                        </a>
+                    </li><!-- End Search Icon-->
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
+                            <i class="bi bi-journal-bookmark-fill"></i>
+                            <span class="badge bg-primary badge-number"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                            <i class="bi bi-whatsapp"></i>   
+                            <span class="badge bg-primary badge-number"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown pe-3">
+                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                            <img th:src="@{${'images/' + userdetail.imagen}}" th:alt="${userdetail.imagen}" class="rounded-circle"/>
+                            <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${userdetail.nombre}"></span>
+                        </a><!-- End Profile Image Icon -->
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                            <li class="dropdown-header">
+                                <h6 th:text="${userdetail.nombre}"></h6>
+                                <span>Administrador</span>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
+                                    <i class="bi bi-person"></i>
+                                    <span>Mi perfil</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
+                                    <i class="bi bi-gear"></i>
+                                    <span>Configuracion de la Cuenta</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <i class="bi bi-question-circle"></i>
+                                    <span>¿Necesitas ayuda?</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>Salir</span>
+                                </a>
+                            </li>
+                        </ul><!-- End Profile Dropdown Items -->
+                    </li><!-- End Profile Nav -->
+                </ul>
+            </nav><!-- End Icons Navigation -->
         </header><!-- End Header -->
 
         <!-- ======= Sidebar ======= -->
-        <aside th:replace="~{Plantillas/administrador :: sidebar}">
-
-        </aside><!-- End Sidebar-->
+        <aside id="sidebar" class="sidebar">
+            <ul class="sidebar-nav" id="sidebar-nav">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/homes}">
+                        <i class="bi bi-house"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/perfil_admin}">
+                        <i class="bi bi-person"></i>
+                        <span>Mi perfil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/cliente}">
+                        <i class="bi bi-people"></i>
+                        <span>Clientes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/razas}">
+                        <i class="bi bi-hearts"></i>
+                        <span>Gestión mascotas</span>
+                    </a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/citasRapidas}">
+                        <i class="bi bi-calendar-plus"></i>
+                        <span>Citas Rápidas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/listado}">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Gestión citas</span>
+                    </a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/productos}">
+                        <i class="bi bi-clipboard-plus"></i>
+                        <span>Gestión productos y servicios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/getCartadmin}">
+                        <i class="bi bi-cart4"></i>
+                        <span>Carrito</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/verhomeadmin}">
+                        <i class="bi bi-coin"></i>
+                        <span>Gestión ventas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" th:href="@{/ayuda}">
+                        <i class="bi bi-question-circle"></i>
+                        <span>Ayuda y soporte</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
 
         <main id="main" class="main" >
 
             <div class="pagetitle">
-                <h1 class="textcartas">Razas</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item titlecartaSel"><a href="inicio_vet.html">Inicio</a></li>
-                        <li class="breadcrumb-item titlecartaSel">Gestión Raza</li>
-                    </ol>
-                </nav>
+                <h1 class="textcartas">Gestión Mascotas</h1>
             </div><!-- End Page Title -->
             <section class="section profile">
                 <div class="col-xl-12">
@@ -289,203 +420,204 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-12">
-                                                    <form class="form-inline" action="">
+                                                    <form class="search-form d-flex align-items-center pb-1 form-inline" method="post" action="" object="">
+
+
                                                         <div class="form-group">
                                                             <input type="text" name="palabraClave" placeholder="Palabra Clave" id="palabraClave">
-                                                                <input  id="buscar" type="submit" class="btn texto2" style="background-color:#2FD6B4" value="Buscar">
-                                                                        &nbsp;&nbsp;
+                                                                &nbsp;&nbsp;
+                                                                &nbsp;&nbsp;
 
-                                                                        </div>
-
-                                                                        </form>
-                                                                        <form class="search-form d-flex align-items-center pb-1" method="post" action="" object="">
-
-                                                                            <a class="icon-link btn mt-2" style="background-color:#2FD6B4;
-                                                                            font-family: 'Montserrat', Arial, sans-serif;
-                                                                            font-size: 15px;
-                                                                            margin: 0 0 20px;
-                                                                            padding: 0;
-                                                                            width: 55px;
-                                                                            height: 40px;
-                                                                            display: flex;
-                                                                            justify-content: center;
-                                                                            align-items: center;"
-                                                                            th:href="@{/razas/create}">Crear</a>
-
-                                                                    </form>
-                                                                    </div>
-                                                                    </div>
-                                                                    <!-- Inicio Tabla -->
-                                                                    <table class="table table-striped table-hover text-start">
-                                                                        <thead>
-                                                                            <tr class="table-secondary">
-
-                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                    font-size: 16px;
-                                                                                    font-weight: 600;
-                                                                                    line-height: 20px;
-                                                                                    color: #000000;" scope="col">Nombre</th>
-                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                    font-size: 16px;
-                                                                                    font-weight: 600;
-                                                                                    line-height: 20px;
-                                                                                    color: #000000;" scope="col">Descripción</th>
-                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                    font-size: 16px;
-                                                                                    font-weight: 600;
-                                                                                    line-height: 20px;
-                                                                                    color: #000000;" scope="col">Estado</th>
-                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                    font-size: 16px;
-                                                                                    font-weight: 600;
-                                                                                    line-height: 20px;
-                                                                                    color: #000000;" scope="col">Editar</th>
-                                                                                <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                    font-size: 16px;
-                                                                                    font-weight: 600;
-                                                                                    line-height: 20px;
-                                                                                    color: #000000;" scope="col">Eliminar</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-
-                                                                            <tr th:each="raza : ${razas}">
-                                                                                <td th:text="${raza.nombre}"></td>
-                                                                                <td th:text="${raza.descripcion}"></td>
-                                                                                <td th:text="${raza.estado}"></td>
-                                                                                <td>
-                                                                                    <!--boton de editar-->
-                                                                                    <a  class="btn texto2" style="background-color:#2FD6B4"  th:href="@{razas/editarRaza/{id} (id=${raza.id}) }">
-                                                                                            Editar</a> 
-                                                                                        <!-- Eliminar -->
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <a class="btn texto2" style="background-color:#2FD6B4" type="button" onclick="show()" th:href="@{razas/delete/{id} (id=${raza.id}) }">Eliminar</a>   
-                                                                                    </td>
+                                                        </div>
 
 
 
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <!-- final de la tabla -->
-                                                                        </div>
-                                                                        </div>
-                                                                        </div>
+                                                        <a class="icon-link btn btn-success" style="
+                                                           font-family: 'Montserrat', Arial, sans-serif;
+                                                           font-size: 15px;
+                                                           padding: 0;
+                                                           width: 55px;
+                                                           height: 40px;
+                                                           display: flex;
+                                                           justify-content: center;
+                                                           align-items: center;"
+                                                           th:href="@{/razas/create}"><i class="bi bi-plus-square"></i></a>
 
-                                                                        <!-- Especie -->
-                                                                        <div class="tab-pane fade profile-overview" id="especies">
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- Inicio Tabla -->
+                                            <table class="table table-striped table-hover text-start">
+                                                <thead>
+                                                    <tr class="table-secondary">
 
-                                                                            <div class="table-responsive">
-                                                                                <div class="card-body">
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Nombre</th>
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Descripción</th>
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Estado</th>
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Editar</th>
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Eliminar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-6 col-md-12">
-                                                                                            <form class="form-inline" action="">
-                                                                                                <div class="form-group">
-                                                                                                    <input type="text" name="palabraClave" placeholder="Palabra Clave" id="palabraClave">
-                                                                                                        <input id="buscar" type="submit" class="btn texto2" style="background-color:#2FD6B4" value="Buscar">
-                                                                                                            &nbsp;&nbsp;
-
-                                                                                                            </div>
-
-                                                                                                            </form>
-                                                                                                            <form class="search-form d-flex align-items-center pb-1" method="post" action="" object="">
-                                                                                                                <!-- donde se pone la pagina de crear -->
-                                                                                                                <a class="icon-link btn  mt-2 texto2" 
-                                                                                                                   style="background-color:#2FD6B4;
-                                                                                                                font-family: 'Montserrat', Arial, sans-serif;
-                                                                                                                font-size: 15px;
-                                                                                                                margin: 0 0 20px;
-                                                                                                                padding: 0;
-                                                                                                                width: 55px;
-                                                                                                                height: 40px;
-                                                                                                                display: flex;
-                                                                                                                justify-content: center;
-                                                                                                                align-items: center;"th:href="@{/razas/createEs}">Crear</a>
-
-                                                                                                        </form>
-                                                                                                        </div>
-                                                                                                        </div>
-                                                                                                        <!-- Inicio Tabla -->
-                                                                                                        <table class="table table-striped table-hover text-start">
-                                                                                                            <thead>
-                                                                                                                <tr class="table-secondary">
-
-                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                                                        font-size: 16px;
-                                                                                                                        font-weight: 600;
-                                                                                                                        line-height: 20px;
-                                                                                                                        color: #000000;" scope="col">Nombre</th>
-                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                                                        font-size: 16px;
-                                                                                                                        font-weight: 600;
-                                                                                                                        line-height: 20px;
-                                                                                                                        color: #000000;" scope="col">Descripción</th>
-                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                                                        font-size: 16px;
-                                                                                                                        font-weight: 600;
-                                                                                                                        line-height: 20px;
-                                                                                                                        color: #000000;" scope="col">Estado</th>
-                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                                                        font-size: 16px;
-                                                                                                                        font-weight: 600;
-                                                                                                                        line-height: 20px;
-                                                                                                                        color: #000000;" scope="col">Editar</th>
-                                                                                                                    <th style="font-family: 'Montserrat', Arial, sans-serif;
-                                                                                                                        font-size: 16px;
-                                                                                                                        font-weight: 600;
-                                                                                                                        line-height: 20px;
-                                                                                                                        color: #000000;" scope="col">Eliminar</th>
-                                                                                                                </tr>
-                                                                                                            </thead>
-                                                                                                            <tbody>
-
-                                                                                                                <tr th:each="especie : ${especies}">
-                                                                                                                    <td th:text="${especie.nombre}"></td>
-                                                                                                                    <td th:text="${especie.descripcion}"></td>
-                                                                                                                    <td th:text="${especie.estado}"></td>
-                                                                                                                    <td>
-                                                                                                                        <!--boton de editar-->
-                                                                                                                        <a  class="btn texto2" style="background-color:#2FD6B4" th:href="@{razas/editarEspecie/{id} (id=${especie.id}) }">
-                                                                                                                                Editar</a> 
-                                                                                                                            <!-- Eliminar -->
-                                                                                                                        </td>
-                                                                                                                        <td>
-                                                                                                                            <a class="btn texto2" style="background-color:#2FD6B4" type="button" onclick="showAlert()" th:href="@{razas/deleteEspecie/{id} (id=${especie.id}) }">Eliminar</a>   
-                                                                                                                        </td>
+                                                    <tr th:each="raza : ${razas}">
+                                                        <td th:text="${raza.nombre}"></td>
+                                                        <td th:text="${raza.descripcion}"></td>
+                                                        <td th:text="${raza.estado}"></td>
+                                                        <td>
+                                                            <!--boton de editar-->
+                                                            <a  class="btn btn-success texto2"  th:href="@{razas/editarRaza/{id} (id=${raza.id}) }">
+                                                                <i class="bi bi-pencil-square"></i></a> 
+                                                            <!-- Eliminar -->
+                                                        </td>
+                                                        <td>
+                                                            <a  class="btn btn-danger"  type="button" onclick="show()" th:href="@{razas/delete/{id} (id=${raza.id}) }"><i class="bi bi-trash"></i></a>   
+                                                        </td>
 
 
 
-                                                                                                                    </tr>
-                                                                                                                </tbody>
-                                                                                                            </table>
-                                                                                                            <!-- final de la tabla -->
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            <!-- final de especies-->
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- final de la tabla -->
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </section>
+                                <!-- Especie -->
+                                <div class="tab-pane fade profile-overview" id="especies">
 
-                                                                                                            <div th:replace="~{Plantillas/administrador :: scripts}"></div>
-                                                                                                            </main><!-- End #main -->
-                                                                                                            <script>
-                                                                                                               // Función para mostrar la alerta de especie
-                                                                                                               function showAlert() {
-                                                                                                                   // Muestra la alerta utilizando SweetAlert
-                                                                                                                   swal("Especie eliminada", "", "success");
-                                                                                                               }
-                                                                                                               
-                                                                                                               function show() {
-                                                                                                                   // Muestra la alerta utilizando SweetAlert
-                                                                                                                   swal("Raza eliminada", "", "success");
-                                                                                                               }
-                                                                                                               </script>
+                                    <div class="table-responsive">
+                                        <div class="card-body">
 
-                                                                                                               </body>
-                                                                                                                       </html>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <form class="search-form d-flex align-items-center pb-1 form-inline" method="post" action="" object="">
+
+
+                                                        <div class="form-group">
+                                                            <input type="text" name="palabraClave" placeholder="Palabra Clave" id="palabraClave"> 
+                                                                &nbsp;&nbsp;
+                                                                &nbsp;&nbsp;
+
+                                                        </div>
+
+
+                                                        <!-- donde se pone la pagina de crear -->
+                                                        <a class="icon-link btn btn-success texto2" 
+                                                           style="
+                                                           font-family: 'Montserrat', Arial, sans-serif;
+                                                           font-size: 15px;
+                                                           padding: 0;
+                                                           width: 55px;
+                                                           height: 40px;
+                                                           display: flex;
+                                                           justify-content: center;
+                                                           align-items: center;"th:href="@{/razas/createEs}"><i class="bi bi-plus-square"></i></a>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- Inicio Tabla -->
+                                            <table class="table table-striped table-hover text-start">
+                                                <thead>
+                                                    <tr class="table-secondary">
+
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Nombre</th>
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Descripción</th>
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Estado</th>
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Editar</th>
+                                                        <th style="font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 16px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            color: #000000;" scope="col">Eliminar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr th:each="especie : ${especies}">
+                                                        <td th:text="${especie.nombre}"></td>
+                                                        <td th:text="${especie.descripcion}"></td>
+                                                        <td th:text="${especie.estado}"></td>
+                                                        <td>
+                                                            <!--boton de editar-->
+                                                            <a  class="btn btn-success texto2" th:href="@{razas/editarEspecie/{id} (id=${especie.id}) }">
+                                                                <i class="bi bi-pencil-square"></i></a> 
+                                                            <!-- Eliminar -->
+                                                        </td>
+
+                                                        <td>
+                                                            <a  class="btn btn-danger" type="button" onclick="showAlert()" th:href="@{razas/deleteEspecie/{id} (id=${especie.id}) }"> <i class="bi bi-trash"></i></a>   
+                                                        </td>
+
+
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- final de la tabla -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- final de especies-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div th:replace="~{Plantillas/administrador :: scripts}"></div>
+        </main><!-- End #main -->
+        <script>
+            // Función para mostrar la alerta de especie
+            function showAlert() {
+                // Muestra la alerta utilizando SweetAlert
+                swal("Especie eliminada", "", "success");
+            }
+
+            function show() {
+                // Muestra la alerta utilizando SweetAlert
+                swal("Raza eliminada", "", "success");
+            }
+        </script>
+
+    </body>
+</html>

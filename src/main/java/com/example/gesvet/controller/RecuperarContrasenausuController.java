@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 
-public class RecuperarContraseñausuController {
+public class RecuperarContrasenausuController {
 
     @Autowired
     private UserService userService;

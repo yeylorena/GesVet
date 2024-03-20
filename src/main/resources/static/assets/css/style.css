@@ -413,10 +413,8 @@ h6 {
 }
 
 .textoNeon {
-    padding: 5px;
-    background-color: #5c5db4;
+    background-color: #2FC0D5;
     color: black;
-
     text-align: center;
     font-size: 1.8em;
     font-weight: 100;
@@ -428,10 +426,8 @@ h6 {
 }
 
 .textoNeonU {
-    padding: 5px;
-    background-color: #403a3a;
-    color: white;
-
+    background-color: #2FC0D5;
+    color: black;
     text-align: center;
     font-size: 1.8em;
     font-weight: 100;
@@ -1633,11 +1629,8 @@ h6 {
     background-color: #5DADE2 ;
 }
 .textoNe {
-    padding: 5px;
-    background-color: #5DADE2;
+    background-color: #2FC0D5;
     color: black;
-
-
     text-align: center;
     font-size: 1.8em;
     font-weight: 100;

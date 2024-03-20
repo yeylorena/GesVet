@@ -16,6 +16,7 @@ import com.example.gesvet.service.UserService;
 import com.example.gesvet.service.citaRapidaService;
 import com.example.gesvet.service.eventoService;
 import java.security.Principal;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -75,6 +76,8 @@ public class citaRapidaController {
             userDto.setRole(user.getRole());
             userDto.setAcercade(user.getAcercade());
             userDto.setImagen(user.getImagen());
+            userDto.setImagen("/images/" + user.getImagen());
+
             // Obtener las mascotas asociadas a este usuario
             List<Mascota> mascotas = user.getMascotas();
 
@@ -105,12 +108,14 @@ public class citaRapidaController {
         // Formatear cada cita en la lista
         citas.forEach(cita -> cita.setFormattedFecha(cita.getInicio().format(formatter)));
 
-
         return "citas/citasPresencial";
     }
 
     @PostMapping("/guardar")
-    public String saveM(citaRapida citarapida, Model model, @RequestParam("servicio") Integer idServicio, int especie, @RequestParam("usuario") Integer idVeterinario, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
+    public String saveM(citaRapida citarapida, Model model, @RequestParam("inicio") String inicioStr, @RequestParam("servicio") Integer idServicio, int especie, @RequestParam("usuario") Integer idVeterinario, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
+        // Obtener la fecha y hora de inicio de la cita
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime inicio = LocalDateTime.parse(inicioStr, formatter);
         // Obtener el usuario actual
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.findByUsername(userDetails.getUsername());
@@ -120,44 +125,59 @@ public class citaRapidaController {
         if (servicio != null) {
             // Obtener el nombre del servicio
             String nombreServicio = servicio.getNombre(); // Suponiendo que el nombre del servicio se encuentra en el atributo 'nombre' de la entidad Servicio
-
             // Asignar el nombre del servicio al atributo 'nombreCita' de la citaRapida
             citarapida.setNombreCita(nombreServicio);
         }
-
         // Obtener el veterinario seleccionado por su ID
         Optional<User> optionalVeterinario = userService.get(idVeterinario);
-        if (optionalVeterinario.isPresent()) {
-            User veterinario = optionalVeterinario.get();
+        if (!optionalVeterinario.isPresent()) {
+            redirectAttributes.addFlashAttribute("error", "El veterinario seleccionado no es válido.");
+            return "redirect:/citasRapidas";
+        }
+        User veterinario = optionalVeterinario.get();
+
+        // 1. Validación de fecha y hora futura
+        LocalDateTime ahora = LocalDateTime.now();
+        if (citarapida.getInicio().isBefore(ahora)) {
+            redirectAttributes.addFlashAttribute("error", "No puedes seleccionar fechas pasadas.");
+            return "redirect:/citasRapidas";
+        }
+        // Validar si el día actual es domingo
+        if (citarapida.getInicio().getDayOfWeek() == DayOfWeek.SUNDAY) {
+            redirectAttributes.addFlashAttribute("error", "Lo sentimos, no se pueden programar citas los domingos.");
+            return "redirect:/citasRapidas";
+        }
+        // Validación de horario de atención (por ejemplo, no después de las 6 PM ni antes de las 9 AM)
+        if (citarapida.getInicio().getHour() >= 18 || citarapida.getInicio().getHour() < 9) {
+            redirectAttributes.addFlashAttribute("error", "Las citas no pueden ser programadas después de las 6 PM ni antes de las 9 AM.");
+            return "redirect:/citasRapidas";
+        }
+        // Validar que la cita no sea para más de un año en el futuro
+        LocalDateTime fechaMaxima = LocalDateTime.now().plusYears(1);
+        if (citarapida.getInicio().isAfter(fechaMaxima)) {
+            redirectAttributes.addFlashAttribute("error", "No se pueden agendar citas para más de un año.");
+            return "redirect:/citasRapidas";
+        }
+
+        // Verificar la disponibilidad de la cita para el veterinario
+        boolean disponible = citarapidaservice.isCitaDisponibleParaVeterinario(inicio, idVeterinario);
+
+        if (disponible) {
             citarapida.setUsuario(user);
             citarapida.setVeterinarioCita(String.valueOf(veterinario.getId()));
-            citarapida.setNombreVeterinario(veterinario.getNombre() + " " + veterinario.getApellido()); // Guardar el nombre del veterinario
+            citarapida.setNombreVeterinario(veterinario.getNombre() + " " + veterinario.getApellido());
 
-            // Verificar la disponibilidad de la cita para el veterinario
-            LocalDateTime inicio = citarapida.getInicio();
-            boolean disponible = citarapidaservice.isCitaDisponibleParaVeterinario(inicio, idVeterinario);
+            // Guardar la cita
+            citarapidaservice.save(citarapida);
+            redirectAttributes.addFlashAttribute("success", true);
 
-            if (disponible) {
-                // Guardar la cita si está disponible
-                citarapidaservice.save(citarapida);
-                // Crear un evento basado en la cita
-                Evento evento = new Evento();
-                evento.setTitle(citarapida.getNombreCita());
-                evento.setStart(citarapida.getInicio()); // Utiliza la fecha de inicio de la cita
-                evento.setColor(citarapida.getColorMascota()); // Utiliza el color de la mascota para el evento
-
-                // Guardar el evento
-                eventoService.save(evento);
-                return "redirect:/citasRapidas";
-            } else {
-                // Manejar el caso en el que la cita no está disponible para el veterinario
-                // Puedes simplemente agregar el mensaje de error al modelo
-                redirectAttributes.addFlashAttribute("error", "La cita no está disponible para el veterinario en el momento especificado.");
-                return "redirect:/citasRapidas";
-            }
-
+            return "redirect:/citasRapidas";
+        } else {
+            // Manejar el caso en el que la cita no está disponible para el veterinario
+            // Puedes simplemente agregar el mensaje de error al modelo
+            redirectAttributes.addFlashAttribute("error", "La cita no está disponible para el veterinario en la fecha especificada.");
+            return "redirect:/citasRapidas";
         }
-        return "redirect:/citasRapidas";
     }
 
     @GetMapping("/finalizar/{citaId}")

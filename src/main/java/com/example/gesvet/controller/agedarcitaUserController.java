@@ -61,7 +61,7 @@ public class agedarcitaUserController {
     private eventoService eventoService;
 
     @GetMapping("citas")
-    public String show(Model model, Principal principal) {  //el objeto model lleva información desde el backend hacia la vista
+    public String show(Model model, Authentication authentication, Principal principal) {  //el objeto model lleva información desde el backend hacia la vista
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -81,7 +81,8 @@ public class agedarcitaUserController {
             userDto.setTelefono(user.getTelefono());
             userDto.setRole(user.getRole());
             userDto.setAcercade(user.getAcercade());
-            userDto.setImagen(user.getImagen());
+            userDto.setImagen("/images/" + user.getImagen());
+
             usuariosDto.add(userDto);
         }
 

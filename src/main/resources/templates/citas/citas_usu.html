@@ -7,10 +7,133 @@
 <body style="background-color: #F4F4F4;">
 
     <!-- ======= Header ======= -->
-    <header th:replace="~{Plantillas/usuario :: header}"></header><!-- End Header -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+        <div class="d-flex align-items-center justify-content-between">
+            <a class="logo d-flex align-items-center">
+                <img src="/assets/img/logo.svg" alt="" width="200px" heigth="300px">
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+                <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle " href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+                <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf" title="Manual de usuario">
+                    <i class="bi bi-journal-bookmark-fill"></i>
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
+                <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                    <i class="bi bi-whatsapp"></i>   
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
+                <li class="nav-item dropdown pe-3">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img th:src="@{${'images/' + userdetail.imagen}}" th:alt="${userdetail.imagen}" class="rounded-circle"/>
+                        <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${userdetail.nombre}"></span>
+                    </a><!-- End Profile Iamge Icon -->
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6 th:text="${userdetail.nombre}"></h6>
+                            <span>Usuario</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
+                                <i class="bi bi-person"></i>
+                                <span  >Mi perfil</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
+                                <i class="bi bi-gear"></i>
+                                <span>Configuracion de la Cuenta</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bi bi-question-circle"></i>
+                                <span>Nesecitas ayuda?</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
+                        <li>
+                            <a  class="dropdown-item d-flex align-items-center " th:href="@{/logout}">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span sec:authorize="isAuthenticated"> Cerrar sesión</span>
+                            </a>
+                        </li>
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+            </ul>
+        </nav><!-- End Icons Navigation -->
+    </header><!-- End Header -->
     <!-- ======= Sidebar ======= -->
-    <aside th:replace="~{Plantillas/usuario :: sidebar}"></aside><!-- End Sidebar-->
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/home}">
+                    <i class="bi bi-house"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/perfil}">
+                    <i class="bi bi-person"></i>
+                    <span >Mi perfil</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/mascotasUsuarios}">
+                    <i class="bi bi-hearts"></i>
+                    <span>Mis mascotas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/citas}">
+                    <i class="bi bi-chat-quote"></i>
+                    <span>Citas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/verhome}">
+                    <i class="bi bi-bag-plus"></i>
+                    <span>Productos y servicios</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/getCart}">
+                    <i class="bi bi-cart4"></i>
+                    <span>Carrito de compras</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/comprasUser}">
+                    <i class="bi bi-bag-check"></i>                            <span>Compras</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/ayudausuario}">
+                    <i class="bi bi-question-circle"></i>
+                    <span>Centro de ayuda</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+        </ul>
+    </aside>
 
     <main id="main" class="main">
 
@@ -59,7 +182,7 @@
                                                             </div>
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="servicio"><strong>Tipo servicio:</strong></label>
+                                                                    <label for="servicio"><strong>Tipo cita:</strong></label>
                                                                     <select class="form-select" name="servicio" required>
                                                                         <option value="">Selecciona un servicio...</option>
                                                                         <option th:each="servicio : ${servicios}" th:value="${servicio.id}" th:data-precio="${servicio.precio}"
