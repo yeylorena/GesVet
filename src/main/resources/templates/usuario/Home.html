@@ -267,6 +267,26 @@
     });
     /*]]>*/
 </script>
+                                                                <!-- Importa SweetAlert -->
+<link th:href="@{/webjars/sweetalert2/11.1.9/sweetalert2.min.css}" rel="stylesheet" />
+<script th:src="@{/webjars/sweetalert2/11.1.9/sweetalert2.all.min.js}"></script>
+
+<!-- En tu vista -->
+<script th:if="${mostrarAlerta}">
+    Swal.fire({
+        title: '¡Atención!',
+        text: 'Tus datos personales están incompletos. Por favor, edita tus datos para ofrecerte un mejor servicio.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ir a modificar',
+        cancelButtonText: 'Más tarde'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/perfil';
+        }
+    });
+</script>
+
 
                                                                 </main><!-- End #main -->
                                                                 </body>

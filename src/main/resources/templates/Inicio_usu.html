@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"/>
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -479,20 +480,31 @@
 
 
             <!-- Agrega esto en Inicio_usu.html -->
-            <script th:if="${mostrarAlerta}">
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Completa tus datos',
-                    text: 'Por favor, completa tus datos personales para disfrutar de nuestros servicios.',
-                    showCancelButton: true,
-                    confirmButtonText: 'Completar ahora',
-                    cancelButtonText: 'Más tarde'
-                }).then((result) => {
-                    if (result.value) {
-                        window.location.href = '/completar-datos'; // Redirige a la página de completar datos
-                    }
-                });
-            </script>
+            <!-- Agrega este código en la parte relevante de tu vista -->
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- Importa SweetAlert -->
+<link th:href="@{/webjars/sweetalert2/11.1.9/sweetalert2.min.css}" rel="stylesheet" />
+<script th:src="@{/webjars/sweetalert2/11.1.9/sweetalert2.all.min.js}"></script>
+
+<!-- En tu vista -->
+<script th:if="${mostrarAlerta}">
+    Swal.fire({
+        title: '¡Atención!',
+        text: 'Tus datos personales están incompletos. Por favor, edita tus datos para ofrecerte un mejor servicio.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ir a modificar',
+        cancelButtonText: 'Más tarde'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/perfil';
+        }
+    });
+</script>
+
+
+
 
         </body>
     </html>
