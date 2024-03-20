@@ -399,7 +399,7 @@
                                                                                                         </div>
                                                                                                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                                                                                                             <!-- Profile Edit Form -->
-                                                                                                            <form th:action="@{/perfil/editar}" th:object="${userDto}" enctype="multipart/form-data"  method="post" onsubmit="return validarFormulario()">
+                                                                                                            <form th:action="@{/perfil/editar}" th:object="${userDto}" enctype="multipart/form-data"  method="post" onsubmit="return validarFormularioperfil()">
                                                                                                                 <!-- ... (otros campos) -->
                                                                                                                 <input th:field="*{id}" type="hidden"/>
                                                                                                                 <div class="row mb-3">

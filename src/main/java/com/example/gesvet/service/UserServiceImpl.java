@@ -136,6 +136,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id);
     }
 
+    @Override
     public boolean usuarioDatosPersonalesCompletos(User user) {
     return StringUtils.isNotBlank(user.getNombre())
             && StringUtils.isNotBlank(user.getApellido())

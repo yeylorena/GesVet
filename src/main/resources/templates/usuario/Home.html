@@ -230,8 +230,39 @@
                                                                                 // Obtener el valor del precio del contenido de la etiqueta <p>
                                                                                 var valorPrecio = element.textContent.trim();
 
-                                                                                // Parsear el valor del precio a un número flotante
-                                                                                var valor = parseFloat(valorPrecio);
+            // Si el valor es válido, formatear y actualizar el contenido de la etiqueta <p>
+            if (!isNaN(valor)) {
+                var valorFormateado = valor.toLocaleString('es-CO', {
+                    style: 'decimal',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                element.textContent = valorFormateado;
+            }
+        });
+    });
+    /*]]>*/
+</script>
+                                                                <!-- Importa SweetAlert -->
+<link th:href="@{/webjars/sweetalert2/11.1.9/sweetalert2.min.css}" rel="stylesheet" />
+<script th:src="@{/webjars/sweetalert2/11.1.9/sweetalert2.all.min.js}"></script>
+
+<!-- En tu vista -->
+<script th:if="${mostrarAlerta}">
+    Swal.fire({
+        title: '¡Atención!',
+        text: 'Tus datos personales están incompletos. Por favor, edita tus datos para ofrecerte un mejor servicio.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ir a modificar',
+        cancelButtonText: 'Más tarde'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/perfil';
+        }
+    });
+</script>
+
 
                                                                                 // Si el valor es válido, formatear y actualizar el contenido de la etiqueta <p>
                                                                                 if (!isNaN(valor)) {

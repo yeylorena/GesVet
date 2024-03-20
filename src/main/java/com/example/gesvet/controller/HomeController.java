@@ -110,43 +110,49 @@ public class HomeController {
     }
     
     @GetMapping("productohomes/{id}")
-    public String productoHomes(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+public String productoHomes(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+    // Obtener los detalles del usuario actual
+    UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+    model.addAttribute("userdetail", userDetails);
 
-        // Obtener los detalles del usuario actual
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("userdetail", userDetails);
+    // Obtener el nombre de usuario actual
+    String username = authentication.getName();
 
-        // Obtener el nombre de usuario actual
-        String username = authentication.getName();
+    // Buscar al usuario por su nombre de usuario
+    User user = userService.findByUsername(username);
 
-        // Buscar al usuario por su nombre de usuario
-        User user = userService.findByUsername(username);
+    // Crear un objeto UserDto
+    UserDto userDto = new UserDto();
+    userDto.setId(user.getId());
+    userDto.setUsername(user.getUsername());
+    userDto.setNombre(user.getNombre());
+    userDto.setApellido(user.getApellido());
+    userDto.setDireccion(user.getDireccion());
+    userDto.setTelefono(user.getTelefono());
+    userDto.setRole(user.getRole());
+    userDto.setAcercade(user.getAcercade());
+    userDto.setImagen("/images/" + user.getImagen());
 
-        // Crear un objeto UserDto
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setUsername(user.getUsername());
-        userDto.setNombre(user.getNombre());
-        userDto.setApellido(user.getApellido());
-        userDto.setDireccion(user.getDireccion());
-        userDto.setTelefono(user.getTelefono());
-        userDto.setRole(user.getRole());
-        userDto.setAcercade(user.getAcercade());
-        userDto.setImagen("/images/" + user.getImagen());
+    // Verificar si los datos personales del usuario están completos
+    if (!userService.usuarioDatosPersonalesCompletos(user)) {
+        // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
+        model.addAttribute("mostrarAlerta", true);
+    } else {
+        // Obtener la categoría por su ID
+        Categorias categoria = categoriasservice.findById(id);
 
-       // Obtener la categoría por su ID
-    Categorias categoria = categoriasservice.findById(id);
+        // Obtener los productos asociados a la categoría
+        List<Productos> productos = productoService.findByCategoria(categoria);
 
-    // Obtener los productos asociados a la categoría
-    List<Productos> productos = productoService.findByCategoria(categoria);
-
-    model.addAttribute("categoria", categoria);
-    model.addAttribute("productos", productos);
-        model.addAttribute("userDto", userDto);
-     
-
-        return "usuario/Home";
+        model.addAttribute("categoria", categoria);
+        model.addAttribute("productos", productos);
     }
+
+    model.addAttribute("userDto", userDto);
+
+    return "usuario/Home";
+}
+
 
     @GetMapping("verproducto")
     public String home(Model model, Authentication authentication, Principal principal) {

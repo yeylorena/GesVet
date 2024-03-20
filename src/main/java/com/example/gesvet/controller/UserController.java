@@ -67,15 +67,19 @@ public class UserController {
             userDto.setAcercade(user.getAcercade());
             userDto.setImagen("/images/" + user.getImagen()); // Asegúrate de tener la ruta correcta
 
-            if (!userService.usuarioDatosPersonalesCompletos(user)) {
-            // Si los datos personales no están completos, agrega el atributo a mostrarAlerta
-            model.addAttribute("mostrarAlerta", true);
-        }
+           if (!userService.usuarioDatosPersonalesCompletos(user)) {
+        // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
+        model.addAttribute("mostrarAlerta", true);
+    }
             model.addAttribute("userDto", userDto);
         }
 
         return "Inicio_usu";
     }
+    @ModelAttribute("mostrarAlerta")
+public boolean mostrarAlerta() {
+    return false; // Este método se asegurará de que el atributo esté presente en el modelo incluso si la lógica en el método home no lo agrega
+}
 
     @GetMapping("/homes")
     public String homes(Model model, Principal principal) {

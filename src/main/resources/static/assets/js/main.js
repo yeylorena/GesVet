@@ -835,3 +835,43 @@ function validarFormularioPrincipal() {
         });
     }
 
+function validarFormularioperfil() {
+    var nombre = document.getElementsByName("nombre")[0].value;
+    var apellido = document.getElementsByName("apellido")[0].value;
+    var direccion = document.getElementsByName("direccion")[0].value;
+    var telefono = document.getElementsByName("telefono")[0].value;
+
+    if (nombre.trim() === "" || apellido.trim() === "" || direccion.trim() === "" || telefono.trim() === "") {
+        // Mostrar SweetAlert de error
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, complete todos los campos.',
+        });
+        return false; // Evitar que el formulario se envíe
+    }
+
+    // Validar que el teléfono sea solo números
+    var telefonoValido = /^\d+$/.test(telefono);
+    if (!telefonoValido) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, ingrese solo números en el campo de teléfono.',
+        });
+        return false; // Evitar que el formulario se envíe
+    }
+
+    // Validar longitud mínima y máxima del teléfono
+    if (telefono.length < 6 || telefono.length > 11) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'El campo de teléfono debe tener entre 6 y 11 caracteres.',
+        });
+        return false; // Evitar que el formulario se envíe
+    }
+
+    return true; // Permitir que el formulario se envíe
+}
+
