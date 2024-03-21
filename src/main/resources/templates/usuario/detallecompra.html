@@ -1,24 +1,15 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"/>
-
 <head th:replace="Plantillas/usuario :: head"></head>
-
-<body>
-
+<body style="background-color: #F4F4F4">
     <header id="header" class="header fixed-top d-flex align-items-center">
-
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-                <img src="./assets/img/logoGesVet.png" alt="">
-                    <span class="d-none d-lg-block">GesVet</span>
+            <a class="logo d-flex align-items-center">
+                <img src="/assets/img/logo.svg" alt="" width="200px" heigth="300px">
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
-
-
-
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
@@ -27,151 +18,14 @@
                         <i class="bi bi-search"></i>
                     </a>
                 </li><!-- End Search Icon-->
-                <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
+                <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf" title="Manual de usuario">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
                 </a>
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-bell"></i>
-                        <span class="badge bg-primary badge-number">4</span>
-                    </a><!-- End Notification Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <li class="dropdown-header">
-                            Tienes 4 nuevas notificaciones
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-exclamation-circle text-warning"></i>
-                            <div>
-                                <h4>Lorem Ipsum</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>30 min. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-x-circle text-danger"></i>
-                            <div>
-                                <h4>Atque rerum nesciunt</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>1 hr. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-check-circle text-success"></i>
-                            <div>
-                                <h4>Sit rerum fuga</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>2 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-info-circle text-primary"></i>
-                            <div>
-                                <h4>Dicta reprehenderit</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li class="dropdown-footer">
-                            <a href="#">Show all notifications</a>
-                        </li>
-
-                    </ul><!-- End Notification Dropdown Items -->
-
-                </li><!-- End Notification Nav -->
-
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-chat-left-text"></i>
-                        <span class="badge bg-success badge-number">3</span>
-                    </a><!-- End Messages Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                        <li class="dropdown-header">
-                            You have 3 new messages
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                                    <div>
-                                        <h4>Maria Hudson</h4>
-                                        <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                        <p>4 hrs. ago</p>
-                                    </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                    <div>
-                                        <h4>Anna Nelson</h4>
-                                        <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                        <p>6 hrs. ago</p>
-                                    </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                                    <div>
-                                        <h4>David Muldon</h4>
-                                        <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                        <p>8 hrs. ago</p>
-                                    </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="dropdown-footer">
-                            <a href="#">Show all messages</a>
-                        </li>
-
-                    </ul><!-- End Messages Dropdown Items -->
-
-                </li><!-- End Messages Nav -->
-
+                <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp" target="_blank">
+                    <i class="bi bi-whatsapp"></i>   
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -180,7 +34,6 @@
                         <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${userdetail.nombre}"></span>
 
                     </a><!-- End Profile Iamge Icon -->
-
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6 th:text="${userdetail.nombre}"></h6>
@@ -189,7 +42,6 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-
                         <li>
                             <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
                                 <i class="bi bi-person"></i>
@@ -199,19 +51,8 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
-                                <i class="bi bi-gear"></i>
-                                <span>Configuracion de la Cuenta</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" th:href="@{/ayudausuario}">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Nesecitas ayuda?</span>
                             </a>
@@ -223,18 +64,14 @@
                         <li>
                             <a  class="dropdown-item d-flex align-items-center " th:href="@{/logout}">
                                 <i class="bi bi-box-arrow-right"></i>
-                                <span sec:authorize="isAuthenticated"> Salir</span>
+                                <span sec:authorize="isAuthenticated"> Cerrar sesión</span>
                             </a>
                         </li>
-
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
-
             </ul>
         </nav><!-- End Icons Navigation -->
-
     </header><!-- End Header -->
-
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
@@ -259,8 +96,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="citas.html">
-                    <i class="bi bi-chat-quote"></i>
+                <a class="nav-link collapsed" th:href="@{/citas}">
+                    <i class="bi bi-people"></i>
                     <span>Citas</span>
                 </a>
             </li>
@@ -271,45 +108,30 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed"th:href="@{/getCart}">
-                    <i class="bi bi-cart2"></i>
+                <a class="nav-link collapsed" th:href="@{/getCart}">
+                    <i class="bi bi-cart4"></i>
                     <span>Carrito de compras</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/comprasUser}">
-                    <i class="bi bi-cart2"></i>
-                    <span>Compras</span>
+                    <i class="bi bi-bag-check"></i>                    <span>Compras</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="ayuda_cliente.html">
+                <a class="nav-link collapsed" th:href="@{/ayudausuario}">
                     <i class="bi bi-question-circle"></i>
                     <span>Centro de ayuda</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-
-
         </ul>
     </aside>
-
-    <main id="main" class="main" style="background-color: #403a3a">
-
+    <main id="main" class="main" >
         <div class="pagetitle">
-            <h1 style="color: white;">Compra de Productos y Servicios</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" style="color: white;">Inicio</a></li>
-
-                    <li class="breadcrumb-item active" style="color: white;">Compras</li>
-
-                </ol>
-            </nav>
+            <h1 style="color: black;">Detalle compra</h1>
         </div><!-- End Page Title -->
-
         <section class="section profile">
             <div class="col-xl-12">
-
                 <div class="card">
                     <div class="card-body pt-3">
                         <!-- Bordered Tabs -->
@@ -321,35 +143,41 @@
                             </li>
                         </ul>
                         <div class="tab-content pt-2">
-
                             <div class="container-fluid mt-2">
                                 <p class="textoNeonU">Compras</p>
                             </div>
-
                             <div class="row mt-5">
-
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Cantidad</th>
-                                                            <th scope="col">Producto</th>  
-                                                            <th scope="col">Precio</th>
-                                                            <th scope="col">Total</th>                  
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr th:each="detalle:${detalles}">
-                                                            <td  th:text="${detalle.cantidad}" class="cantidadProducto"></td>
-                                                            <td th:text="${detalle.nombre}"></td>
-                                                            <td th:text="${detalle.precio}" class="precio5"></td>
-                                                            <td th:text="${detalle.total}" class="precio4"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Cantidad</th>
+                                                                <th scope="col">Producto</th>  
+                                                                <th scope="col">Precio</th>
+                                                                <th scope="col">Total</th>                  
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr th:each="detalle:${detalles}">
+                                                                <td  th:text="${detalle.cantidad}" class="cantidadProducto"></td>
+                                                                <td th:text="${detalle.nombre}"></td>
+                                                                <td th:text="${detalle.precio}" class="precio5"></td>
+                                                                <td th:text="${detalle.total}" class="precio4"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-10">
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <a class="btn" style="background-color: #2FD6B4" th:href="@{/comprasUser}">Volver</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -357,90 +185,78 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
             </div>
             </div>
             </div>
             </div>
         </section>
-
         <div th:replace="Plantillas/usuario :: scripts"></div>
-
     </main><!-- End #main -->
-    
     <script th:inline="javascript">
-            /*<![CDATA[*/
-            document.addEventListener("DOMContentLoaded", function () {
-                var precios = document.querySelectorAll('.precio4');
-
-                precios.forEach(function (precioElement) {
-                    var valorProducto = precioElement.textContent.trim();
-                    var valor = parseFloat(valorProducto);
-
-                    if (!isNaN(valor)) {
-                        valor = Math.round(valor);
-                        var valorFormateado = valor.toLocaleString('es-CO', {
-                            style: 'currency',
-                            currency: 'COP',
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0
-                        });
-                        precioElement.textContent = valorFormateado;
-                    }
-                });
+        /*<![CDATA[*/
+        document.addEventListener("DOMContentLoaded", function () {
+            var precios = document.querySelectorAll('.precio4');
+            precios.forEach(function (precioElement) {
+                var valorProducto = precioElement.textContent.trim();
+                var valor = parseFloat(valorProducto);
+                if (!isNaN(valor)) {
+                    valor = Math.round(valor);
+                    var valorFormateado = valor.toLocaleString('es-CO', {
+                        style: 'currency',
+                        currency: 'COP',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                    precioElement.textContent = valorFormateado;
+                }
             });
-            /*]]>*/
-        </script>
-<script th:inline="javascript">
-            /*<![CDATA[*/
-            document.addEventListener("DOMContentLoaded", function () {
-                var precios = document.querySelectorAll('.precio5');
-
-                precios.forEach(function (precioElement) {
-                    var valorProducto = precioElement.textContent.trim();
-                    var valor = parseFloat(valorProducto);
-
-                    if (!isNaN(valor)) {
-                        valor = Math.round(valor);
-                        var valorFormateado = valor.toLocaleString('es-CO', {
-                            style: 'currency',
-                            currency: 'COP',
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0
-                        });
-                        precioElement.textContent = valorFormateado;
-                    }
-                });
-            });
-            /*]]>*/
-        </script>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    document.addEventListener("DOMContentLoaded", function () {
-        // Obtener todas las celdas con la clase "cantidadProducto"
-        var cantidadProductoCells = document.querySelectorAll('.cantidadProducto');
-
-        // Iterar sobre cada celda y aplicar el formateo
-        cantidadProductoCells.forEach(function (cell) {
-            // Obtener el valor de la cantidad del contenido de la celda
-            var valorCantidad = cell.textContent.trim();
-
-            // Parsear el valor de la cantidad a un número flotante
-            var valor = parseFloat(valorCantidad);
-
-            // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
-            if (!isNaN(valor)) {
-                var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
-                cell.textContent = valorSinDecimales;
-            }
         });
-    });
-    /*]]>*/
-</script>
+        /*]]>*/
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener("DOMContentLoaded", function () {
+            var precios = document.querySelectorAll('.precio5');
+            precios.forEach(function (precioElement) {
+                var valorProducto = precioElement.textContent.trim();
+                var valor = parseFloat(valorProducto);
+
+                if (!isNaN(valor)) {
+                    valor = Math.round(valor);
+                    var valorFormateado = valor.toLocaleString('es-CO', {
+                        style: 'currency',
+                        currency: 'COP',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                    precioElement.textContent = valorFormateado;
+                }
+            });
+        });
+        /*]]>*/
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener todas las celdas con la clase "cantidadProducto"
+            var cantidadProductoCells = document.querySelectorAll('.cantidadProducto');
+            // Iterar sobre cada celda y aplicar el formateo
+            cantidadProductoCells.forEach(function (cell) {
+                // Obtener el valor de la cantidad del contenido de la celda
+                var valorCantidad = cell.textContent.trim();
+                // Parsear el valor de la cantidad a un número flotante
+                var valor = parseFloat(valorCantidad);
+
+                // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
+                if (!isNaN(valor)) {
+                    var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
+                    cell.textContent = valorSinDecimales;
+                }
+            });
+        });
+        /*]]>*/
+    </script>
 </body>
 </html>

@@ -23,7 +23,7 @@
                                                         <!-- Template Main CSS File -->
                                                         <link href="assets/css/style.css" rel="stylesheet">
                                                             <!-- Favicons -->
-                                                            <link href="../img/productos_servicios/logo.png" rel="icon">
+                                                            <link href="../img/favicon.png" rel="icon">
                                                                 <!-- SweetAlert2 CSS -->
                                                                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
                                                                     <!-- SweetAlert2 JS -->
@@ -235,7 +235,7 @@
                                                                                             <i class="bi bi-journal-bookmark-fill"></i>
                                                                                             <span class="badge bg-primary badge-number"></span>
                                                                                         </a>
-                                                                                        <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                                                                                        <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp" target="_blank">
                                                                                             <i class="bi bi-whatsapp"></i>   
                                                                                             <span class="badge bg-primary badge-number"></span>
                                                                                         </a>
@@ -257,34 +257,24 @@
                                                                                                         <i class="bi bi-person"></i>
                                                                                                         <span>Mi perfil</span>
                                                                                                     </a>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <hr class="dropdown-divider">
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
-                                                                                                        <i class="bi bi-gear"></i>
-                                                                                                        <span>Configuracion de la Cuenta</span>
-                                                                                                    </a>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <hr class="dropdown-divider">
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                                                                                        <i class="bi bi-question-circle"></i>
-                                                                                                        <span>Nesecitas ayuda?</span>
-                                                                                                    </a>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <hr class="dropdown-divider">
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
-                                                                                                        <i class="bi bi-box-arrow-right"></i>
-                                                                                                        <span>Salir</span>
-                                                                                                    </a>
-                                                                                                </li>
+                                                                                                </li>                                                                             
+                                                                                                <hr class="dropdown-divider">
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a class="dropdown-item d-flex align-items-center" th:href="@{/ayudausuario}">
+                                                                                                            <i class="bi bi-question-circle"></i>
+                                                                                                            <span>Nesecitas ayuda?</span>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <hr class="dropdown-divider">
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
+                                                                                                            <i class="bi bi-box-arrow-right"></i>
+                                                                                                            <span>Cerrar sesión</span>
+                                                                                                        </a>
+                                                                                                    </li>
                                                                                             </ul><!-- End Profile Dropdown Items -->
                                                                                         </li><!-- End Profile Nav -->
                                                                                     </ul>
@@ -572,28 +562,28 @@
                                                                                                                                                                                                 Swal.fire({
                                                                                                                                                                                                     icon: 'error',
                                                                                                                                                                                                     title: 'Error',
-                                                                                                                                                                                                    text: 'Contraseña actual incorrecta',
+                                                                                                                                                                                                    text: 'Contraseña actual incorrecta'
                                                                                                                                                                                                 });
                                                                                                                                                                                             </script>
                                                                                                                                                                                             <script th:if="${errorContrasenaConfirmacion}">
                                                                                                                                                                                                 Swal.fire({
                                                                                                                                                                                                     icon: 'error',
                                                                                                                                                                                                     title: 'Error',
-                                                                                                                                                                                                    text: 'Las contraseñas no coinciden',
+                                                                                                                                                                                                    text: 'Las contraseñas no coinciden'
                                                                                                                                                                                                 });
                                                                                                                                                                                             </script>
                                                                                                                                                                                             <script th:if="${cambioContrasenaExitoso}">
                                                                                                                                                                                                 Swal.fire({
                                                                                                                                                                                                     icon: 'success',
                                                                                                                                                                                                     title: 'Éxito',
-                                                                                                                                                                                                    text: 'Cambio de contraseña exitoso',
+                                                                                                                                                                                                    text: 'Cambio de contraseña exitoso'
                                                                                                                                                                                                 });
                                                                                                                                                                                             </script>
                                                                                                                                                                                             <script th:if="${errorCambioContrasena}">
                                                                                                                                                                                                 Swal.fire({
                                                                                                                                                                                                     icon: 'error',
                                                                                                                                                                                                     title: 'Error',
-                                                                                                                                                                                                    text: 'Error al cambiar la contraseña',
+                                                                                                                                                                                                    text: 'Error al cambiar la contraseña'
                                                                                                                                                                                                 });
                                                                                                                                                                                             </script>
                                                                                                                                                                                             <!-- Agrega este script al formulario -->

@@ -51,16 +51,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
-                                <i class="bi bi-gear"></i>
-                                <span>Configuracion de la Cuenta</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" th:href="@{/ayudausuario}">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Nesecitas ayuda?</span>
                             </a>
@@ -72,7 +63,7 @@
                         <li>
                             <a  class="dropdown-item d-flex align-items-center " th:href="@{/logout}">
                                 <i class="bi bi-box-arrow-right"></i>
-                                <span sec:authorize="isAuthenticated"> Cerrar sesión</span>
+                                <span sec:authorize="isAuthenticated">Cerrar sesión</span>
                             </a>
                         </li>
                     </ul><!-- End Profile Dropdown Items -->
