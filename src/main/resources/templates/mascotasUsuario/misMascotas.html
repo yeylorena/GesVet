@@ -445,11 +445,12 @@
                                             <div class="row my-2">
                                                 <div class="col-6">
 
-                                                    <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);">
+                                                    <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);" accept=".jpg, .jpeg, .png">
                                                         <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('imagen').click(); return false;">
                                                             <i class="fas fa-plus"></i> Agregar imagen
                                                         </button>
                                                         <img id="vistaPrevia" src="#" alt="Vista Previa de la Imagen" style="display: none; max-width: 100%;" />
+                                                        <h6 style="margin-top: 5px; font-size: 14px;">Tamaño máximo: 10 MB</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -598,15 +599,39 @@
         function mostrarVistaPrevia(input) {
             var vistaPrevia = document.getElementById('vistaPrevia');
             var file = input.files[0];
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i; // Extensiones permitidas
+            var maxSize = 10 * 1024 * 1024; // Tamaño máximo (en bytes)
 
             if (file) {
-                var reader = new FileReader();
+                // Validar extensión
+                if (!allowedExtensions.exec(input.value)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor, seleccione un archivo con una extensión válida (.jpg, .jpeg, .png).'
+                    });
+                    input.value = '';
+                    vistaPrevia.style.display = 'none';
+                    return false;
+                }
 
+                // Validar tamaño
+                if (file.size > maxSize) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'El tamaño del archivo excede el límite permitido de 10 MB.'
+                    });
+                    input.value = '';
+                    vistaPrevia.style.display = 'none';
+                    return false;
+                }
+
+                var reader = new FileReader();
                 reader.onload = function (e) {
                     vistaPrevia.src = e.target.result;
                     vistaPrevia.style.display = 'block';
                 };
-
                 reader.readAsDataURL(file);
             }
         }

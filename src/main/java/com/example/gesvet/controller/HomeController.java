@@ -298,6 +298,63 @@ public String productoHomes(@PathVariable Integer id, Model model, Authenticatio
 
         return "usuario/Carrito";
     }
+@PostMapping("/cart/update")
+public String updateCart(@RequestParam Integer id, @RequestParam Integer newQuantity, Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) {
+    // Obtener los detalles del usuario actual
+UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+model.addAttribute("userdetail", userDetails);
+
+    // Obtener el usuario actual
+    String username = authentication.getName();
+    User user = userService.findByUsername(username);
+
+    // Crear un objeto UserDto
+    UserDto userDto = new UserDto();
+    userDto.setId(user.getId());
+    userDto.setUsername(user.getUsername());
+    userDto.setNombre(user.getNombre());
+    userDto.setApellido(user.getApellido());
+    userDto.setDireccion(user.getDireccion());
+    userDto.setTelefono(user.getTelefono());
+    userDto.setRole(user.getRole());
+    userDto.setAcercade(user.getAcercade());
+    userDto.setImagen("/images/" + user.getImagen());
+    
+     // Obtener el producto de la base de datos
+    Optional<Productos> optionalProducto = productoService.get(id);
+    Productos producto = optionalProducto.orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+    // Verificar si la nueva cantidad excede la cantidad disponible en la base de datos
+    if (newQuantity > producto.getCantidad()) {
+        int cantidadDisponible = producto.getCantidad(); // Obtener la cantidad disponible del producto
+        redirectAttributes.addFlashAttribute("error", "La cantidad seleccionada excede la cantidad disponible en el inventario (" + cantidadDisponible + " disponibles).");
+        return "redirect:/getCart";
+    }
+
+    // Buscar el detalle correspondiente en la lista de detalles del carrito
+    DetalleFactura detalle = detalles.stream()
+            .filter(df -> df.getProductos().getId().equals(id))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Detalle de factura no encontrado"));
+
+    // Actualizar la cantidad del producto
+    detalle.setCantidad(newQuantity);
+
+    // Recalcular el total del detalle
+    detalle.setTotal(detalle.getPrecio() * newQuantity);
+
+    // Recalcular el total de la factura
+    double sumaTotal = detalles.stream().mapToDouble(df -> df.getTotal()).sum();
+    factura.setTotal(sumaTotal);
+
+    // Actualizar el modelo con los datos actualizados
+    model.addAttribute("cart", detalles);
+    model.addAttribute("factura", factura);
+    model.addAttribute("userDto", userDto);
+
+    // Devolver la vista del carrito
+    return "usuario/Carrito";
+}
 
     //Quitar un producto del carrito
     @GetMapping("/delete/cart/{id}")

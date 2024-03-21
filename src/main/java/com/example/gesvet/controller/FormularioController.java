@@ -33,7 +33,7 @@ public class FormularioController {
                 + "¡Espero que tengas un excelente día!";
 
         // Enviar correo electrónico
-        emailService.enviarCorreo("nicolas260805@gmail.com", "Nuevo formulario enviado", cuerpoCorreo);
+        emailService.enviarCorreo("soportegesvet@gmail.com", "Nuevo formulario enviado", cuerpoCorreo);
         redirectAttributes.addFlashAttribute("FormularioExitoso", true);
         // Puedes redirigir a una página de éxito o a donde sea necesario
         return "redirect:/principal";

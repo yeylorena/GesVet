@@ -2,6 +2,7 @@ package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.User;
+import com.example.gesvet.service.EmailService;
 import com.example.gesvet.service.UserService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,6 +27,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PerfilController {
+    
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -144,6 +148,7 @@ public class PerfilController {
 
             // Eliminar el usuario de la base de datos
             userService.eliminarUsuario(user.getId());
+             userService.enviarEliminacionDeLaCuenta(user);
 
             // Realizar la desconexión (logout) si es necesario
             // Esto dependerá de cómo estés manejando la autenticación en tu aplicación

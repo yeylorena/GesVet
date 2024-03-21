@@ -84,6 +84,9 @@ public class SecretController {
 
         if (claims != null) {
             String username = claims.getSubject();
+            
+            var user=userService.findByUsername(username);
+            userDto.setId(user.getId());
 
             // Actualizar los detalles del usuario
             userService.updateUser(userDto);

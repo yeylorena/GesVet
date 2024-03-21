@@ -28,5 +28,7 @@ public interface UserService {
     public Optional<User> get(Integer id);
     
      public boolean usuarioDatosPersonalesCompletos(User user);
+     
+      void enviarEliminacionDeLaCuenta(User user);
 
 }

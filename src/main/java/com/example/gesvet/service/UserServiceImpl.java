@@ -5,12 +5,15 @@ import com.example.gesvet.models.User;
 import com.example.gesvet.repository.RecuperarContraseñausuRepository;
 import com.example.gesvet.repository.UserRepository;
 import io.micrometer.common.util.StringUtils;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -145,5 +148,25 @@ public class UserServiceImpl implements UserService {
             && StringUtils.isNotBlank(user.getAcercade())
             && StringUtils.isNotBlank(user.getImagen());
 }
+    
+    @Override
+    public void enviarEliminacionDeLaCuenta(User user) {
+        try {
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            helper.setTo(user.getUsername());
+            helper.setSubject("Cuenta Desactivada");
+
+            String contenidoMensaje = "<p class=\"small\" style=\"color: black;\">Tu cuenta ha sido desactivada<br><br>🚨 Advertencia importante: Desactivar cuenta 🚨<br><br>Estimado usuario:<br><br>Al optar por desactivar tu cuenta, queremos informarte que esta será desactivada y no se eliminará por completo de nuestra plataforma. Esto significa que tus datos y perfil no serán accesibles para otros usuarios, pero permanecerán en nuestra base de datos. <br><br>Si en algún momento decides regresar, podrás activar tu cuenta nuevamente simplemente iniciando sesión con tus credenciales anteriores. Sin embargo, para garantizar la seguridad de tu cuenta y proteger tu información, requerimos que solicites la activación de tu cuenta a través de nuestro correo electrónico <a href=\"mailto:soportegesvet@gmail.com\">soportegesvet@gmail.com</a> antes de iniciar sesión. Esta opción te permite volver a utilizar nuestros servicios sin perder tu historial o configuraciones previas. <br><br>Agradecemos tu comprensión y te recordamos que siempre estaremos aquí para ayudarte si cambias de opinión o necesitas asistencia. <br><br>Atentamente, <br>El equipo de soporte.</p>";
+
+            helper.setText(contenidoMensaje, true);
+
+            javaMailSender.send(message);
+        } catch (MessagingException e) {
+            // Manejar la excepción aquí (puedes imprimir un mensaje de error o realizar otra acción apropiada)
+            e.printStackTrace();
+        }
+    }
 
 }

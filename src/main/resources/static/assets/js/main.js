@@ -522,7 +522,7 @@ function eliminarEspe() {
 
 function confirmarEliminacion() {
     Swal.fire({
-        title: '¿Estás seguro de que quieres eliminar tu cuenta?',
+        title: '¿Estás seguro de que quieres desactivar tu cuenta?',
         showCancelButton: true,
         confirmButtonText: 'Confirmar',
         cancelButtonText: 'Cancelar',
