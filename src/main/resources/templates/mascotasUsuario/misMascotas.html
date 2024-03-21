@@ -248,7 +248,7 @@
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
                 </a>
-                <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp" target="_blank">
                     <i class="bi bi-whatsapp"></i>   
                     <span class="badge bg-primary badge-number"></span>
                 </a>
@@ -275,16 +275,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
-                                <i class="bi bi-gear"></i>
-                                <span>Configuracion de la Cuenta</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" th:href="@{/ayudausuario}">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Nesecitas ayuda?</span>
                             </a>
@@ -394,11 +385,11 @@
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
                             <div class="row mt-5">
                                 <!-- Iterar sobre cada mascota -->
-                                <div th:each="mascota : ${mascotas}" class="col-12 col-md-4 mb-4">
+                                <div th:each="mascota : ${mascotas}" class="col-12 col-md-4 col-lg-4 d-flex justify-content-center">
                                     <!-- Tarjeta de mascota -->
-                                    <div class="alimentos card h-90">
+                                    <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
                                         <!-- Imagen de la mascota -->
-                                        <img th:src="@{/images/{imageName}(imageName=${mascota.imagen})}" class="perfil card-img-top" alt="..." style="width: 300px; height: 200px; object-fit: cover;">
+                                        <img th:src="@{/images/{imageName}(imageName=${mascota.imagen})}" class="perfil card-img-top" style="height: 180px;">
                                             <!-- Detalles de la mascota -->
                                             <div class="card-body" style="background: #d9d9d9;">
                                                 <!-- Título y otros detalles -->
@@ -566,7 +557,14 @@
 
         </section>
         <div th:replace="~{Plantillas/usuario :: scripts}"></div>
-    </main><!-- End #main -->
+    </main>
+    <script th:if="${success}">
+        Swal.fire({
+            icon: 'success',
+            title: '¡Mascota agregada!',
+            text: 'La mascota se ha agregado correctamente.'
+        });
+    </script><!-- End #main -->
     <!-- validación números -->
     <script>
         document.getElementById("edadInput").addEventListener("input", function () {
@@ -622,9 +620,6 @@
             // Verifica si algún campo está vacío
             if (nombre === '' || color === '' || edad === '' || genero === '' || raza === '' || especie === '' || tiempo === "") {
                 swal("Error", "Por favor complete todos los campos.", "error");
-            } else {
-                swal("¡Mascota creada con éxito!", "", "success");
-
             }
         });
 

@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/mascotasUsuarios")
@@ -100,7 +101,7 @@ public class mascotaUsuarioController {
     }
 
     @PostMapping("/saveM")
-    public String saveM(Mascota mascota, Model model, @RequestParam("file") MultipartFile imagen, int especie, Authentication authentication, Principal principal) {
+    public String saveM(Mascota mascota, Model model, @RequestParam("file") MultipartFile imagen, int especie, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
 
         // Obtener el usuario actual
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -124,6 +125,7 @@ public class mascotaUsuarioController {
 
             // Guardar la mascota
             mascotaService.save(mascota);
+            redirectAttributes.addFlashAttribute("success", true);
 
             // Obtener todas las mascotas nuevamente
             List<Mascota> mascotasActualizadas = mascotaService.findAll();

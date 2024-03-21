@@ -30,7 +30,7 @@
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
                 </a>
-                <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp" target="_blank">
                     <i class="bi bi-whatsapp"></i>   
                     <span class="badge bg-primary badge-number"></span>
                 </a>
@@ -64,17 +64,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil}">
-                                <i class="bi bi-gear"></i>
-                                <span>Configuracion de la Cuenta</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" th:href="@{/ayudausuario}">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Nesecitas ayuda?</span>
                             </a>
@@ -86,7 +76,7 @@
                         <li>
                             <a  class="dropdown-item d-flex align-items-center " th:href="@{/logout}">
                                 <i class="bi bi-box-arrow-right"></i>
-                                <span sec:authorize="isAuthenticated"> Salir</span>
+                                <span sec:authorize="isAuthenticated"> Cerrar sesión</span>
                             </a>
                         </li>
 
@@ -184,34 +174,36 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-9">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Producto</th>
-                                                        <th scope="col">Precio</th>
-                                                        <th scope="col">Cantidad</th>
-                                                        <th scope="col">Total</th>
-                                                        <th scope="col">Acción</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr th:each="dfactura:${cart}">
-                                                        <td th:text="${dfactura.nombre}"></td>
-                                                        <td th:text="${dfactura.precio}" class="precio2"></td>
-                                                        <td th:text="${dfactura.cantidad}" class="cantidadProducto"></td>
-                                                        <td th:text="${dfactura.total}" class="precio2"></td>
-                                                        <td><a th:href="@{/delete/cart/{id}(id=${dfactura.productos.id})}" class="btn btn-danger"><i class="bi bi-trash3"></i></a></td>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Producto</th>
+                                                            <th scope="col">Precio</th>
+                                                            <th scope="col">Cantidad</th>
+                                                            <th scope="col">Total</th>
+                                                            <th scope="col">Acción</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="dfactura:${cart}">
+                                                            <td th:text="${dfactura.nombre}"></td>
+                                                            <td th:text="${dfactura.precio}" class="precio2"></td>
+                                                            <td th:text="${dfactura.cantidad}" class="cantidadProducto"></td>
+                                                            <td th:text="${dfactura.total}" class="precio2"></td>
+                                                            <td><a th:href="@{/delete/cart/{id}(id=${dfactura.productos.id})}" class="btn btn-danger"><i class="bi bi-trash3"></i></a></td>
 
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
 
                                         <div class="col-lg-3">
                                             <h2 class="card-title">Total compra:</h2>
 
                                             <ul class="list-group">
-                                                 <li class="list-group-item"><h5 th:text="${factura.total}"  class="precio1"></h5></li>
+                                                <li class="list-group-item"><h5 th:text="${factura.total}"  class="precio1"></h5></li>
                                                 <a th:href="@{/factura}" class="btn btn-dark">Ver Factura</a>
                                             </ul>
                                         </div>
@@ -234,8 +226,8 @@
         <div th:replace="Plantillas/usuario :: scripts"></div>
 
     </main><!-- End #main -->
-    
-   <script th:inline="javascript">
+
+    <script th:inline="javascript">
         /*<![CDATA[*/
         document.addEventListener("DOMContentLoaded", function () {
             var precios = document.querySelectorAll('.precio2');
@@ -258,7 +250,7 @@
         });
         /*]]>*/
     </script>
-    
+
     <script th:inline="javascript">
         /*<![CDATA[*/
         document.addEventListener("DOMContentLoaded", function () {
@@ -282,29 +274,29 @@
         });
         /*]]>*/
     </script>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    document.addEventListener("DOMContentLoaded", function () {
-        // Obtener todas las celdas con la clase "cantidadProducto"
-        var cantidadProductoCells = document.querySelectorAll('.cantidadProducto');
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener todas las celdas con la clase "cantidadProducto"
+            var cantidadProductoCells = document.querySelectorAll('.cantidadProducto');
 
-        // Iterar sobre cada celda y aplicar el formateo
-        cantidadProductoCells.forEach(function (cell) {
-            // Obtener el valor de la cantidad del contenido de la celda
-            var valorCantidad = cell.textContent.trim();
+            // Iterar sobre cada celda y aplicar el formateo
+            cantidadProductoCells.forEach(function (cell) {
+                // Obtener el valor de la cantidad del contenido de la celda
+                var valorCantidad = cell.textContent.trim();
 
-            // Parsear el valor de la cantidad a un número flotante
-            var valor = parseFloat(valorCantidad);
+                // Parsear el valor de la cantidad a un número flotante
+                var valor = parseFloat(valorCantidad);
 
-            // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
-            if (!isNaN(valor)) {
-                var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
-                cell.textContent = valorSinDecimales;
-            }
+                // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
+                if (!isNaN(valor)) {
+                    var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
+                    cell.textContent = valorSinDecimales;
+                }
+            });
         });
-    });
-    /*]]>*/
-</script>
+        /*]]>*/
+    </script>
 
 </body>
 </html>
