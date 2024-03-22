@@ -166,10 +166,12 @@
                             </li>
                         </ul>
                         <div class="tab-content pt-2">
+                            <div class="container-fluid mt-2">
+                                <p class="textoNeonU">Realizar compra</p>
+                            </div>
 
 
-
-                            <div class="row mt-3">
+                            <div class="row mt-5">
 
                                 <div class="card-body">
                                     <div class="row">
@@ -207,7 +209,7 @@
 
                                                                                 <input type="hidden" th:name="id" th:value="${dfactura.productos.id}" />
                                                                                 <label for="newQuantity">Nueva Cantidad:</label>
-                                                                                <input type="number" id="newQuantity" name="newQuantity" min="1" th:value="${dfactura.cantidad}" required />
+                                                                                <input class="productoCantidad" type="number" id="newQuantity" name="newQuantity" min="1" th:value="${dfactura.cantidad}" required />
                                                                                 <button type="submit" class="btn btn-primary">Actualizar</button>
                                                                             </form>
                                                                         </div>
@@ -219,31 +221,31 @@
                                                         <td th:text="${dfactura.total}" class="precio2"></td>
                                                         <td><a th:href="@{/delete/cart/{id}(id=${dfactura.productos.id})}" class="btn btn-danger"><i class="bi bi-trash3"></i></a></td>
 
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
+                                    
 
-                                        <div class="col-lg-3">
-                                            <h2 class="card-title">Total compra:</h2>
+                                    <div class="col-lg-3">
+                                        <h2 class="card-title">Total compra:</h2>
 
-                                            <ul class="list-group">
-                                                <li class="list-group-item"><h5 th:text="${factura.total}"  class="precio1"></h5></li>
-                                                <a th:href="@{/factura}" class="btn btn-dark">Ver Factura</a>
-                                            </ul>
-                                        </div>
-
-
+                                        <ul class="list-group">
+                                            <li class="list-group-item"><h5 th:text="${factura.total}"  class="precio1"></h5></li>
+                                            <a th:href="@{/factura}" class="btn btn-dark">Ver Factura</a>
+                                        </ul>
                                     </div>
+
+
                                 </div>
                             </div>
-
                         </div>
 
                     </div>
 
                 </div>
+
+            </div>
             </div>
             </div>
             </div>
@@ -335,6 +337,37 @@
             text: 'Excediste el limite de la cantidad del producto'
         });
     </script>
+    <script th:if="${errorproducto}">
+        Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: 'Por favor, añade un producto antes de ver la factura.'
+        });
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener todas las celdas con la clase "productoCantidad"
+            var productoCantidadCells = document.querySelectorAll('.productoCantidad');
+
+            // Iterar sobre cada celda y aplicar el formateo
+            productoCantidadCells.forEach(function (cell) {
+                // Obtener el valor del producto del contenido de la celda
+                var valorProducto = cell.textContent.trim();
+
+                // Parsear el valor del producto a un número flotante
+                var valor = parseFloat(valorProducto);
+
+                // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
+                if (!isNaN(valor)) {
+                    var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
+                    cell.textContent = valorSinDecimales;
+                }
+            });
+        });
+        /*]]>*/
+    </script>
+
 
 
 

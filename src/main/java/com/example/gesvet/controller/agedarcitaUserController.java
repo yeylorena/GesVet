@@ -61,7 +61,7 @@ public class agedarcitaUserController {
     private eventoService eventoService;
 
     @GetMapping("citas")
-    public String show(Model model, Authentication authentication, Principal principal) {  //el objeto model lleva información desde el backend hacia la vista
+    public String show(Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {  //el objeto model lleva información desde el backend hacia la vista
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -89,6 +89,11 @@ public class agedarcitaUserController {
         User user = userService.findByUsername(userDetails.getUsername());
         List<Mascota> mascotas = user.getMascotas();
         model.addAttribute("mascotas", mascotas);
+         if (!userService.usuarioDatosPersonalesCompletos(user)) {
+        // Si los datos personales no están completos, agregar el atributo para mostrar la alerta
+        redirectAttributes.addFlashAttribute("mostrarAlerta", true);
+        return "redirect:/perfil"; // Redireccionar al perfil del administrador
+    }
 
         // Obtener las citas pendientes del usuario
         List<citaRapida> citasPendientes = citarapidaservice.findPendientesByUsuario(user);

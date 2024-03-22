@@ -62,7 +62,7 @@ public class HomeControllerAdmin {
     Factura factura = new Factura();
 
     @GetMapping("verhomeadmin")
-    public String home(Model model, Authentication authentication, Principal principal) {
+    public String home(Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -85,6 +85,12 @@ public class HomeControllerAdmin {
         userDto.setRole(user.getRole());
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
+
+        if (!userService.usuarioDatosPersonalesCompletos(user)) {
+            // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
+            redirectAttributes.addFlashAttribute("mostrarAlerta", true);
+            return "redirect:/perfil_admin"; // Retornar la vista sin permitir la carga completa
+        }
 
         //ESTA ES PARA EL ADMINISTRADOR
         List<Factura> factura = facturaService.findByUsuario(user);
@@ -223,6 +229,64 @@ public class HomeControllerAdmin {
         return "usuario/Carritoadmin";
     }
 
+    @PostMapping("/cartadmin/updateadmin")
+    public String updateCartadmin(@RequestParam Integer id, @RequestParam Integer newQuantity, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
+
+        // Obtener el usuario actual
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        // Obtener el producto de la base de datos
+        Optional<Productos> optionalProducto = productoService.get(id);
+        Productos producto = optionalProducto.orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        // Verificar si la nueva cantidad excede la cantidad disponible en la base de datos
+        if (newQuantity > producto.getCantidad()) {
+            int cantidadDisponible = producto.getCantidad(); // Obtener la cantidad disponible del producto
+            redirectAttributes.addFlashAttribute("error", "La cantidad seleccionada excede la cantidad disponible en el inventario (" + cantidadDisponible + " disponibles).");
+            return "redirect:/getCartadmin";
+        }
+
+        // Buscar el detalle correspondiente en la lista de detalles del carrito
+        DetalleFactura detalle = detalles.stream()
+                .filter(df -> df.getProductos().getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Detalle de factura no encontrado"));
+
+        // Actualizar la cantidad del producto
+        detalle.setCantidad(newQuantity);
+
+        // Recalcular el total del detalle
+        detalle.setTotal(detalle.getPrecio() * newQuantity);
+
+        // Recalcular el total de la factura
+        double sumaTotal = detalles.stream().mapToDouble(df -> df.getTotal()).sum();
+        factura.setTotal(sumaTotal);
+
+        // Actualizar el modelo con los datos actualizados
+        model.addAttribute("cart", detalles);
+        model.addAttribute("factura", factura);
+        model.addAttribute("userDto", userDto);
+
+        // Devolver la vista del carrito
+        return "usuario/Carritoadmin";
+    }
+
     //Quitar un producto del carrito
     @GetMapping("/deleteadmin/cartadmin/{id}")
     public String deleteProductoCart(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
@@ -305,7 +369,14 @@ public class HomeControllerAdmin {
     }
 
     @GetMapping("/facturaadmin")
-    public String factura(Model model, Authentication authentication, Principal principal) {
+    public String factura(Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
+
+        if (detalles.isEmpty()) {
+            // Agregar un mensaje de error
+            redirectAttributes.addFlashAttribute("errorproducto", "Por favor, añade un producto antes de ver la factura.");
+            // Redirigir al usuario a la página anterior
+            return "redirect:/getCartadmin";
+        }
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -574,7 +645,7 @@ public class HomeControllerAdmin {
         model.addAttribute("productos", productos);
         return "usuario/Homeadmin";
     }
-    
+
     /* detalles compras admin */
  /*
     

@@ -1,8 +1,10 @@
 package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
+import com.example.gesvet.models.Categorias;
 import com.example.gesvet.models.Productos;
 import com.example.gesvet.models.User;
+import com.example.gesvet.service.ICategoriasService;
 import com.example.gesvet.service.IFacturaService;
 import com.example.gesvet.service.IProductoService;
 import com.example.gesvet.service.UserService;
@@ -23,6 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
+    
+     @Autowired
+    ICategoriasService categoriasservice;
 
     @Autowired
     private IProductoService productoService;
@@ -71,6 +76,10 @@ public class UserController {
         // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
         model.addAttribute("mostrarAlerta", true);
     }
+            // Obtén las categorías asociadas al tipo "Producto"
+        List<Categorias> categoriasProducto = categoriasservice.findByTipoCategoria("Producto");
+
+        model.addAttribute("categoriasProducto", categoriasProducto);
             model.addAttribute("userDto", userDto);
         }
 
@@ -153,6 +162,11 @@ public boolean mostrarAlerta() {
             List<Productos> productosConPocoStock = productoService.getTopProductosConPocoStock(limite, minimoStock);
 
             model.addAttribute("productosConPocoStock", productosConPocoStock);
+            
+             if (!userService.usuarioDatosPersonalesCompletos(user)) {
+        // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
+        model.addAttribute("mostrarAlerta", true);
+    }
 
             model.addAttribute("userDto", userDto);
         }
