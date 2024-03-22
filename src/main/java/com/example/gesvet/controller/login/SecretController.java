@@ -3,6 +3,7 @@ package com.example.gesvet.controller.login;
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.jwtUtil.JwtUtils;
 import com.example.gesvet.models.User;
+import com.example.gesvet.models.respuesta;
 import com.example.gesvet.service.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
@@ -76,7 +77,7 @@ public class SecretController {
     }
 
     @PutMapping("/user-details")
-    public ResponseEntity<String> updateUserDetails(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+    public ResponseEntity<Object> updateUserDetails(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
             @RequestBody UserDto userDto) {
         String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
 
@@ -90,10 +91,19 @@ public class SecretController {
 
             // Actualizar los detalles del usuario
             userService.updateUser(userDto);
+            
+            var respuesta = new respuesta(
+                    "Creado",    
+                    "Usuario modificado"
+            );
 
-            return ResponseEntity.status(HttpStatus.OK).body("Detalles del usuario actualizados con éxito");
+            return ResponseEntity.status(HttpStatus.OK).body(respuesta);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No autorizado");
+            var respuesta = new respuesta(
+                    "error",    
+                    "Usuario no autorizado"
+            );
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
     }
 

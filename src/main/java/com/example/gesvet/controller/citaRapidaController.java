@@ -55,13 +55,15 @@ public class citaRapidaController {
     private eventoService eventoService;
 
     @GetMapping("")
-    public String clientes(Model model, Principal principal) {
+    public String clientes(Model model, Principal principal, RedirectAttributes redirectAttributes) {
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
 
         // Obtener la lista de usuarios con rol "ADMIN" y activos
         List<User> usuarios = userService.findByRoleAndActivo("ADMIN", true);
+        
+        
 
         // Preparar los datos de los usuarios para mostrarlos en la vista
         List<UserDto> usuariosDto = new ArrayList<>();
@@ -77,7 +79,9 @@ public class citaRapidaController {
             userDto.setAcercade(user.getAcercade());
             userDto.setImagen(user.getImagen());
             userDto.setImagen("/images/" + user.getImagen());
-
+            
+            
+        
             // Obtener las mascotas asociadas a este usuario
             List<Mascota> mascotas = user.getMascotas();
 
@@ -85,11 +89,19 @@ public class citaRapidaController {
             for (Mascota mascota : mascotas) {
                 nombresMascotas.add(mascota.getNombre()); // O cualquier otro atributo que desees mostrar
             }
+            
+            
 
             userDto.setMascotas(nombresMascotas);
 
             usuariosDto.add(userDto);
         }
+          User user = userService.findByUsername(principal.getName());
+    if (!userService.usuarioDatosPersonalesCompletos(user)) {
+        // Si los datos personales no están completos, agregar el atributo para mostrar la alerta
+        redirectAttributes.addFlashAttribute("mostrarAlerta", true);
+        return "redirect:/perfil_admin"; // Redireccionar al perfil del administrador
+    }
 
         List<Especie> especies = especieService.getAllEspecies();
         model.addAttribute("especies", especies);

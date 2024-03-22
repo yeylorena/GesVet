@@ -218,6 +218,7 @@
                                                                                                             <label for="password" class="form-label titlecartaSel ">Contraseña</label>
                                                                                                             <input th:field="*{password}" type="password" name="password" class="form-control" id="password" required>
                                                                                                                 <div class="invalid-feedback">Escribe tu Contraseña</div>
+                                                                                                                <span th:if="${passwordMismatch}" style="color: red;">Las contraseñas no coinciden.</span>
                                                                                                                 <div th:if="${#fields.hasErrors('password')}" style="color: red;" role="alert">
                                                                                                                     La contraseña debe tener al menos 6 caracteres combinando letras y números.
                                                                                                                 </div>

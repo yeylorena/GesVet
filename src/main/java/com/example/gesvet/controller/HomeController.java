@@ -440,6 +440,13 @@ model.addAttribute("userdetail", userDetails);
     @GetMapping("/factura")
     public String factura(Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) {
 
+        
+         if (detalles.isEmpty()) {
+        // Agregar un mensaje de error
+        redirectAttributes.addFlashAttribute("errorproducto", "Por favor, añade un producto antes de ver la factura.");
+        // Redirigir al usuario a la página anterior
+        return "redirect:/getCart";
+    }
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
