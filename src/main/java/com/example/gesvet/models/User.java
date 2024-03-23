@@ -1,5 +1,7 @@
 package com.example.gesvet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +32,7 @@ public class User {
     private static final String IMAGEN_PREDETERMINADA = "usuario.png";
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+   @JsonIgnoreProperties("usuario")
     private List<Mascota> mascotas;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)

@@ -17,4 +17,5 @@ public interface RazaService {
     public List<Raza> findAll();
 
     public List<Raza> getAllRazas();
+    Raza getById(Integer id);
 }
