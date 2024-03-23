@@ -16,29 +16,13 @@ public class Especie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
-    private String estado;
+    private boolean activo = true;
     private String descripcion;
     // Relación con Raza
     @OneToMany(mappedBy = "especie")
     private List<Raza> razas;
 
     public Especie() {
-    }
-
-    public Especie(Integer id, String nombre, String estado, String descripcion, List<Raza> razas) {
-        this.id = id;
-        this.nombre = nombre;
-        this.estado = estado;
-        this.descripcion = descripcion;
-        this.razas = razas;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public String getDescripcion() {
@@ -73,9 +57,25 @@ public class Especie {
         this.razas = razas;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public Especie(Integer id, String nombre, String descripcion, List<Raza> razas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.razas = razas;
+        this.activo = true;
+    }
+
     @Override
     public String toString() {
-        return "Especie{" + "id=" + id + ", nombre=" + nombre + ", estado=" + estado + ", descripcion=" + descripcion + ", razas=" + razas + '}';
+        return "Especie{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", razas=" + razas + '}';
     }
 
 }

@@ -385,7 +385,7 @@
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
                             <div class="row mt-5">
                                 <!-- Iterar sobre cada mascota -->
-                                <div th:each="mascota : ${mascotas}" class="col-12 col-md-4 col-lg-4 d-flex justify-content-center">
+                                <div th:each="mascota : ${mascotas}" class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:if="${mascota.activo}">
                                     <!-- Tarjeta de mascota -->
                                     <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
                                         <!-- Imagen de la mascota -->
@@ -436,7 +436,7 @@
                                             <div class="row my-2">
                                                 <div class="col-6">
 
-                                                    <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);" accept=".jpg, .jpeg, .png">
+                                                    <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" accept=".jpg, .jpeg, .png" required>
                                                         <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('imagen').click(); return false;">
                                                             <i class="fas fa-plus"></i> Agregar imagen
                                                         </button>
@@ -454,13 +454,13 @@
                                         </div>
                                         <div class="col-6 ">
                                             <label style="color: black;">Color</label>
-                                            <input type="text" name="color" field="" class="form-control" required >
+                                            <input type="text" name="color" id="color" field="" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-6">
                                             <label style="color: black;">Edad:</label>
-                                            <input type="text" name="edad" field="" class="form-control" id="edadInput" required>
+                                            <input type="number" name="edad" field="" class="form-control" id="edadInput" required min="1" >
                                                 <small id="edadHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo números.</small>
                                         </div>
                                         <div class="col-6 ">
@@ -498,9 +498,9 @@
                                                 <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
                                             </select>
                                         </div>
+                                        <div class="col-6">
+                                            <label  style="color: black;">Detalles</label>
 
-                                        <label  style="color: black;">Detalles</label>
-                                        <div class="col-12">
                                             <input name="detalles" type="text" class="form-control" id="detalles" value="">
                                         </div>
                                     </div>
@@ -511,17 +511,18 @@
                                     </div>
                             </form><!-- End Profile Edit Form -->
                         </div>
-
-                        <!--Fin registrar mascota-->
-                        <!-- Modificar mascota -->
-                        <!--Fin modificar mascota-->
-
-                        <!--Historial-->
-                        <!--Historial-->
                         <div class="tab-pane fade pt-3" id="profile-change-password">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" name="palabra" placeholder="Buscar" id="palabra" autocomplete="off" oninput="buscarHistorial()">
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Historial mascota -->
-                            <div class="table-responsive">
-                                <table class="table table-striped table-hover text-start">
+                            <div class="table-responsive mt-4">
+                                <table class="table table-striped table-hover text-start" id="tablaHistorial">
                                     <thead>
                                         <tr class="table-secondary">
                                             <th scope="col">Imagen</th>
@@ -537,7 +538,7 @@
                                     </thead>
                                     <tbody>
                                         <!-- Iterar sobre cada mascota -->
-                                        <tr th:each="mascota : ${mascotas}">
+                                        <tr th:each="mascota : ${mascotas}" th:if="${!mascota.activo}">
                                             <td><img th:src="@{/images/{imageName}(imageName=${mascota.imagen})}" alt="Mascota" style="width: 50px; height: 50px;"></td>
                                             <td th:text="${mascota.nombre}"></td>
                                             <td th:text="${mascota.raza.nombre}"></td>
@@ -559,6 +560,56 @@
         </section>
         <div th:replace="~{Plantillas/usuario :: scripts}"></div>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Función para validar y guardar la mascota
+            document.getElementById('btnRegistrar').addEventListener('click', function () {
+                var nombre = document.getElementById("nombreInput").value;
+                var color = document.getElementById("color").value;
+                var edad = document.getElementById("edadInput").value;
+                var tiempo = document.getElementsByName("tiempo")[0].value;
+                var genero = document.getElementsByName("genero")[0].value;
+                var especie = document.getElementsByName("especie")[0].value;
+                var raza = document.getElementsByName("raza")[0].value;
+                var detalles = document.getElementById("detalles").value;
+            });
+
+            // Validación en tiempo real y capitalización de campos
+            var edadInput = document.getElementById("edadInput");
+            edadInput.addEventListener('input', function () {
+                var tiempo = document.getElementsByName("tiempo")[0].value;
+                var maxEdad = tiempo === "Meses" ? 11 : 20;
+                var valor = parseInt(this.value);
+                if (valor > maxEdad) {
+                    this.value = maxEdad;
+                }
+            });
+
+            var nombreInput = document.getElementById("nombreInput");
+            var colorInput = document.getElementById("color");
+            var detallesInput = document.getElementById("detalles");
+
+
+            nombreInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            });
+
+            colorInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            });
+
+            detallesInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            });
+
+        });
+    </script>
+
+
+
     <script th:if="${success}">
         Swal.fire({
             icon: 'success',
@@ -633,25 +684,43 @@
                 reader.readAsDataURL(file);
             }
         }
-        // boton de registrar
-        document.getElementById('btnRegistrar').addEventListener('click', function () {
-            var nombre = document.getElementById('nombreInput').value.trim();
-            var color = document.getElementsByName('color')[0].value.trim();
-            var edad = document.getElementById('edadInput').value.trim();
-            var genero = document.getElementsByName('genero')[0].value.trim();
-            var raza = document.getElementsByName('raza')[0].value.trim();
-            var especie = document.getElementsByName('especie')[0].value.trim();
-            var tiempo = document.getElementsByName('tiempo')[0].value.trim();
-            // Verifica si algún campo está vacío
-            if (nombre === '' || color === '' || edad === '' || genero === '' || raza === '' || especie === '' || tiempo === "") {
-                swal("Error", "Por favor complete todos los campos.", "error");
-            }
+    </script>
+
+    <script th:if="${mascotaactualizada != null}">
+        Swal.fire({
+            icon: 'success',
+            title: 'Mascota actualizada con éxito'
         });
-
-
-
-
-
+    </script>
+    <script>
+        function buscarHistorial() {
+            // Obtén el valor del campo de búsqueda
+            var input = document.getElementById('palabra');
+            var filtro = input.value.toUpperCase();
+            // Obtén la tabla y las filas de la tabla
+            var tabla = document.getElementById('tablaHistorial');
+            var filas = tabla.getElementsByTagName('tr');
+            // Itera sobre las filas y muestra u oculta según la coincidencia con el filtro
+            for (var i = 0; i < filas.length; i++) {
+                var celdas = filas[i].getElementsByTagName('td');
+                var mostrarFila = false;
+                // Si es la primera fila (encabezado), siempre mostrarla
+                if (i === 0) {
+                    mostrarFila = true;
+                } else {
+                    for (var j = 0; j < celdas.length; j++) {
+                        if (celdas[j]) {
+                            var textoCelda = celdas[j].textContent || celdas[j].innerText;
+                            if (textoCelda.toUpperCase().indexOf(filtro) > -1) {
+                                mostrarFila = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                filas[i].style.display = mostrarFila ? '' : 'none';
+            }
+        }
     </script>
 
 

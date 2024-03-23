@@ -224,123 +224,150 @@
 
 
                                                                         <div class="tab-pane fade  profile-overview" id="profile-overview">
-                                                                            <!--Consultar citas-->
-                                                                            <br>
-                                                                                <div class="search-bar">
-                                                                                    <form class="search-form d-flex align-items-center">
-                                                                                        <input type="text" name="query" placeholder="Buscar mascota"
-                                                                                               title="Enter search keyword">
-                                                                                            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-                                                                                    </form>
+                                                                            <div class="row mt-3">
+                                                                                <div class="col-lg-6 col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        <input type="text" name="palabra" placeholder="Buscar" id="palabra" autocomplete="off" oninput="consultarCita()">
+                                                                                    </div>
                                                                                 </div>
-                                                                                <br><!-- End Search Bar -->
+                                                                            </div>
 
 
-                                                                                    <div class="table-responsive">
-                                                                                        <table class="table table-striped table-hover text-start">
-                                                                                            <thead>
-                                                                                                <tr class="table-secondary">
-                                                                                                    <th scope="col">N°</th>
-                                                                                                    <th scope="col">Mascota</th>
-                                                                                                    <th scope="col">Fecha</th>                                                                             
-                                                                                                    <th scope="col">Tipo de cita</th>
-                                                                                                    <th scope="col">Veterinario</th>
-                                                                                                    <th scope="col">Estado</th>
-                                                                                                </tr>
-                                                                                            </thead>
-                                                                                            <tbody>
-                                                                                                <tr th:each="cita, iterStat : ${citasPendientes}">
-                                                                                                    <td th:text="${iterStat.index + 1}"></td>
-                                                                                                    <td th:text="${cita.nombreMascota}"></td> <!-- Mostrar el nombre de la mascota -->
-                                                                                                    <td th:text="${cita.formattedFecha}"></td>
-                                                                                                    <td th:text="${cita.nombreCita}"></td> <!-- Mostrar el tipo de cita -->
-                                                                                                    <td th:text="${cita.nombreVeterinario}"></td> <!-- Mostrar el nombre del veterinario -->
-                                                                                                    <td style="color: red"  th:text="${cita.estado}"></td> <!-- Mostrar el estado de la cita -->
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
+                                                                            <div class="table-responsive mt-4">
+                                                                                <table class="table table-striped table-hover text-start" id="tablaConsultar">
+                                                                                    <thead>
+                                                                                        <tr class="table-secondary">
+                                                                                            <th scope="col">N°</th>
+                                                                                            <th scope="col">Mascota</th>
+                                                                                            <th scope="col">Fecha</th>                                                                             
+                                                                                            <th scope="col">Tipo de cita</th>
+                                                                                            <th scope="col">Veterinario</th>
+                                                                                            <th scope="col">Estado</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr th:each="cita, iterStat : ${citasPendientes}">
+                                                                                            <td th:text="${iterStat.index + 1}"></td>
+                                                                                            <td th:text="${cita.nombreMascota}"></td> <!-- Mostrar el nombre de la mascota -->
+                                                                                            <td th:text="${cita.formattedFecha}"></td>
+                                                                                            <td th:text="${cita.nombreCita}"></td> <!-- Mostrar el tipo de cita -->
+                                                                                            <td th:text="${cita.nombreVeterinario}"></td> <!-- Mostrar el nombre del veterinario -->
+                                                                                            <td style="color: red"  th:text="${cita.estado}"></td> <!-- Mostrar el estado de la cita -->
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
 
 
-                                                                                    </div>
-                                                                                    <!--Fin consultar citas-->
+                                                                        </div>
+                                                                        <!--Fin consultar citas-->
 
 
-                                                                                    </div><!-- End Bordered Tabs -->
-                                                                                    </div>
-                                                                                    </div>
-                                                                                    </div>
-                                                                                    </section>
-                                                                                    <div th:replace="~{Plantillas/usuario :: scripts}"></div>
+                                                                        </div><!-- End Bordered Tabs -->
+                                                                        </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        </section>
+                                                                        <div th:replace="~{Plantillas/usuario :: scripts}"></div>
 
 
-                                                                                    </main><!-- End #main -->
-                                                                                    <script th:if="${success}">
-                                                                                        Swal.fire({
-                                                                                            icon: 'success',
-                                                                                            title: '¡Cita agendada!',
-                                                                                            text: 'La cita se ha agendado correctamente.'
-                                                                                        });
-                                                                                    </script>
-                                                                                    <script>
-                                                                                        document.addEventListener('DOMContentLoaded', function () {
-                                                                                            // Obtener el selector de servicios
-                                                                                            var servicioSelect = document.querySelector('select[name="servicio"]');
-                                                                                            // Obtener el campo de precio
-                                                                                            var precioInput = document.querySelector('input[name="precio"]');
+                                                                        </main><!-- End #main -->
+                                                                        <script th:if="${success}">
+                                                                            Swal.fire({
+                                                                                icon: 'success',
+                                                                                title: '¡Cita agendada!',
+                                                                                text: 'La cita se ha agendado correctamente.'
+                                                                            });
+                                                                        </script>
+                                                                        <script>
+                                                                            document.addEventListener('DOMContentLoaded', function () {
+                                                                                // Obtener el selector de servicios
+                                                                                var servicioSelect = document.querySelector('select[name="servicio"]');
+                                                                                // Obtener el campo de precio
+                                                                                var precioInput = document.querySelector('input[name="precio"]');
 
-                                                                                            // Manejar el evento de cambio en el selector de servicios
-                                                                                            servicioSelect.addEventListener('change', function () {
-                                                                                                // Obtener el precio del servicio seleccionado
-                                                                                                var precio = parseFloat(this.options[this.selectedIndex].getAttribute('data-precio'));
-                                                                                                // Comprobar si el precio es válido
-                                                                                                if (!isNaN(precio)) {
-                                                                                                    // Autocompletar el campo de precio
-                                                                                                    precioInput.value = precio;
-                                                                                                } else {
-                                                                                                    // Limpiar el campo de precio si no se encuentra un precio válido
-                                                                                                    precioInput.value = '';
-                                                                                                }
-                                                                                            });
-                                                                                        });
-                                                                                    </script>
+                                                                                // Manejar el evento de cambio en el selector de servicios
+                                                                                servicioSelect.addEventListener('change', function () {
+                                                                                    // Obtener el precio del servicio seleccionado
+                                                                                    var precio = parseFloat(this.options[this.selectedIndex].getAttribute('data-precio'));
+                                                                                    // Comprobar si el precio es válido
+                                                                                    if (!isNaN(precio)) {
+                                                                                        // Autocompletar el campo de precio
+                                                                                        precioInput.value = precio;
+                                                                                    } else {
+                                                                                        // Limpiar el campo de precio si no se encuentra un precio válido
+                                                                                        precioInput.value = '';
+                                                                                    }
+                                                                                });
+                                                                            });
+                                                                        </script>
 
 
-                                                                                    <script>
-                                                                                        document.addEventListener('DOMContentLoaded', function () {
-                                                                                            // Obtener el selector de mascotas
-                                                                                            var mascotaSelect = document.querySelector('select[name="mascota"]');
-                                                                                            // Obtener la imagen de la mascota
-                                                                                            var imagenMascota = document.getElementById('imagenMascota');
+                                                                        <script>
+                                                                            document.addEventListener('DOMContentLoaded', function () {
+                                                                                // Obtener el selector de mascotas
+                                                                                var mascotaSelect = document.querySelector('select[name="mascota"]');
+                                                                                // Obtener la imagen de la mascota
+                                                                                var imagenMascota = document.getElementById('imagenMascota');
 
-                                                                                            // Función para mostrar la imagen de la mascota seleccionada o la imagen por defecto
-                                                                                            function mostrarImagenMascota() {
-                                                                                                // Obtener la opción seleccionada
-                                                                                                var selectedOption = mascotaSelect.options[mascotaSelect.selectedIndex];
-                                                                                                // Obtener el nombre de la imagen de la mascota
-                                                                                                var imagenNombre = selectedOption.getAttribute('data-imagen');
+                                                                                // Función para mostrar la imagen de la mascota seleccionada o la imagen por defecto
+                                                                                function mostrarImagenMascota() {
+                                                                                    // Obtener la opción seleccionada
+                                                                                    var selectedOption = mascotaSelect.options[mascotaSelect.selectedIndex];
+                                                                                    // Obtener el nombre de la imagen de la mascota
+                                                                                    var imagenNombre = selectedOption.getAttribute('data-imagen');
 
-                                                                                                // Si hay un nombre de imagen, mostrar la imagen correspondiente
-                                                                                                if (imagenNombre) {
-                                                                                                    // Construir la URL completa de la imagen
-                                                                                                    var imagenUrl = '/images/' + imagenNombre;
-                                                                                                    // Establecer la URL de la imagen en el elemento img
-                                                                                                    imagenMascota.src = imagenUrl;
-                                                                                                } else {
-                                                                                                    // Si no hay nombre de imagen (por ejemplo, opción vacía), mostrar la imagen por defecto
-                                                                                                    imagenMascota.src = './img/perrodefecto.jpg';
+                                                                                    // Si hay un nombre de imagen, mostrar la imagen correspondiente
+                                                                                    if (imagenNombre) {
+                                                                                        // Construir la URL completa de la imagen
+                                                                                        var imagenUrl = '/images/' + imagenNombre;
+                                                                                        // Establecer la URL de la imagen en el elemento img
+                                                                                        imagenMascota.src = imagenUrl;
+                                                                                    } else {
+                                                                                        // Si no hay nombre de imagen (por ejemplo, opción vacía), mostrar la imagen por defecto
+                                                                                        imagenMascota.src = './img/perrodefecto.jpg';
+                                                                                    }
+                                                                                }
+
+                                                                                // Manejar el evento de cambio en el selector de mascotas
+                                                                                mascotaSelect.addEventListener('change', mostrarImagenMascota);
+
+                                                                                // Mostrar la imagen de la mascota al cargar la página
+                                                                                mostrarImagenMascota();
+                                                                            });
+                                                                        </script>
+                                                                        <script>
+                                                                            function consultarCita() {
+                                                                                // Obtén el valor del campo de búsqueda
+                                                                                var input = document.getElementById('palabra');
+                                                                                var filtro = input.value.toUpperCase();
+                                                                                // Obtén la tabla y las filas de la tabla
+                                                                                var tabla = document.getElementById('tablaConsultar');
+                                                                                var filas = tabla.getElementsByTagName('tr');
+                                                                                // Itera sobre las filas y muestra u oculta según la coincidencia con el filtro
+                                                                                for (var i = 0; i < filas.length; i++) {
+                                                                                    var celdas = filas[i].getElementsByTagName('td');
+                                                                                    var mostrarFila = false;
+                                                                                    // Si es la primera fila (encabezado), siempre mostrarla
+                                                                                    if (i === 0) {
+                                                                                        mostrarFila = true;
+                                                                                    } else {
+                                                                                        for (var j = 0; j < celdas.length; j++) {
+                                                                                            if (celdas[j]) {
+                                                                                                var textoCelda = celdas[j].textContent || celdas[j].innerText;
+                                                                                                if (textoCelda.toUpperCase().indexOf(filtro) > -1) {
+                                                                                                    mostrarFila = true;
+                                                                                                    break;
                                                                                                 }
                                                                                             }
-
-                                                                                            // Manejar el evento de cambio en el selector de mascotas
-                                                                                            mascotaSelect.addEventListener('change', mostrarImagenMascota);
-
-                                                                                            // Mostrar la imagen de la mascota al cargar la página
-                                                                                            mostrarImagenMascota();
-                                                                                        });
-                                                                                    </script>
+                                                                                        }
+                                                                                    }
+                                                                                    filas[i].style.display = mostrarFila ? '' : 'none';
+                                                                                }
+                                                                            }
+                                                                        </script>
 
 
-                                                                                    </body>
+                                                                        </body>
 
-                                                                                    </html>
+                                                                        </html>

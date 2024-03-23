@@ -461,22 +461,19 @@ function eliminarServ() {
 
 
 //Función eliminar raza 
-function eliminarRaza() {
+function eliminarRaza(id) {
     Swal.fire({
-        title: "Eliminar Raza",
-        text: "¿Está seguro de eliminarla?",
+        title: "¿Estás seguro de eliminar esta raza?",
+        text: "¡No podrás revertir esto!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "¡Si, eliminar!"
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: "¡Sí, eliminar!"
     }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire({
-                title: "Eliminada!",
-                text: "Raza eliminada",
-                icon: "success"
-            });
+            // Si el usuario confirma, redirige a la URL de eliminación
+            window.location.href = '/razas/delete/' + id;
         }
     });
 }
@@ -489,7 +486,9 @@ function eliminarMascota(id) {
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, eliminarla'
+        confirmButtonText: 'Sí, eliminarla',
+        cancelButtonText: 'Cancelar' // Personaliza el texto del botón "Cancelar"
+
     }).then((result) => {
         if (result.isConfirmed) {
             // Si el usuario confirma, redirige a la URL de eliminación
@@ -498,24 +497,19 @@ function eliminarMascota(id) {
     });
 }
 
-
 //Función eliminar especie
-function eliminarEspe() {
+function eliminarEspecie(id) {
     Swal.fire({
-        title: "Eliminar Especie",
-        text: "¿Está seguro de eliminarla?",
+        title: '¿Estás seguro de eliminar esta especie?',
+        text: "¡No podrás revertir esto!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "¡Si, eliminar!"
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: "¡Sí, eliminar!"
     }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire({
-                title: "Eliminada!",
-                text: "Especie eliminada",
-                icon: "success"
-            });
+            window.location.href = '/razas/deleteEspecie/' + id;
         }
     });
 }
@@ -665,175 +659,175 @@ function validarFormularioPrincipal() {
 }
 
 //funcion validar campo nombre de tipod e categoria
- function validarFormulario() {
-        var nombre = document.getElementsByName("nombre")[0].value;
+function validarFormulario() {
+    var nombre = document.getElementsByName("nombre")[0].value;
 
-        if (nombre.trim() === "") {
-            // Mostrar SweetAlert de error
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, ingrese un nombre.',
-            });
-            return false; // Evitar que el formulario se envíe
-        }
-
-        return true; // Permitir que el formulario se envíe
-    }
- 
- function validarFormularioproducto() {
-        var nombre = document.getElementsByName('nombre')[0].value;
-        var descripcion = document.getElementsByName('descripcion')[0].value;
-        var cantidad = document.getElementsByName('cantidad')[0].value;
-        var imagen = document.getElementById('img').files[0];
-          var categoria = document.getElementsByName('categoria.id')[0].value;
-
-
-        // Validar que los campos no estén vacíos
-        if (nombre.trim() === '' || descripcion.trim() === '' || cantidad.trim() === '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, completa todos los campos.'
-            });
-            return false;
-        }
-
-        // Validar que la cantidad sea un número positivo
-        if (isNaN(parseInt(cantidad)) || parseInt(cantidad) <= 0) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'La cantidad debe ser un número positivo.'
-            });
-            return false;
-        }
-
-        // Validar que se haya seleccionado una imagen
-        if (!imagen) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, selecciona una imagen.'
-            });
-            return false;
-        }
-        // Validar que se haya seleccionado una imagen
-        if (!categoria) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, selecciona una categoria.'
-            });
-            return false;
-        }
-
-        // Otras validaciones si es necesario
-
-        return true; // Enviar el formulario si todas las validaciones son exitosas
-    }
-    
-    
-    function validarFormularioproductoupdate() {
-        var nombre = document.getElementsByName('nombre')[0].value;
-        var descripcion = document.getElementsByName('descripcion')[0].value;
-        var cantidad = document.getElementsByName('cantidad')[0].value;
-       
-
-        // Validar que los campos no estén vacíos
-        if (nombre.trim() === '' || descripcion.trim() === '' || cantidad.trim() === '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, completa todos los campos.'
-            });
-            return false;
-        }
-
-        // Validar que la cantidad sea un número positivo
-        if (isNaN(parseInt(cantidad)) || parseInt(cantidad) <= 0) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'La cantidad debe ser un número positivo.'
-            });
-            return false;
-        }
-
-        
-
-        // Otras validaciones si es necesario
-
-        return true; // Enviar el formulario si todas las validaciones son exitosas
-    }
-    
-     function validarFormularioServicio() {
-        var nombre = document.getElementsByName('nombre')[0].value;
-        var descripcion = document.getElementsByName('descripcion')[0].value;
-        var imagen = document.getElementById('img').files[0];
-        
-
-        // Validar que los campos no estén vacíos
-        if (nombre.trim() === '' || descripcion.trim() === '' || !imagen) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, completa todos los campos.'
-            });
-            return false;
-        }
-        
-
-        // Otras validaciones si es necesario
-
-        return true; // Enviar el formulario si todas las validaciones son exitosas
-    }
-    
-    function validarFormularioServiciouser() {
-        var nombre = document.getElementsByName('nombre')[0].value;
-        var descripcion = document.getElementsByName('descripcion')[0].value;
-        var imagen = document.getElementById('img').files[0];
-        var categoria = document.getElementById('categoria.id').files[0];
-
-        // Validar que los campos no estén vacíos
-        if (nombre.trim() === '' || descripcion.trim() === '' || !imagen) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, completa todos los campos.'
-            });
-            return false;
-        }
-        // Validar que se haya seleccionado una imagen
-        if (!categoria) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, selecciona una categoria.'
-            });
-            return false;
-        }
-
-        // Otras validaciones si es necesario
-
-        return true; // Enviar el formulario si todas las validaciones son exitosas
-    }
-    function confirmarCompra() {
+    if (nombre.trim() === "") {
+        // Mostrar SweetAlert de error
         Swal.fire({
-            title: '¿Estás seguro de realizar la compra?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, comprar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Si el usuario confirma, entonces se realiza la compra
-                document.forms[0].submit(); // Puedes ajustar esto según la estructura de tu formulario
-            } else {
-                // Si el usuario cancela, no se hace nada
-            }
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, ingrese un nombre.',
         });
+        return false; // Evitar que el formulario se envíe
     }
+
+    return true; // Permitir que el formulario se envíe
+}
+
+function validarFormularioproducto() {
+    var nombre = document.getElementsByName('nombre')[0].value;
+    var descripcion = document.getElementsByName('descripcion')[0].value;
+    var cantidad = document.getElementsByName('cantidad')[0].value;
+    var imagen = document.getElementById('img').files[0];
+    var categoria = document.getElementsByName('categoria.id')[0].value;
+
+
+    // Validar que los campos no estén vacíos
+    if (nombre.trim() === '' || descripcion.trim() === '' || cantidad.trim() === '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, completa todos los campos.'
+        });
+        return false;
+    }
+
+    // Validar que la cantidad sea un número positivo
+    if (isNaN(parseInt(cantidad)) || parseInt(cantidad) <= 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La cantidad debe ser un número positivo.'
+        });
+        return false;
+    }
+
+    // Validar que se haya seleccionado una imagen
+    if (!imagen) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, selecciona una imagen.'
+        });
+        return false;
+    }
+    // Validar que se haya seleccionado una imagen
+    if (!categoria) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, selecciona una categoria.'
+        });
+        return false;
+    }
+
+    // Otras validaciones si es necesario
+
+    return true; // Enviar el formulario si todas las validaciones son exitosas
+}
+
+
+function validarFormularioproductoupdate() {
+    var nombre = document.getElementsByName('nombre')[0].value;
+    var descripcion = document.getElementsByName('descripcion')[0].value;
+    var cantidad = document.getElementsByName('cantidad')[0].value;
+
+
+    // Validar que los campos no estén vacíos
+    if (nombre.trim() === '' || descripcion.trim() === '' || cantidad.trim() === '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, completa todos los campos.'
+        });
+        return false;
+    }
+
+    // Validar que la cantidad sea un número positivo
+    if (isNaN(parseInt(cantidad)) || parseInt(cantidad) <= 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La cantidad debe ser un número positivo.'
+        });
+        return false;
+    }
+
+
+
+    // Otras validaciones si es necesario
+
+    return true; // Enviar el formulario si todas las validaciones son exitosas
+}
+
+function validarFormularioServicio() {
+    var nombre = document.getElementsByName('nombre')[0].value;
+    var descripcion = document.getElementsByName('descripcion')[0].value;
+    var imagen = document.getElementById('img').files[0];
+
+
+    // Validar que los campos no estén vacíos
+    if (nombre.trim() === '' || descripcion.trim() === '' || !imagen) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, completa todos los campos.'
+        });
+        return false;
+    }
+
+
+    // Otras validaciones si es necesario
+
+    return true; // Enviar el formulario si todas las validaciones son exitosas
+}
+
+function validarFormularioServiciouser() {
+    var nombre = document.getElementsByName('nombre')[0].value;
+    var descripcion = document.getElementsByName('descripcion')[0].value;
+    var imagen = document.getElementById('img').files[0];
+    var categoria = document.getElementById('categoria.id').files[0];
+
+    // Validar que los campos no estén vacíos
+    if (nombre.trim() === '' || descripcion.trim() === '' || !imagen) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, completa todos los campos.'
+        });
+        return false;
+    }
+    // Validar que se haya seleccionado una imagen
+    if (!categoria) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, selecciona una categoria.'
+        });
+        return false;
+    }
+
+    // Otras validaciones si es necesario
+
+    return true; // Enviar el formulario si todas las validaciones son exitosas
+}
+function confirmarCompra() {
+    Swal.fire({
+        title: '¿Estás seguro de realizar la compra?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, comprar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Si el usuario confirma, entonces se realiza la compra
+            document.forms[0].submit(); // Puedes ajustar esto según la estructura de tu formulario
+        } else {
+            // Si el usuario cancela, no se hace nada
+        }
+    });
+}
 
 function validarFormularioperfil() {
     var nombre = document.getElementsByName("nombre")[0].value;

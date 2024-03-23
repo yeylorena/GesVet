@@ -33,7 +33,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                        <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp" target="_blank">
                             <i class="bi bi-whatsapp"></i>   
                             <span class="badge bg-primary badge-number"></span>
                         </a>
@@ -61,16 +61,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Configuracion de la Cuenta</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/ayuda}">
                                     <i class="bi bi-question-circle"></i>
                                     <span>¿Necesitas ayuda?</span>
                                 </a>
@@ -81,7 +72,7 @@
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
                                     <i class="bi bi-box-arrow-right"></i>
-                                    <span>Salir</span>
+                                    <span>Cerrar sesión</span>
                                 </a>
                             </li>
                         </ul><!-- End Profile Dropdown Items -->
@@ -158,11 +149,6 @@
 
 
         <main id="main" class="main" >
-
-            <div class="pagetitle">
-                <h1>Mascotas</h1>
-            </div><!-- End Page Title -->
-
             <section class="section profile">
                 <div class="col-xl-12">
                     <div class="card">

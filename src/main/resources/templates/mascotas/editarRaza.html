@@ -230,7 +230,7 @@
                 </style>
                 <div class="d-flex align-items-center justify-content-between">
                     <a th:href="@{/homes}" class="logo d-flex align-items-center">
-                        <img src="./assets/img/logo.svg" alt="Logo" width="200px" height="300px">
+                        <img src="/assets/img/logo.svg" alt="Logo" width="200px" height="300px">
                     </a>
                     <i class="bi bi-list toggle-sidebar-btn"></i>
                 </div><!-- End Logo -->
@@ -249,7 +249,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                            <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp" target="_blank">
                                 <i class="bi bi-whatsapp"></i>   
                                 <span class="badge bg-primary badge-number"></span>
                             </a>
@@ -277,16 +277,7 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
-                                        <i class="bi bi-gear"></i>
-                                        <span>Configuracion de la Cuenta</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <a class="dropdown-item d-flex align-items-center" th:href="@{/ayuda}">
                                         <i class="bi bi-question-circle"></i>
                                         <span>¿Necesitas ayuda?</span>
                                     </a>
@@ -297,7 +288,7 @@
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
                                         <i class="bi bi-box-arrow-right"></i>
-                                        <span>Salir</span>
+                                        <span>Cerrar sesión</span>
                                     </a>
                                 </li>
                             </ul><!-- End Profile Dropdown Items -->
@@ -372,13 +363,7 @@
                     </li>
                 </ul>
             </aside>
-
             <main id="main" class="main" >
-
-                <div class="pagetitle">
-                    <h1>Gestión Razas</h1>
-                </div><!-- End Page Title -->
-
                 <section class="section profile">
                     <div class="col-xl-12">
                         <div class="card">
@@ -410,17 +395,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="row my-2">
-                                                            <div class="col-6" >
-                                                                <label>Estado:</label>
-                                                                <select id="estado" name="estado" class="form-control">
-                                                                    <option value="Activo">Activo</option>
-                                                                    <option value="Inactivo">Inactivo</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="box-footer">
                                                         <div class="row my-2">
                                                             <div class="d-grid gap-2 col-6">
@@ -441,35 +415,7 @@
                     </section>
 
                     <div th:replace="~{Plantillas/administrador :: scripts}"></div>
-
                 </main><!-- End #main -->
-
-                <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const guardarBtn = document.getElementById('guardarBtn');
-                        guardarBtn.addEventListener('click', function () {
-                            const nombre = document.getElementById('nombre').value;
-                            const descripcion = document.getElementById('descripcion').value;
-                            const estado = document.getElementById('estado').value;
-                            if (nombre.trim() !== '' && descripcion.trim() !== '' && estado.trim() !== '') {
-                                Swal.fire({
-                                    position: "center",
-                                    icon: "success",
-                                    title: "Raza modificada",
-                                    showConfirmButton: true // Mostrar el botón de confirmación
-
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Oops...",
-                                    text: "Something went wrong!"
-                                });
-                            }
-                        });
-                    });
-                </script>
-
             </body>
         </html>
 

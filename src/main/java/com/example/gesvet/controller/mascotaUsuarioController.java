@@ -36,15 +36,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/mascotasUsuarios")
 public class mascotaUsuarioController {
-
+    
     private static final Logger LOGGER = LoggerFactory.getLogger(mascotaUsuarioController.class);
-
+    
     @Autowired
     private MascotaService mascotaService;
-
+    
     @Autowired
     private RazaService razaService;
-
+    
     @Autowired
     private EspecieService especieService;
     @Autowired
@@ -53,7 +53,7 @@ public class mascotaUsuarioController {
     // id usuarios 
     @Autowired
     private UserService userService;
-
+    
     @GetMapping("")
     public String mascotas(Model model, Authentication authentication, Principal principal) {
 
@@ -72,13 +72,13 @@ public class mascotaUsuarioController {
         userDto.setRole(user.getRole());
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
-
+        
         model.addAttribute("userDto", userDto);
 
         // Obtener todas las razas y especies disponibles
         List<Raza> razas = razaService.getAllRazas();
         model.addAttribute("razas", razas);
-
+        
         List<Especie> especies = especieService.getAllEspecies();
         model.addAttribute("especies", especies);
 
@@ -89,17 +89,17 @@ public class mascotaUsuarioController {
         //obtener la información de las razas 
         return "mascotasUsuario/misMascotas";
     }
-
+    
     @GetMapping("/crearMascota")
     public String crearM(Model model, Authentication authentication, Principal principal) {
 
         // Nuevo objeto Mascota para el formulario
         Mascota mascota = new Mascota();
         model.addAttribute("mascota", mascota);
-
+        
         return "mascotasUsuario/misMascotas";
     }
-
+    
     @PostMapping("/saveM")
     public String saveM(Mascota mascota, Model model, @RequestParam("file") MultipartFile imagen, int especie, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
 
@@ -122,7 +122,7 @@ public class mascotaUsuarioController {
                 Files.write(rutaCompleta, bytesImg);
                 mascota.setImagen(imagen.getOriginalFilename());
             }
-
+          
             // Guardar la mascota
             mascotaService.save(mascota);
             redirectAttributes.addFlashAttribute("success", true);
@@ -136,10 +136,10 @@ public class mascotaUsuarioController {
         } catch (IOException e) {
             // Manejar cualquier excepción de E/S (Input/Output) que pueda ocurrir al guardar la imagen
             e.printStackTrace();
-
+            
             return "errorPage"; // Reemplaza con la página de error adecuada
         }
-
+        
     }
 
     // metodo para editar la mascota 
@@ -160,7 +160,7 @@ public class mascotaUsuarioController {
         userDto.setRole(user.getRole());
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
-
+        
         model.addAttribute("userDto", userDto);
         Mascota mascota = new Mascota();
         Optional<Mascota> optionalMascota = mascotaService.get(id);
@@ -174,16 +174,16 @@ public class mascotaUsuarioController {
         // Obtener todas las razas y especies disponibles
         List<Raza> razas = razaService.getAllRazas();
         model.addAttribute("razas", razas);
-
+        
         List<Especie> especies = especieService.getAllEspecies();
         model.addAttribute("especies", especies);
 
         //Luego nos envía a la vista todo el objeto buscado
         return "mascotasUsuario/editarMascota";
     }
-
+    
     @PostMapping("/update")
-    public String update(Mascota mascota, @RequestParam(value = "file", required = false) MultipartFile imagen) {
+    public String update(Mascota mascota, @RequestParam(value = "file", required = false) MultipartFile imagen, RedirectAttributes redirectAttributes) {
         if (imagen != null && !imagen.isEmpty()) {
             try {
                 // Procesa la nueva imagen si se ha seleccionado
@@ -208,15 +208,18 @@ public class mascotaUsuarioController {
 
         // Actualiza la mascota en la base de datos
         mascotaService.update(mascota);
-
+        redirectAttributes.addFlashAttribute("mascotaactualizada", "Mascota actualizada con éxito");
         // Redirige al usuario a la página principal de mascotas
         return "redirect:/mascotasUsuarios";
     }
-
+    
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
-        mascotaService.delete(id);
+    public String delete(@PathVariable Integer id, Mascota mascota) {
+        
+        Mascota m = mascotaService.get(id).orElse(null);
+        m.setActivo(false);
+        mascotaService.update(m);
         return "redirect:/mascotasUsuarios";
     }
-
+    
 }

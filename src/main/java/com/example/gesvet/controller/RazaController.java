@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/razas")
@@ -127,7 +128,7 @@ public class RazaController {
 
     // metodo para guardar la raza en la base de datos 
     @PostMapping("/save")
-    public String save(Raza raza, Model model, Authentication authentication, Principal principal) {
+    public String save(Raza raza, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -154,11 +155,13 @@ public class RazaController {
         Mascota m = new Mascota(1, "", "", "", "", "", "");
         raza.addMascota(m);
         razaService.save(raza);
+        redirectAttributes.addFlashAttribute("success", true);
+
         return "redirect:/razas";
     }
 
     @PostMapping("/saveEspecie")
-    public String saveEspecie(Especie especie, Model model, Authentication authentication, Principal principal) {
+    public String saveEspecie(Especie especie, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -183,6 +186,7 @@ public class RazaController {
         model.addAttribute("userDto", userDto);
         LOGGER.info("Este es el objeto de la especie: {}", especie);
         especieService.save(especie);
+        redirectAttributes.addFlashAttribute("especiecreada", "Especie agregada con éxito");
         return "redirect:/razas";
     }
 
@@ -251,28 +255,35 @@ public class RazaController {
     // metodo para actualizar la edicción y guardar 
 
     @PostMapping("/update")
-    public String update(Raza raza) {
+    public String update(Raza raza, RedirectAttributes redirectAttributes) {
         razaService.update(raza);
+        redirectAttributes.addFlashAttribute("razaactualizada", "Raza actualizada con éxito");
         return "redirect:/razas";
     }
 
     @PostMapping("/updateEspecie")
-    public String updates(Especie especie) {
+    public String updates(Especie especie, RedirectAttributes redirectAttributes) {
         especieService.update(especie);
+        redirectAttributes.addFlashAttribute("especieactualizada", "Especie actualizada con éxito");
         return "redirect:/razas";
     }
 
     // método para eliminar la raza 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, Model model) {
-        razaService.delete(id);
-
+    public String delete(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
+        Raza r = razaService.get(id).orElse(null);
+        r.setActivo(false);
+        razaService.update(r);
+        redirectAttributes.addFlashAttribute("razaEliminada", "Raza eliminada con éxito");
         return "redirect:/razas";
     }
 
     @GetMapping("/deleteEspecie/{id}")
-    public String deletes(@PathVariable Integer id) {
-        especieService.delete(id);
+    public String deletes(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        Especie e = especieService.get(id).orElse(null);
+        e.setActivo(false);
+        especieService.update(e);
+        redirectAttributes.addFlashAttribute("especieEliminada", "Especie eliminada con éxito");
         return "redirect:/razas";
     }
 

@@ -20,7 +20,7 @@ public class Raza {
     private Integer id;
     private String nombre;
     private String descripcion;
-    private String estado;
+    private boolean activo = true;
     private String opciones;
 
     // Relación con Especie
@@ -33,16 +33,6 @@ public class Raza {
     private List<Mascota> mascotas;
 
     public Raza() {
-    }
-
-    public Raza(Integer id, String nombre, String descripcion, String estado, String opciones, Especie especie) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.estado = estado;
-        this.opciones = opciones;
-        this.especie = especie;
-        this.mascotas = new ArrayList<>(); // Inicializar la lista
     }
 
     public Integer getId() {
@@ -69,14 +59,6 @@ public class Raza {
         this.descripcion = descripcion;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
     public String getOpciones() {
         return opciones;
     }
@@ -101,9 +83,27 @@ public class Raza {
         this.mascotas = mascotas;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public Raza(Integer id, String nombre, String descripcion, String opciones, Especie especie, List<Mascota> mascotas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.opciones = opciones;
+        this.especie = especie;
+        this.mascotas = mascotas;
+        this.activo = true;
+    }
+
     @Override
     public String toString() {
-        return "Raza{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", estado=" + estado + ", opciones=" + opciones + '}';
+        return "Raza{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", opciones=" + opciones + ", especie=" + especie + ", mascotas=" + mascotas + '}';
     }
 
     public void addMascota(Mascota mascota) {

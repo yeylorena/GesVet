@@ -229,7 +229,7 @@
 
             <div class="d-flex align-items-center justify-content-between">
                 <a th:href="@{/homes}" class="logo d-flex align-items-center">
-                    <img src="./assets/img/logo.svg" alt="Logo" width="200px" height="300px">
+                    <img src="/assets/img/logo.svg" alt="Logo" width="200px" height="300px">
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
             </div><!-- End Logo -->
@@ -248,7 +248,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp">
+                        <a class="nav-link nav-icon" href="https://wa.me/573209603212" title="WhatsApp" target="_blank">
                             <i class="bi bi-whatsapp"></i>   
                             <span class="badge bg-primary badge-number"></span>
                         </a>
@@ -276,16 +276,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" th:href="@{/perfil_admin}">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Configuracion de la Cuenta</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" th:href="@{/ayuda}">
                                     <i class="bi bi-question-circle"></i>
                                     <span>¿Necesitas ayuda?</span>
                                 </a>
@@ -296,7 +287,7 @@
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
                                     <i class="bi bi-box-arrow-right"></i>
-                                    <span>Salir</span>
+                                    <span>Cerrar sesión</span>
                                 </a>
                             </li>
                         </ul><!-- End Profile Dropdown Items -->
@@ -370,28 +361,13 @@
                 </li>
             </ul>
         </aside>
-
         <main id="main" class="main">
-
-            <div class="pagetitle">
-                <h1>Gestion Raza</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="inicio_vet.html">Inicio</a></li>
-                        <li class="breadcrumb-item">Gestión Raza</li>
-                        <li class="breadcrumb-item active">Agregar</li>
-                    </ol>
-                </nav>
-            </div><!-- End Page Title -->
-
             <section class="section profile">
                 <div class="col-xl-12">
-
                     <div class="card">
                         <div class="card-body pt-3">
                             <!-- Bordered Tabs -->
                             <ul class="nav nav-tabs nav-tabs-bordered">
-
                                 <li class="nav-item">
                                     <button class="nav-link active" data-bs-toggle="tab"
                                             data-bs-target="#profile-overview">Registro</button>
@@ -420,22 +396,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group" style=" font-family: 'Montserrat', Arial, sans-serif;
-                                                 font-size: 15px;
-                                                 font-weight: 500;
-                                                 line-height: 50px;
-                                                 color: #000000;">
-                                                <div class="row my-2">
-                                                    <div class="col-6">
-                                                        <label>Estado:</label>
-                                                        <select name="estado" id="estado" class="form-control" required>
-                                                            <option value="activo">Activo</option>
-                                                            <option value="inactivo">Inactivo</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                             <div class="box-footer">
                                                 <div class="row my-2">
                                                     <div class="d-grid gap-2 col-6">
@@ -458,38 +418,6 @@
                 <div th:replace="Plantillas/administrador :: scripts"></div>
 
             </main><!-- End #main -->
-            <script>
-                const guardarBtn = document.getElementById('guardarBtn');
-
-                guardarBtn.addEventListener('click', function () {
-                    // Obtener los valores de los campos
-                    const nombre = document.getElementById('nombre').value;
-                    const descripcion = document.getElementById('descripcion').value;
-                    const estado = document.getElementById('estado').value;
-
-                    // Verificar si los campos están vacíos
-                    if (nombre.trim() !== '' && descripcion.trim() !== '' && estado.trim() !== '') {
-                        // Si los campos no están vacíos, mostrar la alerta de SweetAlert
-                        Swal.fire({
-                            title: 'Raza creada',
-                            icon: 'success',
-                            showCancelButton: false,
-                            showConfirmButton: false,
-                            timer: 1000000 // Cambia el tiempo de visualización de la alerta si lo deseas
-                        });
-                        // Aquí puedes agregar la lógica para guardar los datos si es necesario
-                    } else {
-                        // Si algún campo está vacío, mostrar una alerta de error
-                        Swal.fire({
-                            title: 'Error',
-                            text: 'Por favor, completa todos los campos',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                });
-
-            </script>
 
         </body>
     </html>

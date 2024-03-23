@@ -23,6 +23,7 @@ public class Mascota {
     private String tiempo;
     private String genero;
     private String detalles;
+    private boolean activo = true;
 
     // Mapeo de Especie
     @ManyToOne
@@ -51,7 +52,7 @@ public class Mascota {
     public Mascota() {
     }
 
-    public Mascota(Integer id, String nombre, String imagen, String color, String edad, String tiempo, String genero, String detalles, Especie especie, Raza raza) {
+    public Mascota(Integer id, String nombre, String imagen, String color, String edad, String tiempo, String genero, String detalles, Especie especie, User usuario, Raza raza) {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -60,7 +61,9 @@ public class Mascota {
         this.tiempo = tiempo;
         this.genero = genero;
         this.detalles = detalles;
+        this.activo = true;
         this.especie = especie;
+        this.usuario = usuario;
         this.raza = raza;
     }
 
@@ -147,6 +150,14 @@ public class Mascota {
 
     public void setTiempo(String tiempo) {
         this.tiempo = tiempo;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
 }

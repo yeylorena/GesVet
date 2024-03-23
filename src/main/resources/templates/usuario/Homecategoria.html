@@ -155,67 +155,93 @@
                                     <div class="card-body">
 
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-12 ">
-                                                <form class="form-inline" method="post" th:action="@{/buscar}">
-                                                    <div class="form-group">
-                                                        <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off">
+                                            <div class="col-lg-6 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="palabra" placeholder="Search" id="palabra" autocomplete="off" oninput="buscarProductos()">
 
-                                                            &nbsp;&nbsp;
-                                                            <input id="buscar" type="submit" class="btn btn-outline-success" value="Buscar">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-5">
 
-                                                                </div>
+                                            <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center alimentos" th:each="categoria: ${categoriasProducto}" th:if="${categoria.activo}">
+                                                <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
+                                                    <img th:src="@{/images/{img} (img=${categoria.imagen})}" class="card-img-top"
+                                                         alt="..." style="height: 180px;">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title text-center" th:text="${categoria.tipocategoria != null ? categoria.tipocategoria.nombre : 'N/A'}"></h5>
+                                                            <p class="card-text text-center" th:text="${categoria.nombre}"> </p>
+                                                            <p class="card-stock text-center">
+                                                                <!-- Usar expresión Thymeleaf para mostrar "Activo" o "Inactivo" -->
+                                                                <span th:if="${categoria.activo}">Disponible</span>
+                                                                <span th:if="${not categoria.activo}">Inactivo</span>
+                                                            </p>
 
-                                                                </form>
-                                                                </div>
-                                                                </div>
-                                                                <div class="row mt-5">
+                                                            <div class="text-center">
+                                                                <a th:href="@{/productohomes/{id} (id=${categoria.id})}" class="btn btn-primary btn-sm">
+                                                                    Ver productos
+                                                                </a>
+                                                            </div>
 
-                                                                    <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="categoria: ${categoriasProducto}" th:if="${categoria.activo}">
-                                                                        <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
-                                                                            <img th:src="@{/images/{img} (img=${categoria.imagen})}" class="card-img-top"
-                                                                                 alt="..." style="height: 180px;">
-                                                                                <div class="card-body">
-                                                                                    <h5 class="card-title text-center" th:text="${categoria.tipocategoria != null ? categoria.tipocategoria.nombre : 'N/A'}"></h5>
-                                                                                    <p class="card-text text-center" th:text="${categoria.nombre}"> </p>
-                                                                                    <p class="card-stock text-center">
-                                                                                        <!-- Usar expresión Thymeleaf para mostrar "Activo" o "Inactivo" -->
-                                                                                        <span th:if="${categoria.activo}">Disponible</span>
-                                                                                        <span th:if="${not categoria.activo}">Inactivo</span>
-                                                                                    </p>
-
-                                                                                    <div class="text-center">
-                                                                                        <a th:href="@{/productohomes/{id} (id=${categoria.id})}" class="btn btn-primary btn-sm">
-                                                                                            Ver productos
-                                                                                        </a>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                        </div>
-                                                                    </div>
+                                                        </div>
+                                                </div>
+                                            </div>
 
 
 
 
 
-                                                                </div>
+                                        </div>
 
-                                                                </div>
+                                    </div>
 
-                                                                </div>
-                                                                </div>
-                                                                </div>
-                                                                </div>
-                                                                </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
 
-                                                                <div th:replace="Plantillas/usuario :: scripts"></div>
-                                                                <script th:if="${exitofacturauser != null}">
-                                                                    Swal.fire({
-                                                                        icon: 'success',
-                                                                        title: 'Compra efectuada con éxito.',
+            <div th:replace="Plantillas/usuario :: scripts"></div>
+            <script th:if="${exitofacturauser != null}">
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Compra efectuada con éxito.'
 
-                                                                    });
-                                                                </script>
+                });
+            </script>
+            <script>
+            function buscarProductos() {
+    // Obtén el valor del campo de búsqueda
+    var input = document.getElementById('palabra');
+    var filtro = input.value.trim().toUpperCase();
 
-                                                                </main><!-- End #main -->
-                                                                </body>
-                                                                </html>
+    // Obtén todas las tarjetas de productos
+    var contenedorTarjetas = document.querySelector('.row.mt-5');
+
+    // Obtén todas las tarjetas de productos dentro del contenedor
+    var tarjetasProductos = contenedorTarjetas.querySelectorAll('.alimentos');
+
+    // Itera sobre las tarjetas y muestra u oculta según la coincidencia con el filtro
+    tarjetasProductos.forEach(function(tarjeta) {
+        var nombreProducto = tarjeta.querySelector('.card-title').textContent.toUpperCase();
+        var categoriaProducto = tarjeta.querySelector('.card-text').textContent.toUpperCase();
+
+        // Comprueba si el nombre del producto o la categoría coinciden con el filtro
+        if (filtro === '' || nombreProducto.includes(filtro) || categoriaProducto.includes(filtro)) {
+            tarjeta.style.opacity = '1'; // Mostrar la tarjeta si coincide con la búsqueda
+            tarjeta.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Desplazar hasta la tarjeta
+        } else {
+            if (filtro !== '' && categoriaProducto !== filtro) {
+                tarjeta.style.opacity = '0'; // Ocultar la tarjeta si no coincide con la búsqueda de categoría
+            }
+        }
+    });
+}
+
+
+            </script>
+
+
+        </main><!-- End #main -->
+    </body>
+</html>
