@@ -85,22 +85,22 @@ public class SecretController {
 
         if (claims != null) {
             String username = claims.getSubject();
-            
-            var user=userService.findByUsername(username);
+
+            var user = userService.findByUsername(username);
             userDto.setId(user.getId());
 
             // Actualizar los detalles del usuario
             userService.updateUser(userDto);
-            
+
             var respuesta = new respuesta(
-                    "Creado",    
+                    "Creado",
                     "Usuario modificado"
             );
 
             return ResponseEntity.status(HttpStatus.OK).body(respuesta);
         } else {
             var respuesta = new respuesta(
-                    "error",    
+                    "error",
                     "Usuario no autorizado"
             );
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
@@ -108,7 +108,7 @@ public class SecretController {
     }
 
     @PostMapping("/cambiar-contrasena")
-    public ResponseEntity<String> cambiarContrasena(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+    public ResponseEntity<Object> cambiarContrasena(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
             @RequestBody UserDto userDto) {
         String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
 
@@ -123,31 +123,57 @@ public class SecretController {
 
                 // Validar la contraseña actual antes de realizar el cambio
                 if (!passwordEncoder.matches(userDto.getCurrentPassword(), user.getPassword())) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La contraseña actual no coincide");
+                    var respuesta = new respuesta(
+                            "error",
+                            "La contraseña actual no coincide"
+                    );
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                 }
 
                 // Validar que la nueva contraseña y la confirmación coincidan
                 if (!userDto.getNewPassword().equals(userDto.getConfirmNewPassword())) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La nueva contraseña y la confirmación no coinciden");
+
+                    var respuesta = new respuesta(
+                            "error",
+                            "La nueva contraseña y la confirmación no coinciden"
+                    );
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                 }
 
                 // Actualizar la contraseña en la base de datos
                 user.setPassword(passwordEncoder.encode(userDto.getNewPassword()));
                 userService.save(user);
 
-                return ResponseEntity.status(HttpStatus.OK).body("Contraseña cambiada con éxito");
+                var respuesta = new respuesta(
+                        "Creado",
+                        "Contraseña cambiada con éxito"
+                );
+
+                return ResponseEntity.status(HttpStatus.OK).body(respuesta);
             } catch (ServiceException e) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al cambiar la contraseña");
+
+                var respuesta = new respuesta(
+                        "error",
+                        "Error al cambiar la contraseña"
+                );
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
             }
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No autorizado");
+
+            var respuesta = new respuesta(
+                    "error",
+                    "No autorizado"
+            );
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
     }
 
-    @DeleteMapping("/eliminar-cuenta")
-    public ResponseEntity<String> eliminarCuenta(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
+    @PostMapping("/eliminar-cuenta")
+    public ResponseEntity<Object> eliminarCuenta(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        String jwtToken = authorizationHeader.substring(7); 
+        
 
+        // Validar el token
         Claims claims = JwtUtils.extractClaims(jwtToken);
 
         if (claims != null) {
@@ -159,15 +185,35 @@ public class SecretController {
 
                 // Eliminar el usuario de la base de datos
                 userService.eliminarUsuario(user.getId());
+                userService.enviarEliminacionDeLaCuenta(user);
 
                 // Realizar la desconexión (logout) si es necesario
                 // Esto dependerá de cómo estés manejando la autenticación en tu aplicación
-                return ResponseEntity.status(HttpStatus.OK).body("Usuario eliminado con éxito");
+                // Devolver una respuesta de éxito
+                var respuesta = new respuesta(
+                        "Creado",
+                        "Cuenta desactivada con éxito"
+                );
+
+                return ResponseEntity.status(HttpStatus.OK).body(respuesta);
             } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el usuario");
+                // Manejar la excepción según sea necesario
+                e.printStackTrace();
+
+                // Devolver una respuesta de error
+                var respuesta = new respuesta(
+                        "error",
+                        "Error al desactivar la cuenta"
+                );
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
             }
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No autorizado");
+            // Token inválido o no proporcionado, devolver una respuesta de no autorizado
+            var respuesta = new respuesta(
+                    "error",
+                    "No autorizado"
+            );
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
     }
 
