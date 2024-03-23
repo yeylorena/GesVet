@@ -42,5 +42,10 @@ public class EspecieServiceImpl implements EspecieService {
     public List<Especie> getAllEspecies() {
         return especieRepository.findAll();
     }
+    
+    @Override
+    public Especie getById(Integer id) {
+        return especieRepository.findById(id).orElse(null);
+    }
 
 }

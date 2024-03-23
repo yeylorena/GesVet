@@ -17,4 +17,6 @@ public interface EspecieService {
     public List<Especie> findAll();
 
     public List<Especie> getAllEspecies();
+    
+    Especie getById(Integer id);
 }

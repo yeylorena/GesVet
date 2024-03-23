@@ -53,4 +53,9 @@ public class RazaServiceImpl implements RazaService {
     public List<Raza> getAllRazas() {
         return razaRepository.findAll();
     }
+    
+    @Override
+    public Raza getById(Integer id) {
+        return razaRepository.findById(id).orElse(null);
+    }
 }

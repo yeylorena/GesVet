@@ -1,5 +1,7 @@
 package com.example.gesvet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,10 +28,12 @@ public class Raza {
     // Relación con Especie
     @ManyToOne
     @JoinColumn(name = "especie_id")
+    //@JsonIgnoreProperties("especie_id")
     private Especie especie;
 
     // Mapeo de Mascotas
     @OneToMany(mappedBy = "raza")
+    // @JsonIgnoreProperties("especie_id")
     private List<Mascota> mascotas;
 
     public Raza() {

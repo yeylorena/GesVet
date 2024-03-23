@@ -1,5 +1,8 @@
 package com.example.gesvet.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Mascotas")
+
 public class Mascota {
 
     @Id
@@ -28,10 +32,12 @@ public class Mascota {
     // Mapeo de Especie
     @ManyToOne
     @JoinColumn(name = "especie_id")
+    @JsonIgnoreProperties("mascotas")
     private Especie especie;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
+     @JsonIgnore// "mascotas" es el nombre del campo en la clase User que hace referencia a las mascotas
     private User usuario;
 
     public User getUsuario() {
@@ -44,6 +50,7 @@ public class Mascota {
     // Mapeo de razas
     @ManyToOne
     @JoinColumn(name = "raza_id")
+    @JsonIgnoreProperties("mascotas")
     private Raza raza;
 
     public Mascota(int par, String string, String string1, String string2, String string3, String string4, String string5) {
