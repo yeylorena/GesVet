@@ -192,25 +192,6 @@ public class citaRapidaController {
         }
     }
 
-    @GetMapping("/finalizar/{citaId}")
-    public String finalizarCita(@PathVariable Long citaId) {
-        Optional<citaRapida> optionalCita = citarapidaservice.get(citaId);
-        if (optionalCita.isPresent()) {
-            citaRapida cita = optionalCita.get();
-            cita.setEstado("completado");
-            citarapidaservice.update(cita); // Actualizar estado en la base de datos
-            cita.setFin(LocalDateTime.now());
-
-            // Formatear la fecha de finalización
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            cita.setFormattedFechaFin(cita.getFin().format(formatter));
-
-            // Guardar los cambios en la cita (si es necesario)
-            citarapidaservice.save(cita);
-        }
-        return "redirect:/citasRapidas";
-    }
-
     @GetMapping("/eventos")
     @ResponseBody
     public List<Evento> getEventos() {

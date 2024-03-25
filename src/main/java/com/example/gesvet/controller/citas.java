@@ -10,13 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.gesvet.service.citaRapidaService;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class citas {
@@ -71,4 +74,23 @@ public class citas {
         return "citas/citas_vet";
     }
 
+    @GetMapping("/finalizar/{citaId}")
+    public String finalizarCita(@PathVariable Long citaId, RedirectAttributes redirectAttributes) {
+        Optional<citaRapida> optionalCita = citarapidaservice.get(citaId);
+        if (optionalCita.isPresent()) {
+            citaRapida cita = optionalCita.get();
+            cita.setEstado("completado");
+            citarapidaservice.update(cita); // Actualizar estado en la base de datos
+            cita.setFin(LocalDateTime.now());
+
+            // Formatear la fecha de finalización
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            cita.setFormattedFechaFin(cita.getFin().format(formatter));
+
+            // Guardar los cambios en la cita (si es necesario)
+            citarapidaservice.save(cita);
+            redirectAttributes.addFlashAttribute("success", true);
+        }
+        return "redirect:/listado";
+    }
 }

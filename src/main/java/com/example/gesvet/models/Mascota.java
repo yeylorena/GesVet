@@ -133,7 +133,7 @@ public class Mascota {
 
     @Override
     public String toString() {
-        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", tiempo=" + tiempo + ", genero=" + genero + ", detalles=" + detalles + ", especie=" + especie + ", raza=" + raza + '}';
+        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", tiempo=" + tiempo + ", genero=" + genero + ", detalles=" + detalles + ", especie=" + especie + ", usuario=" + usuario + ", raza=" + raza + '}';
     }
 
     public Especie getEspecie() {
