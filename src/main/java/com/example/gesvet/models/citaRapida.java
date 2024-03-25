@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "citasRapidas")
@@ -30,6 +29,10 @@ public class citaRapida {
     private String formattedFechaFin; // Campo para almacenar la fecha y hora formateada
     private String veterinarioCita;
     private String nombreVeterinario;
+
+    public citaRapida() {
+        this.estado = "pendiente"; // Establecer el estado inicial como pendiente al crear la cita
+    }
 
     // Mapeo de Especie
     @ManyToOne
@@ -71,10 +74,6 @@ public class citaRapida {
 
     public void setVeterinarioCita(String veterinarioCita) {
         this.veterinarioCita = veterinarioCita;
-    }
-
-    public citaRapida() {
-        this.estado = "pendiente"; // Establecer el estado inicial como pendiente al crear la cita
     }
 
     public String getEstado() {

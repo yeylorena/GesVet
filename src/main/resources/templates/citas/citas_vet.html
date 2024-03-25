@@ -190,7 +190,7 @@
                                                 <td th:text="${citas.formattedFecha}"></td>
                                                 <td th:text="${citas.estado}" th:classappend="${citas.estado eq 'completado' ? 'text-success' : 'text-danger' }"></td>
                                                 <td>
-                                                    <a  th:href="@{'/citasRapidas/finalizar/' + ${citas.id}}" class="btn btn-primary">Finalizado</a>
+                                                    <a  th:href="@{'/finalizar/' + ${citas.id}}" class="btn btn-primary">Finalizado</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -199,8 +199,8 @@
                             </div><!-- End citas -->
                             <!-- Inicio historial -->
                             <div class="tab-pane fade pt-3" id="facturas">
-                                <div class="container-fluid mt-3">
-                                    <p style="background-color: #5DADE2;" class="textoNeon">Historial citas rapidas</p>
+                                <div>
+                                    <p style="background-color: #5DADE2;" class="textoNeon">Historial citas</p>
                                 </div>
                                 <div class="container-fluid">
                                     <div class="table-responsive">
@@ -254,5 +254,12 @@
         </section> <!-- End section -->
         <div th:replace="~{Plantillas/administrador :: scripts}"></div>
     </main><!-- End #main -->
+    <script th:if="${success}">
+        Swal.fire({
+            icon: 'success',
+            title: '¡Cita finalizada!',
+            text: 'La cita se ha finalizado correctamente.'
+        });
+    </script>
 </body>
 </html>
