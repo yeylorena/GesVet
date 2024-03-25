@@ -436,7 +436,8 @@
                                             <div class="row my-2">
                                                 <div class="col-6">
 
-                                                    <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" accept=".jpg, .jpeg, .png" required>
+                                                      <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);">
+                                                    <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);" accept=".jpg, .jpeg, .png">
                                                         <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('imagen').click(); return false;">
                                                             <i class="fas fa-plus"></i> Agregar imagen
                                                         </button>

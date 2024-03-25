@@ -19,4 +19,10 @@ public interface MascotaService {
     Mascota findById(Integer id);
 
     Mascota create(Mascota mascota);
+
+    List<Mascota> findByUsuarioId(Integer usuarioId);
+
+    // En el servicio (MascotaService)
+    Optional<Mascota> findByUsuarioIdAndMascotaId(Integer usuarioId, Integer mascotaId);
+
 }

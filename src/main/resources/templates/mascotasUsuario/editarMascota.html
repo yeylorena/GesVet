@@ -245,19 +245,44 @@
                                                                 <div th:replace="~{Plantillas/usuario :: scripts}"></div>
 
                                                                 </main>
+                                                                <!-- Agrega este script al formulario -->
                                                                 <script th:inline="javascript">
                                                                     function mostrarVistaPrevia(input) {
                                                                         var vistaPrevia = document.getElementById('vistaPrevia');
                                                                         var file = input.files[0];
+                                                                        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i; // Extensiones permitidas
+                                                                        var maxSize = 10 * 1024 * 1024; // Tamaño máximo (en bytes)
 
                                                                         if (file) {
-                                                                            var reader = new FileReader();
+                                                                            // Validar extensión
+                                                                            if (!allowedExtensions.exec(input.value)) {
+                                                                                Swal.fire({
+                                                                                    icon: 'error',
+                                                                                    title: 'Error',
+                                                                                    text: 'Por favor, seleccione un archivo con una extensión válida (.jpg, .jpeg, .png).'
+                                                                                });
+                                                                                input.value = '';
+                                                                                vistaPrevia.style.display = 'none';
+                                                                                return false;
+                                                                            }
 
+                                                                            // Validar tamaño
+                                                                            if (file.size > maxSize) {
+                                                                                Swal.fire({
+                                                                                    icon: 'error',
+                                                                                    title: 'Error',
+                                                                                    text: 'El tamaño del archivo excede el límite permitido de 10 MB.'
+                                                                                });
+                                                                                input.value = '';
+                                                                                vistaPrevia.style.display = 'none';
+                                                                                return false;
+                                                                            }
+
+                                                                            var reader = new FileReader();
                                                                             reader.onload = function (e) {
                                                                                 vistaPrevia.src = e.target.result;
                                                                                 vistaPrevia.style.display = 'block';
                                                                             };
-
                                                                             reader.readAsDataURL(file);
                                                                         }
                                                                     }

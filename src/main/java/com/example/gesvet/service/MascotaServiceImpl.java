@@ -20,8 +20,7 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public Mascota save(Mascota mascota) {
-        // Asignar la mascota al usuario
-        mascota.getUsuario().getMascotas().add(mascota);
+    
         return mascotaRepository.save(mascota);
     }
 
@@ -55,4 +54,16 @@ public class MascotaServiceImpl implements MascotaService {
         return mascotaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + id));
     }
+    
+    @Override
+    public List<Mascota> findByUsuarioId(Integer usuarioId) {
+        return mascotaRepository.findByUsuarioId(usuarioId);
+    }
+    
+ @Override
+public Optional<Mascota> findByUsuarioIdAndMascotaId(Integer usuarioId, Integer mascotaId) {
+    return mascotaRepository.findByUsuarioIdAndId(usuarioId, mascotaId);
+}
+
+
 }

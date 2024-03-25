@@ -20,10 +20,10 @@ public class Especie {
     private String nombre;
     private boolean activo = true;
     private String descripcion;
-    // Relación con Raza
+    // Relación con Mascota
     @OneToMany(mappedBy = "especie")
-   // @JsonIgnoreProperties("especie")
-    private List<Raza> razas;
+    @JsonIgnoreProperties("especie")
+    private List<Mascota> mascota;
 
     public Especie() {
     }
@@ -52,13 +52,15 @@ public class Especie {
         this.nombre = nombre;
     }
 
-    public List<Raza> getRazas() {
-        return razas;
+    public List<Mascota> getMascota() {
+        return mascota;
     }
 
-    public void setRazas(List<Raza> razas) {
-        this.razas = razas;
+    public void setMascota(List<Mascota> mascota) {
+        this.mascota = mascota;
     }
+
+   
 
     public boolean isActivo() {
         return activo;
@@ -68,17 +70,24 @@ public class Especie {
         this.activo = activo;
     }
 
-    public Especie(Integer id, String nombre, String descripcion, List<Raza> razas) {
+    public Especie(Integer id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.razas = razas;
+        
         this.activo = true;
     }
 
     @Override
-    public String toString() {
-        return "Especie{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", razas=" + razas + '}';
-    }
+public String toString() {
+    return "Especie{" +
+            "id=" + id +
+            ", nombre='" + nombre + '\'' +
+            ", descripcion='" + descripcion + '\'' +
+            ", activo=" + activo +
+            '}';
+}
+
+   
 
 }

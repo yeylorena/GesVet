@@ -153,7 +153,7 @@ public class RazaController {
         model.addAttribute("userDto", userDto);
         LOGGER.info("Este es el objeto de la raza: {}", raza);
         Mascota m = new Mascota(1, "", "", "", "", "", "");
-        raza.addMascota(m);
+        
         razaService.save(raza);
         redirectAttributes.addFlashAttribute("success", true);
 

@@ -23,17 +23,13 @@ public class Raza {
     private String nombre;
     private String descripcion;
     private boolean activo = true;
-    private String opciones;
+   
 
-    // Relación con Especie
-    @ManyToOne
-    @JoinColumn(name = "especie_id")
-    //@JsonIgnoreProperties("especie_id")
-    private Especie especie;
+   
 
     // Mapeo de Mascotas
     @OneToMany(mappedBy = "raza")
-    // @JsonIgnoreProperties("especie_id")
+    @JsonIgnoreProperties("raza")
     private List<Mascota> mascotas;
 
     public Raza() {
@@ -63,21 +59,9 @@ public class Raza {
         this.descripcion = descripcion;
     }
 
-    public String getOpciones() {
-        return opciones;
-    }
+   
 
-    public void setOpciones(String opciones) {
-        this.opciones = opciones;
-    }
-
-    public Especie getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(Especie especie) {
-        this.especie = especie;
-    }
+   
 
     public List<Mascota> getMascotas() {
         return mascotas;
@@ -95,26 +79,28 @@ public class Raza {
         this.activo = activo;
     }
 
-    public Raza(Integer id, String nombre, String descripcion, String opciones, Especie especie, List<Mascota> mascotas) {
+    public Raza(Integer id, String nombre, String descripcion, String opciones, List<Mascota> mascotas) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.opciones = opciones;
-        this.especie = especie;
+       
+      
         this.mascotas = mascotas;
         this.activo = true;
     }
 
     @Override
-    public String toString() {
-        return "Raza{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", opciones=" + opciones + ", especie=" + especie + ", mascotas=" + mascotas + '}';
-    }
+public String toString() {
+    return "Raza{" +
+            "id=" + id +
+            ", nombre='" + nombre + '\'' +
+            ", descripcion='" + descripcion + '\'' +
+            ", activo=" + activo +
+            '}';
+}
 
-    public void addMascota(Mascota mascota) {
-        if (mascotas == null) {
-            mascotas = new ArrayList<>();
-        }
-        mascotas.add(mascota);
-        mascota.setRaza(this);
-    }
+   
+
+   
+  
 }
