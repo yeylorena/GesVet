@@ -1,5 +1,9 @@
 package com.example.gesvet.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "categorias")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Categorias {
 
     @Id
@@ -31,6 +36,7 @@ public class Categorias {
         this.imagen = imagen;
     }
     @ManyToOne()
+    @JsonIgnore
     private User usuario;
 
     public User getUsuario() {
@@ -103,6 +109,7 @@ public class Categorias {
 
     }
     @OneToMany(mappedBy = "categoria")
+    @JsonIgnore
     private List<Productos> productos;
 
     public List<Productos> getProductos() {
@@ -115,6 +122,7 @@ public class Categorias {
 
     @ManyToOne
     @JoinColumn(name = "tipocategoria_id")
+    @JsonIgnoreProperties("categorias")
     private Tipocategoria tipocategoria;
 
     public Tipocategoria getTipocategoria() {
@@ -126,6 +134,7 @@ public class Categorias {
     }
 
     @OneToMany(mappedBy = "categoria")
+    @JsonIgnore
     private List<ServiciosUser> serviciosusers;
 
     public List<ServiciosUser> getServiciosusers() {

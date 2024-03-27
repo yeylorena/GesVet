@@ -1,5 +1,6 @@
 package com.example.gesvet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -91,6 +92,7 @@ public class MetodoPago {
       
   } 
    @ManyToOne
+    @JsonIgnore
     private User usuario;
 
     public User getUsuario() {

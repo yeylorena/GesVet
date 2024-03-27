@@ -1,5 +1,9 @@
 package com.example.gesvet.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "detalles")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DetalleFactura {
 
     @Id
@@ -20,9 +25,11 @@ public class DetalleFactura {
     private double total;
 
     @ManyToOne
+    @JsonIgnore
     private Factura factura;
 
     @ManyToOne
+    @JsonIgnore
     private Productos productos;
 
     public DetalleFactura() {
