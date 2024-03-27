@@ -1,6 +1,6 @@
 package com.example.gesvet.service;
 
-import com.example.gesvet.models.RecuperarContraseñaTokenusu;
+import com.example.gesvet.models.RecuperarContrasenaTokenusu;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,7 +14,7 @@ import jakarta.mail.internet.MimeMessage;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
-public class RecuperarContraseñausuService {
+public class RecuperarContrasenausuService {
 
     @Autowired
     JavaMailSender javaMailSender;
@@ -48,11 +48,11 @@ public class RecuperarContraseñausuService {
         javaMailSender.send(message);
     }
 
-    public boolean isExpired(RecuperarContraseñaTokenusu recuperarContraseñaTokenusu) {
+    public boolean isExpired(RecuperarContrasenaTokenusu recuperarContraseñaTokenusu) {
         return LocalDateTime.now().isAfter(recuperarContraseñaTokenusu.getExpireTime());
     }
 
-    public String checkValidity(RecuperarContraseñaTokenusu recuperarContraseñaTokenusu, Model model, RedirectAttributes redirectAttributes) {
+    public String checkValidity(RecuperarContrasenaTokenusu recuperarContraseñaTokenusu, Model model, RedirectAttributes redirectAttributes) {
         if (recuperarContraseñaTokenusu == null) {
             redirectAttributes.addFlashAttribute("Invalid_Token", true);
             return "password-request";

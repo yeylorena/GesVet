@@ -27,7 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PerfilController {
-    
+
     @Autowired
     private EmailService emailService;
 
@@ -148,7 +148,7 @@ public class PerfilController {
 
             // Eliminar el usuario de la base de datos
             userService.eliminarUsuario(user.getId());
-             userService.enviarEliminacionDeLaCuenta(user);
+            userService.enviarEliminacionDeLaCuenta(user);
 
             // Realizar la desconexión (logout) si es necesario
             // Esto dependerá de cómo estés manejando la autenticación en tu aplicación

@@ -1,9 +1,8 @@
 package com.example.gesvet.controller;
 
-import com.example.gesvet.models.RecuperarContraseñaTokenusu;
+import com.example.gesvet.models.RecuperarContrasenaTokenusu;
 import com.example.gesvet.models.User;
-import com.example.gesvet.repository.RecuperarContraseñausuRepository;
-import com.example.gesvet.service.RecuperarContraseñausuService;
+import com.example.gesvet.service.RecuperarContrasenausuService;
 import com.example.gesvet.service.UserService;
 import java.io.UnsupportedEncodingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +17,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.example.gesvet.repository.RecuperarContrasenausuRepository;
 
 @Controller
-
 public class RecuperarContrasenausuController {
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private RecuperarContraseñausuService recuperarContraseñausuService;
+    private RecuperarContrasenausuService recuperarContraseñausuService;
 
     @Autowired
-    RecuperarContraseñausuRepository recuperarContraseñausuRepository;
+    RecuperarContrasenausuRepository recuperarContraseñausuRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -49,7 +48,7 @@ public class RecuperarContrasenausuController {
             return "password-request";
         }
 
-        RecuperarContraseñaTokenusu recuperarContraseñaTokenusu = new RecuperarContraseñaTokenusu();
+        RecuperarContrasenaTokenusu recuperarContraseñaTokenusu = new RecuperarContrasenaTokenusu();
         recuperarContraseñaTokenusu.setExpireTime(recuperarContraseñausuService.expireTimeRange());
         recuperarContraseñaTokenusu.setToken(recuperarContraseñausuService.generateToken());
         recuperarContraseñaTokenusu.setUser(user);
@@ -73,7 +72,7 @@ public class RecuperarContrasenausuController {
     public String resetPassword(@Param(value = "token") String token, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
 
         session.setAttribute("token", token);
-        RecuperarContraseñaTokenusu recuperarContraseñaTokenusu = recuperarContraseñausuRepository.findByToken(token);
+        RecuperarContrasenaTokenusu recuperarContraseñaTokenusu = recuperarContraseñausuRepository.findByToken(token);
         return recuperarContraseñausuService.checkValidity(recuperarContraseñaTokenusu, model, redirectAttributes);
 
     }
@@ -83,7 +82,7 @@ public class RecuperarContrasenausuController {
         String password = request.getParameter("password");
         String token = (String) session.getAttribute("token");
 
-        RecuperarContraseñaTokenusu recuperarContraseñaTokenusu = recuperarContraseñausuRepository.findByToken(token);
+        RecuperarContrasenaTokenusu recuperarContraseñaTokenusu = recuperarContraseñausuRepository.findByToken(token);
         User user = recuperarContraseñaTokenusu.getUser();
         user.setPassword(passwordEncoder.encode(password));
         recuperarContraseñaTokenusu.setUsed(true);

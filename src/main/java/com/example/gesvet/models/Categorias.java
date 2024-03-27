@@ -23,22 +23,21 @@ public class Categorias {
     private boolean activo;
     private String imagen;
 
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
     @ManyToOne()
     private User usuario;
 
-    public User getUsuario() {
-        return usuario;
-    }
+    @OneToMany(mappedBy = "categoria")
+    private List<ServiciosUser> serviciosusers;
 
-    public void setUsuario(User usuario) {
-        this.usuario = usuario;
+    @ManyToOne
+    @JoinColumn(name = "tipocategoria_id")
+    private Tipocategoria tipocategoria;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Productos> productos;
+
+    public Categorias() {
+
     }
 
     public Categorias(Integer id, String nombre, String tipo, String descripcion, boolean activo, User usuario, String imagen) {
@@ -49,7 +48,47 @@ public class Categorias {
         this.descripcion = descripcion;
         this.activo = activo;
         this.usuario = usuario;
-         this.imagen = imagen;
+        this.imagen = imagen;
+    }
+
+    public List<Productos> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Productos> productos) {
+        this.productos = productos;
+    }
+
+    public Tipocategoria getTipocategoria() {
+        return tipocategoria;
+    }
+
+    public void setTipocategoria(Tipocategoria tipocategoria) {
+        this.tipocategoria = tipocategoria;
+    }
+
+    public List<ServiciosUser> getServiciosusers() {
+        return serviciosusers;
+    }
+
+    public void setServiciosusers(List<ServiciosUser> serviciosusers) {
+        this.serviciosusers = serviciosusers;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
     }
 
     public Integer getId() {
@@ -97,42 +136,4 @@ public class Categorias {
         return "Categorias{" + "id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", descripcion=" + descripcion + ", activo=" + activo + ", imagen=" + imagen + ", usuario=" + usuario + ", productos=" + productos + ", tipocategoria=" + tipocategoria + ", serviciosusers=" + serviciosusers + '}';
     }
 
-  
-
-    public Categorias() {
-
-    }
-    @OneToMany(mappedBy = "categoria")
-    private List<Productos> productos;
-
-    public List<Productos> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Productos> productos) {
-        this.productos = productos;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "tipocategoria_id")
-    private Tipocategoria tipocategoria;
-
-    public Tipocategoria getTipocategoria() {
-        return tipocategoria;
-    }
-
-    public void setTipocategoria(Tipocategoria tipocategoria) {
-        this.tipocategoria = tipocategoria;
-    }
-
-    @OneToMany(mappedBy = "categoria")
-    private List<ServiciosUser> serviciosusers;
-
-    public List<ServiciosUser> getServiciosusers() {
-        return serviciosusers;
-    }
-
-    public void setServiciosusers(List<ServiciosUser> serviciosusers) {
-        this.serviciosusers = serviciosusers;
-    }
 }

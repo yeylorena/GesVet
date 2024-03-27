@@ -22,6 +22,12 @@ public class UsuarioVentas {
     private String telefono;
     private String email;
 
+    @OneToMany(mappedBy = "usuarioventas")
+    private List<Factura> facturasuser;
+
+    public UsuarioVentas() {
+    }
+
     public UsuarioVentas(Long id, String documento, String nombre, String apellido, String direccion, String telefono, String email) {
         super();
         this.id = id;
@@ -88,12 +94,6 @@ public class UsuarioVentas {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public UsuarioVentas() {
-    }
-
-     @OneToMany(mappedBy = "usuarioventas")
-    private List<Factura> facturasuser;
 
     public List<Factura> getFacturasuser() {
         return facturasuser;

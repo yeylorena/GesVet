@@ -8,9 +8,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Implementación del servicio de mascotas.
- */
 @Service
 public class MascotaServiceImpl implements MascotaService {
 
@@ -20,7 +17,7 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public Mascota save(Mascota mascota) {
-    
+
         return mascotaRepository.save(mascota);
     }
 
@@ -54,16 +51,15 @@ public class MascotaServiceImpl implements MascotaService {
         return mascotaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + id));
     }
-    
+
     @Override
     public List<Mascota> findByUsuarioId(Integer usuarioId) {
         return mascotaRepository.findByUsuarioId(usuarioId);
     }
-    
- @Override
-public Optional<Mascota> findByUsuarioIdAndMascotaId(Integer usuarioId, Integer mascotaId) {
-    return mascotaRepository.findByUsuarioIdAndId(usuarioId, mascotaId);
-}
 
+    @Override
+    public Optional<Mascota> findByUsuarioIdAndMascotaId(Integer usuarioId, Integer mascotaId) {
+        return mascotaRepository.findByUsuarioIdAndId(usuarioId, mascotaId);
+    }
 
 }

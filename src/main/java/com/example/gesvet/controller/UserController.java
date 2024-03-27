@@ -25,8 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
-    
-     @Autowired
+
+    @Autowired
     ICategoriasService categoriasservice;
 
     @Autowired
@@ -72,23 +72,24 @@ public class UserController {
             userDto.setAcercade(user.getAcercade());
             userDto.setImagen("/images/" + user.getImagen()); // Asegúrate de tener la ruta correcta
 
-           if (!userService.usuarioDatosPersonalesCompletos(user)) {
-        // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
-        model.addAttribute("mostrarAlerta", true);
-    }
+            if (!userService.usuarioDatosPersonalesCompletos(user)) {
+                // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
+                model.addAttribute("mostrarAlerta", true);
+            }
             // Obtén las categorías asociadas al tipo "Producto"
-        List<Categorias> categoriasProducto = categoriasservice.findByTipoCategoria("Producto");
+            List<Categorias> categoriasProducto = categoriasservice.findByTipoCategoria("Producto");
 
-        model.addAttribute("categoriasProducto", categoriasProducto);
+            model.addAttribute("categoriasProducto", categoriasProducto);
             model.addAttribute("userDto", userDto);
         }
 
         return "Inicio_usu";
     }
+
     @ModelAttribute("mostrarAlerta")
-public boolean mostrarAlerta() {
-    return false; // Este método se asegurará de que el atributo esté presente en el modelo incluso si la lógica en el método home no lo agrega
-}
+    public boolean mostrarAlerta() {
+        return false; // Este método se asegurará de que el atributo esté presente en el modelo incluso si la lógica en el método home no lo agrega
+    }
 
     @GetMapping("/homes")
     public String homes(Model model, Principal principal) {
@@ -138,9 +139,8 @@ public boolean mostrarAlerta() {
 
             model.addAttribute("detallesCompras", detallesCompras);
             model.addAttribute("totalCompras", totalCompras);
-            
-            // para mostrar el total d la facturacion diaria
 
+            // para mostrar el total d la facturacion diaria
             List<Object[]> detallesFacturas = facturaService.findDetallesFactura();
 
             // Lógica para calcular el total de ventas
@@ -162,11 +162,11 @@ public boolean mostrarAlerta() {
             List<Productos> productosConPocoStock = productoService.getTopProductosConPocoStock(limite, minimoStock);
 
             model.addAttribute("productosConPocoStock", productosConPocoStock);
-            
-             if (!userService.usuarioDatosPersonalesCompletos(user)) {
-        // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
-        model.addAttribute("mostrarAlerta", true);
-    }
+
+            if (!userService.usuarioDatosPersonalesCompletos(user)) {
+                // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
+                model.addAttribute("mostrarAlerta", true);
+            }
 
             model.addAttribute("userDto", userDto);
         }

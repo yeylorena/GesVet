@@ -4,10 +4,7 @@ import com.example.gesvet.models.UsuarioVentas;
 import com.example.gesvet.repository.usuarioVentasRepository;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
-
 public class UsuarioVentasServiceImpl implements UsuarioVentasService {
 
     private usuarioVentasRepository usuarioVentasrepository;
@@ -22,12 +19,11 @@ public class UsuarioVentasServiceImpl implements UsuarioVentasService {
         return usuarioVentasrepository.save(usuarioventas);
     }
 
-     @Override
+    @Override
     public void delete(UsuarioVentas usuarioventas) {
         // Lógica para eliminar el usuario de la base de datos
         // Por ejemplo, puedes usar el repositorio de UsuarioVentas si estás usando Spring Data JPA
         usuarioVentasrepository.delete(usuarioventas);
     }
-
 
 }

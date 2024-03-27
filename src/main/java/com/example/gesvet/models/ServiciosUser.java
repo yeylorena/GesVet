@@ -29,6 +29,21 @@ public class ServiciosUser {
     @ManyToOne()
     private User usuario;
 
+    public ServiciosUser() {
+
+    }
+
+    public ServiciosUser(Integer id, String nombre, String descripcion, String imagen, double precio, boolean activo, Categorias categoria, User usuario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.precio = precio;
+        this.activo = activo;
+        this.categoria = categoria;
+        this.usuario = usuario;
+    }
+
     public boolean isActivos() {
         return activos;
     }
@@ -101,23 +116,9 @@ public class ServiciosUser {
         this.usuario = usuario;
     }
 
-    public ServiciosUser(Integer id, String nombre, String descripcion, String imagen, double precio, boolean activo, Categorias categoria, User usuario) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.imagen = imagen;
-        this.precio = precio;
-        this.activo = activo;
-        this.categoria = categoria;
-        this.usuario = usuario;
-    }
-
     @Override
     public String toString() {
         return "ServiciosUser{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", activo=" + activo + ", activos=" + activos + ", categoria=" + categoria + ", usuario=" + usuario + '}';
     }
 
-    public ServiciosUser() {
-
-    }
 }

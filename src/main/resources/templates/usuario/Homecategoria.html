@@ -210,33 +210,33 @@
                 });
             </script>
             <script>
-            function buscarProductos() {
-    // Obtén el valor del campo de búsqueda
-    var input = document.getElementById('palabra');
-    var filtro = input.value.trim().toUpperCase();
+                function buscarProductos() {
+                    // Obtén el valor del campo de búsqueda
+                    var input = document.getElementById('palabra');
+                    var filtro = input.value.trim().toUpperCase();
 
-    // Obtén todas las tarjetas de productos
-    var contenedorTarjetas = document.querySelector('.row.mt-5');
+                    // Obtén todas las tarjetas de productos
+                    var contenedorTarjetas = document.querySelector('.row.mt-5');
 
-    // Obtén todas las tarjetas de productos dentro del contenedor
-    var tarjetasProductos = contenedorTarjetas.querySelectorAll('.alimentos');
+                    // Obtén todas las tarjetas de productos dentro del contenedor
+                    var tarjetasProductos = contenedorTarjetas.querySelectorAll('.alimentos');
 
-    // Itera sobre las tarjetas y muestra u oculta según la coincidencia con el filtro
-    tarjetasProductos.forEach(function(tarjeta) {
-        var nombreProducto = tarjeta.querySelector('.card-title').textContent.toUpperCase();
-        var categoriaProducto = tarjeta.querySelector('.card-text').textContent.toUpperCase();
+                    // Itera sobre las tarjetas y muestra u oculta según la coincidencia con el filtro
+                    tarjetasProductos.forEach(function (tarjeta) {
+                        var nombreProducto = tarjeta.querySelector('.card-title').textContent.toUpperCase();
+                        var categoriaProducto = tarjeta.querySelector('.card-text').textContent.toUpperCase();
 
-        // Comprueba si el nombre del producto o la categoría coinciden con el filtro
-        if (filtro === '' || nombreProducto.includes(filtro) || categoriaProducto.includes(filtro)) {
-            tarjeta.style.opacity = '1'; // Mostrar la tarjeta si coincide con la búsqueda
-            tarjeta.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Desplazar hasta la tarjeta
-        } else {
-            if (filtro !== '' && categoriaProducto !== filtro) {
-                tarjeta.style.opacity = '0'; // Ocultar la tarjeta si no coincide con la búsqueda de categoría
-            }
-        }
-    });
-}
+                        // Comprueba si el nombre del producto o la categoría coinciden con el filtro
+                        if (filtro === '' || nombreProducto.includes(filtro) || categoriaProducto.includes(filtro)) {
+                            tarjeta.style.opacity = '1'; // Mostrar la tarjeta si coincide con la búsqueda
+                            tarjeta.scrollIntoView({behavior: 'smooth', block: 'start'}); // Desplazar hasta la tarjeta
+                        } else {
+                            if (filtro !== '' && categoriaProducto !== filtro) {
+                                tarjeta.style.opacity = '0'; // Ocultar la tarjeta si no coincide con la búsqueda de categoría
+                            }
+                        }
+                    });
+                }
 
 
             </script>

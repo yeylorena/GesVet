@@ -64,5 +64,4 @@ public class citaRapidaServiceImpl implements citaRapidaService {
         return citaRapidaRepository.findByUsuarioAndEstado(user, "pendiente");
     }
 
-
 }

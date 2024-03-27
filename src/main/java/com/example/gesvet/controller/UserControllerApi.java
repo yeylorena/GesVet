@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,13 +107,13 @@ public class UserControllerApi {
         return "Registro_Usu";
     }
 
-     @PostMapping("/register")
+    @PostMapping("/register")
     public ResponseEntity<Object> registerSave(@RequestBody @Valid UserDto userDto, BindingResult bindingResult, Model model) {
-        
+
         if (bindingResult.hasErrors()) {
             //return "Registro_Usu"; // Devolver al formulario de registro si hay errores de validación
             var respuesta = new respuesta(
-                    "error",    
+                    "error",
                     "verificar  el formulario"
             );
 

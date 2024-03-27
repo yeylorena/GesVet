@@ -469,7 +469,9 @@ function eliminarRaza(id) {
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: "¡Sí, eliminar!"
+        confirmButtonText: "¡Sí, eliminar!",
+        cancelButtonText: 'Cancelar' // Personaliza el texto del botón "Cancelar"
+
     }).then((result) => {
         if (result.isConfirmed) {
             // Si el usuario confirma, redirige a la URL de eliminación
@@ -506,7 +508,9 @@ function eliminarEspecie(id) {
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: "¡Sí, eliminar!"
+        confirmButtonText: "¡Sí, eliminar!",
+        cancelButtonText: 'Cancelar' // Personaliza el texto del botón "Cancelar"
+
     }).then((result) => {
         if (result.isConfirmed) {
             window.location.href = '/razas/deleteEspecie/' + id;

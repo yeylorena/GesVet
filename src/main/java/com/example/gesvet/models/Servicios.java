@@ -18,16 +18,12 @@ public class Servicios {
     private boolean activo;
     private boolean activos = true;
 
-    public boolean isActivos() {
-        return activos;
-    }
-
-    public void setActivos(boolean activos) {
-        this.activos = activos;
-    }
-
     @ManyToOne()
     private User usuario;
+
+    public Servicios() {
+
+    }
 
     public Servicios(Integer id, String nombre, boolean activo, User usuario) {
         super();
@@ -35,6 +31,14 @@ public class Servicios {
         this.nombre = nombre;
         this.activo = activo;
         this.usuario = usuario;
+    }
+
+    public boolean isActivos() {
+        return activos;
+    }
+
+    public void setActivos(boolean activos) {
+        this.activos = activos;
     }
 
     public Integer getId() {
@@ -72,10 +76,6 @@ public class Servicios {
     @Override
     public String toString() {
         return "Servicios{" + "id=" + id + ", nombre=" + nombre + ", activo=" + activo + ", usuario=" + usuario + '}';
-    }
-
-    public Servicios() {
-
     }
 
 }

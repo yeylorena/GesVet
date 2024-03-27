@@ -23,6 +23,29 @@ public class Productos {
     private boolean activo;
     private boolean activos = true;
 
+    @ManyToOne()
+    private User usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id") // Nombre de la columna en la tabla productos que contiene la clave foránea
+    private Categorias categoria;
+
+    public Productos() {
+    }
+
+    public Productos(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad, boolean activo, User usuario) {
+        super();
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.activo = activo;
+        this.activos = true;
+        this.usuario = usuario;
+    }
+
     public boolean isActivos() {
         return activos;
     }
@@ -39,30 +62,11 @@ public class Productos {
         this.activo = activo;
     }
 
-    @ManyToOne()
-    private User usuario;
-
     public User getUsuario() {
         return usuario;
     }
 
     public void setUsuario(User usuario) {
-        this.usuario = usuario;
-    }
-
-    public Productos() {
-    }
-
-    public Productos(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad, boolean activo, User usuario) {
-        super();
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.imagen = imagen;
-        this.precio = precio;
-        this.cantidad = cantidad;
-        this.activo = activo;
-        this.activos = true;
         this.usuario = usuario;
     }
 
@@ -114,15 +118,6 @@ public class Productos {
         this.cantidad = cantidad;
     }
 
-    @Override
-    public String toString() {
-        return "Productos{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", cantidad=" + cantidad + ", activo=" + activo + ", activos=" + activos + ", usuario=" + usuario + '}';
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "categoria_id") // Nombre de la columna en la tabla productos que contiene la clave foránea
-    private Categorias categoria;
-
     public Categorias getCategoria() {
         return categoria;
     }
@@ -130,4 +125,10 @@ public class Productos {
     public void setCategoria(Categorias categoria) {
         this.categoria = categoria;
     }
+
+    @Override
+    public String toString() {
+        return "Productos{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", cantidad=" + cantidad + ", activo=" + activo + ", activos=" + activos + ", usuario=" + usuario + '}';
+    }
+
 }

@@ -2,7 +2,6 @@ package com.example.gesvet.service;
 
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.User;
-import com.example.gesvet.repository.RecuperarContraseñausuRepository;
 import com.example.gesvet.repository.UserRepository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.mail.MessagingException;
@@ -16,6 +15,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.example.gesvet.repository.RecuperarContrasenausuRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     // Método para contar el número de usuarios con un rol específico
     @Autowired
-    private RecuperarContraseñausuRepository recuperarContraseñausuRepository;
+    private RecuperarContrasenausuRepository recuperarContraseñausuRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
 
@@ -141,14 +141,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean usuarioDatosPersonalesCompletos(User user) {
-    return StringUtils.isNotBlank(user.getNombre())
-            && StringUtils.isNotBlank(user.getApellido())
-            && StringUtils.isNotBlank(user.getDireccion())
-            && StringUtils.isNotBlank(user.getTelefono())
-            && StringUtils.isNotBlank(user.getAcercade())
-            && StringUtils.isNotBlank(user.getImagen());
-}
-    
+        return StringUtils.isNotBlank(user.getNombre())
+                && StringUtils.isNotBlank(user.getApellido())
+                && StringUtils.isNotBlank(user.getDireccion())
+                && StringUtils.isNotBlank(user.getTelefono())
+                && StringUtils.isNotBlank(user.getAcercade())
+                && StringUtils.isNotBlank(user.getImagen());
+    }
+
     @Override
     public void enviarEliminacionDeLaCuenta(User user) {
         try {

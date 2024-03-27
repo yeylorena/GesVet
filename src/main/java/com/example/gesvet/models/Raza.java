@@ -1,16 +1,12 @@
 package com.example.gesvet.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,9 +19,6 @@ public class Raza {
     private String nombre;
     private String descripcion;
     private boolean activo = true;
-   
-
-   
 
     // Mapeo de Mascotas
     @OneToMany(mappedBy = "raza")
@@ -33,6 +26,14 @@ public class Raza {
     private List<Mascota> mascotas;
 
     public Raza() {
+    }
+
+    public Raza(Integer id, String nombre, String descripcion, String opciones, List<Mascota> mascotas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.mascotas = mascotas;
+        this.activo = true;
     }
 
     public Integer getId() {
@@ -59,10 +60,6 @@ public class Raza {
         this.descripcion = descripcion;
     }
 
-   
-
-   
-
     public List<Mascota> getMascotas() {
         return mascotas;
     }
@@ -79,28 +76,14 @@ public class Raza {
         this.activo = activo;
     }
 
-    public Raza(Integer id, String nombre, String descripcion, String opciones, List<Mascota> mascotas) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-       
-      
-        this.mascotas = mascotas;
-        this.activo = true;
+    @Override
+    public String toString() {
+        return "Raza{"
+                + "id=" + id
+                + ", nombre='" + nombre + '\''
+                + ", descripcion='" + descripcion + '\''
+                + ", activo=" + activo
+                + '}';
     }
 
-    @Override
-public String toString() {
-    return "Raza{" +
-            "id=" + id +
-            ", nombre='" + nombre + '\'' +
-            ", descripcion='" + descripcion + '\'' +
-            ", activo=" + activo +
-            '}';
-}
-
-   
-
-   
-  
 }

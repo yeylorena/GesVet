@@ -39,7 +39,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-    
+
     @Autowired
     ICategoriasService categoriasservice;
 
@@ -72,7 +72,7 @@ public class HomeController {
 
     //datos de la factura
     Factura factura = new Factura();
-    
+
     @GetMapping("verhome")
     public String homecategoria(Model model, Authentication authentication, Principal principal) {
 
@@ -97,62 +97,60 @@ public class HomeController {
         userDto.setRole(user.getRole());
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
-        
+
         // Obtén las categorías asociadas al tipo "Producto"
         List<Categorias> categoriasProducto = categoriasservice.findByTipoCategoria("Producto");
 
         model.addAttribute("categoriasProducto", categoriasProducto);
 
         model.addAttribute("userDto", userDto);
-       
 
         return "usuario/Homecategoria";
     }
-    
+
     @GetMapping("productohomes/{id}")
-public String productoHomes(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
-    // Obtener los detalles del usuario actual
-    UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-    model.addAttribute("userdetail", userDetails);
+    public String productoHomes(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
 
-    // Obtener el nombre de usuario actual
-    String username = authentication.getName();
+        // Obtener el nombre de usuario actual
+        String username = authentication.getName();
 
-    // Buscar al usuario por su nombre de usuario
-    User user = userService.findByUsername(username);
+        // Buscar al usuario por su nombre de usuario
+        User user = userService.findByUsername(username);
 
-    // Crear un objeto UserDto
-    UserDto userDto = new UserDto();
-    userDto.setId(user.getId());
-    userDto.setUsername(user.getUsername());
-    userDto.setNombre(user.getNombre());
-    userDto.setApellido(user.getApellido());
-    userDto.setDireccion(user.getDireccion());
-    userDto.setTelefono(user.getTelefono());
-    userDto.setRole(user.getRole());
-    userDto.setAcercade(user.getAcercade());
-    userDto.setImagen("/images/" + user.getImagen());
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
 
-    // Verificar si los datos personales del usuario están completos
-    if (!userService.usuarioDatosPersonalesCompletos(user)) {
-        // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
-        model.addAttribute("mostrarAlerta", true);
-    } else {
-        // Obtener la categoría por su ID
-        Categorias categoria = categoriasservice.findById(id);
+        // Verificar si los datos personales del usuario están completos
+        if (!userService.usuarioDatosPersonalesCompletos(user)) {
+            // Si los datos personales no están completos, agrega el atributo para mostrar la alerta
+            model.addAttribute("mostrarAlerta", true);
+        } else {
+            // Obtener la categoría por su ID
+            Categorias categoria = categoriasservice.findById(id);
 
-        // Obtener los productos asociados a la categoría
-        List<Productos> productos = productoService.findByCategoria(categoria);
+            // Obtener los productos asociados a la categoría
+            List<Productos> productos = productoService.findByCategoria(categoria);
 
-        model.addAttribute("categoria", categoria);
-        model.addAttribute("productos", productos);
+            model.addAttribute("categoria", categoria);
+            model.addAttribute("productos", productos);
+        }
+
+        model.addAttribute("userDto", userDto);
+
+        return "usuario/Home";
     }
-
-    model.addAttribute("userDto", userDto);
-
-    return "usuario/Home";
-}
-
 
     @GetMapping("verproducto")
     public String home(Model model, Authentication authentication, Principal principal) {
@@ -298,63 +296,64 @@ public String productoHomes(@PathVariable Integer id, Model model, Authenticatio
 
         return "usuario/Carrito";
     }
-@PostMapping("/cart/update")
-public String updateCart(@RequestParam Integer id, @RequestParam Integer newQuantity, Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) {
-    // Obtener los detalles del usuario actual
-UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-model.addAttribute("userdetail", userDetails);
 
-    // Obtener el usuario actual
-    String username = authentication.getName();
-    User user = userService.findByUsername(username);
+    @PostMapping("/cart/update")
+    public String updateCart(@RequestParam Integer id, @RequestParam Integer newQuantity, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("userdetail", userDetails);
 
-    // Crear un objeto UserDto
-    UserDto userDto = new UserDto();
-    userDto.setId(user.getId());
-    userDto.setUsername(user.getUsername());
-    userDto.setNombre(user.getNombre());
-    userDto.setApellido(user.getApellido());
-    userDto.setDireccion(user.getDireccion());
-    userDto.setTelefono(user.getTelefono());
-    userDto.setRole(user.getRole());
-    userDto.setAcercade(user.getAcercade());
-    userDto.setImagen("/images/" + user.getImagen());
-    
-     // Obtener el producto de la base de datos
-    Optional<Productos> optionalProducto = productoService.get(id);
-    Productos producto = optionalProducto.orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        // Obtener el usuario actual
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
 
-    // Verificar si la nueva cantidad excede la cantidad disponible en la base de datos
-    if (newQuantity > producto.getCantidad()) {
-        int cantidadDisponible = producto.getCantidad(); // Obtener la cantidad disponible del producto
-        redirectAttributes.addFlashAttribute("error", "La cantidad seleccionada excede la cantidad disponible en el inventario (" + cantidadDisponible + " disponibles).");
-        return "redirect:/getCart";
+        // Crear un objeto UserDto
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setNombre(user.getNombre());
+        userDto.setApellido(user.getApellido());
+        userDto.setDireccion(user.getDireccion());
+        userDto.setTelefono(user.getTelefono());
+        userDto.setRole(user.getRole());
+        userDto.setAcercade(user.getAcercade());
+        userDto.setImagen("/images/" + user.getImagen());
+
+        // Obtener el producto de la base de datos
+        Optional<Productos> optionalProducto = productoService.get(id);
+        Productos producto = optionalProducto.orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        // Verificar si la nueva cantidad excede la cantidad disponible en la base de datos
+        if (newQuantity > producto.getCantidad()) {
+            int cantidadDisponible = producto.getCantidad(); // Obtener la cantidad disponible del producto
+            redirectAttributes.addFlashAttribute("error", "La cantidad seleccionada excede la cantidad disponible en el inventario (" + cantidadDisponible + " disponibles).");
+            return "redirect:/getCart";
+        }
+
+        // Buscar el detalle correspondiente en la lista de detalles del carrito
+        DetalleFactura detalle = detalles.stream()
+                .filter(df -> df.getProductos().getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Detalle de factura no encontrado"));
+
+        // Actualizar la cantidad del producto
+        detalle.setCantidad(newQuantity);
+
+        // Recalcular el total del detalle
+        detalle.setTotal(detalle.getPrecio() * newQuantity);
+
+        // Recalcular el total de la factura
+        double sumaTotal = detalles.stream().mapToDouble(df -> df.getTotal()).sum();
+        factura.setTotal(sumaTotal);
+
+        // Actualizar el modelo con los datos actualizados
+        model.addAttribute("cart", detalles);
+        model.addAttribute("factura", factura);
+        model.addAttribute("userDto", userDto);
+
+        // Devolver la vista del carrito
+        return "usuario/Carrito";
     }
-
-    // Buscar el detalle correspondiente en la lista de detalles del carrito
-    DetalleFactura detalle = detalles.stream()
-            .filter(df -> df.getProductos().getId().equals(id))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("Detalle de factura no encontrado"));
-
-    // Actualizar la cantidad del producto
-    detalle.setCantidad(newQuantity);
-
-    // Recalcular el total del detalle
-    detalle.setTotal(detalle.getPrecio() * newQuantity);
-
-    // Recalcular el total de la factura
-    double sumaTotal = detalles.stream().mapToDouble(df -> df.getTotal()).sum();
-    factura.setTotal(sumaTotal);
-
-    // Actualizar el modelo con los datos actualizados
-    model.addAttribute("cart", detalles);
-    model.addAttribute("factura", factura);
-    model.addAttribute("userDto", userDto);
-
-    // Devolver la vista del carrito
-    return "usuario/Carrito";
-}
 
     //Quitar un producto del carrito
     @GetMapping("/delete/cart/{id}")
@@ -438,15 +437,14 @@ model.addAttribute("userdetail", userDetails);
     }
 
     @GetMapping("/factura")
-    public String factura(Model model, Authentication authentication, Principal principal,RedirectAttributes redirectAttributes) {
+    public String factura(Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
 
-        
-         if (detalles.isEmpty()) {
-        // Agregar un mensaje de error
-        redirectAttributes.addFlashAttribute("errorproducto", "Por favor, añade un producto antes de ver la factura.");
-        // Redirigir al usuario a la página anterior
-        return "redirect:/getCart";
-    }
+        if (detalles.isEmpty()) {
+            // Agregar un mensaje de error
+            redirectAttributes.addFlashAttribute("errorproducto", "Por favor, añade un producto antes de ver la factura.");
+            // Redirigir al usuario a la página anterior
+            return "redirect:/getCart";
+        }
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);
@@ -480,8 +478,7 @@ model.addAttribute("userdetail", userDetails);
     }
 
     @PostMapping("saveFact")
-    public String saveFact(Model model, Authentication authentication, Principal principal,@RequestParam("img") MultipartFile file,@RequestParam("metodoPago") Integer metodoPagoId,RedirectAttributes redirectAttributes) throws IOException  {
-
+    public String saveFact(Model model, Authentication authentication, Principal principal, @RequestParam("img") MultipartFile file, @RequestParam("metodoPago") Integer metodoPagoId, RedirectAttributes redirectAttributes) throws IOException {
 
         // Obtener los detalles del usuario actual
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -550,7 +547,7 @@ model.addAttribute("userdetail", userDetails);
 
         model.addAttribute("userDto", userDto);
         // Agregar mensaje de éxito para mostrar en la página de destino
-    redirectAttributes.addFlashAttribute("exitofacturauser", "Compra efectuada con éxito.");
+        redirectAttributes.addFlashAttribute("exitofacturauser", "Compra efectuada con éxito.");
         return "redirect:/verhome";
     }
 
