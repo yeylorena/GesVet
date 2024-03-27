@@ -340,11 +340,10 @@
                                                                                                                     <div class="card-body">
                                                                                                                         <div class="text-center">
                                                                                                                             <a th:href="@{/productohomes/{id} (id=${categoria.id})}" class="btn my-4 titlecartass" style="background-color: #ffffff;
-                                                                                                                       ">
+                                                                                                                               ">
                                                                                                                                 <span th:text="${categoria.nombre}"></span>
                                                                                                                             </a>
                                                                                                                         </div>
-
                                                                                                                     </div>
                                                                                                             </div>
                                                                                                         </div>
@@ -356,7 +355,6 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </section>
-
                                                                             </main><!-- End #main -->
                                                                             <!-- ======= Footer ======= -->
                                                                             <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -374,8 +372,6 @@
                                                                             <script src="assets/js/main.js"></script>
                                                                             <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
                                                                             <script src="./js/app.js"></script>
-
-
                                                                             <!-- Agrega esto en Inicio_usu.html -->
                                                                             <!-- Agrega este código en la parte relevante de tu vista -->
                                                                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -383,7 +379,6 @@
                                                                             <!-- Importa SweetAlert -->
                                                                             <link th:href="@{/webjars/sweetalert2/11.1.9/sweetalert2.min.css}" rel="stylesheet" />
                                                                             <script th:src="@{/webjars/sweetalert2/11.1.9/sweetalert2.all.min.js}"></script>
-
                                                                             <!-- En tu vista -->
                                                                             <script th:if="${mostrarAlerta}">
                                                                                 Swal.fire({
@@ -399,9 +394,5 @@
                                                                                     }
                                                                                 });
                                                                             </script>
-
-
-
-
                                                                         </body>
                                                                         </html>

@@ -15,9 +15,7 @@ import com.example.gesvet.service.citaRapidaService;
 import com.example.gesvet.service.eventoService;
 import java.security.Principal;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,11 +87,11 @@ public class agedarcitaUserController {
         User user = userService.findByUsername(userDetails.getUsername());
         List<Mascota> mascotas = user.getMascotas();
         model.addAttribute("mascotas", mascotas);
-         if (!userService.usuarioDatosPersonalesCompletos(user)) {
-        // Si los datos personales no están completos, agregar el atributo para mostrar la alerta
-        redirectAttributes.addFlashAttribute("mostrarAlerta", true);
-        return "redirect:/perfil"; // Redireccionar al perfil del administrador
-    }
+        if (!userService.usuarioDatosPersonalesCompletos(user)) {
+            // Si los datos personales no están completos, agregar el atributo para mostrar la alerta
+            redirectAttributes.addFlashAttribute("mostrarAlerta", true);
+            return "redirect:/perfil"; // Redireccionar al perfil del administrador
+        }
 
         // Obtener las citas pendientes del usuario
         List<citaRapida> citasPendientes = citarapidaservice.findPendientesByUsuario(user);

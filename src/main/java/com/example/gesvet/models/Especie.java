@@ -1,7 +1,6 @@
 package com.example.gesvet.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,12 +19,22 @@ public class Especie {
     private String nombre;
     private boolean activo = true;
     private String descripcion;
+
     // Relación con Mascota
     @OneToMany(mappedBy = "especie")
+
     @JsonIgnoreProperties("especie")
     private List<Mascota> mascota;
 
     public Especie() {
+    }
+
+    public Especie(Integer id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+
+        this.activo = true;
     }
 
     public String getDescripcion() {
@@ -60,8 +69,6 @@ public class Especie {
         this.mascota = mascota;
     }
 
-   
-
     public boolean isActivo() {
         return activo;
     }
@@ -70,24 +77,14 @@ public class Especie {
         this.activo = activo;
     }
 
-    public Especie(Integer id, String nombre, String descripcion) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        
-        this.activo = true;
-    }
-
     @Override
-public String toString() {
-    return "Especie{" +
-            "id=" + id +
-            ", nombre='" + nombre + '\'' +
-            ", descripcion='" + descripcion + '\'' +
-            ", activo=" + activo +
-            '}';
-}
-
-   
+    public String toString() {
+        return "Especie{"
+                + "id=" + id
+                + ", nombre='" + nombre + '\''
+                + ", descripcion='" + descripcion + '\''
+                + ", activo=" + activo
+                + '}';
+    }
 
 }

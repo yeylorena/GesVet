@@ -17,7 +17,6 @@ public interface IFacturaService {
 
     List<Factura> findByUsuario(User usuario);
 
-
     List<Factura> findByUser_Role(String role);
 
     public void update(Factura factura);
@@ -34,9 +33,10 @@ public interface IFacturaService {
 
     //corresponde a las compras del usuario
     List<Object[]> findDetallesCompras();
-    
+
     //corresponde a las compras del usuario
     List<Object[]> findDetallesVentas();
 //corresponde a la facturacio diaria
- List<Object[]> findDetallesFactura();
+
+    List<Object[]> findDetallesFactura();
 }

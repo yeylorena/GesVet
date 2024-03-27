@@ -17,6 +17,5 @@ public interface ITipocategoriaservice {
     List<Tipocategoria> findAll();
 
     boolean existsByNombre(String nombre);
-    
 
 }

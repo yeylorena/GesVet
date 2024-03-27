@@ -30,17 +30,13 @@ public class citaRapida {
     private String veterinarioCita;
     private String nombreVeterinario;
 
-    public citaRapida() {
-        this.estado = "pendiente"; // Establecer el estado inicial como pendiente al crear la cita
-    }
-
     // Mapeo de Especie
     @ManyToOne
     @JoinColumn(name = "especie_id")
     private Especie especie;
 
     @ManyToOne
-    @JoinColumn(name = "admin_id")
+    @JoinColumn(name = "agendacita_id")
     private User usuario;
 
     @ManyToOne
@@ -51,6 +47,30 @@ public class citaRapida {
     @ManyToOne
     @JoinColumn(name = "mascota_id")
     private Mascota mascota;
+
+    public citaRapida() {
+        this.estado = "pendiente"; // Establecer el estado inicial como pendiente al crear la cita
+    }
+
+    public citaRapida(Long id, String nombreCita, String nombreMascota, String nombreDueño, String colorMascota, double precio, LocalDateTime inicio, LocalDateTime fin, String estado, String formattedFecha, String formattedFechaFin, String veterinarioCita, String nombreVeterinario, Especie especie, User usuario, ServiciosUser servicio, Mascota mascota) {
+        this.id = id;
+        this.nombreCita = nombreCita;
+        this.nombreMascota = nombreMascota;
+        this.nombreDueño = nombreDueño;
+        this.colorMascota = colorMascota;
+        this.precio = precio;
+        this.inicio = inicio;
+        this.fin = fin;
+        this.estado = estado;
+        this.formattedFecha = formattedFecha;
+        this.formattedFechaFin = formattedFechaFin;
+        this.veterinarioCita = veterinarioCita;
+        this.nombreVeterinario = nombreVeterinario;
+        this.especie = especie;
+        this.usuario = usuario;
+        this.servicio = servicio;
+        this.mascota = mascota;
+    }
 
     public Mascota getMascota() {
         return mascota;
@@ -186,26 +206,6 @@ public class citaRapida {
 
     public void setServicio(ServiciosUser servicio) {
         this.servicio = servicio;
-    }
-
-    public citaRapida(Long id, String nombreCita, String nombreMascota, String nombreDueño, String colorMascota, double precio, LocalDateTime inicio, LocalDateTime fin, String estado, String formattedFecha, String formattedFechaFin, String veterinarioCita, String nombreVeterinario, Especie especie, User usuario, ServiciosUser servicio, Mascota mascota) {
-        this.id = id;
-        this.nombreCita = nombreCita;
-        this.nombreMascota = nombreMascota;
-        this.nombreDueño = nombreDueño;
-        this.colorMascota = colorMascota;
-        this.precio = precio;
-        this.inicio = inicio;
-        this.fin = fin;
-        this.estado = estado;
-        this.formattedFecha = formattedFecha;
-        this.formattedFechaFin = formattedFechaFin;
-        this.veterinarioCita = veterinarioCita;
-        this.nombreVeterinario = nombreVeterinario;
-        this.especie = especie;
-        this.usuario = usuario;
-        this.servicio = servicio;
-        this.mascota = mascota;
     }
 
     @Override

@@ -166,7 +166,7 @@
                                                     <tr th:each="dfactura:${cart}">
                                                         <td th:text="${dfactura.nombre}"></td>
                                                         <td th:text="${dfactura.precio}" class="precio2"></td>
-                                                         <td>
+                                                        <td>
                                                             <span class="cantidadProducto" th:text="${dfactura.cantidad}"></span>
                                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#editarCantidadModal' + ${dfactura.productos.id}">
                                                                 <i class="bi bi-pencil-square"></i>
@@ -287,8 +287,8 @@
             text: 'Por favor, añade un producto antes de ver la factura.'
         });
     </script>
-    
-      <script th:if="${error}">
+
+    <script th:if="${error}">
         Swal.fire({
             icon: 'error',
             title: '¡Error!',

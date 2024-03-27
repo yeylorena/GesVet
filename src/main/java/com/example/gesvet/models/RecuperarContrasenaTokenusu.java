@@ -12,8 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-
-public class RecuperarContraseñaTokenusu {
+public class RecuperarContrasenaTokenusu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

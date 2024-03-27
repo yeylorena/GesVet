@@ -26,6 +26,29 @@ public class UserDto {
     private String confirmNewPassword;
     private List<String> mascotas; // Agregar el campo para las mascotas
 
+    public UserDto() {
+
+    }
+
+    public UserDto(Integer id, String username, String password, String confirmPassword, String nombre, String apellido, String direccion, String telefono, String acercade, String imagen, String role,
+            String currentPassword, String newPassword, String confirmNewPassword) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.role = role;
+        this.acercade = acercade;
+        this.imagen = imagen;
+        this.currentPassword = currentPassword;
+        this.newPassword = newPassword;
+        this.confirmNewPassword = confirmNewPassword;
+
+    }
+
     public String getCurrentPassword() {
         return currentPassword;
     }
@@ -48,29 +71,6 @@ public class UserDto {
 
     public void setConfirmNewPassword(String confirmNewPassword) {
         this.confirmNewPassword = confirmNewPassword;
-    }
-
-    public UserDto() {
-
-    }
-
-    public UserDto(Integer id, String username, String password, String confirmPassword, String nombre, String apellido, String direccion, String telefono, String acercade, String imagen, String role,
-            String currentPassword, String newPassword, String confirmNewPassword) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.role = role;
-        this.acercade = acercade;
-        this.imagen = imagen;
-        this.currentPassword = currentPassword;
-        this.newPassword = newPassword;
-        this.confirmNewPassword = confirmNewPassword;
-
     }
 
     public String getImagen() {

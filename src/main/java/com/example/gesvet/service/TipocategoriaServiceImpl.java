@@ -43,13 +43,12 @@ public class TipocategoriaServiceImpl implements ITipocategoriaservice {
 
     }
 
-     @Override
+    @Override
     public boolean existsByNombre(String nombre) {
-        // Implementa la lógica para verificar si existe una categoría con el mismo nombre
-        // Puedes utilizar el método correspondiente de tu repositorio categoriasRepository
+        // Lógica para verificar si existe una categoría con el mismo nombre
+        // Método correspondiente de tu repositorio categoriasRepository
         // Devuelve true si existe, false si no
         return tipocategoriarepository.existsByNombre(nombre);
     }
-    
 
 }

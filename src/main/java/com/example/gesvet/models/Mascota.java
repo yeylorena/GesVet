@@ -1,6 +1,5 @@
 package com.example.gesvet.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
@@ -9,12 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Mascotas")
-
 public class Mascota {
 
     @Id
@@ -37,16 +34,8 @@ public class Mascota {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-     @JsonIgnore// "mascotas" es el nombre del campo en la clase User que hace referencia a las mascotas
+    @JsonIgnore// "mascotas" es el nombre del campo en la clase User que hace referencia a las mascotas
     private User usuario;
-
-    public User getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(User usuario) {
-        this.usuario = usuario;
-    }
     // Mapeo de razas
     @ManyToOne
     @JoinColumn(name = "raza_id")
@@ -72,6 +61,14 @@ public class Mascota {
         this.especie = especie;
         this.usuario = usuario;
         this.raza = raza;
+    }
+
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
     }
 
     public Integer getId() {
@@ -138,11 +135,6 @@ public class Mascota {
         this.nombre = nombre;
     }
 
-    @Override
-    public String toString() {
-        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", tiempo=" + tiempo + ", genero=" + genero + ", detalles=" + detalles + ", especie=" + especie + ", usuario=" + usuario + ", raza=" + raza + '}';
-    }
-
     public Especie getEspecie() {
         return especie;
     }
@@ -167,4 +159,8 @@ public class Mascota {
         this.activo = activo;
     }
 
+    @Override
+    public String toString() {
+        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", color=" + color + ", edad=" + edad + ", tiempo=" + tiempo + ", genero=" + genero + ", detalles=" + detalles + ", especie=" + especie + ", usuario=" + usuario + ", raza=" + raza + '}';
+    }
 }

@@ -110,7 +110,7 @@ public class FacturaServiceImpl implements IFacturaService {
     public List<Object[]> findDetallesVentas() {
         return facturaRepository.findDetallesVentas();
     }
-    
+
     @Override
     public List<Object[]> findDetallesFactura() {
         return facturaRepository.findDetallesFactura();

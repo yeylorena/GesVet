@@ -34,6 +34,35 @@ public class Factura {
     private String role;
     private boolean procesada;
 
+    @ManyToOne
+    @JoinColumn(name = "metodo_pago_id")
+    private MetodoPago metodoPago;
+
+    @ManyToOne
+    private User usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "usuarioventas_id")
+    private UsuarioVentas usuarioventas;
+    
+    @OneToMany(mappedBy = "factura")
+    private List<DetalleFactura> listaDetalles;
+
+    public Factura() {
+    }
+
+    public Factura(Integer id, String numero, Date fecha, double total, String estadoPago, String imagen, String estadoEnvio, String role, User usuario) {
+        this.id = id;
+        this.numero = numero;
+        this.fecha = fecha;
+        this.total = total;
+        this.estadoPago = estadoPago;
+        this.imagen = imagen;
+        this.estadoEnvio = estadoEnvio;
+        this.role = role;
+        this.usuario = usuario;
+    }
+
     public boolean isProcesada() {
         return procesada;
     }
@@ -152,15 +181,6 @@ public class Factura {
         this.listaDetalles = listaDetalles;
     }
 
-    @Override
-    public String toString() {
-        return "Factura{" + "id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", total=" + total + ", estadoPago=" + estadoPago + ", imagen=" + imagen + ", estadoEnvio=" + estadoEnvio + ", role=" + role + ", usuario=" + usuario + '}';
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "metodo_pago_id")
-    private MetodoPago metodoPago;
-
     public MetodoPago getMetodoPago() {
         return metodoPago;
     }
@@ -180,5 +200,10 @@ public class Factura {
 
     public void setUsuarioventas(UsuarioVentas usuarioventas) {
         this.usuarioventas = usuarioventas;
+    }
+
+    @Override
+    public String toString() {
+        return "Factura{" + "id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", total=" + total + ", estadoPago=" + estadoPago + ", imagen=" + imagen + ", estadoEnvio=" + estadoEnvio + ", role=" + role + ", usuario=" + usuario + '}';
     }
 }

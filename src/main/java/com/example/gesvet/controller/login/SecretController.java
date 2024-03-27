@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -170,8 +169,7 @@ public class SecretController {
 
     @PostMapping("/eliminar-cuenta")
     public ResponseEntity<Object> eliminarCuenta(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        String jwtToken = authorizationHeader.substring(7); 
-        
+        String jwtToken = authorizationHeader.substring(7);
 
         // Validar el token
         Claims claims = JwtUtils.extractClaims(jwtToken);

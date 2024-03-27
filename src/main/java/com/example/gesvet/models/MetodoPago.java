@@ -20,7 +20,25 @@ public class MetodoPago {
     private String nombre;
     private String cuenta;
     private boolean activo;
-     private boolean activos = true;
+    private boolean activos = true;
+
+    @ManyToOne
+    private User usuario;
+
+    @OneToMany(mappedBy = "metodoPago")
+    private List<Factura> factura;
+
+    public MetodoPago() {
+
+    }
+
+    public MetodoPago(Integer id, String nombre, String cuenta, String imagen, boolean activo) {
+        super();
+        this.id = id;
+        this.nombre = nombre;
+        this.cuenta = cuenta;
+        this.activo = activo;
+    }
 
     public boolean isActivos() {
         return activos;
@@ -62,23 +80,6 @@ public class MetodoPago {
         this.activo = activo;
     }
 
-    public MetodoPago(Integer id, String nombre, String cuenta, String imagen, boolean activo) {
-        super();
-        this.id = id;
-        this.nombre = nombre;
-        this.cuenta = cuenta;
-
-        this.activo = activo;
-    }
-
-    @Override
-    public String toString() {
-        return "MetodoPago{" + "id=" + id + ", nombre=" + nombre + ", cuenta=" + cuenta + ", activo=" + activo + '}';
-    }
-
-    @OneToMany(mappedBy = "metodoPago")
-    private List<Factura> factura;
-
     public List<Factura> getFactura() {
         return factura;
     }
@@ -102,5 +103,10 @@ public class MetodoPago {
     public void setUsuario(User usuario) {
         this.usuario = usuario;
 
+    }
+
+    @Override
+    public String toString() {
+        return "MetodoPago{" + "id=" + id + ", nombre=" + nombre + ", cuenta=" + cuenta + ", activo=" + activo + '}';
     }
 }

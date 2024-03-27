@@ -1,7 +1,6 @@
 package com.example.gesvet.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,21 +31,39 @@ public class User {
     private static final String IMAGEN_PREDETERMINADA = "usuario.png";
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-   @JsonIgnoreProperties("usuario")
+    @JsonIgnoreProperties("usuario")
     private List<Mascota> mascotas;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<citaRapida> citasRapidas;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<agendarcitaAdmin> agendarCitas;
+    @OneToMany(mappedBy = "usuario")
+    private List<Categorias> listaCategorias;
 
-    public List<agendarcitaAdmin> getAgendarCitas() {
-        return agendarCitas;
+    @OneToMany(mappedBy = "usuario")
+    private List<Productos> listaProductos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Factura> listaFacturas;
+
+    public User() {
     }
 
-    public void setAgendarCitas(List<agendarcitaAdmin> agendarCitas) {
-        this.agendarCitas = agendarCitas;
+    public User(String username, String password, String nombre, String apellido, String direccion, String telefono, String acercade, String imagen, String role) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.acercade = acercade;
+        this.imagen = (imagen != null && !imagen.isEmpty()) ? imagen : IMAGEN_PREDETERMINADA;
+        // Set default role if not provided
+        this.role = role != null ? role : "USER";
+        this.activo = true;
+
     }
 
     public List<citaRapida> getCitasRapidas() {
@@ -57,8 +74,6 @@ public class User {
         this.citasRapidas = citasRapidas;
     }
 
-    // Resto de tu código...
-    // Agrega este método para obtener la lista de mascotas del usuario
     public List<Mascota> getMascotas() {
         return mascotas;
     }
@@ -151,37 +166,6 @@ public class User {
         this.acercade = acercade;
     }
 
-    public User(String username, String password, String nombre, String apellido, String direccion, String telefono, String acercade, String imagen, String role) {
-        super();
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.acercade = acercade;
-        this.imagen = (imagen != null && !imagen.isEmpty()) ? imagen : IMAGEN_PREDETERMINADA;
-        // Set default role if not provided
-        this.role = role != null ? role : "USER";
-        this.activo = true;
-
-    }
-
-    public User() {
-    }
-
-    @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", telefono=" + telefono + ", acercade=" + acercade + ", imagen=" + imagen + ", activo=" + activo + ", mascotas=" + mascotas + '}';
-    }
-    /* productos v*/
-    @OneToMany(mappedBy = "usuario")
-    private List<Productos> listaProductos;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<Factura> listaFacturas;
-
     public List<Productos> getListaProductos() {
         return listaProductos;
     }
@@ -189,11 +173,6 @@ public class User {
     public void setListaProductos(List<Productos> listaProductos) {
         this.listaProductos = listaProductos;
     }
-    /* fin productos v*/
- /* categorias v*/
-
-    @OneToMany(mappedBy = "usuario")
-    private List<Categorias> listaCategorias;
 
     public List<Categorias> getListaCategorias() {
         return listaCategorias;
@@ -203,13 +182,17 @@ public class User {
         this.listaCategorias = listaCategorias;
     }
 
-    /* fin categorias v*/
     public List<Factura> getListaFacturas() {
         return listaFacturas;
     }
 
     public void setListaFacturas(List<Factura> listaFacturas) {
         this.listaFacturas = listaFacturas;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", telefono=" + telefono + ", acercade=" + acercade + ", imagen=" + imagen + ", activo=" + activo + ", mascotas=" + mascotas + '}';
     }
 
 }

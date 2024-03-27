@@ -23,22 +23,30 @@ public class Tipocategoria {
     private Integer id;
     private String nombre;
     private boolean activo;
+
     @ManyToOne()
     @JsonIgnore
     private User usuario;
 
-    public User getUsuario() {
-        return usuario;
-    }
+    @OneToMany(mappedBy = "tipocategoria")
+    private List<Categorias> categorias;
 
-    public void setUsuario(User usuario) {
-        this.usuario = usuario;
+    public Tipocategoria() {
+
     }
 
     public Tipocategoria(Integer id, String nombre, boolean activo, User usuario) {
         this.id = id;
         this.nombre = nombre;
         this.activo = activo;
+        this.usuario = usuario;
+    }
+
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
         this.usuario = usuario;
     }
 
@@ -85,6 +93,11 @@ public class Tipocategoria {
 
     public void setCategorias(List<Categorias> categorias) {
         this.categorias = categorias;
+    }
+
+    @Override
+    public String toString() {
+        return "Tipocategoria{" + "id=" + id + ", nombre=" + nombre + ", activo=" + activo + ", usuario=" + usuario + ", categorias=" + categorias + '}';
     }
 
 }

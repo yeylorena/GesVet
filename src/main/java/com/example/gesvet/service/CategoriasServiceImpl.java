@@ -43,20 +43,15 @@ public class CategoriasServiceImpl implements ICategoriasService {
         return categoriasRepository.findByTipocategoriaNombre(tipoCategoria);
     }
 
-    
-  
- @Override
+    @Override
     public boolean existsByNombre(String nombre) {
-        // Implementa la lógica para verificar si existe una categoría con el mismo nombre
-        // Puedes utilizar el método correspondiente de tu repositorio categoriasRepository
+        // Lógica para verificar si existe una categoría con el mismo nombre
         // Devuelve true si existe, false si no
         return categoriasRepository.existsByNombre(nombre);
     }
 
-
-
-
     @Override
     public Categorias findById(Integer id) {
-      return categoriasRepository.findById(id).orElse(null);}
+        return categoriasRepository.findById(id).orElse(null);
+    }
 }
