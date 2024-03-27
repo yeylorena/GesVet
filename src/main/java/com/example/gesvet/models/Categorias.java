@@ -33,13 +33,16 @@ public class Categorias {
     private User usuario;
 
     @OneToMany(mappedBy = "categoria")
+    @JsonIgnore
     private List<ServiciosUser> serviciosusers;
 
     @ManyToOne
     @JoinColumn(name = "tipocategoria_id")
+    @JsonIgnoreProperties("categorias")
     private Tipocategoria tipocategoria;
 
     @OneToMany(mappedBy = "categoria")
+    @JsonIgnore
     private List<Productos> productos;
 
     public Categorias() {
@@ -142,45 +145,4 @@ public class Categorias {
         return "Categorias{" + "id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", descripcion=" + descripcion + ", activo=" + activo + ", imagen=" + imagen + ", usuario=" + usuario + ", productos=" + productos + ", tipocategoria=" + tipocategoria + ", serviciosusers=" + serviciosusers + '}';
     }
 
-  
-
-    public Categorias() {
-
-    }
-    @OneToMany(mappedBy = "categoria")
-    @JsonIgnore
-    private List<Productos> productos;
-
-    public List<Productos> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Productos> productos) {
-        this.productos = productos;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "tipocategoria_id")
-    @JsonIgnoreProperties("categorias")
-    private Tipocategoria tipocategoria;
-
-    public Tipocategoria getTipocategoria() {
-        return tipocategoria;
-    }
-
-    public void setTipocategoria(Tipocategoria tipocategoria) {
-        this.tipocategoria = tipocategoria;
-    }
-
-    @OneToMany(mappedBy = "categoria")
-    @JsonIgnore
-    private List<ServiciosUser> serviciosusers;
-
-    public List<ServiciosUser> getServiciosusers() {
-        return serviciosusers;
-    }
-
-    public void setServiciosusers(List<ServiciosUser> serviciosusers) {
-        this.serviciosusers = serviciosusers;
-    }
 }

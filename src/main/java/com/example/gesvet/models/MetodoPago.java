@@ -23,6 +23,7 @@ public class MetodoPago {
     private boolean activos = true;
 
     @ManyToOne
+    @JsonIgnore
     private User usuario;
 
     @OneToMany(mappedBy = "metodoPago")
@@ -87,14 +88,6 @@ public class MetodoPago {
     public void setFactura(List<Factura> factura) {
         this.factura = factura;
     }
-
-
-  public MetodoPago(){
-      
-  } 
-   @ManyToOne
-    @JsonIgnore
-    private User usuario;
 
     public User getUsuario() {
         return usuario;

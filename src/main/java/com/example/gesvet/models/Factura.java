@@ -1,10 +1,7 @@
 package com.example.gesvet.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,13 +36,16 @@ public class Factura {
     private MetodoPago metodoPago;
 
     @ManyToOne
+    @JsonIgnore
     private User usuario;
 
     @ManyToOne
     @JoinColumn(name = "usuarioventas_id")
+    @JsonIgnore
     private UsuarioVentas usuarioventas;
-    
+
     @OneToMany(mappedBy = "factura")
+    @JsonIgnore
     private List<DetalleFactura> listaDetalles;
 
     public Factura() {
@@ -110,28 +110,6 @@ public class Factura {
     public void setUsuario(User usuario) {
         this.usuario = usuario;
     }
-    @ManyToOne
-     @JsonIgnore
-    private User usuario;
-
-    @OneToMany(mappedBy = "factura")
-    @JsonIgnore 
-    private List<DetalleFactura> listaDetalles;
-
-    public Factura() {
-    }
-
-    public Factura(Integer id, String numero, Date fecha, double total, String estadoPago, String imagen, String estadoEnvio, String role, User usuario) {
-        this.id = id;
-        this.numero = numero;
-        this.fecha = fecha;
-        this.total = total;
-        this.estadoPago = estadoPago;
-        this.imagen = imagen;
-        this.estadoEnvio = estadoEnvio;
-        this.role = role;
-        this.usuario = usuario;
-    }
 
     public Integer getId() {
         return id;
@@ -188,11 +166,6 @@ public class Factura {
     public void setMetodoPago(MetodoPago metodoPago) {
         this.metodoPago = metodoPago;
     }
-    
-    @ManyToOne
-    @JoinColumn(name = "usuarioventas_id")
-    @JsonIgnore
-    private UsuarioVentas usuarioventas;
 
     public UsuarioVentas getUsuarioventas() {
         return usuarioventas;

@@ -25,6 +25,7 @@ public class Productos {
     private boolean activos = true;
 
     @ManyToOne()
+    @JsonIgnore
     private User usuario;
 
     @ManyToOne
@@ -62,10 +63,6 @@ public class Productos {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-
-    @ManyToOne()
-    @JsonIgnore
-    private User usuario;
 
     public User getUsuario() {
         return usuario;
