@@ -141,6 +141,7 @@ public class SecretController {
 
                 // Actualizar la contraseña en la base de datos
                 user.setPassword(passwordEncoder.encode(userDto.getNewPassword()));
+                userService.cambiarContrasenaYEnviarCorreo(user);
                 userService.save(user);
 
                 var respuesta = new respuesta(

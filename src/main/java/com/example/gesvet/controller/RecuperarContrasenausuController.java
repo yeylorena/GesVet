@@ -56,7 +56,7 @@ public class RecuperarContrasenausuController {
 
         recuperarContraseñausuRepository.save(recuperarContraseñaTokenusu);
 
-        String emailLink = "http://localhost:8080/reset-password?token=" + recuperarContraseñaTokenusu.getToken();
+        String emailLink = "http://192.168.0.101:8080/reset-password?token=" + recuperarContraseñaTokenusu.getToken();
 
         try {
             recuperarContraseñausuService.sendEmail(user.getUsername(), "Enlace para restablecer contraseña", emailLink);

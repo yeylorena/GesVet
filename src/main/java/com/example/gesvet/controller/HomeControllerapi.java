@@ -8,6 +8,7 @@ import com.example.gesvet.models.Factura;
 import com.example.gesvet.models.MetodoPago;
 import com.example.gesvet.models.Productos;
 import com.example.gesvet.models.User;
+import com.example.gesvet.models.respuesta;
 import com.example.gesvet.repository.UserRepository;
 import com.example.gesvet.service.ICategoriasService;
 import com.example.gesvet.service.IDetalleFactService;
@@ -230,7 +231,7 @@ public class HomeControllerapi {
     }
 
     @PostMapping("/cart")
-    public ResponseEntity<Object> addToCart(@RequestParam Integer id, @RequestParam Integer cantidad, HttpServletRequest request, Authentication authentication, HttpSession httpSession) {
+    public ResponseEntity<Object> addToCart(@RequestBody Map<String, Object> body, HttpServletRequest request, Authentication authentication, HttpSession httpSession) {
         try {
             // Extraer el token del encabezado de la solicitud
             String jwtToken = extractTokenFromRequest(request);
@@ -261,6 +262,10 @@ public class HomeControllerapi {
                     userDto.setAcercade(user.getAcercade());
                     userDto.setImagen("/images/" + user.getImagen());
 
+                    // Obtener el ID y la cantidad del cuerpo de la solicitud JSON
+                    Integer id = (Integer) body.get("id");
+                    Integer cantidad = (Integer) body.get("cantidad");
+
                     // Obtener el producto por su ID
                     Optional<Productos> optionalProducto = productoService.get(id);
                     if (optionalProducto.isPresent()) {
@@ -268,16 +273,12 @@ public class HomeControllerapi {
 
                         // Verificar si la cantidad a agregar supera la cantidad disponible
                         if (cantidad > producto.getCantidad()) {
+                            var respuesta = new respuesta("error", "La cantidad solicitada supera la disponibilidad del producto");
                             // Devolver una respuesta de error si la cantidad excede la disponibilidad
-                            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cantidad solicitada supera la disponibilidad del producto");
+                            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                         }
 
-                        // Obtener los detalles del carrito almacenados en la sesión del usuario
-                        List<DetalleFactura> detalles = (List<DetalleFactura>) httpSession.getAttribute("carrito");
-                        if (detalles == null) {
-                            detalles = new ArrayList<>();
-                        }
-
+                       
                         // Buscar si el producto ya está en el carrito
                         Optional<DetalleFactura> existingDetail = detalles.stream()
                                 .filter(detalle -> detalle.getProductos().getId().equals(id))
@@ -290,7 +291,8 @@ public class HomeControllerapi {
 
                             // Verificar si la nueva cantidad supera la disponibilidad del producto
                             if (newCantidad > producto.getCantidad()) {
-                                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cantidad solicitada supera la disponibilidad del producto");
+                                var respuesta = new respuesta("error", "La cantidad solicitada supera la disponibilidad del producto");
+                                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                             }
 
                             // Actualizar la cantidad y el total del detalle existente
@@ -309,28 +311,29 @@ public class HomeControllerapi {
                             detalles.add(detalleFactura);
                         }
 
-                        // Guardar los detalles del carrito actualizados en la sesión del usuario
-                        httpSession.setAttribute("carrito", detalles);
-                        // Calcular el total de la factura
-                        // Calcular el total de la factura
+                       
+                      
                         double total = detalles.stream().mapToDouble(detalle -> detalle.getTotal()).sum();
 
                         // Crear una instancia de Factura y establecer el total
                         Factura factura = new Factura();
                         factura.setTotal(total);
-
-                        return ResponseEntity.ok("Producto agregado al carrito exitosamente");
+                        var respuesta = new respuesta("Creado", "Producto agregado al carrito exitosamente");
+                        return ResponseEntity.ok(respuesta);
                     } else {
                         // Devolver una respuesta de error si el producto no se encuentra
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Producto no encontrado");
+                        var respuesta = new respuesta("error", "Producto no encontrado");
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
                     }
                 }
             }
+            
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } catch (Exception e) {
             // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+             var respuesta = new respuesta("error", "Error al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -432,12 +435,7 @@ public class HomeControllerapi {
                     // Buscar al usuario por su nombre de usuario
                     User user = userService.findByUsername(username);
 
-                    // Verificar si el usuario tiene un carrito
-                    // Obtener los detalles del carrito almacenados en la sesión del usuario
-                    List<DetalleFactura> detalles = (List<DetalleFactura>) httpSession.getAttribute("carrito");
-                    if (detalles == null) {
-                        detalles = new ArrayList<>();
-                    }
+                 
 // Calcular el total del carrito
                     double totalCarrito = detalles.stream().mapToDouble(DetalleFactura::getTotal).sum();
                     // Crear un objeto UserDto
@@ -458,6 +456,7 @@ public class HomeControllerapi {
                     responseData.put("cart", detalles);
                     responseData.put("totalCarrito", totalCarrito);
 
+                     
                     return ResponseEntity.ok(responseData);
                 }
             }
@@ -665,11 +664,9 @@ public class HomeControllerapi {
                     // Obtener las facturas del usuario
                     List<Factura> facturas = facturaService.findByUsuario(user);
 
-                
-
                     // Crear un objeto de respuesta que contenga los datos del usuario y las facturas
                     Map<String, Object> responseData = new HashMap<>();
-                    
+
                     responseData.put("facturas", facturas);
 
                     return ResponseEntity.ok(responseData);
@@ -683,63 +680,62 @@ public class HomeControllerapi {
         }
     }
 
-   @GetMapping("/detalle/{id}")
-public ResponseEntity<Object> detalleCompra(@PathVariable Integer id, HttpServletRequest request) {
-    try {
-        // Extraer el token del encabezado de la solicitud
-        String jwtToken = extractTokenFromRequest(request);
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<Object> detalleCompra(@PathVariable Integer id, HttpServletRequest request) {
+        try {
+            // Extraer el token del encabezado de la solicitud
+            String jwtToken = extractTokenFromRequest(request);
 
-        // Validar el token
-        if (jwtToken != null) {
-            // Obtener las reclamaciones del token
-            Claims claims = JwtUtils.extractClaims(jwtToken);
+            // Validar el token
+            if (jwtToken != null) {
+                // Obtener las reclamaciones del token
+                Claims claims = JwtUtils.extractClaims(jwtToken);
 
-            if (claims != null) {
-                String username = claims.getSubject();
+                if (claims != null) {
+                    String username = claims.getSubject();
 
-                // Buscar al usuario por su nombre de usuario
-                User user = userService.findByUsername(username);
+                    // Buscar al usuario por su nombre de usuario
+                    User user = userService.findByUsername(username);
 
-                // Verificar si el usuario existe
-                if (user == null) {
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+                    // Verificar si el usuario existe
+                    if (user == null) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+                    }
+
+                    // Obtener la factura por su ID
+                    Optional<Factura> optionalFactura = facturaService.findById(id);
+
+                    // Verificar si la factura existe
+                    if (!optionalFactura.isPresent()) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Factura no encontrada");
+                    }
+
+                    Factura factura = optionalFactura.get();
+
+                    // Verificar si la factura pertenece al usuario
+                    if (!factura.getUsuario().equals(user)) {
+                        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No tiene permiso para acceder a esta factura");
+                    }
+
+                    // Obtener los detalles de la factura
+                    List<DetalleFactura> detalles = factura.getListaDetalles();
+
+                    // Crear un objeto de respuesta que contenga los detalles de la factura
+                    Map<String, Object> responseData = new HashMap<>();
+                    responseData.put("idFactura", factura.getId());
+                    responseData.put("detalles", detalles);
+
+                    // Devolver la respuesta JSON
+                    return ResponseEntity.ok(responseData);
                 }
-
-                // Obtener la factura por su ID
-                Optional<Factura> optionalFactura = facturaService.findById(id);
-
-                // Verificar si la factura existe
-                if (!optionalFactura.isPresent()) {
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Factura no encontrada");
-                }
-
-                Factura factura = optionalFactura.get();
-
-                // Verificar si la factura pertenece al usuario
-                if (!factura.getUsuario().equals(user)) {
-                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No tiene permiso para acceder a esta factura");
-                }
-
-                // Obtener los detalles de la factura
-                List<DetalleFactura> detalles = factura.getListaDetalles();
-
-                // Crear un objeto de respuesta que contenga los detalles de la factura
-                Map<String, Object> responseData = new HashMap<>();
-                responseData.put("idFactura", factura.getId());
-                responseData.put("detalles", detalles);
-
-                // Devolver la respuesta JSON
-                return ResponseEntity.ok(responseData);
             }
+            // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            // Manejar cualquier excepción y devolver una respuesta de error
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
         }
-        // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    } catch (Exception e) {
-        // Manejar cualquier excepción y devolver una respuesta de error
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
     }
-}
-
 
     // Método auxiliar para extraer el token del encabezado de la solicitud
     private String extractTokenFromRequest(HttpServletRequest request) {
