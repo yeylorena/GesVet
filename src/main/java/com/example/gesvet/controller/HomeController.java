@@ -277,6 +277,7 @@ public class HomeController {
             }
 
             detalleFactura.setCantidad(cantidad);
+            detalleFactura.setImagen(producto.getImagen());
             detalleFactura.setPrecio(producto.getPrecio());
             detalleFactura.setNombre(producto.getNombre());
             detalleFactura.setTotal(producto.getPrecio() * cantidad);

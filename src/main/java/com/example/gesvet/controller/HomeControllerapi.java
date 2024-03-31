@@ -278,7 +278,6 @@ public class HomeControllerapi {
                             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                         }
 
-                       
                         // Buscar si el producto ya está en el carrito
                         Optional<DetalleFactura> existingDetail = detalles.stream()
                                 .filter(detalle -> detalle.getProductos().getId().equals(id))
@@ -302,6 +301,7 @@ public class HomeControllerapi {
                             // Si el producto no está en el carrito, agregar un nuevo detalle
                             DetalleFactura detalleFactura = new DetalleFactura();
                             detalleFactura.setCantidad(cantidad);
+                            detalleFactura.setImagen(producto.getImagen());
                             detalleFactura.setPrecio(producto.getPrecio());
                             detalleFactura.setNombre(producto.getNombre());
                             detalleFactura.setTotal(producto.getPrecio() * cantidad);
@@ -311,8 +311,6 @@ public class HomeControllerapi {
                             detalles.add(detalleFactura);
                         }
 
-                       
-                      
                         double total = detalles.stream().mapToDouble(detalle -> detalle.getTotal()).sum();
 
                         // Crear una instancia de Factura y establecer el total
@@ -327,12 +325,12 @@ public class HomeControllerapi {
                     }
                 }
             }
-            
+
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } catch (Exception e) {
             // Manejar cualquier excepción y devolver una respuesta de error
-             var respuesta = new respuesta("error", "Error al procesar la solicitud");
+            var respuesta = new respuesta("error", "Error al procesar la solicitud");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
@@ -435,7 +433,6 @@ public class HomeControllerapi {
                     // Buscar al usuario por su nombre de usuario
                     User user = userService.findByUsername(username);
 
-                 
 // Calcular el total del carrito
                     double totalCarrito = detalles.stream().mapToDouble(DetalleFactura::getTotal).sum();
                     // Crear un objeto UserDto
@@ -456,7 +453,6 @@ public class HomeControllerapi {
                     responseData.put("cart", detalles);
                     responseData.put("totalCarrito", totalCarrito);
 
-                     
                     return ResponseEntity.ok(responseData);
                 }
             }
@@ -484,11 +480,22 @@ public class HomeControllerapi {
 
                     // Obtener los detalles del usuario actual
                     User user = userService.findByUsername(username);
+// Crear un objeto UserDto
+                    UserDto userDto = new UserDto();
+                    userDto.setId(user.getId());
+                    userDto.setUsername(user.getUsername());
+                    userDto.setNombre(user.getNombre());
+                    userDto.setApellido(user.getApellido());
+                    userDto.setDireccion(user.getDireccion());
+                    userDto.setTelefono(user.getTelefono());
+                    userDto.setRole(user.getRole());
+                    userDto.setAcercade(user.getAcercade());
+                    userDto.setImagen("/images/" + user.getImagen());
 
-                    // Verificar si hay detalles en el carrito
-                    List<DetalleFactura> detalles = (List<DetalleFactura>) httpSession.getAttribute("carrito");
                     if (detalles == null || detalles.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Por favor, añade un producto antes de ver la factura.");
+                        // Devolver una respuesta de error si el producto no se encuentra
+                        var respuesta = new respuesta("error", "Por favor, añade un producto antes de ver la factura");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                     }
 
                     // Obtener los métodos de pago disponibles
@@ -504,7 +511,10 @@ public class HomeControllerapi {
 
                     // Agregar los métodos de pago a la respuesta
                     Map<String, Object> responseData = new HashMap<>();
+
                     responseData.put("factura", facturaDto);
+                    responseData.put("userDto", userDto);
+                    responseData.put("cart", detalles);
                     responseData.put("metodosDePago", metodosDePago);
 
                     return ResponseEntity.ok(responseData);
@@ -524,8 +534,7 @@ public class HomeControllerapi {
             @RequestParam("metodoPago") Integer metodoPagoId,
             Authentication authentication,
             Principal principal,
-            HttpServletRequest request,
-            HttpSession httpSession) {
+            HttpServletRequest request) {
         try {
             // Extraer el token del encabezado de la solicitud
             String jwtToken = extractTokenFromRequest(request);
@@ -547,10 +556,10 @@ public class HomeControllerapi {
                     // Obtener el Método de Pago seleccionado
                     MetodoPago metodoPagoSeleccionado = metodopagoservice.findById(metodoPagoId);
 
-                    // Obtener los detalles del carrito almacenados en la sesión del usuario
-                    List<DetalleFactura> detalles = (List<DetalleFactura>) httpSession.getAttribute("carrito");
+                   
                     if (detalles == null || detalles.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay productos en el carrito para generar la factura.");
+                         var respuesta = new respuesta("error", "No hay productos en el carrito para generar la factura.");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                     }
 
                     // Calcular el total de la factura
@@ -595,7 +604,8 @@ public class HomeControllerapi {
                     detalles.clear();
 
                     // Devolver una respuesta de éxito
-                    return ResponseEntity.ok("Factura generada exitosamente");
+                    var respuesta = new respuesta("Creado", "Factura generada exitosamente");
+                    return ResponseEntity.ok(respuesta);
                 }
             }
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado

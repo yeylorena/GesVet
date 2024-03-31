@@ -20,6 +20,7 @@ public class DetalleFactura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
+    private String imagen;
     private double cantidad;
     private double precio;
     private double total;
@@ -32,16 +33,25 @@ public class DetalleFactura {
     @JsonIgnore
     private Productos productos;
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     public DetalleFactura() {
     }
 
-    public DetalleFactura(Integer id, String nombre, double cantidad, double precio, double total) {
+    public DetalleFactura(Integer id, String nombre, double cantidad, double precio, double total,String imagen) {
         super();
         this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
         this.total = total;
+        this.imagen = imagen;
     }
 
     public Integer getId() {
