@@ -12,12 +12,12 @@ import com.example.gesvet.service.IServiciosUserService;
 import com.example.gesvet.service.MascotaService;
 import com.example.gesvet.service.UserService;
 import com.example.gesvet.service.citaRapidaService;
-import com.example.gesvet.service.eventoService;
 import java.security.Principal;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +55,6 @@ public class agedarcitaUserController {
     @Autowired
     private citaRapidaRepository citarapidarepository;
 
-    @Autowired
-    private eventoService eventoService;
-
     @GetMapping("citas")
     public String show(Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {  //el objeto model lleva información desde el backend hacia la vista
         // Obtener los detalles del usuario actual
@@ -92,12 +89,17 @@ public class agedarcitaUserController {
             redirectAttributes.addFlashAttribute("mostrarAlerta", true);
             return "redirect:/perfil"; // Redireccionar al perfil del administrador
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         // Obtener las citas pendientes del usuario
         List<citaRapida> citasPendientes = citarapidaservice.findPendientesByUsuario(user);
+        // Ordenar las citas pendientes por fecha más próxima primero
+        citasPendientes.sort(Comparator.comparing(citaRapida::getInicio));
         model.addAttribute("citasPendientes", citasPendientes);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        // Obtener las citas cancel del usuario
+        List<citaRapida> citascompletadasycanceladas = citarapidaservice.findCompletasandCanceladasByUsuario(user);
+        model.addAttribute("citasEstado", citascompletadasycanceladas);
 
         for (citaRapida cita : citasPendientes) {
             cita.setFormattedFecha(cita.getInicio().format(formatter));
@@ -194,6 +196,13 @@ public class agedarcitaUserController {
             redirectAttributes.addFlashAttribute("error", "La mascota ya tiene una cita programada para esa fecha con otro veterinario.");
             return "redirect:/citas";
         }
+        // Verificar si la mascota ya tiene una cita agendada para la misma fecha y hora
+        boolean citaExistente = citarapidaservice.existeCitaParaMascotaEnFecha(citarapida.getMascota(), citarapida.getInicio());
+
+        if (citaExistente) {
+            redirectAttributes.addFlashAttribute("error", "La mascota ya tiene una cita agendada para la misma fecha y hora.");
+            return "redirect:/citas";
+        }
 
         // Verificar la disponibilidad de la cita para el veterinario
         boolean disponible = citarapidaservice.isCitaDisponibleParaVeterinario(inicio, idVeterinario);
@@ -214,7 +223,6 @@ public class agedarcitaUserController {
             return "redirect:/citas";
         } else {
             // Manejar el caso en el que la cita no está disponible para el veterinario
-            // Puedes simplemente agregar el mensaje de error al modelo
             redirectAttributes.addFlashAttribute("error", "La cita no está disponible para el veterinario en la fecha especificada.");
             return "redirect:/citas";
         }

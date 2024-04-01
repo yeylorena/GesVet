@@ -156,7 +156,7 @@
                                                 <div class="row my-2">
                                                     <div class="col-6 ">
                                                         <label>Nombre:</label>
-                                                        <input type="text" name="nombre" field="" th:value="${metodopago.nombre}" class="form-control" required autocomplete="off">
+                                                        <input type="text" name="nombre" id="nombre" field="" th:value="${metodopago.nombre}" class="form-control" required autocomplete="off">
                                                     </div>
                                                     <div class="col-6 ">
                                                         <label>Cuenta:</label>
@@ -202,5 +202,16 @@
         </section>
         <div th:replace="Plantillas/administrador :: scripts"></div>
     </main><!-- End #main -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var nombreInput = document.getElementById("nombre");
+
+            nombreInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            });
+
+        });
+    </script>
 </body>
 </html>

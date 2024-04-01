@@ -155,7 +155,7 @@
                                             <div class="row my-2">
                                                 <div class="col-6 ">
                                                     <label>Nombre:</label>
-                                                    <input type="text" name="nombre" field="" class="form-control">
+                                                    <input type="text" name="nombre" id="nombre" field="" class="form-control">
                                                 </div>
                                                 <div class="col-6 ">
                                                     <label class="form-label">Estado:</label><br>
@@ -193,5 +193,16 @@
         </section>
         <div th:replace="Plantillas/administrador :: scripts"></div>
     </main><!-- End #main -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var nombreInput = document.getElementById("nombre");
+
+            nombreInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            });
+
+        });
+    </script>
 </body>
 </html>

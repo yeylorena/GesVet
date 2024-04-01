@@ -58,4 +58,9 @@ public class RazaServiceImpl implements RazaService {
     public Raza getById(Integer id) {
         return razaRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public boolean existsByNombre(String nombre) {
+        return razaRepository.existsByNombre(nombre);
+    }
 }

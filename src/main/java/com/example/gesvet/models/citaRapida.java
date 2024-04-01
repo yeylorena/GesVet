@@ -49,7 +49,7 @@ public class citaRapida {
     private Mascota mascota;
 
     public citaRapida() {
-        this.estado = "pendiente"; // Establecer el estado inicial como pendiente al crear la cita
+        this.estado = "Pendiente"; // Establecer el estado inicial como pendiente al crear la cita
     }
 
     public citaRapida(Long id, String nombreCita, String nombreMascota, String nombreDueño, String colorMascota, double precio, LocalDateTime inicio, LocalDateTime fin, String estado, String formattedFecha, String formattedFechaFin, String veterinarioCita, String nombreVeterinario, Especie especie, User usuario, ServiciosUser servicio, Mascota mascota) {

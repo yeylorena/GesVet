@@ -155,11 +155,11 @@
                                             <div class="row my-2">
                                                 <div class="col-6 ">
                                                     <label>Nombre:</label>
-                                                    <input type="text" name="nombre" field="" class="form-control" required>
+                                                    <input type="text" name="nombre" id="nombre" field="" class="form-control" required>
                                                 </div>
                                                 <div class="col-6 ">
                                                     <label>Descripción:</label>
-                                                    <input type="text" name="descripcion" field="" class="form-control" required>
+                                                    <input type="text" name="descripcion" id="descripcion" field="" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -259,6 +259,23 @@
                 }
             }
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var descripcionInput = document.getElementById("descripcion");
+            var nombreInput = document.getElementById("nombre");
+
+            descripcionInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            });
+
+            nombreInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            });
+
+        });
     </script>
 </body>
 </html>

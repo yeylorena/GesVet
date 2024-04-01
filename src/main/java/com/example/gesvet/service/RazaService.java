@@ -19,4 +19,6 @@ public interface RazaService {
     public List<Raza> getAllRazas();
 
     Raza getById(Integer id);
+
+    public boolean existsByNombre(String nombre);
 }

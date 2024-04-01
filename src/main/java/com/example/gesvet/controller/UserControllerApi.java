@@ -114,7 +114,7 @@ public class UserControllerApi {
             //return "Registro_Usu"; // Devolver al formulario de registro si hay errores de validación
             var respuesta = new respuesta(
                     "error",
-                    "verificar  el formulario"
+                    "Completa todos los campos del formulario."
             );
 
             return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -127,7 +127,7 @@ public class UserControllerApi {
             //   return "Registro_Usu";
             var respuesta = new respuesta(
                     "error",
-                    "el usuario ya existe formulario"
+                    "El usuario ya existe."
             );
             return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 
@@ -138,7 +138,7 @@ public class UserControllerApi {
             //   return "Registro_Usu";
             var respuesta = new respuesta(
                     "error",
-                    "las contrasñas no coinciden"
+                    "Las contraseñas no coinciden."
             );
             return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
         }
@@ -147,7 +147,7 @@ public class UserControllerApi {
         // return "redirect:/register?success";
         var respuesta = new respuesta(
                 "Creado",
-                "Usuario creado"
+                "Usuario creado."
         );
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }

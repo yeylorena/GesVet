@@ -2,7 +2,6 @@ package com.example.gesvet.controller;
 
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.Especie;
-import com.example.gesvet.models.Evento;
 import com.example.gesvet.models.Mascota;
 import com.example.gesvet.models.ServiciosUser;
 import com.example.gesvet.models.User;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.gesvet.service.UserService;
 import com.example.gesvet.service.citaRapidaService;
-import com.example.gesvet.service.eventoService;
 import java.security.Principal;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -50,9 +48,6 @@ public class citaRapidaController {
 
     @Autowired
     private citaRapidaRepository citarapidarepository;
-
-    @Autowired
-    private eventoService eventoService;
 
     @GetMapping("")
     public String clientes(Model model, Principal principal, RedirectAttributes redirectAttributes) {
@@ -97,7 +92,7 @@ public class citaRapidaController {
             return "redirect:/perfil_admin"; // Redireccionar al perfil del administrador
         }
 
-        List<Especie> especies = especieService.getAllEspecies();
+        List<Especie> especies = especieService.getActiveEspecies();
         model.addAttribute("especies", especies);
 
         List<ServiciosUser> servicios = serviciouserservice.findAll();
@@ -185,25 +180,4 @@ public class citaRapidaController {
             return "redirect:/citasRapidas";
         }
     }
-
-    @GetMapping("/eventos")
-    @ResponseBody
-    public List<Evento> getEventos() {
-        List<Evento> eventos = eventoService.findAll(); // Suponiendo que tienes un método para obtener todos los eventos
-        return eventos;
-    }
-
-    // Métodos para manejar los eventos
-    @PostMapping("/evento/crear")
-    public String crearEvento(@ModelAttribute("evento") Evento evento) {
-        eventoService.save(evento);
-        return "redirect:/citasRapidas";
-    }
-
-    @PostMapping("/evento/eliminar/{id}")
-    public String eliminarEvento(@PathVariable Integer id) {
-        eventoService.delete(id);
-        return "redirect:/citasRapidas";
-    }
-
 }

@@ -237,28 +237,28 @@
                                                                                                                             <div class="row mb-3">
                                                                                                                                 <label for="about" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Acerca de</label>
                                                                                                                                 <div class="col-md-8 col-lg-9">
-                                                                                                                                    <textarea th:field="*{acercade}" class="form-control" style="height: 100px"></textarea>
+                                                                                                                                    <textarea id="acercade" th:field="*{acercade}" class="form-control" style="height: 100px"></textarea>
                                                                                                                                     <small id="errorAcercade" class="text-danger"></small>
                                                                                                                                 </div>
                                                                                                                             </div>
                                                                                                                             <div class="row mb-3">
                                                                                                                                 <label for="fullName" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Nombres</label>
                                                                                                                                 <div class="col-md-8 col-lg-9">
-                                                                                                                                    <input th:field="*{nombre}" type="text" class="form-control"/>
+                                                                                                                                    <input id="nombres" th:field="*{nombre}" type="text" class="form-control"/>
                                                                                                                                     <small id="errorNombre" class="text-danger"></small>
                                                                                                                                 </div>
                                                                                                                             </div>
                                                                                                                             <div class="row mb-3">
                                                                                                                                 <label for="company" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Apellidos</label>
                                                                                                                                 <div class="col-md-8 col-lg-9">
-                                                                                                                                    <input th:field="*{apellido}" type="text" class="form-control"/>
+                                                                                                                                    <input id="apellidos" th:field="*{apellido}" type="text" class="form-control"/>
                                                                                                                                     <small id="errorApellido" class="text-danger"></small>
                                                                                                                                 </div>
                                                                                                                             </div>
                                                                                                                             <div class="row mb-3">
                                                                                                                                 <label for="company" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Dirección</label>
                                                                                                                                 <div class="col-md-8 col-lg-9">
-                                                                                                                                    <input th:field="*{direccion}" type="text" class="form-control"/>
+                                                                                                                                    <input id="direccion" th:field="*{direccion}" type="text" class="form-control"/>
                                                                                                                                     <small id="errorDireccion" class="text-danger"></small>
                                                                                                                                 </div>
                                                                                                                             </div>
@@ -462,6 +462,29 @@
                                                                                                                                                                                             text: 'Tus datos personales están incompletos. Por favor, edita tus datos para ofrecerte un mejor servicio.',
                                                                                                                                                                                             icon: 'warning',
                                                                                                                                                                                             confirmButtonText: 'OK'
+                                                                                                                                                                                        });
+                                                                                                                                                                                    </script>
+                                                                                                                                                                                    <script>
+                                                                                                                                                                                        document.addEventListener('DOMContentLoaded', function () {
+                                                                                                                                                                                            var acercadeInput = document.getElementById("acercade");
+                                                                                                                                                                                            var nombreInput = document.getElementById("nombres");
+                                                                                                                                                                                            var apellidoInput = document.getElementById("apellidos");
+
+                                                                                                                                                                                            acercadeInput.addEventListener('input', function () {
+                                                                                                                                                                                                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                                                                                                                                                                                                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+                                                                                                                                                                                            });
+
+                                                                                                                                                                                            nombreInput.addEventListener('input', function () {
+                                                                                                                                                                                                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                                                                                                                                                                                                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+                                                                                                                                                                                            });
+
+                                                                                                                                                                                            apellidoInput.addEventListener('input', function () {
+                                                                                                                                                                                                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                                                                                                                                                                                                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+                                                                                                                                                                                            });
+
                                                                                                                                                                                         });
                                                                                                                                                                                     </script>
                                                                                                                                                                                     </body>
