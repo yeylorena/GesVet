@@ -19,4 +19,8 @@ public interface EspecieService {
     public List<Especie> getAllEspecies();
 
     Especie getById(Integer id);
+
+    public boolean existsByNombre(String nombre);
+
+    public List<Especie> getActiveEspecies();
 }

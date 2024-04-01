@@ -1,10 +1,13 @@
 package com.example.gesvet.service;
 
+import com.example.gesvet.models.Mascota;
 import com.example.gesvet.models.User;
 import com.example.gesvet.models.citaRapida;
 import com.example.gesvet.repository.citaRapidaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +64,18 @@ public class citaRapidaServiceImpl implements citaRapidaService {
 
     @Override
     public List<citaRapida> findPendientesByUsuario(User user) {
-        return citaRapidaRepository.findByUsuarioAndEstado(user, "pendiente");
+        return citaRapidaRepository.findByUsuarioAndEstado(user, "Pendiente");
+    }
+
+    @Override
+    public List<citaRapida> findCompletasandCanceladasByUsuario(User user) {
+        return citaRapidaRepository.findByUsuarioAndEstadoIn(user, Arrays.asList("Completado", "Cancelado"));
+
+    }
+
+    @Override
+    public boolean existeCitaParaMascotaEnFecha(Mascota mascota, LocalDateTime inicio) {
+        return citaRapidaRepository.existsByMascotaAndInicio(mascota, inicio);
     }
 
 }

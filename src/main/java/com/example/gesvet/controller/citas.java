@@ -12,8 +12,10 @@ import com.example.gesvet.service.citaRapidaService;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -59,13 +61,30 @@ public class citas {
         userDto.setRole(user.getRole());
         userDto.setAcercade(user.getAcercade());
         userDto.setImagen("/images/" + user.getImagen());
-        List<citaRapida> citas = citarapidaservice.findAll();
+
+        // Obtener todas las citas
+        List<citaRapida> todasLasCitas = citarapidaservice.findAll();
+
+        // Filtrar las citas pendientes
+        List<citaRapida> citasPendientes = todasLasCitas.stream()
+                .filter(cita -> "Pendiente".equals(cita.getEstado()))
+                .sorted(Comparator.comparing(citaRapida::getInicio))
+                .collect(Collectors.toList());
+
+        // Filtrar las citas por estado "cancelado" y "completado"
+        List<citaRapida> citasCanceladasYCompletadas = todasLasCitas.stream()
+                .filter(cita -> "Cancelado".equals(cita.getEstado()) || "Completado".equals(cita.getEstado()))
+                .sorted(Comparator.comparing(citaRapida::getInicio))
+                .collect(Collectors.toList());
+
+        // Formatear la fecha de cada cita en las listas
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        citasPendientes.forEach(cita -> cita.setFormattedFecha(cita.getInicio().format(formatter)));
+        citasCanceladasYCompletadas.forEach(cita -> cita.setFormattedFecha(cita.getInicio().format(formatter)));
 
-        // Formatear cada cita en la lista
-        citas.forEach(cita -> cita.setFormattedFecha(cita.getInicio().format(formatter)));
-
-        model.addAttribute("listadoCitas", citas);
+        // Agregar las listas al modelo
+        model.addAttribute("citasPendientes", citasPendientes);
+        model.addAttribute("citasCompletadas", citasCanceladasYCompletadas);
         model.addAttribute("userDto", userDto);
 
         List<Especie> especies = especieService.getAllEspecies();
@@ -79,7 +98,33 @@ public class citas {
         Optional<citaRapida> optionalCita = citarapidaservice.get(citaId);
         if (optionalCita.isPresent()) {
             citaRapida cita = optionalCita.get();
-            cita.setEstado("completado");
+            LocalDateTime ahora = LocalDateTime.now();
+
+            // Verificar si la fecha y hora actual es igual o después de la fecha y hora de inicio de la cita
+            if (!ahora.isBefore(cita.getInicio())) {
+                cita.setEstado("Completado");
+                cita.setFin(LocalDateTime.now());
+
+                // Formatear la fecha de finalización
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                cita.setFormattedFechaFin(cita.getFin().format(formatter));
+
+                // Actualizar la cita en la base de datos
+                citarapidaservice.save(cita);
+                redirectAttributes.addFlashAttribute("success", true);
+            } else {
+                redirectAttributes.addFlashAttribute("error", "No se puede finalizar la cita antes de su fecha de inicio.");
+            }
+        }
+        return "redirect:/listado";
+    }
+
+    @GetMapping("/cancelar/{citaId}")
+    public String cancelarCita(@PathVariable Long citaId, RedirectAttributes redirectAttributes) {
+        Optional<citaRapida> optionalCita = citarapidaservice.get(citaId);
+        if (optionalCita.isPresent()) {
+            citaRapida cita = optionalCita.get();
+            cita.setEstado("Cancelado");
             citarapidaservice.update(cita); // Actualizar estado en la base de datos
             cita.setFin(LocalDateTime.now());
 
@@ -89,7 +134,7 @@ public class citas {
 
             // Guardar los cambios en la cita (si es necesario)
             citarapidaservice.save(cita);
-            redirectAttributes.addFlashAttribute("success", true);
+            redirectAttributes.addFlashAttribute("cancelar", true);
         }
         return "redirect:/listado";
     }

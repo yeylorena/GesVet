@@ -1,5 +1,6 @@
 package com.example.gesvet.service;
 
+import com.example.gesvet.models.Mascota;
 import com.example.gesvet.models.User;
 import com.example.gesvet.models.citaRapida;
 import java.time.LocalDateTime;
@@ -24,4 +25,7 @@ public interface citaRapidaService {
 
     public List<citaRapida> findPendientesByUsuario(User user);
 
+    public List<citaRapida> findCompletasandCanceladasByUsuario(User user);
+
+    public boolean existeCitaParaMascotaEnFecha(Mascota mascota, LocalDateTime inicio);
 }

@@ -48,4 +48,14 @@ public class EspecieServiceImpl implements EspecieService {
         return especieRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public boolean existsByNombre(String nombre) {
+        return especieRepository.existsByNombre(nombre);
+    }
+
+    @Override
+    public List<Especie> getActiveEspecies() {
+        return especieRepository.findByActivo(true);
+    }
+
 }

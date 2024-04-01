@@ -160,65 +160,79 @@
                         </ul>
                         <div class="tab-content pt-2">
                             <div class="tab-pane fade show active pt-3" id="cita">
-                                <!--Citas del dia-->
+                                <!-- Citas pendientes -->
                                 <div>
-                                    <p style="background-color: #2FC0D5;" class="textoNeon">Citas</p>
+                                    <p style="background-color: #2FC0D5;" class="textoNeon">Citas Pendientes</p>
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="tabla-listar" class="table table-striped table-hover text-start">
+                                    <table id="tabla-pendientes" class="table table-striped table-hover text-start">
+                                        <!-- Encabezado de la tabla -->
                                         <thead>
                                             <tr class="table-secondary">
+                                                <!-- Columnas -->
                                                 <th scope="col">N°</th>
                                                 <th scope="col">Dueño</th>
                                                 <th scope="col">Veterinario</th>
                                                 <th scope="col">Cita</th>
                                                 <th scope="col">Mascota</th>
+                                                <th scope="col">Tipo</th>
                                                 <th scope="col">Precio</th>
                                                 <th scope="col">Fecha inicio</th>
                                                 <th scope="col">Estado</th>
-                                                <th scope="col">Opción</th>
+                                                <th scope="col">Finalizar</th>
+                                                <th scope="col">Cancelar</th>
                                             </tr>
                                         </thead>
+                                        <!-- Cuerpo de la tabla -->
                                         <tbody>
-                                            <tr th:each="citas,iterStat : ${listadoCitas} "> <!-- "citas" es la variable que recibe cada uno de los onbjetos de la lista mandados desde el backend con la variable llamada listadoCitas -->
+                                            <!-- Iterar sobre las citas pendientes -->
+                                            <tr th:each="cita, iterStat : ${citasPendientes}">
+                                                <!-- Columnas -->
                                                 <td th:text="${iterStat.index + 1}"></td>
-                                                <td th:text="${citas.nombreDueño}"></td>
-                                                <td th:text="${citas.nombreVeterinario}"></td> <!-- Mostrar el nombre del veterinario -->
-                                                <td th:text="${citas.nombreCita}"></td>
-                                                <td th:text="${citas.nombreMascota}"></td>
-                                                <td th:text="${citas.precio}"></td>
-                                                <td th:text="${citas.formattedFecha}"></td>
-                                                <td th:text="${citas.estado}" th:classappend="${citas.estado eq 'completado' ? 'text-success' : 'text-danger' }"></td>
-                                                <td>
-                                                    <a  th:href="@{'/finalizar/' + ${citas.id}}" class="btn" style="background-color: #2FD6B4;">Finalizado</a>
+                                                <td th:text="${cita.nombreDueño}"></td>
+                                                <td th:text="${cita.nombreVeterinario}"></td>
+                                                <td th:text="${cita.nombreCita}"></td>
+                                                <td th:text="${cita.nombreMascota}"></td>
+                                                <td th:text="${cita.especie.nombre}"></td>
+                                                <td th:text="${cita.precio}" class="precio2"></td>
+                                                <td th:text="${cita.formattedFecha}"></td>
+                                                <td th:text="${cita.estado}" th:classappend="${cita.estado eq 'completado' ? 'text-success' : 'text-danger' }"></td>
+                                                <td class="align-middle text-center">
+                                                    <a th:href="@{'/finalizar/' + ${cita.id}}" class="btn" style="background-color: #2FD6B4;"><i class="bi bi-check"></i></a>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <a th:href="@{'/cancelar/' + ${cita.id}}" class="btn" style="background-color: #2FD6B4;"><i class="bi bi-x"></i></a>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                            </div><!-- End citas -->
-                            <!-- Inicio historial -->
+                            </div>
+
                             <div class="tab-pane fade pt-3" id="facturas">
+                                <!-- Citas completadas -->
                                 <div>
                                     <p style="background-color: #2FC0D5" class="textoNeon">Historial citas</p>
                                 </div>
-                                <div class="container-fluid">
+                                <div class="row mt-3">
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" name="palabra" placeholder="Buscar" id="palabraHistorial" autocomplete="off" oninput="consultarHistorial()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
                                     <div class="table-responsive">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="search-bar">
-                                                    <form class="search-form d-flex align-items-center" method="POST" action="#">
-                                                        <input type="date" name="date"  title="Enter search keyword">
-                                                            <button class="btn" type="submit" title="Search"><i class="bi bi-search"></i></button>
-                                                    </form>
-                                                </div>
                                                 <br>
-                                                    <!-- Inicio tabla histotial -->
-                                                    <table id="tabla-historial" class="table table-striped table-hover text-start">
+                                                    <!-- Tabla de historial -->
+                                                    <table id="tablaHistorial" class="table table-striped table-hover text-start">
                                                         <thead>
                                                             <tr class="table-secondary">
                                                                 <th scope="col">N°</th>
                                                                 <th scope="col">Dueño</th>
+                                                                <th scope="col">Veterinario</th>
                                                                 <th scope="col">Cita</th>
                                                                 <th scope="col">Mascota</th>
                                                                 <th scope="col">Tipo</th>
@@ -229,23 +243,25 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr th:each="citas,iterStat : ${listadoCitas}">
+                                                            <!-- Iterar sobre las citas completadas -->
+                                                            <tr th:each="cita, iterStat : ${citasCompletadas}">
+                                                                <!-- Columnas -->
                                                                 <td th:text="${iterStat.index + 1}"></td>
-                                                                <td th:text="${citas.nombreDueño}"></td>
-                                                                <td th:text="${citas.nombreCita}"></td>
-                                                                <td th:text="${citas.nombreMascota}"></td>
-                                                                <td th:text="${citas.especie.nombre}"></td>
-                                                                <td th:text="${citas.precio}"></td>
-                                                                <td th:text="${citas.formattedFecha}"></td>
-                                                                <td th:text="${citas.formattedFechaFin}"></td>
-                                                                <td style="color: green" th:text="${citas.estado}"></td>
+                                                                <td th:text="${cita.nombreDueño}"></td>
+                                                                <td th:text="${cita.nombreVeterinario}"></td>
+                                                                <td th:text="${cita.nombreCita}"></td>
+                                                                <td th:text="${cita.nombreMascota}"></td>
+                                                                <td th:text="${cita.especie.nombre}"></td>
+                                                                <td th:text="${cita.precio}" class="precio2"></td>
+                                                                <td th:text="${cita.formattedFecha}"></td>
+                                                                <td th:text="${cita.formattedFechaFin}"></td>
+                                                                <td style="color: green" th:text="${cita.estado}"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                         </div> <!-- End tab-content-->
                     </div>  <!-- End card-body pt-3-->
@@ -260,6 +276,70 @@
             title: '¡Cita finalizada!',
             text: 'La cita se ha finalizado correctamente.'
         });
+    </script>
+    <script th:if="${cancelar}">
+        Swal.fire({
+            icon: 'success',
+            title: '¡Cita cancelada!',
+            text: 'La cita se ha cancelado.'
+        });
+    </script>
+    <script th:if="${error != null}">
+        Swal.fire({
+            icon: 'error',
+            title: '¡No se puede finalizar la cita antes de su fecha de inicio!'
+        });
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener("DOMContentLoaded", function () {
+            var precios = document.querySelectorAll('.precio2');
+            precios.forEach(function (precioElement) {
+                var valorProducto = precioElement.textContent.trim();
+                var valor = parseFloat(valorProducto);
+                if (!isNaN(valor)) {
+                    valor = Math.round(valor);
+                    var valorFormateado = valor.toLocaleString('es-CO', {
+                        style: 'currency',
+                        currency: 'COP',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                    precioElement.textContent = valorFormateado;
+                }
+            });
+        });
+        /*]]>*/
+    </script>
+    <script>
+        function consultarHistorial() {
+            // Obtén el valor del campo de búsqueda
+            var input = document.getElementById('palabraHistorial');
+            var filtro = input.value.toUpperCase();
+            // Obtén la tabla y las filas de la tabla
+            var tabla = document.getElementById('tablaHistorial');
+            var filas = tabla.getElementsByTagName('tr');
+            // Itera sobre las filas y muestra u oculta según la coincidencia con el filtro
+            for (var i = 0; i < filas.length; i++) {
+                var celdas = filas[i].getElementsByTagName('td');
+                var mostrarFila = false;
+                // Si es la primera fila (encabezado), siempre mostrarla
+                if (i === 0) {
+                    mostrarFila = true;
+                } else {
+                    for (var j = 0; j < celdas.length; j++) {
+                        if (celdas[j]) {
+                            var textoCelda = celdas[j].textContent || celdas[j].innerText;
+                            if (textoCelda.toUpperCase().indexOf(filtro) > -1) {
+                                mostrarFila = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                filas[i].style.display = mostrarFila ? '' : 'none';
+            }
+        }
     </script>
 </body>
 </html>

@@ -156,11 +156,11 @@
                                                 <div class="row my-2">
                                                     <div class="col-6 ">
                                                         <label>Nombre:</label>
-                                                        <input type="text" name="nombre" field="" th:value="${categoria.nombre}" class="form-control" required autocomplete="off">
+                                                        <input type="text" name="nombre" id="nombre" field="" th:value="${categoria.nombre}" class="form-control" required autocomplete="off">
                                                     </div>
                                                     <div class="col-6 ">
                                                         <label>Descripción:</label>
-                                                        <input type="text" name="descripcion" field="" th:value="${categoria.descripcion}" class="form-control" required autocomplete="off">
+                                                        <input type="text" name="descripcion" id="descripcion" field="" th:value="${categoria.descripcion}" class="form-control" required autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,6 +256,23 @@
                 }
             }
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var descripcionInput = document.getElementById("descripcion");
+            var nombreInput = document.getElementById("nombre");
+
+            descripcionInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            });
+
+            nombreInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            });
+
+        });
     </script>
 </body>
 </html>

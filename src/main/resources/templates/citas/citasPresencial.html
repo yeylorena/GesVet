@@ -165,7 +165,7 @@
 
                         </ul>
                         <div class="tab-content pt-2">
-                            <div class="tab-pane show active fade profile-edit pt-3" id="profile-rapida">
+                            <div class="tab-pane show active fade profile-edit" id="profile-rapida">
                                 <!--agendar cita-->
                                 <div>
                                     <p style="background-color: #2FC0D5;" class="textoNeon">Citas Rápidas</p>
@@ -174,14 +174,14 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <form method="post" action="/citasRapidas/guardar" class="search-form d-flex align-items-center pb-3">
+                                                <form method="post" action="/citasRapidas/guardar" id="formCita" class="search-form d-flex align-items-center pb-3">
                                                     <div class="row">
                                                         <!-- Contenido del formulario -->
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
                                                                     <label for="servicio"><strong>Tipo cita:</strong></label>
-                                                                    <select name="servicio" class="form-select" required>
+                                                                    <select name="servicio" id="servicio" class="form-select" required>
                                                                         <option value="">Selecciona un servicio</option>
                                                                         <option th:each="servicio : ${servicios}" th:value="${servicio.id}"  th:data-precio="${servicio.precio}"
                                                                                 th:text="${servicio.nombre}"></option>
@@ -234,13 +234,11 @@
                                                                                                 <label for="colorMascota"><strong>Nivel de urgencia:</strong></label>
                                                                                                 <select class="form-select show-tick" name="colorMascota" id="colorMascota" required>
                                                                                                     <option value="">-- Seleccione el color --</option>
-                                                                                                    <option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
-                                                                                                    <option style="color:#e1ff00;" value="#e1ff00">&#9724; Amarillo</option>
-                                                                                                    <option style="color:#ff0000;" value="#ff0000">&#9724; Rojo</option>
-                                                                                                    <option style="color:#66ff00;" value="#66ff00">&#9724; Verde</option>
-                                                                                                    <option style="color:#00ffd5;" value="#00ffd5">&#9724; Celeste</option>
-                                                                                                    <option style="color:#ff00b3;" value="#ff00b3">&#9724; Morado</option>
-
+                                                                                                    <option value="Reanimación"><span style="background-color:#ff0000;">&#x25A0;</span> Reanimación</option>
+                                                                                                    <option value="Emergencia"><span style="background-color:#FF8C00;">&#x25A0;</span> Emergencia</option>
+                                                                                                    <option value="Urgencia"><span style="background-color:#e1ff00;">&#x25A0;</span> Urgencia</option>
+                                                                                                    <option value="Urgencia menor"><span style="background-color:#66ff00;">&#x25A0;</span> Urgencia menor</option>
+                                                                                                    <option value="No urgente"><span style="color:#00ffd5;">&#x25A0;</span> No urgente</option>
                                                                                                 </select>
                                                                                         </div>
                                                                                         </div>
@@ -255,7 +253,7 @@
                                                                                                         </div>
                                                                                                         <div class="col">
                                                                                                             <br>
-                                                                                                                <label class="control-label"><strong>Fecha de inicio</strong><span class="text-danger">*</span></label>
+                                                                                                                <label class="control-label"><strong>Fecha de inicio:</strong></label>
                                                                                                                 <input type="datetime-local" name="inicio" id="fechaInicio" class="form-control" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" required />
                                                                                                         </div>
                                                                                                         <div th:if="${error != null}" class="alert alert-danger mt-3" role="alert">
@@ -265,12 +263,6 @@
 
                                                                                                         <br>
                                                                                                             <br>
-
-                                                                                                                <!-- <div id="error-message" style="display: none;" class="alert alert-danger" role="alert">
-                                                                                                                                                                        La cita no está disponible para el veterinario en el momento especificado.
-                                            
-                                                                                                                                                                        <span th:if="${error}" th:text="${error}"></span>
-                                                                                                                                                                        </div>-->  
 
                                                                                                                 <div class="text-center mt-3">
                                                                                                                     <button style="background-color: #2FD6B4;" id="btnGuardar" type="submit" class="btn">Agregar</button>
@@ -282,7 +274,6 @@
                                                                                                                 </div>  <!-- End col-md-12 -->
                                                                                                                 </div> <!-- End row -->
                                                                                                                 </div> <!-- End card-body -->
-                                                                                                                <div id='calendar'></div>
 
                                                                                                                 </div> <!-- End container-fluid -->
                                                                                                                 </div> <!-- End citas rapidas -->
@@ -296,25 +287,6 @@
                                                                                                                 </main><!-- End #main -->
 
                                                                                                                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                                                                                <!-- comment           <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        // Función para validar y guardar la cita
-        document.getElementById('btnGuardar').addEventListener('click', function () {
-        // Lógica para verificar la disponibilidad de la cita
-        var disponible = false; // Esto debería ser tu lógica real de verificación
-        
-        // Mostrar mensaje de error si la cita no está disponible
-        if (!disponible) {
-        document.getElementById('error-message').style.display = 'block';
-        document.getElementById("btnGuardar").disabled = true;
-        } else {
-        document.getElementById("error-message").style.display = "none";
-        document.getElementById("btnGuardar").disabled = false;
-        }
-        });
-        });
-        
-                                                                                                                </script>-->
                                                                                                                 <script th:if="${success}">
 Swal.fire({
     icon: 'success',
@@ -322,83 +294,6 @@ Swal.fire({
     text: 'La cita se ha agendado correctamente.'
 });
                                                                                                                 </script>
-                                                                                                                <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css' rel='stylesheet' />
-
-
-                                                                                                                <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
-
-
-                                                                                                                <script>
-document.getElementById('btnGuardar').addEventListener('click', function () {
-// Obtener los datos del formulario
-    var nombreCita = document.getElementById('nombreCita').value;
-    var colorCita = document.getElementById('colorMascota').value;
-    var inicio = document.getElementById('fechaInicio').value;
-
-// Realizar una solicitud AJAX para guardar la cita
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/citasRapidas/guardar', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                // La cita se guardó correctamente, actualizar el FullCalendar
-                actualizarCalendario();
-            } else {
-                // Hubo un error al guardar la cita
-                console.error('Error al guardar la cita:', xhr.responseText);
-            }
-        }
-    };
-// Enviar los datos del formulario al servidor
-    xhr.send('nombreCita=' + encodeURIComponent(nombreCita) + '&colorMascota=' + encodeURIComponent(colorCita) + '&inicio=' + encodeURIComponent(inicio));
-});
-
-// Función para actualizar el FullCalendar con los eventos de las citas guardadas
-function actualizarCalendario() {
-// Realizar una solicitud AJAX para obtener la lista de eventos
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/citasRapidas/eventos', true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                // Parsear la respuesta JSON con los eventos
-                var eventos = JSON.parse(xhr.responseText);
-                // Limpiar el calendario
-                calendar.removeAllEvents();
-                // Agregar los eventos al calendario
-                calendar.addEventSource(eventos);
-            } else {
-                // Hubo un error al obtener los eventos
-                console.error('Error al obtener los eventos:', xhr.responseText);
-            }
-        }
-    };
-// Enviar la solicitud GET para obtener los eventos
-    xhr.send();
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'es',
-        dateClick: function (info) {
-            // info.date contiene la fecha seleccionada por el usuario
-            // Puedes usar esta fecha para mostrarla en algún campo de tu formulario
-            document.getElementById('fechaInicio').value = info.date.toISOString().slice(0, 16);
-        }
-    });
-
-    calendar.render();
-});
-
-
-
-                                                                                                                </script>
-
-
                                                                                                                 <script>
                                                                                                                     document.addEventListener('DOMContentLoaded', function () {
                                                                                                                         // Función para validar y guardar la cita
@@ -469,7 +364,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                                                                                                         var servicioSelect = document.querySelector('select[name="servicio"]');
                                                                                                                         // Obtener el campo de precio
                                                                                                                         var precioInput = document.querySelector('input[name="precio"]');
-
                                                                                                                         // Manejar el evento de cambio en el selector de servicios
                                                                                                                         servicioSelect.addEventListener('change', function () {
                                                                                                                             // Obtener el precio del servicio seleccionado

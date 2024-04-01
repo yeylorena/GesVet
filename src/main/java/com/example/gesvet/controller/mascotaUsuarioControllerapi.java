@@ -275,4 +275,8 @@ public class mascotaUsuarioControllerapi {
         }
         return null;
     }
+
+    public ResponseEntity<Object> saveMascota(Mascota mascota) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

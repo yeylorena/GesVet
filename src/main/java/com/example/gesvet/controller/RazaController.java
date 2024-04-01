@@ -153,7 +153,11 @@ public class RazaController {
         model.addAttribute("userDto", userDto);
         LOGGER.info("Este es el objeto de la raza: {}", raza);
         Mascota m = new Mascota(1, "", "", "", "", "", "");
-
+        if (razaService.existsByNombre(raza.getNombre())) {
+            // Agregar un mensaje de flash para mostrar en la vista
+            redirectAttributes.addFlashAttribute("razaexiste", "Ya existe una raza con el mismo nombre.");
+            return "redirect:/razas/create";
+        }
         razaService.save(raza);
         redirectAttributes.addFlashAttribute("success", true);
 
@@ -185,6 +189,11 @@ public class RazaController {
         userDto.setImagen("/images/" + user.getImagen());
         model.addAttribute("userDto", userDto);
         LOGGER.info("Este es el objeto de la especie: {}", especie);
+        if (especieService.existsByNombre(especie.getNombre())) {
+            // Agregar un mensaje de flash para mostrar en la vista
+            redirectAttributes.addFlashAttribute("especieexiste", "Ya existe una especie con el mismo nombre.");
+            return "redirect:/razas/createEs";
+        }
         especieService.save(especie);
         redirectAttributes.addFlashAttribute("especiecreada", "Especie agregada con éxito");
         return "redirect:/razas";
