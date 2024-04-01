@@ -284,7 +284,7 @@ public class HomeControllerAdmin {
         model.addAttribute("userDto", userDto);
 
         // Devolver la vista del carrito
-        return "usuario/Carritoadmin";
+        return "redirect:/getCartadmin";
     }
 
     //Quitar un producto del carrito
@@ -332,7 +332,7 @@ public class HomeControllerAdmin {
         model.addAttribute("cart", detalles);
         model.addAttribute("factura", factura);
 
-        return "usuario/Carritoadmin";
+        return "redirect:/getCartadmin";
     }
 
     @GetMapping("/getCartadmin")
