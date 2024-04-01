@@ -3,7 +3,15 @@
       xmlns:th="http://www.thymeleaf.org"/>
 
 <head th:replace="~{Plantillas/usuario :: head}"></head>
-
+<style>
+    .titlecartaSel2 {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        color: #000000;
+    }
+</style>
 <body style="background-color: #F4F4F4;">
 
     <!-- ======= Header ======= -->
@@ -142,11 +150,19 @@
                             <ul class="nav nav-tabs nav-tabs-bordered">
 
                                 <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="tab"
+                                    <button class="nav-link active" data-bs-toggle="tab" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            color: #000000;"
                                             data-bs-target="#profile-edit">Solicitar cita</button>
                                 </li>
                                 <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab"
+                                    <button class="nav-link" data-bs-toggle="tab" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            color: #000000;"
                                             data-bs-target="#profile-overview">Consultar citas</button>
                                 </li>
                                 <li class="nav-item">
@@ -169,7 +185,7 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="mascota"><strong>Mascota:</strong></label>
+                                                                    <label for="mascota" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Mascota:</label>
                                                                     <select class="form-select" name="mascota" required>
                                                                         <option value="">Selecciona una mascota...</option>
                                                                         <option th:each="mascota : ${mascotas}" th:value="${mascota.id}" th:data-imagen="${mascota.imagen}" th:text="${mascota.nombre}" ></option>
@@ -177,7 +193,7 @@
                                                             </div>
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="servicio"><strong>Tipo cita:</strong></label>
+                                                                    <label for="servicio" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Tipo cita:</label>
                                                                     <select class="form-select" name="servicio" required>
                                                                         <option value="">Selecciona un servicio...</option>
                                                                         <option th:each="servicio : ${servicios}" th:value="${servicio.id}" th:data-precio="${servicio.precio}"
@@ -187,21 +203,21 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="usuario"><strong>Veterinario:</strong></label>
+                                                                    <label for="usuario" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Veterinario:</label>
                                                                     <select class="form-select" name="usuario" required>
                                                                         <option value="">Selecciona un veterinario...</option>
                                                                         <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nombre} + ' ' + ${usuario.apellido}">
                                                                     </select>                                                                        </div>
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="precio"><strong>Precio:</strong></label>
+                                                                    <label for="precio" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Precio:</label>
                                                                     <input type="text" name="precio" class="form-control custom-border custom-bg-fondo" required readonly>
                                                                         <!-- El precio se autocompleta segun el servicio escogido -->
                                                                         </div>
                                                                         </div>
                                                                         <div class="row mt-3">
                                                                             <div class="col">
-                                                                                <label class="control-label"><strong>Fecha</strong></label>
+                                                                                <label class="control-label" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Fecha</label>
                                                                                 <input type="datetime-local" name="inicio" id="fechaInicio" class="form-control" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" required />
                                                                             </div>
                                                                         </div>
@@ -210,7 +226,7 @@
                                                                         </div>
 
                                                                         <div class="text-center mt-4">
-                                                                            <button id="agendarButton" type="submit" class="btn btn-success" style="background-color: #2FD6B4;">Agendar</button>
+                                                                            <button id="agendarButton" type="submit" class="btn btn-success" style="background-color: #2FD6B4; color: #000000">Agendar</button>
                                                                         </div>
                                                                         </div>
                                                                         </div>

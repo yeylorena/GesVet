@@ -4,6 +4,15 @@
       xmlns:th="http://www.thymeleaf.org"/>
 
 <head th:replace="~{Plantillas/usuario :: head}">
+    <style>
+        .titlecartaSel2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 20px;
+            color: #000000;
+        }
+    </style>
 
     <body style="background-color: #F4F4F4">
         <!-- ======= Header ======= -->
@@ -141,7 +150,11 @@
                             <ul class="nav nav-tabs nav-tabs-bordered">
 
                                 <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="tab"
+                                    <button class="nav-link active" data-bs-toggle="tab" style="font-family: 'Montserrat', Arial, sans-serif;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            color: #000000;"
                                             data-bs-target="#profile-overview">Ver Todos</button>
                                 </li>
                             </ul>
@@ -181,7 +194,7 @@
                                                                                     </p>
 
                                                                                     <div class="text-center">
-                                                                                        <a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-primary btn-sm">
+                                                                                        <a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-sm" style="background-color:#2FD6B4; color:#000000 ">
                                                                                             Ver productos</a>
                                                                                     </div>
                                                                                 </div>

@@ -362,17 +362,29 @@
                     <!-- Bordered Tabs -->
                     <ul class="nav nav-tabs nav-tabs-bordered">
 
-                        <li class="nav-item titlecartaSel2">
+                        <li class="nav-item titlecartaSel2" style="font-family: 'Montserrat', Arial, sans-serif;
+                            font-size: 16px;
+                            font-weight: 600;
+                            line-height: 20px;
+                            color: #000000;">
                             <button class="nav-link active " data-bs-toggle="tab"
                                     data-bs-target="#profile-overview">Ver</button>
                         </li>
 
-                        <li class="nav-item titlecartaSel2">
+                        <li class="nav-item"style="font-family: 'Montserrat', Arial, sans-serif;
+                            font-size: 16px;
+                            font-weight: 600;
+                            line-height: 20px;
+                            color: #000000;">
                             <button class="nav-link" data-bs-toggle="tab"
                                     data-bs-target="#profile-regis">Registrar</button>
                         </li>
 
-                        <li class="nav-item titlecartaSel2">
+                        <li class="nav-item"style="font-family: 'Montserrat', Arial, sans-serif;
+                            font-size: 16px;
+                            font-weight: 600;
+                            line-height: 20px;
+                            color: #000000;">
                             <button class="nav-link" data-bs-toggle="tab"
                                     data-bs-target="#profile-change-password">Historial</button>
                         </li>
@@ -431,7 +443,7 @@
 
                                     <!-- crear mascota campos  -->
                                     <div class="row mb-5">
-                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Imagen de Mascota</label>
+                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Imagen de Mascota</label>
                                         <div class="col-md-8 col-lg-9">
                                             <div class="row my-2">
                                                 <div class="col-6">
@@ -449,23 +461,23 @@
                                                             </div>
                                                             <div class="row mb-3">
                                                                 <div class="col-6">
-                                                                    <label style="color: black;">Nombre:</label>
+                                                                    <label style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Nombre:</label>
                                                                     <input type="text" name="nombre" field="" class="form-control" id="nombreInput" required>
                                                                         <small id="nombreHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo letras y entre 3 y 20 caracteres.</small>
                                                                 </div>
                                                                 <div class="col-6 ">
-                                                                    <label style="color: black;">Color</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Color</label>
                                                                     <input type="text" name="color" id="color" field="" class="form-control" required>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
                                                                 <div class="col-6">
-                                                                    <label style="color: black;">Edad:</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Edad:</label>
                                                                     <input type="number" name="edad" field="" class="form-control" id="edadInput" required min="1" >
                                                                         <small id="edadHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo números.</small>
                                                                 </div>
                                                                 <div class="col-6 ">
-                                                                    <label style="color: black;">Tiempo</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Tiempo</label>
                                                                     <select name="tiempo" class="form-select" required>
                                                                         <option value="">Selecciona el tiempo</option>
                                                                         <option value="Meses">Meses</option>
@@ -475,7 +487,7 @@
                                                             </div>
                                                             <div class="row mb-3">
                                                                 <div class="col-6 ">
-                                                                    <label style="color: black;">Género</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Género</label>
                                                                     <select name="genero" class="form-select" required>
                                                                         <option value="">Selecciona una género</option>
                                                                         <option value="Macho">Macho</option>
@@ -483,7 +495,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-6 ">
-                                                                    <label style="color: black;">Especie</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Especie</label>
                                                                     <select name="especie" class="form-select" required>
                                                                         <option value="">Selecciona una especie</option>
                                                                         <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}"></option>
@@ -493,14 +505,14 @@
 
                                                             <div class="row mb-3">
                                                                 <div class="col-6">
-                                                                    <label style="color: black;">Raza</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Raza</label>
                                                                     <select name="raza" class="form-select" required>
                                                                         <option value="">Selecciona una raza</option>
                                                                         <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-6">
-                                                                    <label  style="color: black;">Detalles</label>
+                                                                    <label  style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Detalles</label>
 
                                                                     <input name="detalles" type="text" class="form-control" id="detalles" value="">
                                                                 </div>
@@ -508,7 +520,7 @@
 
                                                             <div class="text-center">
                                                                 <button type="submit" class="btn " id="btnRegistrar"
-                                                                        style="background-color: #979AD4; color: black;">Registrar</button>
+                                                                        style="background-color: #2FD6B4; color: black;">Registrar</button>
                                                             </div>
                                                             </form><!-- End Profile Edit Form -->
                                                             </div>
