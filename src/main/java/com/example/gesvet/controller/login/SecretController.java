@@ -81,7 +81,7 @@ public class SecretController {
         String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
 
         Claims claims = JwtUtils.extractClaims(jwtToken);
-
+        
         if (claims != null) {
             String username = claims.getSubject();
 

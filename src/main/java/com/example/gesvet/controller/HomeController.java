@@ -353,7 +353,7 @@ public class HomeController {
         model.addAttribute("userDto", userDto);
 
         // Devolver la vista del carrito
-        return "usuario/Carrito";
+        return "redirect:/getCart";
     }
 
     //Quitar un producto del carrito
@@ -402,7 +402,7 @@ public class HomeController {
         model.addAttribute("cart", detalles);
         model.addAttribute("factura", factura);
 
-        return "usuario/Carrito";
+        return "redirect:/getCart";
     }
 
     @GetMapping("/getCart")

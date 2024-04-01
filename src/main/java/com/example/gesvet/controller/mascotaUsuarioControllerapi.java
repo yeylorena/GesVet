@@ -194,72 +194,57 @@ public class mascotaUsuarioControllerapi {
         }
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Object> updateMascota(@RequestBody Mascota mascota, @RequestParam(value = "file", required = false) MultipartFile imagen, HttpServletRequest request) {
-        // Obtener el token JWT de la solicitud
-        String jwtToken = extractTokenFromRequest(request);
+  @PutMapping("/update")
+public ResponseEntity<Object> updateMascota(@RequestBody Mascota mascota, HttpServletRequest request) {
+    // Obtener el token JWT de la solicitud
+    String jwtToken = extractTokenFromRequest(request);
 
-        // Validar el token JWT
-        Claims claims = JwtUtils.extractClaims(jwtToken);
-        if (claims != null) {
-            String username = claims.getSubject();
-            User user = userService.findByUsername(username);
-            if (user != null) {
-                // El usuario está autenticado, ahora puedes continuar con la lógica de actualización de la mascota
-                try {
-                    if (imagen != null && !imagen.isEmpty()) {
-                        // Procesa la nueva imagen si se ha seleccionado
-                        byte[] bytesImg = imagen.getBytes();
-                        Path directorioImagenes = Paths.get("images/");
-                        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
-                        Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
-                        Files.write(rutaCompleta, bytesImg);
-                        mascota.setImagen(imagen.getOriginalFilename());
-                    } else {
-                        // Si no se selecciona una nueva imagen, mantén la imagen actual
-                        Mascota mascotaActual = mascotaService.get(mascota.getId()).orElse(null);
-                        if (mascotaActual != null) {
-                            mascota.setImagen(mascotaActual.getImagen());
-                        }
-                    }
+    // Validar el token JWT
+    Claims claims = JwtUtils.extractClaims(jwtToken);
+    if (claims != null) {
+        String username = claims.getSubject();
+        User user = userService.findByUsername(username);
+        if (user != null) {
+            // Asignar el usuario a la mascota que se está actualizando
+            mascota.setUsuario(user);
 
-                    // Actualiza la mascota en la base de datos
-                    mascotaService.update(mascota);
+            try {
+                // Actualiza la mascota en la base de datos
+                mascotaService.update(mascota);
 
-                    // Devuelve una respuesta exitosa
-                    var respuesta = new respuesta(
-                            "Creado",
-                            "Mascota actualizada exitosamente"
-                    );
-                    return ResponseEntity.status(HttpStatus.OK).body(respuesta);
-                } catch (IOException e) {
-                    // Maneja cualquier excepción de E/S que pueda ocurrir al guardar la imagen
-                    e.printStackTrace();
-                    // Devuelve una respuesta de error
-                    var respuesta = new respuesta(
-                            "error",
-                            "Error al procesar la imagen"
-                    );
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
-                }
-            } else {
-
-                var respuesta = new respuesta(
-                        "error",
-                        "Usuario no autenticado"
+                // Devuelve una respuesta exitosa
+                respuesta respuesta = new respuesta(
+                        "Éxito",
+                        "Mascota actualizada exitosamente"
                 );
-                // Si el usuario no está autenticado, devuelve una respuesta de error
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
+                return ResponseEntity.status(HttpStatus.OK).body(respuesta);
+            } catch (Exception e) {
+                // Maneja cualquier excepción que pueda ocurrir al actualizar la mascota
+                e.printStackTrace();
+                // Devuelve una respuesta de error
+                respuesta respuesta = new respuesta(
+                        "error",
+                        "Error al actualizar la mascota"
+                );
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
             }
         } else {
-            // Si el token no es válido, devuelve una respuesta de error
-            var respuesta = new respuesta(
+            respuesta respuesta = new respuesta(
                     "error",
-                    "Token JWT inválido"
+                    "Usuario no autenticado"
             );
+            // Si el usuario no está autenticado, devuelve una respuesta de error
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
+    } else {
+        // Si el token no es válido, devuelve una respuesta de error
+        respuesta respuesta = new respuesta(
+                "error",
+                "Token JWT inválido"
+        );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
     }
+}
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {

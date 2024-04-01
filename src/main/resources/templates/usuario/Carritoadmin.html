@@ -261,24 +261,27 @@
         /*]]>*/
     </script>
     <script th:inline="javascript">
-        /*<![CDATA[*/
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener todas las celdas con la clase "cantidadProducto"
-            var cantidadProductoCells = document.querySelectorAll('.cantidadProducto');
-            // Iterar sobre cada celda y aplicar el formateo
-            cantidadProductoCells.forEach(function (cell) {
-                // Obtener el valor de la cantidad del contenido de la celda
-                var valorCantidad = cell.textContent.trim();
-                // Parsear el valor de la cantidad a un número flotante
-                var valor = parseFloat(valorCantidad);
-                // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
-                if (!isNaN(valor)) {
-                    var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
-                    cell.textContent = valorSinDecimales;
-                }
-            });
-        });
-        /*]]>*/
+      /*<![CDATA[*/
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener todos los elementos de entrada con la clase "productoCantidad"
+    var productoCantidadInputs = document.querySelectorAll('.productoCantidad');
+
+    // Iterar sobre cada elemento de entrada y aplicar el formateo
+    productoCantidadInputs.forEach(function (input) {
+        // Obtener el valor del atributo "value" del elemento de entrada
+        var valorProducto = input.value.trim();
+
+        // Parsear el valor del producto a un número entero
+        var valor = parseInt(valorProducto);
+
+        // Si el valor es válido, actualizar el valor del atributo "value" del elemento de entrada
+        if (!isNaN(valor)) {
+            input.value = valor; // Actualizar el valor
+        }
+    });
+});
+/*]]>*/
+
     </script>
     <script th:if="${errorproducto}">
         Swal.fire({
@@ -294,6 +297,29 @@
             title: '¡Error!',
             text: 'Excediste el limite de la cantidad del producto'
         });
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener todas las celdas con la clase "cantidadProducto"
+            var cantidadProductoCells = document.querySelectorAll('.cantidadProducto');
+
+            // Iterar sobre cada celda y aplicar el formateo
+            cantidadProductoCells.forEach(function (cell) {
+                // Obtener el valor de la cantidad del contenido de la celda
+                var valorCantidad = cell.textContent.trim();
+
+                // Parsear el valor de la cantidad a un número flotante
+                var valor = parseFloat(valorCantidad);
+
+                // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
+                if (!isNaN(valor)) {
+                    var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
+                    cell.textContent = valorSinDecimales;
+                }
+            });
+        });
+        /*]]>*/
     </script>
 </body>
 </html>

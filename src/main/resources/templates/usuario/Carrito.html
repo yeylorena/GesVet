@@ -358,26 +358,26 @@
     </script>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener todas las celdas con la clase "productoCantidad"
-            var productoCantidadCells = document.querySelectorAll('.productoCantidad');
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener todos los elementos de entrada con la clase "productoCantidad"
+    var productoCantidadInputs = document.querySelectorAll('.productoCantidad');
 
-            // Iterar sobre cada celda y aplicar el formateo
-            productoCantidadCells.forEach(function (cell) {
-                // Obtener el valor del producto del contenido de la celda
-                var valorProducto = cell.textContent.trim();
+    // Iterar sobre cada elemento de entrada y aplicar el formateo
+    productoCantidadInputs.forEach(function (input) {
+        // Obtener el valor del atributo "value" del elemento de entrada
+        var valorProducto = input.value.trim();
 
-                // Parsear el valor del producto a un número flotante
-                var valor = parseFloat(valorProducto);
+        // Parsear el valor del producto a un número entero
+        var valor = parseInt(valorProducto);
 
-                // Si el valor es válido, eliminar los decimales y actualizar el contenido de la celda
-                if (!isNaN(valor)) {
-                    var valorSinDecimales = Math.trunc(valor); // Eliminar los decimales
-                    cell.textContent = valorSinDecimales;
-                }
-            });
-        });
-        /*]]>*/
+        // Si el valor es válido, actualizar el valor del atributo "value" del elemento de entrada
+        if (!isNaN(valor)) {
+            input.value = valor; // Actualizar el valor
+        }
+    });
+});
+/*]]>*/
+
     </script>
 
 
