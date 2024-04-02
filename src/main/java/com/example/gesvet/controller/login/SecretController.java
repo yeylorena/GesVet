@@ -93,7 +93,7 @@ public class SecretController {
 
             var respuesta = new respuesta(
                     "Creado",
-                    "Usuario modificado"
+                    "Modificación exitosa"
             );
 
             return ResponseEntity.status(HttpStatus.OK).body(respuesta);

@@ -137,7 +137,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Servicio de citas</h1>
+            <h1>Citas</h1>
         </div><!-- End Page Title -->
 
         <section class="section profile">
@@ -166,7 +166,11 @@
                                             data-bs-target="#profile-overview">Consultar citas</button>
                                 </li>
                                 <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab"
+                                    <button class="nav-link" data-bs-toggle="tab" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            color: #000000;"
                                             data-bs-target="#historial">Historial citas</button>
                                 </li>
                             </ul>
@@ -181,7 +185,8 @@
                                                 <div class="col-8">
                                                     <div class="card-body"> 
                                                         <h6>Horario de atención:
-                                                            Lunes a Sábado: 9:00 AM - 6:00 PM.</h6>
+                                                            Lunes a Sábado: 9:00 AM - 6:00 PM. Por favor, seleccione horarios en intervalos de 30 minutos.</h6>
+
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
@@ -218,7 +223,7 @@
                                                                         <div class="row mt-3">
                                                                             <div class="col">
                                                                                 <label class="control-label" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Fecha</label>
-                                                                                <input type="datetime-local" name="inicio" id="fechaInicio" class="form-control" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" required />
+                                                                                <input type="datetime-local" name="inicio" id="fechaInicio" step="1800" class="form-control" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" required />
                                                                             </div>
                                                                         </div>
                                                                         <div th:if="${error != null}" class="alert alert-danger mt-3" role="alert">
@@ -226,7 +231,7 @@
                                                                         </div>
 
                                                                         <div class="text-center mt-4">
-                                                                            <button id="agendarButton" type="submit" class="btn btn-success" style="background-color: #2FD6B4; color: #000000">Agendar</button>
+                                                                            <button id="agendarButton" type="submit" class="btn btn-success" style="background-color: #2FD6B4; color: #000000; border: 0;">Agendar</button>
                                                                         </div>
                                                                         </div>
                                                                         </div>
