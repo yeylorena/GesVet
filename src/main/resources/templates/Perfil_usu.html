@@ -332,7 +332,10 @@
                                                                                     </li><!-- End Dashboard Nav -->
                                                                                 </ul>
                                                                             </aside>
-                                                                            <main id="main" class="main">          
+                                                                            <main id="main" class="main">   
+                                                                                <div class="pagetitle">
+                                                                                    <h1>Mi perfil</h1>
+                                                                                </div><!-- End Page Title -->
                                                                                 <section class="section profile">
                                                                                     <div class="row">
                                                                                         <div class="col-xl-4">
@@ -367,23 +370,33 @@
                                                                                                     </ul>
                                                                                                     <div class="tab-content pt-2">
                                                                                                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                                                                                                            <h5 style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Acerca de</h5>
+                                                                                                            <h5 style="text-align: justify;
+                                                                                                            font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                            font-size: 16px;">Acerca de</h5>
                                                                                                             <p class="small fst-italic texto2" th:text="${userdetail.acercade}"></p>
                                                                                                             <h5 class="textcartas">Detalles del perfil</h5>
                                                                                                             <div class="row align-items-center">
-                                                                                                                <div class="col-lg-3 col-md-4" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Nombre</div>
+                                                                                                                <div class="col-lg-3 col-md-4" style="text-align: justify;
+                                                                                                                font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                font-size: 16px;">Nombre</div>
                                                                                                                 <div class="col-lg-9 col-md-8" th:text="${userdetail.nombre}"></div>
                                                                                                             </div>
                                                                                                             <div class="row align-items-center">
-                                                                                                                <div class="col-lg-3 col-md-4" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Apellidos</div>
+                                                                                                                <div class="col-lg-3 col-md-4" style="text-align: justify;
+                                                                                                                font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                font-size: 16px;">Apellidos</div>
                                                                                                                 <div  class="col-lg-9 col-md-8" th:text="${userdetail.apellido}"></div>
                                                                                                             </div>
                                                                                                             <div class="row align-items-center">
-                                                                                                                <div class="col-lg-3 col-md-4" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Dirección</div>
+                                                                                                                <div class="col-lg-3 col-md-4" style="text-align: justify;
+                                                                                                                font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                font-size: 16px;">Dirección</div>
                                                                                                                 <div class="col-lg-9 col-md-8"th:text="${userdetail.direccion}"></div>
                                                                                                             </div>
                                                                                                             <div class="row align-items-center">
-                                                                                                                <div class="col-lg-3 col-md-4" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Teléfono</div>
+                                                                                                                <div class="col-lg-3 col-md-4" style="text-align: justify;
+                                                                                                                font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                font-size: 16px;">Teléfono</div>
                                                                                                                 <div  class="col-lg-9 col-md-8" th:text="${userdetail.telefono}"></div>
                                                                                                             </div>
                                                                                                         </div>
@@ -393,7 +406,10 @@
                                                                                                                 <!-- ... (otros campos) -->
                                                                                                                 <input th:field="*{id}" type="hidden"/>
                                                                                                                 <div class="row mb-3">
-                                                                                                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Imagen de
+                                                                                                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black;
+                                                                                                                        text-align: justify;
+                                                                                                                        font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                        font-size: 16px;">Imagen de
                                                                                                                         Perfil</label>
                                                                                                                     <div class="col-md-8 col-lg-9">
                                                                                                                         <img th:src="@{'/images/' + ${userDto.imagen}}" th:alt="${userDto.imagen}" class="rounded-circle"/>
@@ -411,35 +427,50 @@
 
                                                                                                                                     </div>
                                                                                                                                     <div class="row mb-3">
-                                                                                                                                        <label for="about" class="col-md-4 col-lg-3 col-form-label" style="color:#000000; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Acerca de</label>
-                                                                                                                                            <div class="col-md-8 col-lg-9">
-                                                                                                                                                <textarea id="acercade" th:field="*{acercade}" class="form-control" style="height: 100px"></textarea>
+                                                                                                                                        <label for="about" class="col-md-4 col-lg-3 col-form-label" style="color:#000000;
+                                                                                                                                        text-align: justify;
+                                                                                                                                        font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                        font-size: 16px;">Acerca de</label>
+                                                                                                                                        <div class="col-md-8 col-lg-9">
+                                                                                                                                            <textarea id="acercade" th:field="*{acercade}" class="form-control" style="height: 100px"></textarea>
                                                                                                                                                 <small id="errorAcercade" class="texto2"></small>
                                                                                                                                             </div>
                                                                                                                                         </div>
                                                                                                                                         <div class="row mb-3  align-items-center ">
-                                                                                                                                            <label for="fullName" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Nombres</label>
+                                                                                                                                            <label for="fullName" class="col-md-4 col-lg-3 col-form-label" style="color: black;
+                                                                                                                                        text-align: justify;
+                                                                                                                                        font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                        font-size: 16px;">Nombres</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input id="nombres" th:field="*{nombre}" type="text" class="form-control"/>
                                                                                                                                             <small id="errorNombre" class="text-danger"></small>
                                                                                                                                         </div>
                                                                                                                                     </div>
                                                                                                                                     <div class="row mb-3  align-items-center">
-                                                                                                                                        <label for="company" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Apellidos</label>
+                                                                                                                                        <label for="company" class="col-md-4 col-lg-3 col-form-label" style="color: black;
+                                                                                                                                        text-align: justify;
+                                                                                                                                        font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                        font-size: 16px;">Apellidos</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input id="apellidos" th:field="*{apellido}" type="text" class="form-control"/>
                                                                                                                                             <small id="errorApellido" class="text-danger"></small>
                                                                                                                                         </div>
                                                                                                                                     </div>
                                                                                                                                     <div class="row mb-3  align-items-center">
-                                                                                                                                        <label for="company" class="col-md-4 col-lg-3 col-form-label " style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Dirección</label>
+                                                                                                                                        <label for="company" class="col-md-4 col-lg-3 col-form-label " style="color: black;
+                                                                                                                                        text-align: justify;
+                                                                                                                                        font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                        font-size: 16px;">Dirección</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input th:field="*{direccion}" type="text" class="form-control"/>
                                                                                                                                             <small id="errorDireccion" class="text-danger"></small>
                                                                                                                                         </div>
                                                                                                                                     </div>
                                                                                                                                     <div class="row mb-3  align-items-center">
-                                                                                                                                        <label for="Job" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Teléfono</label>
+                                                                                                                                        <label for="Job" class="col-md-4 col-lg-3 col-form-label" style="color: black;
+                                                                                                                                        text-align: justify;
+                                                                                                                                        font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                        font-size: 16px;">Teléfono</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input th:field="*{telefono}" type="text" class="form-control"/>
                                                                                                                                             <small id="errorTelefono" class="text-danger"></small>
@@ -452,26 +483,32 @@
                                                                                                                                                 width: 100%;
                                                                                                                                                 text-align: center;
                                                                                                                                                 text-decoration: none;
-                                                                                                                                                padding: 10px;"><strong>Modificar</strong></button>
+                                                                                                                                                padding: 10px;"><strong>Aceptar</strong></button>
                                                                                                                                     </div>
                                                                                                                                     </form>
                                                                                                                                     </div>
                                                                                                                                     <div class="tab-pane fade pt-3" id="profile-settings">
                                                                                                                                         <form action="/perfil/cambiar-contrasena" method="post" onsubmit="return validarContrasena()">
                                                                                                                                             <div class="row mb-3 align-items-center">
-                                                                                                                                                <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Contraseña actual</label>
+                                                                                                                                                <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label" style="text-align: justify;
+                                                                                                                                                font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                                font-size: 16px;">Contraseña actual</label>
                                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                                     <input name="currentPassword" type="password" class="form-control col-sm-6" id="currentPassword" required>
                                                                                                                                                 </div>
                                                                                                                                             </div>
                                                                                                                                             <div class="row mb-3 align-items-center">
-                                                                                                                                                <label for="newPassword" class="col-md-4 col-lg-3 col-form-label" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Contraseña nueva</label>
+                                                                                                                                                <label for="newPassword" class="col-md-4 col-lg-3 col-form-label" style="text-align: justify;
+                                                                                                                                                font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                                font-size: 16px;">Contraseña nueva</label>
                                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                                     <input name="newPassword" type="password" class="form-control" id="newPassword" required>
                                                                                                                                                 </div>
                                                                                                                                             </div>
                                                                                                                                             <div class="row mb-3 align-items-center">
-                                                                                                                                                <label for="confirmNewPassword" class="col-md-4 col-lg-3 col-form-label " style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Confirmar contraseña</label>
+                                                                                                                                                <label for="confirmNewPassword" class="col-md-4 col-lg-3 col-form-label " style="text-align: justify;
+                                                                                                                                                font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                                font-size: 16px;">Confirmar contraseña</label>
                                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                                     <input name="confirmNewPassword" type="password" class="form-control" id="confirmNewPassword" required>
                                                                                                                                                 </div>
