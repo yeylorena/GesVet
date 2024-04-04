@@ -86,7 +86,11 @@ public class mascotaUsuarioControllerapi {
             // Devolver una respuesta exitosa con la información
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
     }
 
@@ -102,6 +106,19 @@ public class mascotaUsuarioControllerapi {
 
             // Obtener el usuario a partir del nombre de usuario en el token (subject)
             User user = userService.findByUsername(username);
+
+            // Validar que los campos obligatorios no estén vacíos
+            if (StringUtils.isEmpty(mascotaRequest.getNombre()) || StringUtils.isEmpty(mascotaRequest.getColor())
+                    || StringUtils.isEmpty(mascotaRequest.getEdad()) || StringUtils.isEmpty(mascotaRequest.getTiempo())
+                    || StringUtils.isEmpty(mascotaRequest.getGenero()) || StringUtils.isEmpty(mascotaRequest.getDetalles())
+                    || StringUtils.isEmpty(mascotaRequest.getEspecie()) || StringUtils.isEmpty(mascotaRequest.getRaza())
+                    || StringUtils.isEmpty(mascotaRequest.getImagen())) {
+                var respuesta = new respuesta(
+                        "error",
+                        "Por favor, complete todos los campos obligatorios"
+                );
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
+            }
 
             try {
                 // Crear una nueva instancia de Mascota con los datos recibidos
@@ -194,62 +211,119 @@ public class mascotaUsuarioControllerapi {
         }
     }
 
-  @PutMapping("/update")
-public ResponseEntity<Object> updateMascota(@RequestBody Mascota mascota, HttpServletRequest request) {
-    // Obtener el token JWT de la solicitud
-    String jwtToken = extractTokenFromRequest(request);
+    @PutMapping("/update")
+    public ResponseEntity<Object> updateMascota(@RequestBody Mascota mascota, HttpServletRequest request) {
+        // Obtener el token JWT de la solicitud
+        String jwtToken = extractTokenFromRequest(request);
 
-    // Validar el token JWT
-    Claims claims = JwtUtils.extractClaims(jwtToken);
-    if (claims != null) {
-        String username = claims.getSubject();
-        User user = userService.findByUsername(username);
-        if (user != null) {
-            // Asignar el usuario a la mascota que se está actualizando
-            mascota.setUsuario(user);
+        // Validar el token JWT
+        Claims claims = JwtUtils.extractClaims(jwtToken);
+        if (claims != null) {
+            String username = claims.getSubject();
+            User user = userService.findByUsername(username);
+            if (user != null) {
 
-            try {
-                // Actualiza la mascota en la base de datos
-                mascotaService.update(mascota);
+                // Validar que los campos obligatorios no estén vacíos
+                if (StringUtils.isEmpty(mascota.getNombre()) || StringUtils.isEmpty(mascota.getColor())
+                        || StringUtils.isEmpty(mascota.getEdad()) || StringUtils.isEmpty(mascota.getTiempo())
+                        || StringUtils.isEmpty(mascota.getGenero()) || StringUtils.isEmpty(mascota.getDetalles())
+                        || StringUtils.isEmpty(mascota.getEspecie()) || StringUtils.isEmpty(mascota.getRaza())
+                        || StringUtils.isEmpty(mascota.getImagen())) {
+                    var respuesta = new respuesta(
+                            "error",
+                            "Por favor, complete todos los campos obligatorios"
+                    );
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
+                }
+                // Asignar el usuario a la mascota que se está actualizando
+                mascota.setUsuario(user);
 
-                // Devuelve una respuesta exitosa
-                respuesta respuesta = new respuesta(
-                        "Éxito",
-                        "Mascota actualizada exitosamente"
-                );
-                return ResponseEntity.status(HttpStatus.OK).body(respuesta);
-            } catch (Exception e) {
-                // Maneja cualquier excepción que pueda ocurrir al actualizar la mascota
-                e.printStackTrace();
-                // Devuelve una respuesta de error
+                try {
+                    // Actualiza la mascota en la base de datos
+                    mascotaService.update(mascota);
+
+                    // Devuelve una respuesta exitosa
+                    respuesta respuesta = new respuesta(
+                            "Éxito",
+                            "Mascota actualizada exitosamente"
+                    );
+                    return ResponseEntity.status(HttpStatus.OK).body(respuesta);
+                } catch (Exception e) {
+                    // Maneja cualquier excepción que pueda ocurrir al actualizar la mascota
+                    e.printStackTrace();
+                    // Devuelve una respuesta de error
+                    respuesta respuesta = new respuesta(
+                            "error",
+                            "Error al actualizar la mascota"
+                    );
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+                }
+            } else {
                 respuesta respuesta = new respuesta(
                         "error",
-                        "Error al actualizar la mascota"
+                        "Usuario no autenticado"
+                );
+                // Si el usuario no está autenticado, devuelve una respuesta de error
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
+            }
+        } else {
+            // Si el token no es válido, devuelve una respuesta de error
+            respuesta respuesta = new respuesta(
+                    "error",
+                    "Token JWT inválido"
+            );
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
+        }
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteMascota(@PathVariable Integer id, HttpServletRequest request) {
+        // Obtener el token JWT de la solicitud
+        String jwtToken = extractTokenFromRequest(request);
+
+        // Validar el token JWT
+        Claims claims = JwtUtils.extractClaims(jwtToken);
+        if (claims != null) {
+            try {
+                // Buscar la mascota por su ID
+                Optional<Mascota> optionalMascota = mascotaService.get(id);
+
+                if (optionalMascota.isPresent()) {
+                    Mascota mascota = optionalMascota.get();
+                    // Desactivar la mascota estableciendo el estado activo en false
+                    mascota.setActivo(false);
+                    // Actualizar la mascota en la base de datos
+                    mascotaService.update(mascota);
+                    // Devolver una respuesta exitosa
+                    respuesta respuesta = new respuesta(
+                            "Creado",
+                            "Mascota eliminada exitosamente"
+                    );
+                    return ResponseEntity.ok(respuesta);
+                } else {
+                    // Si no se encuentra la mascota, devolver una respuesta de error
+                    var respuesta = new respuesta(
+                            "error",
+                            "Mascota no encontrada"
+                    );
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+                }
+            } catch (Exception e) {
+                // Si ocurre alguna excepción, devolver una respuesta de error
+                var respuesta = new respuesta(
+                        "error",
+                        "Error al procesar la solicitud"
                 );
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
             }
         } else {
+            // Si el token no es válido, devuelve una respuesta de error
             respuesta respuesta = new respuesta(
                     "error",
-                    "Usuario no autenticado"
+                    "Usuario no autorizado"
             );
-            // Si el usuario no está autenticado, devuelve una respuesta de error
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
-    } else {
-        // Si el token no es válido, devuelve una respuesta de error
-        respuesta respuesta = new respuesta(
-                "error",
-                "Token JWT inválido"
-        );
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
-    }
-}
-
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
-        mascotaService.delete(id);
-        return "redirect:/mascotasUsuarios";
     }
 
     // Método auxiliar para extraer el token del encabezado de la solicitud

@@ -44,7 +44,7 @@ public class SecretController {
     }
 
     @GetMapping("/user-details")
-    public ResponseEntity<UserDto> getUserDetails(HttpServletRequest request) {
+    public ResponseEntity<Object> getUserDetails(HttpServletRequest request) {
         String jwtToken = extractTokenFromRequest(request);
 
         // Validar el token
@@ -56,22 +56,34 @@ public class SecretController {
             // Obtener todos los detalles del usuario desde la base de datos o el servicio correspondiente
             User user = userService.findByUsername(username);
 
-            // Construir un objeto UserDto con todos los detalles del usuario
-            UserDto userDto = new UserDto();
-            userDto.setId(user.getId());
-            userDto.setUsername(user.getUsername());
-            userDto.setNombre(user.getNombre());
-            userDto.setApellido(user.getApellido());
-            userDto.setDireccion(user.getDireccion());
-            userDto.setTelefono(user.getTelefono());
-            userDto.setRole(user.getRole());
-            userDto.setAcercade(user.getAcercade());
-            userDto.setImagen(user.getImagen());
+            if (user != null) {
+                // Construir un objeto UserDto con todos los detalles del usuario
+                UserDto userDto = new UserDto();
+                userDto.setId(user.getId());
+                userDto.setUsername(user.getUsername());
+                userDto.setNombre(user.getNombre());
+                userDto.setApellido(user.getApellido());
+                userDto.setDireccion(user.getDireccion());
+                userDto.setTelefono(user.getTelefono());
+                userDto.setRole(user.getRole());
+                userDto.setAcercade(user.getAcercade());
+                userDto.setImagen(user.getImagen());
 
-            // Devolver los detalles del usuario en la respuesta
-            return ResponseEntity.status(HttpStatus.OK).body(userDto);
+                // Devolver los detalles del usuario en la respuesta
+                return ResponseEntity.status(HttpStatus.OK).body(userDto);
+            } else {
+                var respuesta = new respuesta(
+                        "error",
+                        "Usuario no encontrado"
+                );
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+            }
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
     }
 
@@ -81,12 +93,23 @@ public class SecretController {
         String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
 
         Claims claims = JwtUtils.extractClaims(jwtToken);
-        
+
         if (claims != null) {
             String username = claims.getSubject();
 
             var user = userService.findByUsername(username);
             userDto.setId(user.getId());
+
+            // Validar que los campos obligatorios no estén vacíos
+            if (StringUtils.isEmpty(userDto.getNombre()) || StringUtils.isEmpty(userDto.getApellido())
+                    || StringUtils.isEmpty(userDto.getDireccion()) || StringUtils.isEmpty(userDto.getTelefono())
+                    || StringUtils.isEmpty(userDto.getAcercade()) || StringUtils.isEmpty(userDto.getImagen())) {
+                var respuesta = new respuesta(
+                        "error",
+                        "Por favor, complete todos los campos obligatorios"
+                );
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
+            }
 
             // Actualizar los detalles del usuario
             userService.updateUser(userDto);

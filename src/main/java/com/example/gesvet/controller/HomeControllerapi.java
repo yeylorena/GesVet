@@ -112,11 +112,19 @@ public class HomeControllerapi {
                     return ResponseEntity.ok(responseData);
                 }
             }
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
-            // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -149,11 +157,19 @@ public class HomeControllerapi {
                     return ResponseEntity.ok(response);
                 }
             }
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
             // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -182,11 +198,19 @@ public class HomeControllerapi {
                     return ResponseEntity.ok(response);
                 }
             }
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
             // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -217,16 +241,31 @@ public class HomeControllerapi {
                         // Devolver la respuesta como JSON con un ResponseEntity
                         return ResponseEntity.ok(response);
                     } else {
+
+                        var respuesta = new respuesta(
+                                "error",
+                                "Producto no encontrado"
+                        );
                         // Si el producto no se encuentra, devolver una respuesta de no encontrado
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Producto no encontrado");
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
                     }
                 }
             }
+
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
+
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
             // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -326,8 +365,13 @@ public class HomeControllerapi {
                 }
             }
 
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
+
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
             // Manejar cualquier excepción y devolver una respuesta de error
             var respuesta = new respuesta("error", "Error al procesar la solicitud");
@@ -341,37 +385,73 @@ public class HomeControllerapi {
             HttpServletRequest request,
             HttpSession httpSession) {
         try {
-            // Obtener los detalles del carrito almacenados en la sesión del usuario
-            List<DetalleFactura> detalles = (List<DetalleFactura>) httpSession.getAttribute("carrito");
-            if (detalles == null || detalles.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron detalles del carrito");
-            }
+            // Extraer el token del encabezado de la solicitud
+            String jwtToken = extractTokenFromRequest(request);
 
-            // Buscar el detalle correspondiente en la lista de detalles del carrito
-            Optional<DetalleFactura> optionalDetalle = detalles.stream()
-                    .filter(detalle -> detalle.getProductos().getId().equals(productId))
-                    .findFirst();
+            // Validar el token JWT
+            if (jwtToken != null) {
+                // Obtener las reclamaciones del token
+                Claims claims = JwtUtils.extractClaims(jwtToken);
 
-            if (optionalDetalle.isPresent()) {
-                DetalleFactura detalle = optionalDetalle.get();
-                // Verificar si la nueva cantidad excede la cantidad disponible en el inventario
-                if (newQuantity > detalle.getProductos().getCantidad()) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cantidad seleccionada excede la cantidad disponible en el inventario");
+                if (claims != null) {
+                   
+
+                    if (detalles == null || detalles.isEmpty()) {
+                        var respuesta = new respuesta("error", "No se encontraron detalles del carrito");
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+                    }
+
+                    // Buscar el detalle correspondiente en la lista de detalles del carrito
+                    Optional<DetalleFactura> optionalDetalle = detalles.stream()
+                            .filter(detalle -> detalle.getProductos().getId().equals(productId))
+                            .findFirst();
+
+                    if (optionalDetalle.isPresent()) {
+                        DetalleFactura detalle = optionalDetalle.get();
+                        // Verificar si la nueva cantidad excede la cantidad disponible en el inventario
+                        if (newQuantity > detalle.getProductos().getCantidad()) {
+                            var respuesta = new respuesta("error", "La cantidad seleccionada excede la cantidad disponible en el inventario");
+                            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
+                        }
+
+                        // Actualizar la cantidad del producto en el detalle del carrito
+                        detalle.setCantidad(newQuantity);
+                        detalle.setTotal(detalle.getPrecio() * newQuantity);
+
+                        // Guardar los detalles del carrito actualizados en la sesión del usuario
+                        httpSession.setAttribute("carrito", detalles);
+
+                        var respuesta = new respuesta(
+                                "Creado",
+                                "Cantidad del producto actualizada exitosamente"
+                        );
+
+                        return ResponseEntity.ok(respuesta);
+                    } else {
+
+                        var respuesta = new respuesta(
+                                "error",
+                                "El producto no se encontró en el carrito"
+                        );
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+                    }
                 }
-
-                // Actualizar la cantidad del producto en el detalle del carrito
-                detalle.setCantidad(newQuantity);
-                detalle.setTotal(detalle.getPrecio() * newQuantity);
-
-                // Guardar los detalles del carrito actualizados en la sesión del usuario
-                httpSession.setAttribute("carrito", detalles);
-
-                return ResponseEntity.ok("Cantidad del producto actualizada exitosamente");
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El producto no se encontró en el carrito");
             }
+
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
+            // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -388,8 +468,7 @@ public class HomeControllerapi {
                 Claims claims = JwtUtils.extractClaims(jwtToken);
 
                 if (claims != null) {
-                    // Obtener los detalles del carrito almacenados en la sesión del usuario
-                    List<DetalleFactura> detalles = (List<DetalleFactura>) httpSession.getAttribute("carrito");
+
                     if (detalles == null || detalles.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron detalles en el carrito");
                     }
@@ -401,14 +480,26 @@ public class HomeControllerapi {
 
                     // Guardar los detalles actualizados del carrito en la sesión del usuario
                     httpSession.setAttribute("carrito", detalles);
-
-                    return ResponseEntity.ok("Producto eliminado del carrito exitosamente");
+                    var respuesta = new respuesta(
+                            "Creado",
+                            "Producto eliminado del carrito exitosamente"
+                    );
+                    return ResponseEntity.ok(respuesta);
                 }
             }
+
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -456,11 +547,19 @@ public class HomeControllerapi {
                     return ResponseEntity.ok(responseData);
                 }
             }
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
             // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -520,11 +619,20 @@ public class HomeControllerapi {
                     return ResponseEntity.ok(responseData);
                 }
             }
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
+
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
             // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -556,9 +664,8 @@ public class HomeControllerapi {
                     // Obtener el Método de Pago seleccionado
                     MetodoPago metodoPagoSeleccionado = metodopagoservice.findById(metodoPagoId);
 
-                   
                     if (detalles == null || detalles.isEmpty()) {
-                         var respuesta = new respuesta("error", "No hay productos en el carrito para generar la factura.");
+                        var respuesta = new respuesta("error", "No hay productos en el carrito para generar la factura.");
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                     }
 
@@ -608,11 +715,20 @@ public class HomeControllerapi {
                     return ResponseEntity.ok(respuesta);
                 }
             }
+
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
             // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -668,7 +784,11 @@ public class HomeControllerapi {
 
                     // Verificar si el usuario existe
                     if (user == null) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+                        var respuesta = new respuesta(
+                                "error",
+                                "Usuario no encontrado"
+                        );
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
                     }
 
                     // Obtener las facturas del usuario
@@ -682,11 +802,19 @@ public class HomeControllerapi {
                     return ResponseEntity.ok(responseData);
                 }
             }
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
             // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
@@ -709,7 +837,11 @@ public class HomeControllerapi {
 
                     // Verificar si el usuario existe
                     if (user == null) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+                        var respuesta = new respuesta(
+                                "error",
+                                "Usuario no encontrado"
+                        );
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
                     }
 
                     // Obtener la factura por su ID
@@ -717,14 +849,22 @@ public class HomeControllerapi {
 
                     // Verificar si la factura existe
                     if (!optionalFactura.isPresent()) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Factura no encontrada");
+                        var respuesta = new respuesta(
+                                "error",
+                                "Error Factura no encontrada"
+                        );
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
                     }
 
                     Factura factura = optionalFactura.get();
 
                     // Verificar si la factura pertenece al usuario
                     if (!factura.getUsuario().equals(user)) {
-                        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No tiene permiso para acceder a esta factura");
+                        var respuesta = new respuesta(
+                                "error",
+                                "No tiene permiso para acceder a esta factura"
+                        );
+                        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(respuesta);
                     }
 
                     // Obtener los detalles de la factura
@@ -739,11 +879,19 @@ public class HomeControllerapi {
                     return ResponseEntity.ok(responseData);
                 }
             }
+            var respuesta = new respuesta(
+                    "error",
+                    "Usuario no autorizado"
+            );
             // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         } catch (Exception e) {
+            var respuesta = new respuesta(
+                    "error",
+                    "Error al procesar la solicitud"
+            );
             // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
     }
 
