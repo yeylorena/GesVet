@@ -447,7 +447,6 @@
                                         <div class="col-md-8 col-lg-9">
                                             <div class="row my-2">
                                                 <div class="col-6">
-
                                                     <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);">
                                                         <input id="imagen" type="file" name="file" class="btn btn-sm" title="Upload new profile image" style="display: none;" onchange="mostrarVistaPrevia(this);" accept=".jpg, .jpeg, .png">
                                                             <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('imagen').click(); return false;">
@@ -463,10 +462,10 @@
                                                                 <div class="col-6">
                                                                     <label style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Nombre:</label>
                                                                     <input type="text" name="nombre" field="" class="form-control" id="nombreInput" required>
-                                                                        <small id="nombreHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo letras y entre 3 y 20 caracteres.</small>
+                                                                        <small id="nombreHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo letras entre 3 y 20 caracteres.</small>
                                                                 </div>
                                                                 <div class="col-6 ">
-                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Color</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Color:</label>
                                                                     <input type="text" name="color" id="color" field="" class="form-control" required>
                                                                 </div>
                                                             </div>
@@ -477,7 +476,7 @@
                                                                         <small id="edadHelp" class="form-text text-danger" style="display:none;">Por favor, ingrese solo números.</small>
                                                                 </div>
                                                                 <div class="col-6 ">
-                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Tiempo</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Tiempo:</label>
                                                                     <select name="tiempo" class="form-select" required>
                                                                         <option value="">Selecciona el tiempo</option>
                                                                         <option value="Meses">Meses</option>
@@ -495,7 +494,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-6 ">
-                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Especie</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Especie:</label>
                                                                     <select name="especie" class="form-select" required>
                                                                         <option value="">Selecciona una especie</option>
                                                                         <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}"></option>
@@ -505,14 +504,14 @@
 
                                                             <div class="row mb-3">
                                                                 <div class="col-6">
-                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Raza</label>
+                                                                    <label style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Raza:</label>
                                                                     <select name="raza" class="form-select" required>
                                                                         <option value="">Selecciona una raza</option>
                                                                         <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-6">
-                                                                    <label  style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Detalles</label>
+                                                                    <label  style="color: black;text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Detalles:</label>
 
                                                                     <input name="detalles" type="text" class="form-control" id="detalles" value="">
                                                                 </div>
@@ -604,17 +603,17 @@
 
 
                                                                     nombreInput.addEventListener('input', function () {
-                                                                        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                                                                        this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
                                                                         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
                                                                     });
 
                                                                     colorInput.addEventListener('input', function () {
-                                                                        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                                                                        this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
                                                                         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
                                                                     });
 
                                                                     detallesInput.addEventListener('input', function () {
-                                                                        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                                                                        this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
                                                                         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
                                                                     });
 
@@ -735,8 +734,5 @@
                                                                     }
                                                                 }
                                                             </script>
-
-
                                                             </body>
-
                                                             </html>

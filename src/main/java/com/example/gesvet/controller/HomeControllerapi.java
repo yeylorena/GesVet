@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +30,6 @@ import com.example.gesvet.service.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
@@ -48,8 +46,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
 @RequestMapping("/api/carrito")
@@ -556,9 +552,8 @@ public class HomeControllerapi {
                     // Obtener el Método de Pago seleccionado
                     MetodoPago metodoPagoSeleccionado = metodopagoservice.findById(metodoPagoId);
 
-                   
                     if (detalles == null || detalles.isEmpty()) {
-                         var respuesta = new respuesta("error", "No hay productos en el carrito para generar la factura.");
+                        var respuesta = new respuesta("error", "No hay productos en el carrito para generar la factura.");
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                     }
 

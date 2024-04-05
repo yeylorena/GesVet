@@ -1,6 +1,5 @@
 package com.example.gesvet.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -44,7 +43,7 @@ public class DetalleFactura {
     public DetalleFactura() {
     }
 
-    public DetalleFactura(Integer id, String nombre, double cantidad, double precio, double total,String imagen) {
+    public DetalleFactura(Integer id, String nombre, double cantidad, double precio, double total, String imagen) {
         super();
         this.id = id;
         this.nombre = nombre;

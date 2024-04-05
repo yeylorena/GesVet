@@ -6,7 +6,6 @@ import com.example.gesvet.models.citaRapida;
 import com.example.gesvet.repository.citaRapidaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;

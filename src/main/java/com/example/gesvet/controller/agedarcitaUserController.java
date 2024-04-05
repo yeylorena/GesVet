@@ -123,11 +123,6 @@ public class agedarcitaUserController {
         // Obtener la fecha y hora de inicio de la cita
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime inicio = LocalDateTime.parse(inicioStr, formatter);
-        // Validar que la hora de inicio esté en un intervalo de media hora
-        if (inicio.getMinute() % 30 != 0) {
-            redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una hora en intervalos de media hora.");
-            return "redirect:/citas";
-        }
 
         // Obtener el usuario actual
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();

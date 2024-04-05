@@ -4,7 +4,6 @@ import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.models.Categorias;
 import com.example.gesvet.models.MetodoPago;
 import com.example.gesvet.models.Productos;
-import com.example.gesvet.models.Servicios;
 import com.example.gesvet.models.ServiciosUser;
 import com.example.gesvet.models.Tipocategoria;
 import com.example.gesvet.models.User;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.example.gesvet.service.IProductoService;
-import com.example.gesvet.service.IServicioService;
 import com.example.gesvet.service.IServiciosUserService;
 import com.example.gesvet.service.ITipocategoriaservice;
 import com.example.gesvet.service.UserService;
@@ -56,9 +54,6 @@ public class ProductoController {
 
     @Autowired
     private ICategoriasService categoriasService;
-
-    @Autowired
-    private IServicioService serviciosService;
 
     @Autowired
     private ITipocategoriaservice tipocategoriaservice;
@@ -95,7 +90,6 @@ public class ProductoController {
 
         model.addAttribute("productos", productoService.findAll());
         model.addAttribute("categorias", categoriasService.findAll());
-        model.addAttribute("servicios", serviciosService.findAll());
         model.addAttribute("tipocategorias", tipocategoriaservice.findAll());
         model.addAttribute("serviciousers", serviciouserservice.findAll());
         model.addAttribute("metodopagos", metodopagoservice.findAll());
@@ -538,179 +532,6 @@ public class ProductoController {
         categoriasService.delete(id);
         // Agregar un mensaje de flash para mostrar en la vista
         redirectAttributes.addFlashAttribute("exitoeliminadocategroia", "Categoría eliminada con éxito");
-        return "redirect:/productos";
-    }
-
-    /* Servicios */
-    @GetMapping("/crearservicio")
-    public String createservicio(Model model, Authentication authentication, Principal principal) {
-        // Obtener los detalles del usuario actual
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("userdetail", userDetails);
-
-        // Obtener el nombre de usuario actual
-        String username = authentication.getName();
-
-        // Buscar al usuario por su nombre de usuario
-        User user = userService.findByUsername(username);
-
-        // Crear un objeto UserDto
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setUsername(user.getUsername());
-        userDto.setNombre(user.getNombre());
-        userDto.setApellido(user.getApellido());
-        userDto.setDireccion(user.getDireccion());
-        userDto.setTelefono(user.getTelefono());
-        userDto.setRole(user.getRole());
-        userDto.setAcercade(user.getAcercade());
-        userDto.setImagen("/images/" + user.getImagen());
-
-        model.addAttribute("userDto", userDto);
-        return "productos/agregarservicio";
-    }
-
-    @PostMapping("/saveservicio")
-    public String saveservicio(Servicios servicios, Model model, Authentication authentication, Principal principal, @RequestParam("activo") boolean activo, RedirectAttributes redirectAttributes) throws IOException {
-
-        // Obtener los detalles del usuario actual
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("userdetail", userDetails);
-        // Obtener el nombre de usuario del usuario autenticado
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-
-        // Buscar el usuario en la base de datos por su nombre de usuario
-        User user = userService.findByUsername(username);
-        // Crear un objeto UserDto
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setUsername(user.getUsername());
-        userDto.setNombre(user.getNombre());
-        userDto.setApellido(user.getApellido());
-        userDto.setDireccion(user.getDireccion());
-        userDto.setTelefono(user.getTelefono());
-        userDto.setRole(user.getRole());
-        userDto.setAcercade(user.getAcercade());
-        userDto.setImagen("/images/" + user.getImagen());
-
-        model.addAttribute("userDto", userDto);
-        servicios.setActivo(activo);
-        serviciosService.save(servicios);
-        // Agregar un mensaje de flash para mostrar en la vista
-        redirectAttributes.addFlashAttribute("exitoservicio", "Tipo servicio agregado con éxito");
-        return "redirect:/productos";
-    }
-
-    @GetMapping("/editarservicio/{id}")
-    public String editarservicio(@PathVariable Integer id, Model model, Authentication authentication, Principal principal) {
-
-        // Obtener los detalles del usuario actual
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("userdetail", userDetails);
-
-        // Obtener el nombre de usuario actual
-        String username = authentication.getName();
-
-        // Buscar al usuario por su nombre de usuario
-        User user = userService.findByUsername(username);
-
-        // Crear un objeto UserDto
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setUsername(user.getUsername());
-        userDto.setNombre(user.getNombre());
-        userDto.setApellido(user.getApellido());
-        userDto.setDireccion(user.getDireccion());
-        userDto.setTelefono(user.getTelefono());
-        userDto.setRole(user.getRole());
-        userDto.setAcercade(user.getAcercade());
-        userDto.setImagen("/images/" + user.getImagen());
-
-        Servicios servicio = new Servicios();
-        Optional<Servicios> optionalServicio = serviciosService.get(id);
-        servicio = optionalServicio.get();
-
-        model.addAttribute("userDto", userDto);
-        model.addAttribute("servicio", servicio);
-
-        return "productos/editarservicio";
-    }
-
-    @PostMapping("/updateservicio")
-    public String updateservicio(Servicios servicio, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) throws IOException {
-
-        // Obtener los detalles del usuario actual
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("userdetail", userDetails);
-
-        // Obtener el nombre de usuario actual
-        String username = authentication.getName();
-
-        // Buscar al usuario por su nombre de usuario
-        User user = userService.findByUsername(username);
-
-        // Crear un objeto UserDto
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setUsername(user.getUsername());
-        userDto.setNombre(user.getNombre());
-        userDto.setApellido(user.getApellido());
-        userDto.setDireccion(user.getDireccion());
-        userDto.setTelefono(user.getTelefono());
-        userDto.setRole(user.getRole());
-        userDto.setAcercade(user.getAcercade());
-        userDto.setImagen("/images/" + user.getImagen());
-
-        Servicios s = new Servicios();
-        s = serviciosService.get(servicio.getId()).get();
-
-        servicio.setUsuario(s.getUsuario());
-        serviciosService.update(servicio);
-
-        model.addAttribute("userDto", userDto);
-        // Agregar un mensaje de flash para mostrar en la vista
-        redirectAttributes.addFlashAttribute("exitoservicioactualizado", "Tipo servicio actualizado con éxito");
-        return "redirect:/productos";
-    }
-
-    @GetMapping("/deleteservicio/{id}")
-    public String deleteservicio(@PathVariable Integer id, Model model, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
-
-        // Obtener los detalles del usuario actual
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("userdetail", userDetails);
-
-        // Obtener el nombre de usuario actual
-        String username = authentication.getName();
-
-        // Buscar al usuario por su nombre de usuario
-        User user = userService.findByUsername(username);
-
-        // Crear un objeto UserDto
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setUsername(user.getUsername());
-        userDto.setNombre(user.getNombre());
-        userDto.setApellido(user.getApellido());
-        userDto.setDireccion(user.getDireccion());
-        userDto.setTelefono(user.getTelefono());
-        userDto.setRole(user.getRole());
-        userDto.setAcercade(user.getAcercade());
-        userDto.setImagen("/images/" + user.getImagen());
-
-        Servicios s = new Servicios();
-        s = serviciosService.get(id).get();
-
-        if (s != null) {
-            // Desactivar el producto en lugar de borrarlo
-            s.setActivos(false);
-            serviciosService.update(s);
-        }
-
-        model.addAttribute("userDto", userDto);
-
-        // Agregar un mensaje de flash para mostrar en la vista
-        redirectAttributes.addFlashAttribute("exitoservicioeliminado", "Tipo servicio eliminado con éxito");
         return "redirect:/productos";
     }
 

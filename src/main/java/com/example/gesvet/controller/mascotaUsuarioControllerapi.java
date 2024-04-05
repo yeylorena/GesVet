@@ -194,57 +194,57 @@ public class mascotaUsuarioControllerapi {
         }
     }
 
-  @PutMapping("/update")
-public ResponseEntity<Object> updateMascota(@RequestBody Mascota mascota, HttpServletRequest request) {
-    // Obtener el token JWT de la solicitud
-    String jwtToken = extractTokenFromRequest(request);
+    @PutMapping("/update")
+    public ResponseEntity<Object> updateMascota(@RequestBody Mascota mascota, HttpServletRequest request) {
+        // Obtener el token JWT de la solicitud
+        String jwtToken = extractTokenFromRequest(request);
 
-    // Validar el token JWT
-    Claims claims = JwtUtils.extractClaims(jwtToken);
-    if (claims != null) {
-        String username = claims.getSubject();
-        User user = userService.findByUsername(username);
-        if (user != null) {
-            // Asignar el usuario a la mascota que se está actualizando
-            mascota.setUsuario(user);
+        // Validar el token JWT
+        Claims claims = JwtUtils.extractClaims(jwtToken);
+        if (claims != null) {
+            String username = claims.getSubject();
+            User user = userService.findByUsername(username);
+            if (user != null) {
+                // Asignar el usuario a la mascota que se está actualizando
+                mascota.setUsuario(user);
 
-            try {
-                // Actualiza la mascota en la base de datos
-                mascotaService.update(mascota);
+                try {
+                    // Actualiza la mascota en la base de datos
+                    mascotaService.update(mascota);
 
-                // Devuelve una respuesta exitosa
-                respuesta respuesta = new respuesta(
-                        "Éxito",
-                        "Mascota actualizada exitosamente"
-                );
-                return ResponseEntity.status(HttpStatus.OK).body(respuesta);
-            } catch (Exception e) {
-                // Maneja cualquier excepción que pueda ocurrir al actualizar la mascota
-                e.printStackTrace();
-                // Devuelve una respuesta de error
+                    // Devuelve una respuesta exitosa
+                    respuesta respuesta = new respuesta(
+                            "Éxito",
+                            "Mascota actualizada exitosamente"
+                    );
+                    return ResponseEntity.status(HttpStatus.OK).body(respuesta);
+                } catch (Exception e) {
+                    // Maneja cualquier excepción que pueda ocurrir al actualizar la mascota
+                    e.printStackTrace();
+                    // Devuelve una respuesta de error
+                    respuesta respuesta = new respuesta(
+                            "error",
+                            "Error al actualizar la mascota"
+                    );
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+                }
+            } else {
                 respuesta respuesta = new respuesta(
                         "error",
-                        "Error al actualizar la mascota"
+                        "Usuario no autenticado"
                 );
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+                // Si el usuario no está autenticado, devuelve una respuesta de error
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
             }
         } else {
+            // Si el token no es válido, devuelve una respuesta de error
             respuesta respuesta = new respuesta(
                     "error",
-                    "Usuario no autenticado"
+                    "Token JWT inválido"
             );
-            // Si el usuario no está autenticado, devuelve una respuesta de error
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
-    } else {
-        // Si el token no es válido, devuelve una respuesta de error
-        respuesta respuesta = new respuesta(
-                "error",
-                "Token JWT inválido"
-        );
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
     }
-}
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
@@ -259,9 +259,5 @@ public ResponseEntity<Object> updateMascota(@RequestBody Mascota mascota, HttpSe
             return authHeader.substring(7);
         }
         return null;
-    }
-
-    public ResponseEntity<Object> saveMascota(Mascota mascota) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

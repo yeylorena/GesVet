@@ -498,6 +498,40 @@ function eliminarMascota(id) {
         }
     });
 }
+function finalizarCita(citaId) {
+    Swal.fire({
+        title: '¿Deseas finalizar la cita?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, finalizar',
+        cancelButtonText: 'Cancelar' // Personaliza el texto del botón "Cancelar"
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Si el usuario confirma, redirige a la URL de finalización
+            window.location.href = '/finalizar/' + citaId;
+        }
+    });
+}
+function cancelarCita(citaId) {
+    Swal.fire({
+        title: '¿Deseas cancelar la cita?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, cancelar',
+        cancelButtonText: 'Cancelar' // Personaliza el texto del botón "Cancelar"
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Si el usuario confirma, redirige a la URL de finalización
+            window.location.href = '/cancelar/' + citaId;
+        }
+    });
+}
 
 //Función eliminar especie
 function eliminarEspecie(id) {

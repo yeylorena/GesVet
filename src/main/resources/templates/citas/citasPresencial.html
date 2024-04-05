@@ -254,7 +254,7 @@
                                                                                                         <div class="col">
                                                                                                             <br>
                                                                                                                 <label class="control-label"><strong>Fecha de inicio:</strong></label>
-                                                                                                                <input type="datetime-local" name="inicio" id="fechaInicio" class="form-control" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" required />
+                                                                                                                <input type="datetime-local" name="inicio" step="1800" id="fechaInicio" class="form-control" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" required />
                                                                                                         </div>
                                                                                                         <div th:if="${error != null}" class="alert alert-danger mt-3" role="alert">
                                                                                                             <strong>Error:</strong> <span th:text="${error}"></span>
@@ -338,13 +338,15 @@ Swal.fire({
                                                                                                                             }
                                                                                                                         });
                                                                                                                         nombreMascotaInput.addEventListener('input', function () {
-                                                                                                                            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                                                                                                                            this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
                                                                                                                             this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
                                                                                                                         });
+
                                                                                                                         nombreDueñoInput.addEventListener('input', function () {
-                                                                                                                            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                                                                                                                            this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
                                                                                                                             this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
                                                                                                                         });
+
                                                                                                                         // Restablecer valores al cerrar el modal
                                                                                                                         $('#agregarProv').on('hidden.bs.modal', function (e) {
                                                                                                                             $('#nombreMascota').val('');

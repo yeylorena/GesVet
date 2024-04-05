@@ -94,7 +94,7 @@ public class citas {
     }
 
     @GetMapping("/finalizar/{citaId}")
-    public String finalizarCita(@PathVariable Long citaId, RedirectAttributes redirectAttributes) {
+    public String finalizar(@PathVariable Long citaId, RedirectAttributes redirectAttributes) {
         Optional<citaRapida> optionalCita = citarapidaservice.get(citaId);
         if (optionalCita.isPresent()) {
             citaRapida cita = optionalCita.get();

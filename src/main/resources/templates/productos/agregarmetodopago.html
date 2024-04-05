@@ -12,7 +12,7 @@
         </div><!-- End Logo -->
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-               
+
                 <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
@@ -202,7 +202,7 @@
             var nombreInput = document.getElementById("nombre");
 
             nombreInput.addEventListener('input', function () {
-                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
                 this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
             });
 

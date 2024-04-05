@@ -1,6 +1,7 @@
 package com.example.gesvet.controller.login;
 
 import com.example.gesvet.auth.AuthService;
+import com.example.gesvet.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,15 +17,25 @@ public class AuthController {
 
     private final AuthService authService;
 
+    private final UserService UserService;
+
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto authRequestDto) {
-        var jwtToken = authService.login(authRequestDto.username(), authRequestDto.password());
+        var user = UserService.findByUsername(authRequestDto.username());
 
-        var authResponseDto = new AuthResponseDto(jwtToken, AuthStatus.LOGIN_SUCCESS);
+        if (user.getRole().equals("USER")) {
+            var jwtToken = authService.login(authRequestDto.username(), authRequestDto.password());
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(authResponseDto);
+            var authResponseDto = new AuthResponseDto(jwtToken, AuthStatus.LOGIN_SUCCESS);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(authResponseDto);
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(null);
+        }
     }
 
     @PostMapping("/verify-token")
