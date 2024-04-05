@@ -7,24 +7,15 @@ import com.example.gesvet.service.RecuperarContrasenausuService;
 import com.example.gesvet.service.UserService;
 import java.io.UnsupportedEncodingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.mail.MessagingException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.gesvet.repository.RecuperarContrasenausuRepository;
-import java.time.LocalDateTime;
 import java.util.Map;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,7 +44,7 @@ public class RecuperarContrasenausuControllerapi {
 
     @PostMapping("/password-request")
     public ResponseEntity<Object> savePasswordRequest(@RequestBody Map<String, String> requestBody) {
-    String username = requestBody.get("username"); 
+        String username = requestBody.get("username");
         User user = userService.findByUsername(username);
         if (user == null) {
 

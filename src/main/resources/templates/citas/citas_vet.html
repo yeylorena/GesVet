@@ -198,10 +198,10 @@
                                                 <td th:text="${cita.formattedFecha}"></td>
                                                 <td th:text="${cita.estado}" th:classappend="${cita.estado eq 'completado' ? 'text-success' : 'text-danger' }"></td>
                                                 <td class="align-middle text-center">
-                                                    <a th:href="@{'/finalizar/' + ${cita.id}}" class="btn" style="background-color: #2FD6B4;"><i class="bi bi-check"></i></a>
+                                                    <a th:onclick="'finalizarCita(' + ${cita.id} + ')'" class="btn" style="background-color: #2FD6B4;"><i class="bi bi-check"></i></a>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a th:href="@{'/cancelar/' + ${cita.id}}" class="btn" style="background-color: #2FD6B4;"><i class="bi bi-x"></i></a>
+                                                    <a th:onclick="'cancelarCita(' + ${cita.id} + ')'" class="btn" style="background-color: #2FD6B4;"><i class="bi bi-x"></i></a>
                                                 </td>
                                             </tr>
                                         </tbody>

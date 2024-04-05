@@ -314,7 +314,8 @@ public class mascotaUsuarioControllerapi {
                         "error",
                         "Error al procesar la solicitud"
                 );
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+                // Si el usuario no está autenticado, devuelve una respuesta de error
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
             }
         } else {
             // Si el token no es válido, devuelve una respuesta de error
@@ -333,9 +334,5 @@ public class mascotaUsuarioControllerapi {
             return authHeader.substring(7);
         }
         return null;
-    }
-
-    public ResponseEntity<Object> saveMascota(Mascota mascota) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -26,8 +26,8 @@ public interface IFacturaService {
     List<Object[]> obtenerTopProductosMasVendidos();
 
     /*
-  List<Object[]> findTotalVentasPorProducto();
-  Double findSumaTotalVentas();
+    List<Object[]> findTotalVentasPorProducto();
+    Double findSumaTotalVentas();
      */
     List<Factura> findByUsuarioAndEstadoPago(User usuario, String estadoPago);
 
@@ -36,7 +36,7 @@ public interface IFacturaService {
 
     //corresponde a las compras del usuario
     List<Object[]> findDetallesVentas();
-//corresponde a la facturacio diaria
+    //corresponde a la facturacio diaria
 
     List<Object[]> findDetallesFactura();
 }

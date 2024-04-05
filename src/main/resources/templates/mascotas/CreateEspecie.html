@@ -422,12 +422,12 @@
                     var nombreInput = document.getElementById("nombre");
 
                     descripcionInput.addEventListener('input', function () {
-                        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                        this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
                         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
                     });
 
                     nombreInput.addEventListener('input', function () {
-                        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                        this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
                         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
                     });
 

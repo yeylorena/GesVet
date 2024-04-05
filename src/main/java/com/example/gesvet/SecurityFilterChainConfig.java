@@ -50,7 +50,7 @@ public class SecurityFilterChainConfig {
                 -> requestMatcher.requestMatchers("/api/auth/login/**").permitAll()
                         .requestMatchers("/api/auth/sign-up/**").permitAll()
                         .requestMatchers("/api/auth/verify-token/**").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().hasRole("USER")
         );
 
         // Authentication Entry Point -> Exception Handler
