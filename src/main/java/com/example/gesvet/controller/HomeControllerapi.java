@@ -336,6 +336,7 @@ public class HomeControllerapi {
                             // Si el producto no está en el carrito, agregar un nuevo detalle
                             DetalleFactura detalleFactura = new DetalleFactura();
                             detalleFactura.setCantidad(cantidad);
+                            detalleFactura.setId(producto.getId());
                             detalleFactura.setImagen(producto.getImagen());
                             detalleFactura.setPrecio(producto.getPrecio());
                             detalleFactura.setNombre(producto.getNombre());
