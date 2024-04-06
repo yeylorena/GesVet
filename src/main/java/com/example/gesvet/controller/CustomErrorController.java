@@ -8,7 +8,6 @@ public class CustomErrorController {
 
     @GetMapping("/error403")
     public String handle403() {
-        // Puedes realizar algún procesamiento adicional si es necesario
-        return "error403"; // Nombre de la página HTML personalizada
+        return "error403";
     }
 }

@@ -145,7 +145,6 @@
             }
             .titlecartasDos {
                 font-family: 'Montserrat', Arial, sans-serif;
-                font-size: 18px;
                 font-weight: 300;
                 color: #FFFFFF;
             }
@@ -163,7 +162,7 @@
         <script th:src="@{/assets/js/main.js}"></script>
     </head>
     <body>
-        <div class="navbar-container " style="position: fixed; top: 0; width: 100%; z-index: 1000; background-color: #FFFFFF">
+        <div class="navbar-container">
             <div class="container-fluid ">
                 <div class="row">
                     <nav  class="navbar navbar-expand-lg bg-body-tertiary " style="background-color: #FFFFFF" >
@@ -173,48 +172,37 @@
                                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div  class="collapse navbar-collapse" id="navbarNavDropdown">
-                                <ul class="navbar-nav justify-content-end !important" style="padding-left: 18rem;">
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav justify-content-end" style="padding-left: 10rem;">
                                     <li class="nav-item">
-                                        <a class="nav-link titulo"  href="#carouselExample"
-                                           >Inicio</a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link titulo"  href="#quienesSomosFooter"
-                                           >Nosotros</a>
+                                        <a class="nav-link titulo" href="#carouselExample">Inicio</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link titulo" href="#nuestros-servicios"
-                                           >Servicios</a>
+                                        <a class="nav-link titulo" href="#quienesSomosFooter">Nosotros</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link titulo" href="#nuestros-servicios">Servicios</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link titulo" href="#contacto">Contacto</a>
                                     </li>
                                     <!-- First dropdown button -->
-                                    <li class="nav-item dropdown my-1">
-                                        <a class="nav-link custom-btn botones text-center" href="#" role="button"
-                                           data-bs-toggle="dropdown" aria-expanded="false">
-                                            REGÍSTRATE
-                                        </a>
-                                        <ul class="dropdown-menu subboton" style="width: 150px; min-width: unset; height: 41px; ">
-                                            <li><a class="dropdown-item custom-btn text-center" th:href="@{/register}">USUARIO</a></li>
-                                        </ul>
+                                    <li class="nav-item my-1" style="padding-left: 6rem;">
+                                        <a class="nav-link custom-btn botones text-center" th:href="@{/register}" role="button">REGÍSTRATE</a>
                                     </li>
                                     <!-- Second dropdown button -->
                                     <li class="nav-item dropdown my-1">
-                                        <a class="nav-link custom-btn botones text-center" href="#" role="button"
-                                           data-bs-toggle="dropdown" aria-expanded="false">
-                                            INGRESA YA
-                                        </a>
-                                        <ul class="dropdown-menu text-center" style="background-color: #39DBC1; border-radius: 8px; width: 150px; min-width: unset;" >
-                                            <li><a class="dropdown-item custom-btn text-center" style=" height: 21px;" th:href="@{/login}">ADMINISTRADOR</a></li>
+                                        <a class="nav-link custom-btn botones text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">INGRESA YA</a>
+                                        <ul class="dropdown-menu text-center" style="background-color: #39DBC1; border-radius: 8px; width: 150px; min-width: unset;">
+                                            <li><a class="dropdown-item custom-btn text-center" style="height: 21px;" th:href="@{/login}">ADMINISTRADOR</a></li>
                                             <!-- Agregar separador -->
                                             <div class="dropdown-divider"></div>
-                                            <li><a class="dropdown-item custom-btn text-center " style=" height: 21px;" th:href="@{/login}">USUARIO</a></li>
+                                            <li><a class="dropdown-item custom-btn text-center " style="height: 21px;" th:href="@{/login}">USUARIO</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
+
                         </div>
                     </nav>
                 </div>
@@ -225,21 +213,21 @@
                 <div class="carousel-item active">
                     <img src="./img/banneruno.jpg" class="d-block w-100" alt="..." style="   max-width: 100%;
                          width: 1920px;
-                         height: 700px;
+                         height: 550px;
                          display: block;
                          margin: 0 auto;">
                 </div>
                 <div class="carousel-item">
                     <img src="./img/bannerdos.jpg" class="d-block w-100" alt="..." style="   max-width: 100%;
                          width: 1920px;
-                         height: 700px;
+                         height: 550px;
                          display: block;
                          margin: 0 auto;">
                 </div>
                 <div class="carousel-item">
                     <img src="./img/bannertres.jpg" class="d-block w-100" alt="..." style="    max-width: 100%;
                          width: 1920px;
-                         height: 700px;
+                         height: 550px;
                          display: block;
                          margin: 0 auto;">
                 </div>
@@ -256,61 +244,51 @@
         <footer id="quienesSomosFooter" class="p-2" style="background-color:#2FC0D5;">
             <h3 class="encabezados text-center">CONOCE UN POCO DE NOSOTROS</h3>
         </footer>
-        <footer class="p-3" style="background-color: #FFFFFF; font-family: 'Inter';
+        <footer class="p-5" style="background-color: #FFFFFF; font-family: 'Inter';
                 font-style: normal;
                 font-weight: 500;
                 font-size: 10px;
-                line-height: 50px;
-                /* or 208% */
-                text-align: justify;">
-            <h4 class="p-5 texto" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 20px;">Desde el año 2024, GesVet se ha convertido en un referente en la ciudad
-                de Neiva en cuanto a la atención de servicios veterinarios y de emergencia. Nuestro equipo de profesionales
-                altamente capacitados se ha dedicado a llevar a cabo nuestra misión fundamental: brindar
-                atención veterinaria de excelencia a todas las mascotas de la ciudad de Neiva. Ya sea que tengas un perrito o un
-                gatito, en GesVet estamos comprometidos a ayudar en cualquier situación que se presente. Nuestra pasión es el
-                cuidado de los animales, y estamos aquí para asegurarnos de que todas las mascotas reciban el cuidado y la
-                atención que merecen.</h4>
+                line-height: 1.6; /* Cambiado de 50px a 1.6 para mejorar la legibilidad */
+                text-align: justify; /* Opcional: Justificar el texto */
+                margin-left: auto; /* Ajuste para centrar horizontalmente */
+                margin-right: auto; /* Ajuste para centrar horizontalmente */
+                max-width: 1050px; /* Establecer un ancho máximo para el footer */">
+            <h4 class="texto" style="font-family: 'Calibri Light', Arial, sans-serif; font-size: 20px;">Desde el año 2024, GesVet se ha convertido en un referente en la ciudad de Neiva en cuanto a la atención de servicios veterinarios y de emergencia. Nuestro equipo de profesionales altamente capacitados se ha dedicado a llevar a cabo nuestra misión fundamental: brindar atención veterinaria de excelencia a todas las mascotas de la ciudad de Neiva. Ya sea que tengas un perrito o un gatito, en GesVet estamos comprometidos a ayudar en cualquier situación que se presente. Nuestra pasión es el cuidado de los animales, y estamos aquí para asegurarnos de que todas las mascotas reciban el cuidado y la atención que merecen.</h4>
         </footer>
-        <div class="container-fluid">
-            <div class="row row-cols-1 row-cols-md-3 g-4 p-3 " style="background-color:#F9F7F7">
+
+        <div class="container-fluid" style="background-color:#F9F7F7;">
+            <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-left: auto; margin-right: auto; max-width: 1000px;">
                 <div class="col">
-                    <div class="card h-100 card-hover">
-                        <div class="card-body" style=" box-sizing: border-box;
+                    <div class="card h-100">
+                        <div class="card-body" style="box-sizing: border-box;
                              background: #2FC0D5;
                              border-radius: 8px;
-                             box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);">
-                            <h5 class="titlecartas p-2 " style="text-align: center; color: #000000"> Misión</h5>
+                             padding: 8px;">
+                            <h5 class="titlecartas p-2" style="text-align: center; color: #000000">Misión</h5>
                             <br>
-                            <p class="textcartas p-2" style="text-align: center; font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">Brindar atención veterinaria de excelencia a todas las mascotas de la ciudad de Neiva, comprometiéndonos a ayudar en
-                                cualquier situación que se presente y asegurándonos de que todas las mascotas reciban el cuidado y la
-                                atención que merecen.</p>
+                            <p class="textcartas p-2" style="text-align: center; font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">Brindar atención veterinaria de excelencia a todas las mascotas de la ciudad de Neiva, comprometiéndonos a ayudar en cualquier situación que se presente y asegurándonos de que todas las mascotas reciban el cuidado y la atención que merecen.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card h-100 card-hover">
-                        <div class="card-body" style=" box-sizing: border-box;
+                    <div class="card h-100">
+                        <div class="card-body" style="box-sizing: border-box;
                              background:#2FD67D;
-                             border-radius: 8px;
-                             box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
-                             ">
+                             border-radius: 8px;">
                             <h5 class="titlecartas p-2" style="text-align: center; color: #000000 ">Visión</h5>
                             <br>
-                            <p class="textcartas p-2" style="text-align: center;font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;" >Convertirnos en la clínica veterinaria líder en la ciudad de Neiva, reconocida por nuestra atención de excelencia y
-                                nuestro compromiso con el bienestar animal.</p>
+                            <p class="textcartas p-2" style="text-align: center;font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;" >Convertirnos en la clínica veterinaria líder en la ciudad de Neiva, reconocida por nuestra atención de excelencia y nuestro compromiso con el bienestar animal.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card h-100 card-hover">
-                        <div class="card-body" style=" box-sizing: border-box;
+                    <div class="card h-100">
+                        <div class="card-body" style="box-sizing: border-box;
                              background: #2FD6B5;
-                             border-radius: 8px;
-                             box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
-                             ">
+                             border-radius: 8px;">
                             <h5 class="titlecartas p-2" style="text-align: center; color: #000000">Valores</h5>
                             <br>
-                            <p class="textcartas p-2" style="text-align: center; font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">- Compromiso con el bienestar animal.
+                            <p class="textcartas p-2" style="text-align: left; font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">- Compromiso con el bienestar animal.
                                 <br>
                                 - Atención de excelencia.
                                 <br>
@@ -325,237 +303,243 @@
                 </div>
             </div>
         </div>
-        <footer id="nuestros-servicios" class="p-2 " style="background-color: #2FC0D5;">
+
+        <footer id="nuestros-servicios" class="p-2 mt-4" style="background-color: #2FC0D5;">
             <h3 class="encabezados text-center">NUESTROS SERVICIOS</h3>
         </footer>
-        <div class="container-fluid " style="background-color:#F9F7F7">
-            <div class="row col-md-12 ">
+        <div class="container-fluid" style="margin-left: auto; margin-right: auto; max-width: 1100px;">
+            <div class="row col-md-12">
                 <div class="col-md-6">
-                    <h4 class="p-5 mt-4" style="font-family: 'Calibri Light', Arial, sans-serif;font-size: 20px;">
+                    <h4 class="p-5 mt-4" style="font-family: 'Calibri Light', Arial, sans-serif; font-size: 20px; text-align: justify;">
                         En nuestra clínica veterinaria, nos enorgullece 
                         brindar una variedad de productos cuidadosamente seleccionados para mascotas, diseñados para satisfacer sus 
                         necesidades de salud, bienestar y comodidad. Nuestro objetivo es ser su socio de confianza en el 
-                        cuidado de sus queridas mascotas, brindándoles la mejor atención posible en cada etapa de sus vidas.</h4>
+                        cuidado de sus queridas mascotas, brindándoles la mejor atención posible en cada etapa de sus vidas.
+                    </h4>
                 </div>
-                <div class="col-md-6" style="text-align: center;">
-                    <img class="p-3" style="width: 200px;" src="./img/Logo_gesvet.svg" alt="">
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <img class="p-3" style="width: 600px;" src="./img/vet.jpg" alt="">
                 </div>
             </div>
         </div>
+
         <footer class="p-2" style="background-color: #2FC0D5;">
             <h3 class="encabezados text-center">¡TODO PARA EL CUIDADO DE TU MEJOR AMIGO!</h3>
         </footer>
-        <div class="container-fluid">
-            <div class="row col-md-12">
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover " style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/BAÑO.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000">
-                                Baño
-                            </a>
+        <div class="container-fluid" style="background-color:#F9F7F7;">
+            <div class="container-fluid" style="margin-left: auto; margin-right: auto; max-width: 1100px;">
+                <div class="row">
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/BAÑO.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Baño
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/alimentos.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Alimentos
-                            </a>
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/alimentos.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Alimentos
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/medicamentos.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Medicamentos
-                            </a>
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/medicamentos.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Medicamentos
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card  card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/peluqueria.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Peluquería
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row col-md-12">
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover " style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/guarderia.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Guardería
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card  card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/hozpitalizacion.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Hospitalización
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/accesorios.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Accesorios
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/juguetes.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Juguetes
-                            </a>
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card  card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/peluqueria.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Peluquería
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row col-md-12">
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover " style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/laboratorio.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 90px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Laboratorio
-                            </a>
+
+            <div class="container-fluid" style="margin-left: auto; margin-right: auto; max-width: 1100px;">
+                <div class="row">
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover " style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/guarderia.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Guardería
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card  card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/hozpitalizacion.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Hospitalización
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/accesorios.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Accesorios
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/juguetes.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Juguetes
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/citas.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Citas
-                            </a>
+            </div>
+            <div class="container-fluid" style="margin-left: auto; margin-right: auto; max-width: 1100px;">
+                <div class="row">
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover " style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/laboratorio.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 90px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Laboratorio
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/vacunacion.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Vacunación
-                            </a>
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/citas.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Citas
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
-                    <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
-                         border: 1px solid #000000;
-                         border-radius: 30px;
-                         box-sizing: border-box; ">
-                        <!-- Center the image -->
-                        <img src="./img/muchomas.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <!-- Reduce the button width -->
-                            <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
-                               border-radius: 8px;
-                               color: #000000;">
-                                Mucho Más...
-                            </a>
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/vacunacion.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Vacunación
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-5 d-flex justify-content-center align-items-center">
+                        <div class="card card-hover" style="width: 200px; height: 175px; background-color:#F9F7F7; text-align: center; background:#F9F7F7;
+                             border: 1px solid #000000;
+                             border-radius: 30px;
+                             box-sizing: border-box; ">
+                            <!-- Center the image -->
+                            <img src="./img/muchomas.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <!-- Reduce the button width -->
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                   border-radius: 8px;
+                                   color: #000000;">
+                                    Mucho Más...
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -571,21 +555,26 @@
             </div>
         </div>
         <form method="post" action="/enviar-formulario" onsubmit="return validarFormularioPrincipal()">
-            <div class="container-fluid " style="background-color:#FFFCFC">
+            <div class="container-fluid " style="margin-left: auto; margin-right: auto; max-width: 1100px;" >
                 <div class="row col-md-12  p-5">
                     <div class="col-md-12 ">
                         <p style="color:#212529; font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">Estaremos encantados de ayudarte con cualquier consulta o solicitud de información específica.</p>
                     </div>
-                    <div class="col-md-6  p-2">
+                    <br>
+                    <div class="col-md-6">
                         <label for="inputEmail4" class="form-label titlecartasDos" style="color: #212529;">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" style="background-color:#F9F7F7">
                         <small id="errorNombre" class="text-danger"></small>
                     </div>
-                    <div class="col-md-6 p-2">
+                    <br>
+                    <br>
+                    <div class="col-md-6">
                         <label for="inputPassword4" class="form-label titlecartasDos" style="color: #212529;">Apellidos:</label>
                         <input type="text" class="form-control" id="apellido" name="apellido" style="background-color:#F9F7F7" >
                         <small id="errorApellido" class="text-danger"></small>
                     </div>
+                    <br>
+                    <br>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label titlecartasDos" style="color: #212529;">Teléfono:</label>
                         <input type="text" class="form-control" id="telefono" name="telefono" style="background-color:#F9F7F7">
@@ -634,7 +623,7 @@
         <div style="margin: 0; padding: 0;">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63753.20144902977!2d-75.31367426908344!3d2.9377043590878045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3b747c5a6b4009%3A0x69acf162bb25539a!2sNeiva%2C%20Huila!5e0!3m2!1ses-419!2sco!4v1699988145285!5m2!1ses-419!2sco" width="100%" height="600" style="border:0; margin: 0; padding: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <footer class="p-2" style="background-color: #2FC0D5;">
-                <h1 style="color: #FFFFFF; font-family: 'Inter'; font-style: italic; font-weight: 600; font-size: 15px; text-align: center;">© 2024 GesVet. Todos los derechos reservados</h1>
+                <h1 style="color: #FFFFFF; font-family: 'Calibri Light', Arial, sans-serif; font-size: 16px; text-align: center;">© 2024 GesVet. Todos los derechos reservados</h1>
             </footer>
         </div>
         <script th:if="${FormularioExitoso}">
