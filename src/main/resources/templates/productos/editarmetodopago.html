@@ -133,6 +133,9 @@
         </ul>
     </aside>
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Gestión productos y servicios</h1>
+        </div><!-- End Page Title -->
         <section class="section profile">
             <div class="col-xl-12">
                 <div class="card">
@@ -140,13 +143,17 @@
                         <!-- Bordered Tabs -->
                         <ul class="nav nav-tabs nav-tabs-bordered">
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab"
+                                <button class="nav-link active" data-bs-toggle="tab" style="font-family: 'Montserrat', Arial, sans-serif;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        line-height: 20px;
+                                        color: #000000;"
                                         data-bs-target="#profile-overview">Modificar</button>
                             </li>
                         </ul>
                         <div class="tab-content pt-2">
                             <div class="container-fluid mt-2">
-                                <p class="textoNeon">Modificar tipo de método de pago</p>
+                                <p class="textoNeon" style="color: #FFFFFF">Modificar tipo de método de pago</p>
                             </div>
                             <div class="container">
                                 <form th:action="@{/productos/updatemetodopago}" object="" method="post" enctype="multipart/form-data">
@@ -155,11 +162,15 @@
                                             <div class="form-group">
                                                 <div class="row my-2">
                                                     <div class="col-6 ">
-                                                        <label>Nombre:</label>
+                                                        <label style="text-align: justify;
+                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                           font-size: 18px;" >Nombre:</label>
                                                         <input type="text" name="nombre" id="nombre" field="" th:value="${metodopago.nombre}" class="form-control" required autocomplete="off">
                                                     </div>
                                                     <div class="col-6 ">
-                                                        <label>Cuenta:</label>
+                                                        <label style="text-align: justify;
+                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                           font-size: 18px;">Cuenta:</label>
                                                         <input type="number" name="cuenta" field="" th:value="${metodopago.cuenta}" class="form-control" required autocomplete="off">
                                                     </div>
                                                 </div>
@@ -167,12 +178,14 @@
                                             <div class="form-group">
                                                 <div class="row my-2">
                                                     <div class="col-6 ">
-                                                        <label class="form-label">Estado:</label><br>
+                                                        <label style="text-align: justify;
+                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                           font-size: 18px;" class="form-label">Estado:</label><br>
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="activo" value="true" th:checked="${metodopago.activo}">
                                                                     <label class="form-check-label">Activo</label>
                                                             </div>
-                                                            <div class="form-check form-check-inline">
+                                                               <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="activo" value="false" th:checked="${!metodopago.activo}">
                                                                     <label class="form-check-label">Inactivo</label>
                                                             </div>
@@ -182,10 +195,10 @@
                                             <div class="box-footer">
                                                 <div class="row my-2">
                                                     <div class="d-grid gap-2 col-6">
-                                                        <button class="btn btn-success">Guardar</button>
+                                                        <button class="btn" style="background-color:#2FD6B4; color:#000000;">Guardar</button>
                                                     </div>
                                                     <div class="d-grid gap-2 col-6">
-                                                        <a class="btn btn-danger" href="/productos">Cancelar</a>
+                                                        <a class="btn" style="background-color:#2FD6B4; color:#000000;" href="/productos">Cancelar</a>
                                                     </div>
                                                 </div>
                                             </div>

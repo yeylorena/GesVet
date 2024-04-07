@@ -237,11 +237,7 @@
 
                 <nav class="header-nav ms-auto">
                     <ul class="d-flex align-items-center">
-                        <li class="nav-item d-block d-lg-none">
-                            <a class="nav-link nav-icon search-bar-toggle" href="#">
-                                <i class="bi bi-search"></i>
-                            </a>
-                        </li><!-- End Search Icon-->
+                       
                         <li class="nav-item">
                             <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                                 <i class="bi bi-journal-bookmark-fill"></i>
@@ -364,13 +360,20 @@
                 </ul>
             </aside>
             <main id="main" class="main" >
+                <div class="pagetitle">
+                    <h1>Gestión Mascotas</h1>
+                </div><!-- End Page Title -->
                 <section class="section profile">
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body pt-3">
                                 <!-- Bordered Tabs -->
                                 <ul class="nav nav-tabs nav-tabs-bordered">
-                                    <li class="nav-item">
+                                    <li class="nav-item" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        line-height: 20px;
+                                        color: #000000;">
                                         <button id="editarBtn" class="nav-link active">Editar</button>
                                     </li>
                                 </ul>
@@ -386,11 +389,15 @@
                                                              line-height: 50px;
                                                              color: #000000;">
                                                             <div class="col-6">
-                                                                <label>Nombre:</label>
+                                                                <label style="text-align: justify;
+                                                                       font-family: 'Calibri Light', Arial, sans-serif;
+                                                                       font-size: 18px;">Nombre:</label>
                                                                 <input type="text" id="nombre" name="nombre" th:value="${Raza.nombre}" class="form-control" required autocomplete="off">
                                                             </div>
                                                             <div class="col-6">
-                                                                <label >Descripción:</label>
+                                                                <label style="text-align: justify;
+                                                                       font-family: 'Calibri Light', Arial, sans-serif;
+                                                                       font-size: 18px;">Descripción:</label>
                                                                 <input type="text" id="descripcion" name="descripcion" th:value="${Raza.descripcion}" class="form-control" required autocomplete="off">
                                                             </div>
                                                         </div>

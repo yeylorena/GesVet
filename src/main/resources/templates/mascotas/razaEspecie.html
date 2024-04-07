@@ -235,11 +235,7 @@
 
             <nav class="header-nav ms-auto">
                 <ul class="d-flex align-items-center">
-                    <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link nav-icon search-bar-toggle" href="#">
-                            <i class="bi bi-search"></i>
-                        </a>
-                    </li><!-- End Search Icon-->
+
                     <li class="nav-item">
                         <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                             <i class="bi bi-journal-bookmark-fill"></i>
@@ -361,6 +357,9 @@
             </ul>
         </aside>
         <main id="main" class="main" >
+            <div class="pagetitle">
+                <h1>Gestión Mascotas</h1>
+            </div><!-- End Page Title -->
             <section class="section profile">
                 <div class="col-xl-12">
                     <div class="card">
@@ -372,7 +371,7 @@
                                             data-bs-target="#especies"
                                             style="font-family: 'Montserrat', Arial, sans-serif;
                                             font-size: 16px;
-                                            font-weight: 600;
+                                            font-weight: 500;
                                             line-height: 20px;
                                             color: #000000;">Especies</button>
                                 </li>
@@ -380,7 +379,7 @@
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-overview" 
                                             style="font-family: 'Montserrat', Arial, sans-serif;
                                             font-size: 16px;
-                                            font-weight: 600;
+                                            font-weight: 500;
                                             line-height: 20px;
                                             color: #000000;">Razas
                                     </button>
@@ -390,32 +389,32 @@
                                 <!--Razas-->
                                 <div class="tab-pane fade profile-overview" id="profile-overview">
                                     <div class="container-fluid">
-                                        <p class="textoNeon">Razas</p>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12">
-                                                    <form class="search-form d-flex align-items-center pb-1 form-inline" method="post" action="" object="">
-                                                        <div class="row mt-3">
-                                                            <div class="col-lg-6 col-md-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" name="palabra" placeholder="Buscar" id="palabra" autocomplete="off" oninput="consultarRaza()">
-                                                                        &nbsp;&nbsp;
-                                                                        &nbsp;&nbsp;
+                                        <p class="textoNeon" style="color: #FFFFFF">Razas</p>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <form class="search-form d-flex align-items-center pb-1 form-inline" method="post" action="" object="">
+                                                            <div class="row mt-3">
+                                                                <div class="col-lg-6 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <input type="text" name="palabra" placeholder="Buscar" id="palabra" autocomplete="off" oninput="consultarRaza()">
+                                                                            &nbsp;&nbsp;
+                                                                            &nbsp;&nbsp;
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <a class="icon-link btn btn-success" style="
-                                                           font-family: 'Montserrat', Arial, sans-serif;
-                                                           font-size: 15px;
-                                                           padding: 0;
-                                                           width: 55px;
-                                                           height: 40px;
-                                                           display: flex;
-                                                           justify-content: center;
-                                                           align-items: center;"
-                                                           th:href="@{/razas/create}"><i class="bi bi-plus-square"></i></a>
+                                                            <a class="icon-link btn btn-success" style="
+                                                               font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 15px;
+                                                            padding: 0;
+                                                            width: 55px;
+                                                            height: 40px;
+                                                            display: flex;
+                                                            justify-content: center;
+                                                            align-items: center;"
+                                                            th:href="@{/razas/create}"><i class="bi bi-plus-square"></i></a>
                                                     </form>
                                                 </div>
                                             </div>
@@ -470,33 +469,33 @@
                                 <!-- Especie -->
                                 <div class="tab-pane fade show active profile-overview" id="especies">
                                     <div class="container-fluid">
-                                        <p class="textoNeon">Especies</p>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12">
-                                                    <form class="search-form d-flex align-items-center pb-1 form-inline" method="post" action="" object="">
-                                                        <div class="row mt-3">
-                                                            <div class="col-lg-6 col-md-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" name="palabra" placeholder="Buscar" id="palabraEspecie" autocomplete="off" oninput="consultarEspecie()">
-                                                                        &nbsp;&nbsp;
-                                                                        &nbsp;&nbsp;
+                                        <p class="textoNeon" style="color: #FFFFFF">Especies</p>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <form class="search-form d-flex align-items-center pb-1 form-inline" method="post" action="" object="">
+                                                            <div class="row mt-3">
+                                                                <div class="col-lg-6 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <input type="text" name="palabra" placeholder="Buscar" id="palabraEspecie" autocomplete="off" oninput="consultarEspecie()">
+                                                                            &nbsp;&nbsp;
+                                                                            &nbsp;&nbsp;
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- donde se pone la pagina de crear -->
-                                                        <a class="icon-link btn btn-success texto2" 
-                                                           style="
-                                                           font-family: 'Montserrat', Arial, sans-serif;
-                                                           font-size: 15px;
-                                                           padding: 0;
-                                                           width: 55px;
-                                                           height: 40px;
-                                                           display: flex;
-                                                           justify-content: center;
-                                                           align-items: center;"th:href="@{/razas/createEs}"><i class="bi bi-plus-square"></i></a>
+                                                            <!-- donde se pone la pagina de crear -->
+                                                            <a class="icon-link btn btn-success texto2" 
+                                                               style="
+                                                               font-family: 'Montserrat', Arial, sans-serif;
+                                                            font-size: 15px;
+                                                            padding: 0;
+                                                            width: 55px;
+                                                            height: 40px;
+                                                            display: flex;
+                                                            justify-content: center;
+                                                            align-items: center;"th:href="@{/razas/createEs}"><i class="bi bi-plus-square"></i></a>
                                                     </form>
                                                 </div>
                                             </div>

@@ -25,11 +25,7 @@
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle" href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
+                
                 <li class="nav-item">
                     <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                         <i class="bi bi-journal-bookmark-fill"></i>
@@ -152,6 +148,9 @@
     </aside>
 
     <main id="main" class="main" >
+           <div class="pagetitle">
+                <h1>Cita Rápida</h1>
+            </div><!-- End Page Title -->
         <section class="section profile">
             <div class="col-xl-12">
 
@@ -160,15 +159,19 @@
                         <!-- Bordered Tabs -->
                         <ul class="nav nav-tabs nav-tabs-bordered">
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-rapida">Cita Rápida</button>
+                                <button class="nav-link active" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        line-height: 20px;
+                                        color: #000000;" data-bs-toggle="tab" data-bs-target="#profile-rapida">Cita Rápida</button>
                             </li>
 
                         </ul>
                         <div class="tab-content pt-2">
-                            <div class="tab-pane show active fade profile-edit" id="profile-rapida">
+                            <div class="tab-pane show active fade profile-edit" id="profile-rapida" >
                                 <!--agendar cita-->
                                 <div>
-                                    <p style="background-color: #2FC0D5;" class="textoNeon">Citas Rápidas</p>
+                                    <p style="background-color: #2FC0D5; color: #ffffff;" class="textoNeon"  >Citas Rápidas</p>
                                 </div>
                                 <div class="container-fluid">
                                     <div class="card-body">
@@ -180,7 +183,9 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="servicio"><strong>Tipo cita:</strong></label>
+                                                                    <label for="servicio" style="text-align: justify;
+                                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                                           font-size: 16px; color: #000000;">Tipo cita:</label>
                                                                     <select name="servicio" id="servicio" class="form-select" required>
                                                                         <option value="">Selecciona un servicio</option>
                                                                         <option th:each="servicio : ${servicios}" th:value="${servicio.id}"  th:data-precio="${servicio.precio}"
@@ -189,7 +194,9 @@
                                                             </div>
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="usuario"><strong>Veterinario:</strong></label>
+                                                                    <label for="usuario"  style="text-align: justify;
+                                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                                           font-size: 16px;color: #000000;">Veterinario:</label>
                                                                     <select id="usuario" name="usuario" class="form-select" required>
                                                                         <option value="">Selecciona un veterinario</option>
                                                                         <!-- Iteramos sobre los usuarios y generamos las opciones del menú desplegable -->
@@ -203,7 +210,9 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="especie"><strong>Tipo de mascota:</strong></label>
+                                                                    <label for="especie" style="text-align: justify;
+                                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                                           font-size: 16px;color: #000000;">Tipo de mascota:</label>
                                                                     <select name="especie" class="form-select" required>
                                                                         <option value="">Selecciona una especie</option>
                                                                         <option th:each="especie : ${especies}" th:value="${especie.id}"
@@ -212,7 +221,9 @@
                                                             </div>
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="nombreMascota"><strong>Nombre de la mascota:</strong></label>
+                                                                    <label for="nombreMascota" style="text-align: justify;
+                                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                                           font-size: 16px;color: #000000;">Nombre de la mascota:</label>
                                                                     <input type="text" name="nombreMascota" id="nombreMascota"
                                                                            class="form-control custom-border custom-bg-fondo" required>
                                                                         <span class="error-message"></span>
@@ -223,7 +234,9 @@
 
                                                                             <div class="col">
                                                                                 <br>
-                                                                                    <label for="nombreDueño"><strong>Nombre del dueño:</strong></label>
+                                                                                    <label for="nombreDueño"  style="text-align: justify;
+                                                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                           font-size: 16px;color: #000000;">Nombre del dueño:</label>
                                                                                     <input type="text" name="nombreDueño" id="nombreDueño"
                                                                                            class="form-control custom-border custom-bg-fondo" required>
                                                                                         <span class="error-message"></span>
@@ -245,7 +258,9 @@
                                                                                         <div class="row">
                                                                                             <div class="col">
                                                                                                 <br>
-                                                                                                    <label for="precio"><strong>Precio:</strong></label>
+                                                                                                    <label for="precio"style="text-align: justify;
+                                                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                           font-size: 16px;color: #000000;">Precio:</label>
                                                                                                     <input type="double" name="precio" id="precio"
                                                                                                            class="form-control custom-border custom-bg-fondo" required readonly>
                                                                                                         <span class="error-message"></span>
