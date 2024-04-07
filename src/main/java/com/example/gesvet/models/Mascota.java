@@ -42,9 +42,6 @@ public class Mascota {
     @JsonIgnoreProperties("mascotas")
     private Raza raza;
 
-    public Mascota(int par, String string, String string1, String string2, String string3, String string4, String string5) {
-    }
-
     public Mascota() {
     }
 
@@ -62,6 +59,7 @@ public class Mascota {
         this.usuario = usuario;
         this.raza = raza;
     }
+    
 
     public User getUsuario() {
         return usuario;

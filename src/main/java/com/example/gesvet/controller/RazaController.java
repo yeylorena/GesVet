@@ -152,7 +152,7 @@ public class RazaController {
         userDto.setImagen("/images/" + user.getImagen());
         model.addAttribute("userDto", userDto);
         LOGGER.info("Este es el objeto de la raza: {}", raza);
-        Mascota m = new Mascota(1, "", "", "", "", "", "");
+     
         if (razaService.existsByNombre(raza.getNombre())) {
             // Agregar un mensaje de flash para mostrar en la vista
             redirectAttributes.addFlashAttribute("razaexiste", "Ya existe una raza con el mismo nombre.");

@@ -19,6 +19,31 @@
     input[type="text"] {
         width: calc(100% - 48px); /* Restar el ancho del icono más el padding del input-group-addon */
     }
+    .titlecartaSel2 {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        color: #000000;
+    }
+    .textcartas {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-size: 19px;
+        font-weight: 300;
+        color: #000000;
+    }
+    .texto2 {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-size: 15px;
+        margin: 0 0 20px;
+        padding: 0;
+    }
+    .texto {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-size: 20px;
+        margin: 0 0 20px;
+        padding: 0;
+    }
 </style>
 
 <body style="background-color: #F4F4F4;">
@@ -34,11 +59,7 @@
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle" href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
+
                 <li class="nav-item">
                     <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                         <i class="bi bi-journal-bookmark-fill"></i>
@@ -162,13 +183,20 @@
 
 
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Clientes</h1>
+        </div><!-- End Page Title -->
         <section class="section profile">
             <div class="card">
                 <div class="card-body pt-3">
                     <!-- los dos div blancos -->
                     <ul class="nav nav-tabs nav-tabs-bordered">
                         <li class="nav-item">
-                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Consultar
+                            <button class="nav-link active" style="font-family: 'Montserrat', Arial, sans-serif;
+                                    font-size: 16px;
+                                    font-weight: 500;
+                                    line-height: 20px;
+                                    color: #000000;" data-bs-toggle="tab" data-bs-target="#profile-overview">Consultar
                                 clientes</button>
                         </li>
                     </ul>
@@ -177,7 +205,7 @@
                             <!-- inicio de Consultar clientes  -->
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
                                 <div class="container-fluid">
-                                    <p class="textoNeon">Clientes</p>
+                                    <p class="textoNeon" style="color: #ffffff">Clientes</p>
                                 </div>
                                 <div class="container-fluid">
                                     <div>

@@ -24,6 +24,35 @@
                                                         <link href="assets/css/style.css" rel="stylesheet">
                                                             <!-- Favicons -->
                                                             <link href="../img/favicon.png" rel="icon">
+                                                                <style>
+                                                                    .titlecartaSel2 {
+                                                                        font-family: 'Montserrat', Arial, sans-serif;
+                                                                        font-size: 16px;
+                                                                        font-weight: 600;
+                                                                        line-height: 20px;
+                                                                        color: #000000;
+                                                                    }
+                                                                    .textcartas {
+                                                                        font-family: 'Montserrat', Arial, sans-serif;
+                                                                        font-size: 19px;
+                                                                        font-weight: 300;
+                                                                        color: #000000;
+                                                                    }
+                                                                    .texto2 {
+                                                                        font-family: 'Montserrat', Arial, sans-serif;
+                                                                        font-size: 15px;
+                                                                        margin: 0 0 20px;
+                                                                        padding: 0;
+                                                                    }
+                                                                    .texto {
+                                                                        font-family: 'Montserrat', Arial, sans-serif;
+                                                                        font-size: 20px;
+                                                                        margin: 0 0 20px;
+                                                                        padding: 0;
+                                                                    }
+
+                                                                </style>
+
                                                                 </head>
                                                                 <body style="background-color: #F4F4F4;">
                                                                     <!-- ======= Header ======= -->
@@ -36,11 +65,7 @@
                                                                         </div><!-- End Logo -->
                                                                         <nav class="header-nav ms-auto">
                                                                             <ul class="d-flex align-items-center">
-                                                                                <li class="nav-item d-block d-lg-none">
-                                                                                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                                                                                        <i class="bi bi-search"></i>
-                                                                                    </a>
-                                                                                </li><!-- End Search Icon-->
+
                                                                                 <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                                                                                     <i class="bi bi-journal-bookmark-fill"></i>
                                                                                     <span class="badge bg-primary badge-number"></span>
@@ -158,6 +183,9 @@
                                                                         </ul>
                                                                     </aside>
                                                                     <main id="main" class="main">
+                                                                        <div class="pagetitle">
+                                                                            <h1>Mi perfil</h1>
+                                                                        </div><!-- End Page Title -->
                                                                         <section class="section profile">
                                                                             <div class="row">
                                                                                 <div class="col-xl-4">
@@ -174,41 +202,67 @@
                                                                                         <div class="card-body pt-3">
                                                                                             <!-- Bordered Tabs -->
                                                                                             <ul class="nav nav-tabs nav-tabs-bordered">
-                                                                                                <li class="nav-item">
+                                                                                                <li class="nav-item" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                    font-size: 16px;
+                                                                                                    font-weight: 500;
+                                                                                                    line-height: 20px;
+                                                                                                    color: #000000;">
                                                                                                     <button class="nav-link active" data-bs-toggle="tab"
                                                                                                             data-bs-target="#profile-overview">Perfil</button>
                                                                                                 </li>
-                                                                                                <li class="nav-item">
+                                                                                                <li class="nav-item" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                    font-size: 16px;
+                                                                                                    font-weight: 500;
+                                                                                                    line-height: 20px;
+                                                                                                    color: #000000;">
                                                                                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Modificar</button>
                                                                                                 </li>
-                                                                                                <li class="nav-item">
+                                                                                                <li class="nav-item" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                    font-size: 16px;
+                                                                                                    font-weight: 500;
+                                                                                                    line-height: 20px;
+                                                                                                    color: #000000;">
                                                                                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Cambiar
                                                                                                         contraseña</button>
                                                                                                 </li>
-                                                                                                <li class="nav-item">
+                                                                                                <li class="nav-item" style=" font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                    font-size: 16px;
+                                                                                                    font-weight: 500;
+                                                                                                    line-height: 20px;
+                                                                                                    color: #000000;">
                                                                                                     <button class="nav-link" data-bs-toggle="tab"
                                                                                                             data-bs-target="#profile-change-password">Desactivar cuenta</button>
                                                                                                 </li>
                                                                                             </ul>
                                                                                             <div class="tab-content pt-2">
                                                                                                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                                                                                                    <h5 class="card-title">Acerca de</h5>
-                                                                                                    <p class="small fst-italic" th:text="${userdetail.acercade}"></p>
-                                                                                                    <h5 class="card-title">Detalles del perfil</h5>
+                                                                                                    <h5  style="text-align: justify;
+                                                                                                         font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                         font-size: 16px;">Acerca de</h5>
+                                                                                                    <p class="small fst-italic texto2" th:text="${userdetail.acercade}"></p>
+                                                                                                    <h5 class="textcartas">Detalles del perfil</h5>
                                                                                                     <div class="row">
-                                                                                                        <div class="col-lg-3 col-md-4 label ">Nombre</div>
+                                                                                                        <div class="col-lg-3 col-md-4" style="text-align: justify;
+                                                                                                             font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                             font-size: 16px;">Nombre</div>
                                                                                                         <div class="col-lg-9 col-md-8" th:text="${userdetail.nombre}"></div>
                                                                                                     </div>
                                                                                                     <div class="row">
-                                                                                                        <div class="col-lg-3 col-md-4 label">Apellidos</div>
+                                                                                                        <div class="col-lg-3 col-md-4" style="text-align: justify;
+                                                                                                             font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                             font-size: 16px;">Apellidos</div>
                                                                                                         <div  class="col-lg-9 col-md-8" th:text="${userdetail.apellido}"></div>
                                                                                                     </div>
                                                                                                     <div class="row">
-                                                                                                        <div class="col-lg-3 col-md-4 label">Dirección</div>
+                                                                                                        <div class="col-lg-3 col-md-4" style="text-align: justify;
+                                                                                                             font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                             font-size: 16px;">Dirección</div>
                                                                                                         <div class="col-lg-9 col-md-8"th:text="${userdetail.direccion}"></div>
                                                                                                     </div>
                                                                                                     <div class="row">
-                                                                                                        <div class="col-lg-3 col-md-4 label">Teléfono</div>
+                                                                                                        <div class="col-lg-3 col-md-4" style="text-align: justify;
+                                                                                                             font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                             font-size: 16px;">Teléfono</div>
                                                                                                         <div  class="col-lg-9 col-md-8" th:text="${userdetail.telefono}"></div>
                                                                                                     </div>
                                                                                                 </div>
@@ -218,7 +272,9 @@
                                                                                                         <!-- ... (otros campos) -->
                                                                                                         <input th:field="*{id}" type="hidden"/>
                                                                                                         <div class="row mb-3">
-                                                                                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Imagen de
+                                                                                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;
+                                                                                                                   font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                   font-size: 16px;">Imagen de
                                                                                                                 Perfil</label>
                                                                                                             <div class="col-md-8 col-lg-9">
                                                                                                                 <img th:src="@{'/images/' + ${userDto.imagen}}" th:alt="${userDto.imagen}" class="rounded-circle"/>
@@ -235,68 +291,89 @@
 
                                                                                                                             </div>
                                                                                                                             <div class="row mb-3">
-                                                                                                                                <label for="about" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Acerca de</label>
+                                                                                                                                <label for="about" class="col-md-4 col-lg-3 col-form-label" style="color: black;text-align: justify;
+                                                                                                                                       font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                       font-size: 16px;">Acerca de</label>
                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                     <textarea id="acercade" th:field="*{acercade}" class="form-control" style="height: 100px"></textarea>
                                                                                                                                     <small id="errorAcercade" class="text-danger"></small>
                                                                                                                                 </div>
                                                                                                                             </div>
                                                                                                                             <div class="row mb-3">
-                                                                                                                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Nombres</label>
+                                                                                                                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;
+                                                                                                                                       font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                       font-size: 16px;">Nombres</label>
                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                     <input id="nombres" th:field="*{nombre}" type="text" class="form-control"/>
                                                                                                                                     <small id="errorNombre" class="text-danger"></small>
                                                                                                                                 </div>
                                                                                                                             </div>
                                                                                                                             <div class="row mb-3">
-                                                                                                                                <label for="company" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Apellidos</label>
+                                                                                                                                <label for="company" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;
+                                                                                                                                       font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                       font-size: 16px;">Apellidos</label>
                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                     <input id="apellidos" th:field="*{apellido}" type="text" class="form-control"/>
                                                                                                                                     <small id="errorApellido" class="text-danger"></small>
                                                                                                                                 </div>
                                                                                                                             </div>
                                                                                                                             <div class="row mb-3">
-                                                                                                                                <label for="company" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Dirección</label>
+                                                                                                                                <label for="company" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;
+                                                                                                                                       font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                       font-size: 16px;">Dirección</label>
                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                     <input id="direccion" th:field="*{direccion}" type="text" class="form-control"/>
                                                                                                                                     <small id="errorDireccion" class="text-danger"></small>
                                                                                                                                 </div>
                                                                                                                             </div>
                                                                                                                             <div class="row mb-3">
-                                                                                                                                <label for="Job" class="col-md-4 col-lg-3 col-form-label" style="color: black;">Teléfono</label>
+                                                                                                                                <label for="Job" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;
+                                                                                                                                       font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                       font-size: 16px;">Teléfono</label>
                                                                                                                                 <div class="col-md-8 col-lg-9">
                                                                                                                                     <input th:field="*{telefono}" type="text" class="form-control"/>
                                                                                                                                     <small id="errorTelefono" class="text-danger"></small>
                                                                                                                                 </div>
                                                                                                                             </div>
                                                                                                                             <div class="text-center">
-                                                                                                                                <button type="submit" class="btn" style="background-color: #979AD4; color: black;">Modificar</button>
+                                                                                                                                <button type="submit" class="btn c w-50 texto2" style="background-color: #2FD6B4; color:black;
+                                                                                                                                        display:inline-block;
+                                                                                                                                        width: 100%;
+                                                                                                                                        text-align: center;
+                                                                                                                                        text-decoration: none;
+                                                                                                                                        padding: 10px;">Aceptar</button>
                                                                                                                             </div>
                                                                                                                             </form>
                                                                                                                             </div>
                                                                                                                             <div class="tab-pane fade pt-3" id="profile-settings">
                                                                                                                                 <form action="/perfil_admin/cambiar-contrasenaadmin" method="post" onsubmit="return validarContrasena()">
                                                                                                                                     <div class="row mb-3">
-                                                                                                                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña actual</label>
+                                                                                                                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label" style="text-align: justify;
+                                                                                                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                               font-size: 16px;">Contraseña actual</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
                                                                                                                                         </div>
                                                                                                                                     </div>
                                                                                                                                     <div class="row mb-3">
-                                                                                                                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña nueva</label>
+                                                                                                                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label" style="text-align: justify;
+                                                                                                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                               font-size: 16px;">Contraseña nueva</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input name="newPassword" type="password" class="form-control" id="newPassword" required>
                                                                                                                                         </div>
                                                                                                                                     </div>
                                                                                                                                     <div class="row mb-3">
-                                                                                                                                        <label for="confirmNewPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña nueva</label>
+                                                                                                                                        <label for="confirmNewPassword" class="col-md-4 col-lg-3 col-form-label" style="text-align: justify;
+                                                                                                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                                               font-size: 16px;">Confirmar contraseña nueva</label>
                                                                                                                                         <div class="col-md-8 col-lg-9">
                                                                                                                                             <input name="confirmNewPassword" type="password" class="form-control" id="confirmNewPassword" required>
                                                                                                                                         </div>
                                                                                                                                     </div>
                                                                                                                                     <div class="text-center">
                                                                                                                                         <button type="submit" class="btn btn-primary"
-                                                                                                                                                style="background-color: #979AD4; color: black;">Cambiar contraseña</button>
+                                                                                                                                                style="background-color: #2FD6B4; color: black;">Cambiar contraseña</button>
                                                                                                                                     </div>
                                                                                                                                 </form><!-- End Change Password Form -->
                                                                                                                             </div>

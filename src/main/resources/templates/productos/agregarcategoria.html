@@ -12,7 +12,7 @@
         </div><!-- End Logo -->
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-               
+
                 <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
@@ -129,6 +129,9 @@
         </ul>
     </aside>
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Gestión productos y servicios</h1>
+        </div><!-- End Page Title -->
         <section class="section profile">
             <div class="col-xl-12">
                 <div class="card">
@@ -136,13 +139,17 @@
                         <!-- Bordered Tabs -->
                         <ul class="nav nav-tabs nav-tabs-bordered">
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab"
+                                <button class="nav-link active" data-bs-toggle="tab" style="font-family: 'Montserrat', Arial, sans-serif;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        line-height: 20px;
+                                        color: #000000;"
                                         data-bs-target="#profile-overview">Registro</button>
                             </li>
                         </ul>
                         <div class="tab-content pt-2">
                             <div class="container-fluid mt-2">
-                                <p class="textoNeon">Registrar Categoría</p>
+                                <p class="textoNeon" style="color: #FFFFFF">Registrar Categoría</p>
                             </div>
                             <div class="container">
                                 <form th:action="@{/productos/savecategoria}" object="" method="post" enctype="multipart/form-data">
@@ -150,11 +157,15 @@
                                         <div class="form-group">
                                             <div class="row my-2">
                                                 <div class="col-6 ">
-                                                    <label>Nombre:</label>
+                                                    <label style="text-align: justify;
+                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                           font-size: 16px;" >Nombre:</label>
                                                     <input type="text" name="nombre" id="nombre" field="" class="form-control" required>
                                                 </div>
                                                 <div class="col-6 ">
-                                                    <label>Descripción:</label>
+                                                    <label style="text-align: justify;
+                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                           font-size: 16px;" >Descripción:</label>
                                                     <input type="text" name="descripcion" id="descripcion" field="" class="form-control" required>
                                                 </div>
                                             </div>
@@ -162,20 +173,26 @@
                                         <div class="form-group">
                                             <div class="row my-2">
                                                 <div class="col-6 ">
-                                                    <label>Tipo Categoría:</label>
+                                                    <label style="text-align: justify;
+                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                           font-size: 16px;" >Tipo Categoría:</label>
                                                     <select name="tipocategoria.id" class="form-select">
                                                         <option th:each="tipoCategoria : ${tipocategorias}" th:value="${tipoCategoria.id}" th:text="${tipoCategoria.nombre}"></option>
                                                     </select>
                                                 </div>
                                                 <div class="col-6 ">
-                                                    <label>Imagen:</label>
+                                                    <label style="text-align: justify;
+                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                           font-size: 16px;" >Imagen:</label>
                                                     <input type="file" name="img" id="img" class="form-control"  onchange="validarArchivo(this);"  accept=".jpg, .jpeg, .png" >
                                                         <h6 style="margin-top: 5px; font-size: 14px;">Tamaño máximo: 10 MB</h6>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row my-2">
                                                         <div class="col-6">
-                                                            <label class="form-label">Estado:</label><br>
+                                                            <label style="text-align: justify;
+                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                           font-size: 16px;" class="form-label">Estado:</label><br>
                                                                 <div class="form-check form-check-inline">
                                                                     <input class="form-check-input" type="radio" name="activo" value="true" checked>
                                                                         <label class="form-check-label">Activo</label>
@@ -192,10 +209,10 @@
                                         <div class="box-footer">
                                             <div class="row my-2">
                                                 <div class="d-grid gap-2 col-6">
-                                                    <button class="btn btn-success">Guardar</button>
+                                                    <button class="btn" style="background-color:#2FD6B4; color:#000000;">Guardar</button>
                                                 </div>
                                                 <div class="d-grid gap-2 col-6">
-                                                    <a class="btn btn-danger" href="/productos">Cancelar</a>
+                                                    <a class="btn" style="background-color:#2FD6B4; color:#000000;" href="/productos">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>
