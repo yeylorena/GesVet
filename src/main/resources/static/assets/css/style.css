@@ -1075,8 +1075,8 @@ h6 {
     display: flex;
     align-items: center;
     font-size: 15px;
-    font-weight: 600;
-    color: #4154f1;
+    font-weight: 400;
+    color: #444444;
     transition: 0.3;
     background: #f6f9ff;
     padding: 10px 15px;
@@ -1090,7 +1090,7 @@ h6 {
 }
 
 .sidebar-nav .nav-link.collapsed {
-    color: #012970;
+    color: #444444;
     background: #fff;
 }
 

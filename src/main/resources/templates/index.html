@@ -87,7 +87,7 @@
             }
             .botones{
                 font-family: 'Montserrat', Arial, sans-serif;
-                font-size: 16px;
+                font-size: 12px;
                 font-weight: 400;
                 margin-right: 20px;
                 color: #FFFFFF;
@@ -126,7 +126,7 @@
             .titlecartas {
                 font-family: 'Montserrat', Arial, sans-serif;
                 font-size: 20px;
-                font-weight: 500;
+                font-weight: 550;
                 line-height: 50px;
                 color: #FFFFFF;
             }
@@ -161,13 +161,13 @@
         </style>
         <script th:src="@{/assets/js/main.js}"></script>
     </head>
-    <body>
+    <body  style="margin-top: 91px;">
         <div class="navbar-container">
             <div class="container-fluid ">
                 <div class="row">
-                    <nav  class="navbar navbar-expand-lg bg-body-tertiary " style="background-color: #FFFFFF" >
+                    <nav  class="navbar navbar-expand-lg bg-body-tertiary fixed-top" style="background-color: #FFFFFF" >
                         <div class="container-fluid col-md-12">
-                            <img src="./assets/img/logo.svg" alt="" style="margin-left: 40px;" width="200px" heigth="300px">
+                            <img src="./assets/img/logo.svg" alt="" style="margin-left: 40px;" width="170px" heigth="300px">
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -193,7 +193,7 @@
                                     <!-- Second dropdown button -->
                                     <li class="nav-item dropdown my-1">
                                         <a class="nav-link custom-btn botones text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">INGRESA YA</a>
-                                        <ul class="dropdown-menu text-center" style="background-color: #39DBC1; border-radius: 8px; width: 150px; min-width: unset;">
+                                        <ul class="dropdown-menu text-center" style="background-color: #39DBC1; border-radius: 8px; width: 150px; min-width: unset; top: 70%; font-size: 12px;">
                                             <li><a class="dropdown-item custom-btn text-center" style="height: 21px;" th:href="@{/login}">ADMINISTRADOR</a></li>
                                             <!-- Agregar separador -->
                                             <div class="dropdown-divider"></div>
@@ -264,7 +264,7 @@
                              background: #2FC0D5;
                              border-radius: 8px;
                              padding: 8px;">
-                            <h5 class="titlecartas p-2" style="text-align: center; color: #000000">Misión</h5>
+                            <h5 class="titlecartas p-2" style="text-align: center; color: #444444">Misión</h5>
                             <br>
                             <p class="textcartas p-2" style="text-align: center; font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">Brindar atención veterinaria de excelencia a todas las mascotas de la ciudad de Neiva, comprometiéndonos a ayudar en cualquier situación que se presente y asegurándonos de que todas las mascotas reciban el cuidado y la atención que merecen.</p>
                         </div>
@@ -275,7 +275,7 @@
                         <div class="card-body" style="box-sizing: border-box;
                              background:#2FD67D;
                              border-radius: 8px;">
-                            <h5 class="titlecartas p-2" style="text-align: center; color: #000000 ">Visión</h5>
+                            <h5 class="titlecartas p-2" style="text-align: center; color: #444444">Visión</h5>
                             <br>
                             <p class="textcartas p-2" style="text-align: center;font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;" >Convertirnos en la clínica veterinaria líder en la ciudad de Neiva, reconocida por nuestra atención de excelencia y nuestro compromiso con el bienestar animal.</p>
                         </div>
@@ -286,7 +286,7 @@
                         <div class="card-body" style="box-sizing: border-box;
                              background: #2FD6B5;
                              border-radius: 8px;">
-                            <h5 class="titlecartas p-2" style="text-align: center; color: #000000">Valores</h5>
+                            <h5 class="titlecartas p-2" style="text-align: center; color: #444444">Valores</h5>
                             <br>
                             <p class="textcartas p-2" style="text-align: left; font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">- Compromiso con el bienestar animal.
                                 <br>
@@ -338,7 +338,7 @@
                             <img src="./img/BAÑO.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}" style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Baño
@@ -355,7 +355,7 @@
                             <img src="./img/alimentos.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Alimentos
@@ -372,7 +372,7 @@
                             <img src="./img/medicamentos.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Medicamentos
@@ -389,7 +389,7 @@
                             <img src="./img/peluqueria.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Peluquería
@@ -411,7 +411,7 @@
                             <img src="./img/guarderia.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Guardería
@@ -428,7 +428,7 @@
                             <img src="./img/hozpitalizacion.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Hospitalización
@@ -445,7 +445,7 @@
                             <img src="./img/accesorios.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Accesorios
@@ -462,7 +462,7 @@
                             <img src="./img/juguetes.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Juguetes
@@ -483,7 +483,7 @@
                             <img src="./img/laboratorio.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 90px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Laboratorio
@@ -500,7 +500,7 @@
                             <img src="./img/citas.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Citas
@@ -517,7 +517,7 @@
                             <img src="./img/vacunacion.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}" style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
                                     Vacunación
@@ -534,10 +534,10 @@
                             <img src="./img/muchomas.svg" class="card-img-top mx-auto p-2 mb-0" style="width: 100px;" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <!-- Reduce the button width -->
-                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" style="background-color:#2FD6B5;
+                                <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}"  style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
-                                    Mucho Más...
+                                    Mucho más...
                                 </a>
                             </div>
                         </div>
@@ -556,7 +556,7 @@
         </div>
         <form method="post" action="/enviar-formulario" onsubmit="return validarFormularioPrincipal()">
             <div class="container-fluid " style="margin-left: auto; margin-right: auto; max-width: 1100px;" >
-                <div class="row col-md-12  p-5">
+                <div class="row col-md-12  p-5" style="background-color:#F4F4F4;">
                     <div class="col-md-12 ">
                         <p style="color:#212529; font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">Estaremos encantados de ayudarte con cualquier consulta o solicitud de información específica.</p>
                     </div>
@@ -620,7 +620,7 @@
                 </div>
             </div>
         </form>
-        <div style="margin: 0; padding: 0;">
+        <div style="margin-top: 25px; padding: 0;" class="mt-3">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63753.20144902977!2d-75.31367426908344!3d2.9377043590878045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3b747c5a6b4009%3A0x69acf162bb25539a!2sNeiva%2C%20Huila!5e0!3m2!1ses-419!2sco!4v1699988145285!5m2!1ses-419!2sco" width="100%" height="600" style="border:0; margin: 0; padding: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <footer class="p-2" style="background-color: #2FC0D5;">
                 <h1 style="color: #FFFFFF; font-family: 'Calibri Light', Arial, sans-serif; font-size: 16px; text-align: center;">© 2024 GesVet. Todos los derechos reservados</h1>

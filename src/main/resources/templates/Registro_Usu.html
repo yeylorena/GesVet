@@ -192,58 +192,62 @@
                                                                                                      border-radius: 8px;
                                                                                                      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
                                                                                                      ">
-                                                                                                    <div class="col-12 py-1 d-flex align-items-center my-1">
-                                                                                                        <img th:src="@{/assets/img/Logo_gesvet.svg}"
-                                                                                                             style="width: 80px; margin-right: 15px; margin-bottom: 15px;">
-
-                                                                                                            <div>
-                                                                                                                <h4 class="fs-4 justify-content-between titlecartaSel" style="font-family: 'Roboto', sans-serif;
-                                                                                                                    font-weight: 400;
-                                                                                                                    font-style: normal;
-                                                                                                                    text-align: center;
-                                                                                                                    margin-bottom: 20px;">Crear una Cuenta</h4>
-                                                                                                            </div>
+                                                                                                    <div class="col-12 py-1 d-flex align-items-center my-1" style="margin-left: 80px;">
+                                                                                                        <img th:src="@{./assets/img/logo.svg}" style="width: 170px; margin-right: 15px;">
                                                                                                     </div>
-                                                                                                    <p class="text-center small justify-content-between mb-0"><h5 style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">Ingresa la siguiente información:</h5>
+                                                                                                    <div class="col-12 py-1 d-flex align-items-center my-1" style="margin-left: 20px;">
+                                                                                                        <div>
+                                                                                                            <h4 class="fs-4 justify-content-between titlecartaSel" style="font-family: 'Roboto', sans-serif;
+                                                                                                                font-weight: 400;
+                                                                                                                font-style: normal;
+                                                                                                                text-align: center;
+                                                                                                                margin-bottom: 20px;
+                                                                                                                margin-left: 65px">
+                                                                                                                Crea una cuenta
+                                                                                                            </h4>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <p class="text-center small justify-content-between mb-0"><h5 style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px; margin-left:25px;">Ingresa la siguiente información:</h5>
 
                                                                                                     </p>
                                                                                                     <form    method="post"
                                                                                                              role="form"
                                                                                                              th:action="@{/register}"
-                                                                                                             th:object="${user}"    class="row g-3 needs-validation py-2" novalidate>
+                                                                                                             th:object="${user}"    class="row needs-validation" novalidate>
 
-                                                                                                        <div class="col-12 py-2">
-                                                                                                            <label for="yourName" class="form-label titlecartaSel ">Email</label>
-                                                                                                            <input  th:field="*{username}" type="email" name="name" class="form-control" id="yourName" required>
-                                                                                                                <span th:if="${userexist}" style="color: red;">El usuario ya está registrado.</span>
-                                                                                                                <div class="invalid-feedback">Escribe tu correo electrónico</div>
+                                                                                                        <div class="col-12">
+                                                                                                            <label for="yourName" class="form-label titlecartaSel " style="margin-left:25px;">Email</label>
+                                                                                                            <input  th:field="*{username}" type="email" name="name" class="form-control" id="yourName" style="margin-left:25px;" required>
+                                                                                                                <span th:if="${userexist}" style="color: red; margin-left:25px;">El usuario ya está registrado.</span>
+                                                                                                                <div class="invalid-feedback" style="margin-left:25px;">Escribe tu correo electrónico</div>
                                                                                                         </div>
                                                                                                         <div class="col-12 py-1">
-                                                                                                            <label for="password" class="form-label titlecartaSel ">Contraseña</label>
-                                                                                                            <input th:field="*{password}" type="password" name="password" class="form-control" id="password" required>
-                                                                                                                <div class="invalid-feedback">Escribe tu Contraseña</div>
-                                                                                                                <span th:if="${passwordMismatch}" style="color: red;">Las contraseñas no coinciden.</span>
-                                                                                                                <div th:if="${#fields.hasErrors('password')}" style="color: red;" role="alert">
+                                                                                                            <label for="password" class="form-label titlecartaSel " style="margin-left:25px;">Contraseña</label>
+                                                                                                            <input th:field="*{password}" type="password" name="password" class="form-control" id="password" style="margin-left:25px;" required>
+                                                                                                                <div class="invalid-feedback" style="margin-left:25px;" >Escribe tu Contraseña</div>
+                                                                                                                <span th:if="${passwordMismatch}" style="color: red; margin-left:25px;">Las contraseñas no coinciden.</span>
+                                                                                                                <div th:if="${#fields.hasErrors('password')}" style="color: red; margin-left:25px;" role="alert">
                                                                                                                     La contraseña debe tener al menos 6 caracteres combinando letras y números.
                                                                                                                 </div>
                                                                                                         </div>
                                                                                                         <div class="col-12 py-1">
-                                                                                                            <label for="confirmPassword" class="form-label titlecartaSel ">Confirmar Contraseña</label>
-                                                                                                            <input th:field="*{confirmPassword}" type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
-                                                                                                                <div class="invalid-feedback">Confirma tu contraseña</div>
+                                                                                                            <label for="confirmPassword" class="form-label titlecartaSel " style="margin-left:25px;">Confirmar Contraseña</label>
+                                                                                                            <input th:field="*{confirmPassword}" type="password" name="confirmPassword" class="form-control" id="confirmPassword" style="margin-left:25px;" required>
+                                                                                                                <div class="invalid-feedback" style="margin-left:25px;">Confirma tu contraseña</div>
                                                                                                         </div>
                                                                                                         <div class="col-12 py-1">
                                                                                                             <div class="form-check">
-                                                                                                                <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                                                                                                                    <a class="form-check-label accept-terms texto2" for="acceptTerms" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer; color:#000000; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 18px;">Acepto los términos y condiciones</a>
+                                                                                                                <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" style="margin-left:1px;" required>
+                                                                                                                    <a class="form-check-label accept-terms texto2" for="acceptTerms" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer; margin-left:10px; color:#000000; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 14px;">Acepto los términos y condiciones</a>
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                        <div class="col-12 py-1">
-                                                                                                            <button type="submit" class="btn c w-100 texto2"
-                                                                                                                    style="background-color: #2FD6B4; color: black; display: inline-block; width: 100%; text-align: center; text-decoration: none; padding: 8px;">Crear cuenta</button>
+                                                                                                        <div class="col-12 py-3">
+                                                                                                            <button type="submit" class="btn texto2"
+                                                                                                                    style="background-color: #2FD6B4; color: black; display: inline-block; width: 40%; text-align: center; text-decoration: none; padding: 8px; margin-left:100px;">Registrar</button>
                                                                                                         </div>
                                                                                                         <div class="col-12 py-2">
-                                                                                                            <p class="small mb-0 texto2">¿Ya tienes una cuenta? <a th:href="@{/login}" style="color:#2FC0D5;">Iniciar Sesión</a>
+                                                                                                            <p class="small mb-0 texto2" style="margin-left:25px;">¿Ya tienes una cuenta? <a th:href="@{/login}" style="color:#2FC0D5;">Iniciar Sesión</a>
                                                                                                             </p>
                                                                                                         </div>
                                                                                                         <!-- Modal -->
