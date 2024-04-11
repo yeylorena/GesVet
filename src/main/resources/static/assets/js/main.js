@@ -764,6 +764,22 @@ function validarFormularioproducto() {
 
     return true; // Enviar el formulario si todas las validaciones son exitosas
 }
+function validarmascotaimagen() {
+    var imagen = document.getElementById('imagen').files[0];
+
+    // Validar que se haya seleccionado una imagen
+    if (!imagen) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, selecciona una imagen.'
+        });
+        return false;
+    }
+
+    return true; // Enviar el formulario si todas las validaciones son exitosas
+}
+
 
 
 function validarFormularioproductoupdate() {

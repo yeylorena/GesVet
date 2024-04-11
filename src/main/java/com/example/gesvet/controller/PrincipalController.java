@@ -9,7 +9,7 @@ public class PrincipalController {
 
     @GetMapping("/principal")
     public String Principal(Model model) {
-        return "index";
-    }
+            return "index";
+        }
 
-}
+    }

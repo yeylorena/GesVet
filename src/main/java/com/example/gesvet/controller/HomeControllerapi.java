@@ -30,6 +30,11 @@ import com.example.gesvet.service.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,6 +51,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/carrito")
@@ -391,7 +397,6 @@ public class HomeControllerapi {
                 Claims claims = JwtUtils.extractClaims(jwtToken);
 
                 if (claims != null) {
-                   
 
                     if (detalles == null || detalles.isEmpty()) {
                         var respuesta = new respuesta("error", "No se encontraron detalles del carrito");
@@ -637,6 +642,7 @@ public class HomeControllerapi {
     @ResponseBody
     public ResponseEntity<Object> saveFact(
             @RequestParam("metodoPago") Integer metodoPagoId,
+            @RequestParam(value = "file", required = false) MultipartFile imagenFile,
             Authentication authentication,
             Principal principal,
             HttpServletRequest request) {
@@ -663,6 +669,12 @@ public class HomeControllerapi {
 
                     if (detalles == null || detalles.isEmpty()) {
                         var respuesta = new respuesta("error", "No hay productos en el carrito para generar la factura.");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
+                    }
+
+                    // Validar si se proporcionó una imagen
+                    if (imagenFile == null || imagenFile.isEmpty()) {
+                        var respuesta = new respuesta("error", "Debe proporcionar una imagen.");
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                     }
 
@@ -694,6 +706,20 @@ public class HomeControllerapi {
 
                     // Asignar el usuario a la factura
                     factura.setUser(user);
+
+                    // Procesar la imagen de la factura (si se proporciona)
+                    try {
+                        if (imagenFile != null && !imagenFile.isEmpty()) {
+                            byte[] bytesImg = imagenFile.getBytes();
+                            Path directorioImagenes = Paths.get("images"); // Ajustar según necesidades
+                            String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+                            Path rutaCompleta = Paths.get(rutaAbsoluta + File.separator + imagenFile.getOriginalFilename());
+                            Files.write(rutaCompleta, bytesImg);
+                            factura.setImagen(imagenFile.getOriginalFilename());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace(); // Puedes manejar el error según tus necesidades
+                    }
 
                     // Guardar la factura en la base de datos
                     Factura facturaGuardada = facturaService.save(factura);

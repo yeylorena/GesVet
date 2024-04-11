@@ -34,7 +34,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(c -> c.disable())
+         http.csrf(c -> c.disable())
                 .authorizeHttpRequests(request -> request.requestMatchers("/homes", "/perfil_admin", "/cliente", "/razas", "/citasRapidas", "/listado", "/productos", "/getCartadmin", "/verhomeadmin", "/ayuda", "/productohomeadmin", "/cartadmin", "/facturaadmin", "/detalleadmin", "/editarFactura")
                 .hasAuthority("ADMIN").requestMatchers("/home", "/perfil", "/mascotasUsuarios", "/citas", "/verhome", "/getCart", "/comprasUser", "/ayudausuario", "/productohome", "/factura", "/cart", "/productohomes", "/detalle").hasAuthority("USER")
                 .requestMatchers("/**").permitAll()
