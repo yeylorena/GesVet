@@ -20,25 +20,25 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     @Autowired
     private UserService userService;
+    
+@Override
+public String login(String username, String password) {
+    var authToken = new UsernamePasswordAuthenticationToken(username, password);
 
-    @Override
-    public String login(String username, String password) {
-        var authToken = new UsernamePasswordAuthenticationToken(username, password);
-
-        var authenticate = authenticationManager.authenticate(authToken);
+    var authenticate = authenticationManager.authenticate(authToken);
 
         // Generate Token
         return JwtUtils.generateToken(((UserDetails) (authenticate.getPrincipal())).getUsername());
-    }
+}
 
-    @Override
-    public String verifyToken(String token) {
-        var usernameOptional = JwtUtils.getUsernameFromToken(token);
+   @Override
+public String verifyToken(String token) {
+    var usernameOptional = JwtUtils.getUsernameFromToken(token);
 
-        if (usernameOptional.isPresent()) {
+    if (usernameOptional.isPresent()) {
             return usernameOptional.get();
         }
 
-        throw new RuntimeException("Token invalid");
-    }
+    throw new RuntimeException("Token invalid");
 }
+    }

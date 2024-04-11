@@ -12,10 +12,12 @@ import com.example.gesvet.service.RazaService;
 import com.example.gesvet.service.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +37,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,12 +77,13 @@ public class mascotaUsuarioControllerapi {
             List<Raza> razas = razaService.getAllRazas();
             List<Especie> especies = especieService.getAllEspecies();
 
-            // Obtener las mascotas del usuario actual solamente
-            List<Mascota> mascotas = userService.findByUsername(username).getMascotas();
+            // Obtener las mascotas activas del usuario actual solamente
+            List<Mascota> mascotas = userService.findByUsername(username).getMascotas().stream()
+                    .filter(Mascota::isActivo) // Filtrar solo las mascotas activas
+                    .collect(Collectors.toList());
 
             // Construir un objeto que contenga toda la información necesaria para la respuesta
             Map<String, Object> response = new HashMap<>();
-
             response.put("razas", razas);
             response.put("especies", especies);
             response.put("mascotas", mascotas);
@@ -95,24 +100,33 @@ public class mascotaUsuarioControllerapi {
     }
 
     @PostMapping("/mascota/save")
-    public ResponseEntity<Object> saveMascota(@RequestBody Mascota mascotaRequest, HttpServletRequest request) {
-        String jwtToken = extractTokenFromRequest(request);
+    public ResponseEntity<Object> saveMascota(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("color") String color,
+            @RequestParam("edad") String edad,
+            @RequestParam("tiempo") String tiempo,
+            @RequestParam("genero") String genero,
+            @RequestParam("detalles") String detalles,
+            @RequestParam("especieId") Integer especieId,
+            @RequestParam("razaId") Integer razaId,
+            @RequestParam(value = "file", required = false) MultipartFile imagenFile,
+            HttpServletRequest request
+    ) {
+        String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
 
-        // Validar el token
         Claims claims = JwtUtils.extractClaims(jwtToken);
 
         if (claims != null) {
             String username = claims.getSubject();
 
-            // Obtener el usuario a partir del nombre de usuario en el token (subject)
             User user = userService.findByUsername(username);
 
             // Validar que los campos obligatorios no estén vacíos
-            if (StringUtils.isEmpty(mascotaRequest.getNombre()) || StringUtils.isEmpty(mascotaRequest.getColor())
-                    || StringUtils.isEmpty(mascotaRequest.getEdad()) || StringUtils.isEmpty(mascotaRequest.getTiempo())
-                    || StringUtils.isEmpty(mascotaRequest.getGenero()) || StringUtils.isEmpty(mascotaRequest.getDetalles())
-                    || StringUtils.isEmpty(mascotaRequest.getEspecie()) || StringUtils.isEmpty(mascotaRequest.getRaza())
-                    || StringUtils.isEmpty(mascotaRequest.getImagen())) {
+            if (StringUtils.isEmpty(nombre) || StringUtils.isEmpty(color)
+                    || StringUtils.isEmpty(edad) || StringUtils.isEmpty(tiempo)
+                    || StringUtils.isEmpty(genero) || StringUtils.isEmpty(detalles)
+                    || especieId == null || razaId == null) {
                 var respuesta = new respuesta(
                         "error",
                         "Por favor, complete todos los campos obligatorios"
@@ -124,31 +138,28 @@ public class mascotaUsuarioControllerapi {
                 // Crear una nueva instancia de Mascota con los datos recibidos
                 Mascota mascota = new Mascota();
                 mascota.setUsuario(user);
-                mascota.setNombre(mascotaRequest.getNombre());
-                mascota.setImagen(mascotaRequest.getImagen());
-                mascota.setColor(mascotaRequest.getColor());
-                mascota.setEdad(mascotaRequest.getEdad());
-                mascota.setTiempo(mascotaRequest.getTiempo());
-                mascota.setGenero(mascotaRequest.getGenero());
-                mascota.setDetalles(mascotaRequest.getDetalles());
+                mascota.setNombre(nombre);
+                mascota.setColor(color);
+                mascota.setEdad(edad);
+                mascota.setTiempo(tiempo);
+                mascota.setGenero(genero);
+                mascota.setDetalles(detalles);
 
-                Especie especieRequest = mascotaRequest.getEspecie();
-                if (especieRequest != null && especieRequest.getId() != null) {
-                    int especieId = especieRequest.getId();
-                    Especie especie = especieService.getById(especieId);
-                    mascota.setEspecie(especie);
-                } else {
-                    // Manejar el caso en que la especie en la solicitud es nula o no tiene ID
+                // Procesar la imagen de la mascota si se proporcionó
+                if (imagenFile != null && !imagenFile.isEmpty()) {
+                    byte[] bytesImg = imagenFile.getBytes();
+                    Path directorioImagenes = Paths.get("images"); // Ajustar según necesidades
+                    String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+                    Path rutaCompleta = Paths.get(rutaAbsoluta + File.separator + imagenFile.getOriginalFilename());
+                    Files.write(rutaCompleta, bytesImg);
+                    mascota.setImagen(imagenFile.getOriginalFilename());
                 }
 
-                Raza razaRequest = mascotaRequest.getRaza();
-                if (razaRequest != null && razaRequest.getId() != null) {
-                    int razaId = razaRequest.getId();
-                    Raza raza = razaService.getById(razaId);
-                    mascota.setRaza(raza);
-                } else {
-                    // Manejar el caso en que la raza en la solicitud es nula o no tiene ID
-                }
+                Especie especie = especieService.getById(especieId);
+                mascota.setEspecie(especie);
+
+                Raza raza = razaService.getById(razaId);
+                mascota.setRaza(raza);
 
                 // Guardar la mascota
                 mascotaService.save(mascota);
@@ -212,9 +223,22 @@ public class mascotaUsuarioControllerapi {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Object> updateMascota(@RequestBody Mascota mascota, HttpServletRequest request) {
+    public ResponseEntity<Object> updateMascota(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+            @RequestParam("id") Integer id,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("color") String color,
+            @RequestParam("edad") String edad,
+            @RequestParam("tiempo") String tiempo,
+            @RequestParam("genero") String genero,
+            @RequestParam("detalles") String detalles,
+            @RequestParam("especieId") Integer especieId,
+            @RequestParam("razaId") Integer razaId,
+            @RequestParam(value = "file", required = false) MultipartFile imagenFile,
+            HttpServletRequest request
+    ) {
         // Obtener el token JWT de la solicitud
-        String jwtToken = extractTokenFromRequest(request);
+        String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
 
         // Validar el token JWT
         Claims claims = JwtUtils.extractClaims(jwtToken);
@@ -224,54 +248,69 @@ public class mascotaUsuarioControllerapi {
             if (user != null) {
 
                 // Validar que los campos obligatorios no estén vacíos
-                if (StringUtils.isEmpty(mascota.getNombre()) || StringUtils.isEmpty(mascota.getColor())
-                        || StringUtils.isEmpty(mascota.getEdad()) || StringUtils.isEmpty(mascota.getTiempo())
-                        || StringUtils.isEmpty(mascota.getGenero()) || StringUtils.isEmpty(mascota.getDetalles())
-                        || StringUtils.isEmpty(mascota.getEspecie()) || StringUtils.isEmpty(mascota.getRaza())
-                        || StringUtils.isEmpty(mascota.getImagen())) {
+                if (StringUtils.isEmpty(nombre) || StringUtils.isEmpty(color)
+                        || StringUtils.isEmpty(edad) || StringUtils.isEmpty(tiempo)
+                        || StringUtils.isEmpty(genero) || StringUtils.isEmpty(detalles)
+                        || especieId == null || razaId == null) {
                     var respuesta = new respuesta(
                             "error",
                             "Por favor, complete todos los campos obligatorios"
                     );
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
                 }
-                // Asignar el usuario a la mascota que se está actualizando
-                mascota.setUsuario(user);
-
                 try {
-                    // Actualiza la mascota en la base de datos
+                    // Buscar la mascota por su ID
+                    Mascota mascota = mascotaService.findById(id);
+                    if (mascota == null) {
+                        var respuesta = new respuesta("error", "No se encontró la mascota con ID: " + id);
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+                    }
+
+                    // Actualizar los datos de la mascota
+                    mascota.setNombre(nombre);
+                    mascota.setColor(color);
+                    mascota.setEdad(edad);
+                    mascota.setTiempo(tiempo);
+                    mascota.setGenero(genero);
+                    mascota.setDetalles(detalles);
+
+                    // Procesar la imagen de la mascota si se proporcionó
+                    if (imagenFile != null && !imagenFile.isEmpty()) {
+                        byte[] bytesImg = imagenFile.getBytes();
+                        Path directorioImagenes = Paths.get("images"); // Ajustar según necesidades
+                        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+                        Path rutaCompleta = Paths.get(rutaAbsoluta + File.separator + imagenFile.getOriginalFilename());
+                        Files.write(rutaCompleta, bytesImg);
+                        mascota.setImagen(imagenFile.getOriginalFilename());
+                    }
+
+                    Especie especie = especieService.getById(especieId);
+                    mascota.setEspecie(especie);
+
+                    Raza raza = razaService.getById(razaId);
+                    mascota.setRaza(raza);
+
+                    // Guardar la mascota actualizada
                     mascotaService.update(mascota);
 
-                    // Devuelve una respuesta exitosa
-                    respuesta respuesta = new respuesta(
-                            "Éxito",
-                            "Mascota actualizada exitosamente"
-                    );
+                    // Crear una respuesta exitosa con un mensaje personalizado
+                    var respuesta = new respuesta("Éxito", "Mascota actualizada exitosamente");
                     return ResponseEntity.status(HttpStatus.OK).body(respuesta);
                 } catch (Exception e) {
-                    // Maneja cualquier excepción que pueda ocurrir al actualizar la mascota
+                    // Manejar cualquier excepción que pueda ocurrir al actualizar la mascota
                     e.printStackTrace();
-                    // Devuelve una respuesta de error
-                    respuesta respuesta = new respuesta(
-                            "error",
-                            "Error al actualizar la mascota"
-                    );
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+                    // Devolver una respuesta de error si ocurre una excepción
+                    var respuestaError = new respuesta("error", "Error al actualizar la mascota");
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
                 }
             } else {
-                respuesta respuesta = new respuesta(
-                        "error",
-                        "Usuario no autenticado"
-                );
                 // Si el usuario no está autenticado, devuelve una respuesta de error
+                var respuesta = new respuesta("error", "Usuario no autorizado");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
             }
         } else {
             // Si el token no es válido, devuelve una respuesta de error
-            respuesta respuesta = new respuesta(
-                    "error",
-                    "Token JWT inválido"
-            );
+            var respuesta = new respuesta("error", "Token JWT inválido");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
         }
     }

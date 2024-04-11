@@ -168,5 +168,10 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
     }
+    @Override
+public void updateUser2(User user) {
+    // Lógica para actualizar el usuario
+    userRepository.save(user);
+}
 
 }

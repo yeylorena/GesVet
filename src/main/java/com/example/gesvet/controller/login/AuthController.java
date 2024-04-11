@@ -1,6 +1,7 @@
 package com.example.gesvet.controller.login;
 
 import com.example.gesvet.auth.AuthService;
+import com.example.gesvet.models.respuesta;
 import com.example.gesvet.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -52,4 +54,24 @@ public class AuthController {
                     .build();
         }
     }
+    
+    @PostMapping("/logout")
+public ResponseEntity<Object> logout(@RequestBody String token) {
+    try {
+        // Invalidar el token y eliminar cualquier sesión asociada
+        SecurityContextHolder.clearContext();
+        var respuesta = new respuesta(
+                "success",
+                "Sesión cerrada exitosamente"
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(respuesta);
+    } catch (Exception e) {
+        var respuesta = new respuesta(
+                "error",
+                "Error al cerrar sesión"
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+    }
+}
+
 }

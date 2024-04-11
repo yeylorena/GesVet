@@ -7,6 +7,12 @@ import com.example.gesvet.models.respuesta;
 import com.example.gesvet.service.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.UUID;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +27,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/secret")
@@ -87,47 +95,75 @@ public class SecretController {
         }
     }
 
-    @PutMapping("/user-details")
-    public ResponseEntity<Object> updateUserDetails(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
-            @RequestBody UserDto userDto) {
-        String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
+   @PutMapping("/user-details")
+public ResponseEntity<Object> updateUserDetails(
+    @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+    @RequestParam("nombre") String nombre,
+    @RequestParam("apellido") String apellido,
+    @RequestParam("direccion") String direccion,
+    @RequestParam("telefono") String telefono,
+    @RequestParam("acercade") String acercade,
+    @RequestParam(value = "file", required = false) MultipartFile file
+) throws IOException {
+    String jwtToken = authorizationHeader.substring(7); // Eliminar "Bearer " del encabezado
 
-        Claims claims = JwtUtils.extractClaims(jwtToken);
+    Claims claims = JwtUtils.extractClaims(jwtToken);
 
-        if (claims != null) {
-            String username = claims.getSubject();
+    if (claims != null) {
+        String username = claims.getSubject();
 
-            var user = userService.findByUsername(username);
-            userDto.setId(user.getId());
+        User user = userService.findByUsername(username);
 
-            // Validar que los campos obligatorios no estén vacíos
-            if (StringUtils.isEmpty(userDto.getNombre()) || StringUtils.isEmpty(userDto.getApellido())
-                    || StringUtils.isEmpty(userDto.getDireccion()) || StringUtils.isEmpty(userDto.getTelefono())
-                    || StringUtils.isEmpty(userDto.getAcercade()) || StringUtils.isEmpty(userDto.getImagen())) {
-                var respuesta = new respuesta(
-                        "error",
-                        "Por favor, complete todos los campos obligatorios"
-                );
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
+        // Actualizar los campos del usuario
+        user.setNombre(nombre);
+        user.setApellido(apellido);
+        user.setDireccion(direccion);
+        user.setTelefono(telefono);
+        user.setAcercade(acercade);
+
+        // Procesar la imagen (si se envió)
+        try {
+            if (file != null && !file.isEmpty()) {
+                byte[] bytesImg = file.getBytes();
+                Path directorioImgenes = Paths.get("images"); // Ajustar según necesidades
+                String rutaAbsoluta = directorioImgenes.toFile().getAbsolutePath();
+                Path rutaCompleta = Paths.get(rutaAbsoluta + File.separator + file.getOriginalFilename());
+                Files.write(rutaCompleta, bytesImg);
+                user.setImagen(file.getOriginalFilename());
             }
-
-            // Actualizar los detalles del usuario
-            userService.updateUser(userDto);
-
-            var respuesta = new respuesta(
-                    "Creado",
-                    "Modificación exitosa"
-            );
-
-            return ResponseEntity.status(HttpStatus.OK).body(respuesta);
-        } else {
-            var respuesta = new respuesta(
-                    "error",
-                    "Usuario no autorizado"
-            );
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
+        } catch (IOException e) {
+            e.printStackTrace(); // Puedes manejar el error según tus necesidades
         }
+
+        // Validar que los campos obligatorios no estén vacíos
+        if (StringUtils.isEmpty(user.getNombre()) || StringUtils.isEmpty(user.getApellido())
+                || StringUtils.isEmpty(user.getDireccion()) || StringUtils.isEmpty(user.getTelefono())
+                || StringUtils.isEmpty(user.getAcercade()) || StringUtils.isEmpty(user.getImagen())) {
+            var respuesta = new respuesta(
+                "error",
+                "Por favor, complete todos los campos obligatorios"
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
+        }
+
+        // Actualizar los detalles del usuario
+        userService.updateUser2(user);
+
+        var respuesta = new respuesta(
+            "Creado",
+            "Modificación exitosa"
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(respuesta);
+    } else {
+        var respuesta = new respuesta(
+            "error",
+            "Usuario no autorizado"
+        );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
     }
+}
+
 
     @PostMapping("/cambiar-contrasena")
     public ResponseEntity<Object> cambiarContrasena(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
