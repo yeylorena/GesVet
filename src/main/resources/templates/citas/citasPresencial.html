@@ -25,7 +25,11 @@
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-                
+                <a class="nav-link nav-icon" style="font-size: 28px;
+                   line-height:10px;" th:href="@{/principal}" title="Principal">
+                    <i class="bi bi-house-door"></i>
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
                 <li class="nav-item">
                     <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                         <i class="bi bi-journal-bookmark-fill"></i>
@@ -148,9 +152,9 @@
     </aside>
 
     <main id="main" class="main" >
-           <div class="pagetitle">
-                <h1>Cita Rápida</h1>
-            </div><!-- End Page Title -->
+        <div class="pagetitle">
+            <h1>Cita Rápida</h1>
+        </div><!-- End Page Title -->
         <section class="section profile">
             <div class="col-xl-12">
 
@@ -183,10 +187,10 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="servicio" style="text-align: justify;
-                                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                                           font-size: 16px; color: #000000;">Tipo cita:</label>
-                                                                    <select name="servicio" id="servicio" class="form-select" required>
+                                                                    <label for="servicio">Tipo cita:</label>
+                                                                    <select  style="text-align: justify;
+                                                                             font-family: 'Calibri Light', Arial, sans-serif;
+                                                                             font-size: 16px; color: #000000;" name="servicio" id="servicio" class="form-select" required>
                                                                         <option value="">Selecciona un servicio</option>
                                                                         <option th:each="servicio : ${servicios}" th:value="${servicio.id}"  th:data-precio="${servicio.precio}"
                                                                                 th:text="${servicio.nombre}"></option>
@@ -194,10 +198,10 @@
                                                             </div>
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="usuario"  style="text-align: justify;
-                                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                                           font-size: 16px;color: #000000;">Veterinario:</label>
-                                                                    <select id="usuario" name="usuario" class="form-select" required>
+                                                                    <label for="usuario">Veterinario:</label>
+                                                                    <select id="usuario" name="usuario" class="form-select"  style="text-align: justify;
+                                                                            font-family: 'Calibri Light', Arial, sans-serif;
+                                                                            font-size: 16px; color: #000000;" required>
                                                                         <option value="">Selecciona un veterinario</option>
                                                                         <!-- Iteramos sobre los usuarios y generamos las opciones del menú desplegable -->
                                                                         <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nombre} + ' ' + ${usuario.apellido}">
@@ -210,10 +214,10 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="especie" style="text-align: justify;
-                                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                                           font-size: 16px;color: #000000;">Tipo de mascota:</label>
-                                                                    <select name="especie" class="form-select" required>
+                                                                    <label for="especie">Tipo de mascota:</label>
+                                                                    <select name="especie" class="form-select"  style="text-align: justify;
+                                                                            font-family: 'Calibri Light', Arial, sans-serif;
+                                                                            font-size: 16px; color: #000000;" required>
                                                                         <option value="">Selecciona una especie</option>
                                                                         <option th:each="especie : ${especies}" th:value="${especie.id}"
                                                                                 th:text="${especie.nombre}"></option>
@@ -221,11 +225,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="nombreMascota" style="text-align: justify;
+                                                                    <label for="nombreMascota">Nombre de la mascota:</label>
+                                                                    <input type="text"  style="text-align: justify;
                                                                            font-family: 'Calibri Light', Arial, sans-serif;
-                                                                           font-size: 16px;color: #000000;">Nombre de la mascota:</label>
-                                                                    <input type="text" name="nombreMascota" id="nombreMascota"
-                                                                           class="form-control custom-border custom-bg-fondo" required>
+                                                                           font-size: 16px; color: #000000;" name="nombreMascota" id="nombreMascota"
+                                                                           class="form-control custom-border custom-bg-fondo w-100" required>
                                                                         <span class="error-message"></span>
 
                                                                         </div>
@@ -234,168 +238,163 @@
 
                                                                             <div class="col">
                                                                                 <br>
-                                                                                    <label for="nombreDueño"  style="text-align: justify;
-                                                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                                                           font-size: 16px;color: #000000;">Nombre del dueño:</label>
+                                                                                    <label for="nombreDueño">Nombre del dueño:</label>
                                                                                     <input type="text" name="nombreDueño" id="nombreDueño"
-                                                                                           class="form-control custom-border custom-bg-fondo" required>
+                                                                                           class="form-control custom-border custom-bg-fondo w-100"  style="text-align: justify;
+                                                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                           font-size: 16px; color: #000000;" required>
                                                                                         <span class="error-message"></span>
 
                                                                                         </div>
                                                                                         <div class="col">
                                                                                             <br>
-                                                                                                <label for="colorMascota"><strong>Nivel de urgencia:</strong></label>
-                                                                                                <select class="form-select show-tick" name="colorMascota" id="colorMascota" required>
-                                                                                                    <option value="">-- Seleccione el color --</option>
-                                                                                                    <option value="Reanimación"><span style="background-color:#ff0000;">&#x25A0;</span> Reanimación</option>
-                                                                                                    <option value="Emergencia"><span style="background-color:#FF8C00;">&#x25A0;</span> Emergencia</option>
-                                                                                                    <option value="Urgencia"><span style="background-color:#e1ff00;">&#x25A0;</span> Urgencia</option>
-                                                                                                    <option value="Urgencia menor"><span style="background-color:#66ff00;">&#x25A0;</span> Urgencia menor</option>
-                                                                                                    <option value="No urgente"><span style="color:#00ffd5;">&#x25A0;</span> No urgente</option>
-                                                                                                </select>
-                                                                                        </div>
-                                                                                        </div>
-                                                                                        <div class="row">
-                                                                                            <div class="col">
-                                                                                                <br>
-                                                                                                    <label for="precio"style="text-align: justify;
-                                                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                                                           font-size: 16px;color: #000000;">Precio:</label>
-                                                                                                    <input type="double" name="precio" id="precio"
-                                                                                                           class="form-control custom-border custom-bg-fondo" required readonly>
-                                                                                                        <span class="error-message"></span>
+                                                                                                <label for="precio">Precio:</label>
+                                                                                                <input type="double" name="precio" id="precio"
+                                                                                                       class="form-control custom-border custom-bg-fondo w-100" style="text-align: justify;
+                                                                                                       font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                       font-size: 16px;color: #000000;" required readonly>
+                                                                                                    <span class="error-message"></span>
 
-                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                    <div class="row">
+
                                                                                                         <div class="col">
                                                                                                             <br>
                                                                                                                 <label class="control-label"><strong>Fecha de inicio:</strong></label>
-                                                                                                                <input type="datetime-local" name="inicio" step="1800" id="fechaInicio" class="form-control" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" required />
+                                                                                                                <input  type="datetime-local" name="inicio" step="1800" id="fechaInicio" class="form-control w-100" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" style="text-align: justify;
+                                                                                                                        font-family: 'Calibri Light', Arial, sans-serif;
+                                                                                                                        font-size: 16px;color: #000000;" required />
                                                                                                         </div>
                                                                                                         <div th:if="${error != null}" class="alert alert-danger mt-3" role="alert">
                                                                                                             <strong>Error:</strong> <span th:text="${error}"></span>
                                                                                                         </div>
-                                                                                                        </div>
+                                                                                                    </div>
 
+                                                                                                    <br>
                                                                                                         <br>
-                                                                                                            <br>
 
-                                                                                                                <div class="text-center mt-3">
-                                                                                                                    <button style="background-color: #2FD6B4;" id="btnGuardar" type="submit" class="btn">Agregar</button>
-                                                                                                                </div>
+                                                                                                            <div class="text-center mt-3">
+                                                                                                                <button style=" font-family: 'Montserrat', Arial, sans-serif;
+                                                                                                                        font-size: 16px;
+                                                                                                                        font-weight: 500;
+                                                                                                                        line-height: 20px;
+                                                                                                                        color: #000000; background-color: #2FD6B4;" id="btnGuardar" type="submit" class="btn">Agregar</button>
+                                                                                                            </div>
 
 
-                                                                                                                </div>
-                                                                                                                </form>
-                                                                                                                </div>  <!-- End col-md-12 -->
-                                                                                                                </div> <!-- End row -->
-                                                                                                                </div> <!-- End card-body -->
+                                                                                                            </div>
+                                                                                                            </form>
+                                                                                                            </div>  <!-- End col-md-12 -->
+                                                                                                            </div> <!-- End row -->
+                                                                                                            </div> <!-- End card-body -->
 
-                                                                                                                </div> <!-- End container-fluid -->
-                                                                                                                </div> <!-- End citas rapidas -->
-                                                                                                                </div> <!-- End tab-content -->
-                                                                                                                </div> <!-- End card body pt-3 -->
-                                                                                                                </div> <!-- End card -->
-                                                                                                                </div> <!-- col-xl-12 --> 
-                                                                                                                </section>
-                                                                                                                <div th:replace="~{Plantillas/administrador :: scripts}"></div>
+                                                                                                            </div> <!-- End container-fluid -->
+                                                                                                            </div> <!-- End citas rapidas -->
+                                                                                                            </div> <!-- End tab-content -->
+                                                                                                            </div> <!-- End card body pt-3 -->
+                                                                                                            </div> <!-- End card -->
+                                                                                                            </div> <!-- col-xl-12 --> 
+                                                                                                            </section>
+                                                                                                            <div th:replace="~{Plantillas/administrador :: scripts}"></div>
 
-                                                                                                                </main><!-- End #main -->
+                                                                                                            </main><!-- End #main -->
 
-                                                                                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                                                                                <script th:if="${success}">
+                                                                                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                                                                            <script th:if="${success}">
 Swal.fire({
     icon: 'success',
     title: '¡Cita agendada!',
     text: 'La cita se ha agendado correctamente.'
 });
-                                                                                                                </script>
-                                                                                                                <script>
-                                                                                                                    document.addEventListener('DOMContentLoaded', function () {
-                                                                                                                        // Función para validar y guardar la cita
-                                                                                                                        document.getElementById('btnGuardar').addEventListener('click', function () {
-                                                                                                                            var nombreCita = document.getElementById("nombreCita").value;
-                                                                                                                            var veterinario = document.getElementById("usuario").value;
-                                                                                                                            var especie = document.getElementsByName("especie")[0].value;
-                                                                                                                            var nombreMascota = document.getElementById("nombreMascota").value;
-                                                                                                                            var nombreDueño = document.getElementById("nombreDueño").value;
-                                                                                                                            var colorMascota = document.getElementById("colorMascota").value;
-                                                                                                                            var precio = document.getElementById("precio").value;
-                                                                                                                            var fechaInicio = document.getElementById("fechaInicio").value;
-                                                                                                                            if (nombreCita === "" || veterinario === "" || especie === "" || nombreMascota === "" || nombreDueño === "" || colorMascota === "" || precio === "" || fechaInicio === "") {
+                                                                                                            </script>
+                                                                                                            <script>
+                                                                                                                document.addEventListener('DOMContentLoaded', function () {
+                                                                                                                    // Función para validar y guardar la cita
+                                                                                                                    document.getElementById('btnGuardar').addEventListener('click', function () {
+                                                                                                                        var nombreCita = document.getElementById("nombreCita").value;
+                                                                                                                        var veterinario = document.getElementById("usuario").value;
+                                                                                                                        var especie = document.getElementsByName("especie")[0].value;
+                                                                                                                        var nombreMascota = document.getElementById("nombreMascota").value;
+                                                                                                                        var nombreDueño = document.getElementById("nombreDueño").value;
+                                                                                                                        var colorMascota = document.getElementById("colorMascota").value;
+                                                                                                                        var precio = document.getElementById("precio").value;
+                                                                                                                        var fechaInicio = document.getElementById("fechaInicio").value;
+                                                                                                                        if (nombreCita === "" || veterinario === "" || especie === "" || nombreMascota === "" || nombreDueño === "" || colorMascota === "" || precio === "" || fechaInicio === "") {
+                                                                                                                            Swal.fire({
+                                                                                                                                icon: 'error',
+                                                                                                                                title: 'Error',
+                                                                                                                                text: 'Por favor, completa todos los campos antes de agregar la cita.'
+                                                                                                                            });
+                                                                                                                        } else {
+                                                                                                                            var citaGuardada = true;
+                                                                                                                            if (citaGuardada) {
                                                                                                                                 Swal.fire({
-                                                                                                                                    icon: 'error',
-                                                                                                                                    title: 'Error',
-                                                                                                                                    text: 'Por favor, completa todos los campos antes de agregar la cita.'
+                                                                                                                                    icon: 'success',
+                                                                                                                                    title: 'Cita creada con éxito',
+                                                                                                                                    text: 'Tu cita ha sido guardada exitosamente.',
+                                                                                                                                    showConfirmButton: false,
+                                                                                                                                    timer: 2000
                                                                                                                                 });
-                                                                                                                            } else {
-                                                                                                                                var citaGuardada = true;
-                                                                                                                                if (citaGuardada) {
-                                                                                                                                    Swal.fire({
-                                                                                                                                        icon: 'success',
-                                                                                                                                        title: 'Cita creada con éxito',
-                                                                                                                                        text: 'Tu cita ha sido guardada exitosamente.',
-                                                                                                                                        showConfirmButton: false,
-                                                                                                                                        timer: 2000
-                                                                                                                                    });
-                                                                                                                                }
                                                                                                                             }
-                                                                                                                        });
-                                                                                                                        // Validación en tiempo real y capitalización de campos
-                                                                                                                        var precioInput = document.getElementById("precio");
-                                                                                                                        var nombreMascotaInput = document.getElementById("nombreMascota");
-                                                                                                                        var nombreDueñoInput = document.getElementById("nombreDueño");
-                                                                                                                        precioInput.addEventListener('keydown', function (event) {
-                                                                                                                            if (!(event.key === '.' || event.key === 'Backspace' || event.key === 'Delete' || (event.key >= '0' && event.key <= '9') ||
-                                                                                                                                    (event.ctrlKey && event.key === 'a') || (event.ctrlKey && event.key === 'c') || (event.ctrlKey && event.key === 'x') ||
-                                                                                                                                    (event.ctrlKey && event.key === 'v') || (event.key === 'ArrowLeft') || (event.key === 'ArrowRight') || (event.key === 'Tab') ||
-                                                                                                                                    (event.key === 'Home') || (event.key === 'End'))) {
-                                                                                                                                event.preventDefault();
-                                                                                                                            }
-                                                                                                                        });
-                                                                                                                        nombreMascotaInput.addEventListener('input', function () {
-                                                                                                                            this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
-                                                                                                                            this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
-                                                                                                                        });
-
-                                                                                                                        nombreDueñoInput.addEventListener('input', function () {
-                                                                                                                            this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
-                                                                                                                            this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
-                                                                                                                        });
-
-                                                                                                                        // Restablecer valores al cerrar el modal
-                                                                                                                        $('#agregarProv').on('hidden.bs.modal', function (e) {
-                                                                                                                            $('#nombreMascota').val('');
-                                                                                                                            $('#nombreDueño').val('');
-                                                                                                                            $('#usuario').prop('selectedIndex', 0);
-                                                                                                                            $('#especie').prop('selectedIndex', 0);
-                                                                                                                            $('#colorMascota').prop('selectedIndex', 0);
-                                                                                                                            $('#precio').val('');
-                                                                                                                            $('#fechaInicio').val('');
-                                                                                                                            $('.error-message').text('');
-                                                                                                                        });
+                                                                                                                        }
                                                                                                                     });
-                                                                                                                </script>
-                                                                                                                <script>
-                                                                                                                    document.addEventListener('DOMContentLoaded', function () {
-                                                                                                                        // Obtener el selector de servicios
-                                                                                                                        var servicioSelect = document.querySelector('select[name="servicio"]');
-                                                                                                                        // Obtener el campo de precio
-                                                                                                                        var precioInput = document.querySelector('input[name="precio"]');
-                                                                                                                        // Manejar el evento de cambio en el selector de servicios
-                                                                                                                        servicioSelect.addEventListener('change', function () {
-                                                                                                                            // Obtener el precio del servicio seleccionado
-                                                                                                                            var precio = parseFloat(this.options[this.selectedIndex].getAttribute('data-precio'));
-                                                                                                                            // Comprobar si el precio es válido
-                                                                                                                            if (!isNaN(precio)) {
-                                                                                                                                // Autocompletar el campo de precio
-                                                                                                                                precioInput.value = precio;
-                                                                                                                            } else {
-                                                                                                                                // Limpiar el campo de precio si no se encuentra un precio válido
-                                                                                                                                precioInput.value = '';
-                                                                                                                            }
-                                                                                                                        });
+                                                                                                                    // Validación en tiempo real y capitalización de campos
+                                                                                                                    var precioInput = document.getElementById("precio");
+                                                                                                                    var nombreMascotaInput = document.getElementById("nombreMascota");
+                                                                                                                    var nombreDueñoInput = document.getElementById("nombreDueño");
+                                                                                                                    precioInput.addEventListener('keydown', function (event) {
+                                                                                                                        if (!(event.key === '.' || event.key === 'Backspace' || event.key === 'Delete' || (event.key >= '0' && event.key <= '9') ||
+                                                                                                                                (event.ctrlKey && event.key === 'a') || (event.ctrlKey && event.key === 'c') || (event.ctrlKey && event.key === 'x') ||
+                                                                                                                                (event.ctrlKey && event.key === 'v') || (event.key === 'ArrowLeft') || (event.key === 'ArrowRight') || (event.key === 'Tab') ||
+                                                                                                                                (event.key === 'Home') || (event.key === 'End'))) {
+                                                                                                                            event.preventDefault();
+                                                                                                                        }
                                                                                                                     });
-                                                                                                                </script>
+                                                                                                                    nombreMascotaInput.addEventListener('input', function () {
+                                                                                                                        this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
+                                                                                                                        this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+                                                                                                                    });
 
-                                                                                                                </body>
-                                                                                                                </html>
+                                                                                                                    nombreDueñoInput.addEventListener('input', function () {
+                                                                                                                        this.value = this.value.replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]/g, '');
+                                                                                                                        this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+                                                                                                                    });
+
+                                                                                                                    // Restablecer valores al cerrar el modal
+                                                                                                                    $('#agregarProv').on('hidden.bs.modal', function (e) {
+                                                                                                                        $('#nombreMascota').val('');
+                                                                                                                        $('#nombreDueño').val('');
+                                                                                                                        $('#usuario').prop('selectedIndex', 0);
+                                                                                                                        $('#especie').prop('selectedIndex', 0);
+                                                                                                                        $('#colorMascota').prop('selectedIndex', 0);
+                                                                                                                        $('#precio').val('');
+                                                                                                                        $('#fechaInicio').val('');
+                                                                                                                        $('.error-message').text('');
+                                                                                                                    });
+                                                                                                                });
+                                                                                                            </script>
+                                                                                                            <script>
+                                                                                                                document.addEventListener('DOMContentLoaded', function () {
+                                                                                                                    // Obtener el selector de servicios
+                                                                                                                    var servicioSelect = document.querySelector('select[name="servicio"]');
+                                                                                                                    // Obtener el campo de precio
+                                                                                                                    var precioInput = document.querySelector('input[name="precio"]');
+                                                                                                                    // Manejar el evento de cambio en el selector de servicios
+                                                                                                                    servicioSelect.addEventListener('change', function () {
+                                                                                                                        // Obtener el precio del servicio seleccionado
+                                                                                                                        var precio = parseFloat(this.options[this.selectedIndex].getAttribute('data-precio'));
+                                                                                                                        // Comprobar si el precio es válido
+                                                                                                                        if (!isNaN(precio)) {
+                                                                                                                            // Autocompletar el campo de precio
+                                                                                                                            precioInput.value = precio;
+                                                                                                                        } else {
+                                                                                                                            // Limpiar el campo de precio si no se encuentra un precio válido
+                                                                                                                            precioInput.value = '';
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                });
+                                                                                                            </script>
+
+                                                                                                            </body>
+                                                                                                            </html>

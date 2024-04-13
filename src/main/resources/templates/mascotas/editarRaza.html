@@ -237,7 +237,11 @@
 
                 <nav class="header-nav ms-auto">
                     <ul class="d-flex align-items-center">
-                       
+                        <a class="nav-link nav-icon" style="font-size: 28px;
+                           line-height:10px;" th:href="@{/principal}" title="Principal">
+                            <i class="bi bi-house-door"></i>
+                            <span class="badge bg-primary badge-number"></span>
+                        </a>
                         <li class="nav-item">
                             <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                                 <i class="bi bi-journal-bookmark-fill"></i>
@@ -381,7 +385,7 @@
                                     <div class="container">
                                         <form  th:action="@{/razas/update}" object="" method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="id" th:value="${Raza.id}">
-                                                <div class="card">
+                                                <div >
                                                     <div class="form-group">
                                                         <div class="row my-2" style="font-family: 'Montserrat', Arial, sans-serif;
                                                              font-size: 15px;
@@ -389,20 +393,20 @@
                                                              line-height: 50px;
                                                              color: #000000;">
                                                             <div class="col-6">
-                                                                <label style="text-align: justify;
+                                                                <label>Nombre:</label>
+                                                                <input style="text-align: justify;
                                                                        font-family: 'Calibri Light', Arial, sans-serif;
-                                                                       font-size: 18px;">Nombre:</label>
-                                                                <input type="text" id="nombre" name="nombre" th:value="${Raza.nombre}" class="form-control" required autocomplete="off">
+                                                                       font-size: 18px;" type="text" id="nombre" name="nombre" th:value="${Raza.nombre}" class="form-control w-100" required autocomplete="off">
                                                             </div>
                                                             <div class="col-6">
-                                                                <label style="text-align: justify;
+                                                                <label>Descripción:</label>
+                                                                <input style="text-align: justify;
                                                                        font-family: 'Calibri Light', Arial, sans-serif;
-                                                                       font-size: 18px;">Descripción:</label>
-                                                                <input type="text" id="descripcion" name="descripcion" th:value="${Raza.descripcion}" class="form-control" required autocomplete="off">
+                                                                       font-size: 18px;" type="text" id="descripcion" name="descripcion" th:value="${Raza.descripcion}" class="form-control w-100" required autocomplete="off">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="box-footer">
+                                                    <div class="box-footer mt-3">
                                                         <div class="row my-2">
                                                             <div class="d-grid gap-2 col-6">
                                                                 <button id="guardarBtn" class="btn " style="background-color:#2FD6B4" >Guardar</button>

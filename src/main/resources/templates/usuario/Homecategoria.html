@@ -24,11 +24,11 @@
             </div><!-- End Logo -->
             <nav class="header-nav ms-auto">
                 <ul class="d-flex align-items-center">
-                    <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link nav-icon search-bar-toggle " href="#">
-                            <i class="bi bi-search"></i>
-                        </a>
-                    </li><!-- End Search Icon-->
+                    <a class="nav-link nav-icon" style="font-size: 28px;
+                       line-height:10px;" th:href="@{/principal}" title="Principal">
+                        <i class="bi bi-house-door"></i>
+                        <span class="badge bg-primary badge-number"></span>
+                    </a>
                     <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf" title="Manual de usuario">
                         <i class="bi bi-journal-bookmark-fill"></i>
                         <span class="badge bg-primary badge-number"></span>
@@ -110,7 +110,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" th:href="@{/verhome}">
                         <i class="bi bi-bag-plus"></i>
-                        <span>Productos y servicios</span>
+                        <span>Productos</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -137,7 +137,7 @@
         <main id="main" class="main">
 
             <div class="pagetitle">
-                <h1 style="color: black;">Productos y Servicios </h1>
+                <h1 style="color: black;">Productos</h1>
             </div><!-- End Page Title -->
 
             <section class="section profile">

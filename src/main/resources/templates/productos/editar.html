@@ -12,11 +12,11 @@
         </div><!-- End Logo -->
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
+                <a class="nav-link nav-icon" style="font-size: 28px;
+                   line-height:10px;" th:href="@{/principal}" title="Principal">
+                    <i class="bi bi-house-door"></i>
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
                 <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
@@ -158,46 +158,46 @@
                             <div class="container">
                                 <form th:action="@{/productos/update}" object="" method="post" enctype="multipart/form-data" onsubmit="return validarFormularioproductoupdate()">
                                     <input type="hidden" name="id" th:value="${producto.id}">
-                                        <div class="card">
+                                        <div>
                                             <div class="form-group">
                                                 <div class="row my-2">
                                                     <div class="col-6 ">
-                                                        <label style="text-align: justify;
-                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" >Nombre:</label>
-                                                        <input type="text" name="nombre" id="nombre" field="" th:value="${producto.nombre}" class="form-control" required autocomplete="off">
+                                                        <label>Nombre:</label>
+                                                        <input type="text" name="nombre" id="nombre" field="" th:value="${producto.nombre}" class="form-control w-100"  style="text-align: justify;
+                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                               font-size: 16px;"  required autocomplete="off">
                                                     </div>
                                                     <div class="col-6 ">
-                                                        <label style="text-align: justify;
-                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" >Descripción:</label>
-                                                        <input type="text" name="descripcion" id="descripcion"  field="" th:value="${producto.descripcion}" class="form-control" required autocomplete="off">
+                                                        <label>Descripción:</label>
+                                                        <input type="text" name="descripcion" id="descripcion"  field="" th:value="${producto.descripcion}" class="form-control w-100"  style="text-align: justify;
+                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                               font-size: 16px;"  required autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="row my-2">
                                                     <div class="col-6 ">
-                                                        <label style="text-align: justify;
-                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" >Cantidad:</label>
-                                                        <input type="number" name="cantidad" field="" th:value="${producto.cantidad}" class="form-control" required autocomplete="off">
+                                                        <label>Cantidad:</label>
+                                                        <input type="number" name="cantidad" field="" th:value="${producto.cantidad}" class="form-control w-100"  style="text-align: justify;
+                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                               font-size: 16px;"  required autocomplete="off">
                                                     </div>
                                                     <div class="col-6">
-                                                        <label style="text-align: justify;
-                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" for="precio">Precio:</label>
-                                                        <input type="text" id="precio" name="precio" th:value="${producto.precio}" class="form-control" required autocomplete="off">
+                                                        <label for="precio">Precio:</label>
+                                                        <input type="text" id="precio" name="precio" th:value="${producto.precio}" class="form-control w-100"  style="text-align: justify;
+                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                               font-size: 16px;"  required autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="row my-2">
                                                     <div class="col-6">
-                                                        <label style="text-align: justify;
-                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" >Categoría:</label>
-                                                        <select name="categoriaId" class="form-select" required>
+                                                        <label>Categoría:</label>
+                                                        <select name="categoriaId" class="form-select"  style="text-align: justify;
+                                                                font-family: 'Calibri Light', Arial, sans-serif;
+                                                                font-size: 16px;"  required>
                                                             <option value="" th:if="${producto.categoria == null}">Seleccione una categoría</option>
                                                             <th:block th:each="categoria : ${categorias}">
                                                                 <option th:value="${categoria.id}" th:text="${categoria.nombre}" th:selected="${categoria.id == producto.categoria?.id}"></option>
@@ -205,10 +205,10 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-6 ">
-                                                        <label style="text-align: justify;
-                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;">Imagen:</label>
-                                                        <input type="file" name="img" id="img" class="form-control"  onchange="validarArchivo(this);"  accept=".jpg, .jpeg, .png" >
+                                                        <label>Imagen:</label>
+                                                        <input type="file" name="img" id="img" class="form-control w-100"  style="text-align: justify;
+                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                               font-size: 16px;"   onchange="validarArchivo(this);"  accept=".jpg, .jpeg, .png" >
                                                             <h6 style="margin-top: 5px; font-size: 14px;">Tamaño máximo: 10 MB</h6>
                                                     </div>
                                                 </div>
@@ -216,16 +216,18 @@
                                             <div class="form-group">
                                                 <div class="row my-2">
                                                     <div class="col-6 ">
-                                                        <label style="text-align: justify;
-                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" class="form-label">Estado:</label><br>
+                                                        <label class="form-label">Estado:</label><br>
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="activo" value="true" th:checked="${producto.activo}">
-                                                                    <label class="form-check-label">Activo</label>
+                                                                    <label class="form-check-label"  style="text-align: justify;
+                                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                                           font-size: 16px;" >Activo</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="activo" value="false" th:checked="${!producto.activo}">
-                                                                    <label class="form-check-label">Inactivo</label>
+                                                                    <label class="form-check-label"  style="text-align: justify;
+                                                                           font-family: 'Calibri Light', Arial, sans-serif;
+                                                                           font-size: 16px;" >Inactivo</label>
                                                             </div>
                                                     </div>                                
                                                 </div>

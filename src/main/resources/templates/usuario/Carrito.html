@@ -28,12 +28,11 @@
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
+                <a class="nav-link nav-icon" style="font-size: 28px;
+                   line-height:10px;" th:href="@{/principal}" title="Principal">
+                    <i class="bi bi-house-door"></i>
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
                 <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf" title="Manual de usuario">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
@@ -128,7 +127,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/verhome}">
                     <i class="bi bi-bag-plus"></i>
-                    <span>Productos y servicios</span>
+                    <span>Productos</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -191,14 +190,14 @@
                                             <table class="table">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Producto</th>
-                                                        <th scope="col">Precio</th>
-                                                        <th scope="col">Cantidad</th>
-                                                        <th scope="col">Total</th>
-                                                        <th scope="col">Acción</th>
+                                                        <th style="font-weight:700; color:#444444;" scope="col">Producto</th>
+                                                        <th style="font-weight:700; color:#444444;" scope="col">Precio</th>
+                                                        <th style="font-weight:700; color:#444444;" scope="col">Cantidad</th>
+                                                        <th style="font-weight:700; color:#444444;" scope="col">Total</th>
+                                                        <th style="font-weight:700; color:#444444;" scope="col">Acción</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody style="font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;font-weight:400;">
                                                     <tr th:each="dfactura:${cart}">
                                                         <td th:text="${dfactura.nombre}"></td>
                                                         <td th:text="${dfactura.precio}" class="precio2"></td>
@@ -240,7 +239,7 @@
 
 
                                         <div class="col-lg-3">
-                                            <h2 class="card-title">Total compra:</h2>
+                                            <h2 class="card-title p-0">Total compra:</h2>
 
                                             <ul class="list-group">
                                                 <li class="list-group-item"><h5 th:text="${factura.total}"  class="precio1"></h5></li>
@@ -358,25 +357,25 @@
     </script>
     <script th:inline="javascript">
         /*<![CDATA[*/
-document.addEventListener("DOMContentLoaded", function () {
-    // Obtener todos los elementos de entrada con la clase "productoCantidad"
-    var productoCantidadInputs = document.querySelectorAll('.productoCantidad');
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener todos los elementos de entrada con la clase "productoCantidad"
+            var productoCantidadInputs = document.querySelectorAll('.productoCantidad');
 
-    // Iterar sobre cada elemento de entrada y aplicar el formateo
-    productoCantidadInputs.forEach(function (input) {
-        // Obtener el valor del atributo "value" del elemento de entrada
-        var valorProducto = input.value.trim();
+            // Iterar sobre cada elemento de entrada y aplicar el formateo
+            productoCantidadInputs.forEach(function (input) {
+                // Obtener el valor del atributo "value" del elemento de entrada
+                var valorProducto = input.value.trim();
 
-        // Parsear el valor del producto a un número entero
-        var valor = parseInt(valorProducto);
+                // Parsear el valor del producto a un número entero
+                var valor = parseInt(valorProducto);
 
-        // Si el valor es válido, actualizar el valor del atributo "value" del elemento de entrada
-        if (!isNaN(valor)) {
-            input.value = valor; // Actualizar el valor
-        }
-    });
-});
-/*]]>*/
+                // Si el valor es válido, actualizar el valor del atributo "value" del elemento de entrada
+                if (!isNaN(valor)) {
+                    input.value = valor; // Actualizar el valor
+                }
+            });
+        });
+        /*]]>*/
 
     </script>
 

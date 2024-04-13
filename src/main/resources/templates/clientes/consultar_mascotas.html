@@ -7,6 +7,12 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Bundle JS (incluye Popper) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .titulo{
+            font-weight:700;
+            color:#444444;
+        }
+    </style>
 
     <body style="background-color: #F4F4F4;">
 
@@ -21,7 +27,11 @@
 
             <nav class="header-nav ms-auto">
                 <ul class="d-flex align-items-center">
-
+                    <a class="nav-link nav-icon" style="font-size: 28px;
+                       line-height:10px;" th:href="@{/principal}" title="Principal">
+                        <i class="bi bi-house-door"></i>
+                        <span class="badge bg-primary badge-number"></span>
+                    </a>
                     <li class="nav-item">
                         <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                             <i class="bi bi-journal-bookmark-fill"></i>
@@ -175,20 +185,20 @@
                                 <div class="container">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover text-start">
-                                            <thead>
+                                            <thead >
                                                 <tr>
-                                                    <th>N°</th>
-                                                    <th>Foto</th>
-                                                    <th>Nombre</th>
-                                                    <th>Especie</th>
-                                                    <th>Raza</th>
-                                                    <th>Color</th>
-                                                    <th>Edad</th>
-                                                    <th>Tiempo</th>
-                                                    <th>Género</th>
+                                                    <th style="font-weight:700; color:#444444;">N°</th>
+                                                    <th style="font-weight:700; color:#444444;">Foto</th>
+                                                    <th style="font-weight:700; color:#444444;">Nombre</th>
+                                                    <th style="font-weight:700; color:#444444;">Especie</th>
+                                                    <th style="font-weight:700; color:#444444;">Raza</th>
+                                                    <th style="font-weight:700; color:#444444;">Color</th>
+                                                    <th style="font-weight:700; color:#444444;">Edad</th>
+                                                    <th style="font-weight:700; color:#444444;">Tiempo</th>
+                                                    <th style="font-weight:700; color:#444444;">Género</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody style="font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;font-weight:400;">
                                                 <tr th:each="mascota, iterStat : ${mascotas}">
                                                     <td th:text="${iterStat.index + 1}"></td>
                                                     <td>

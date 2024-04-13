@@ -24,7 +24,11 @@
         </div><!-- End Logo -->
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-              
+                <a class="nav-link nav-icon" style="font-size: 28px;
+                   line-height:10px;" th:href="@{/principal}" title="Principal">
+                    <i class="bi bi-house-door"></i>
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
                 <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf" title="Manual de usuario">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
@@ -106,7 +110,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/verhome}">
                     <i class="bi bi-bag-plus"></i>
-                    <span>Productos y servicios</span>
+                    <span>Productos</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -186,16 +190,16 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="mascota" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Mascota:</label>
-                                                                    <select class="form-select" name="mascota" required>
+                                                                    <label for="mascota">Mascota:</label>
+                                                                    <select class="form-select" name="mascota"  style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;" required>
                                                                         <option value="">Selecciona una mascota...</option>
                                                                         <option th:each="mascota : ${mascotas}" th:value="${mascota.id}" th:data-imagen="${mascota.imagen}" th:text="${mascota.nombre}" ></option>
                                                                     </select>
                                                             </div>
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="servicio" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Tipo cita:</label>
-                                                                    <select class="form-select" name="servicio" required>
+                                                                    <label for="servicio">Tipo cita:</label>
+                                                                    <select class="form-select" name="servicio"  style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;" required>
                                                                         <option value="">Selecciona un servicio...</option>
                                                                         <option th:each="servicio : ${servicios}" th:value="${servicio.id}" th:data-precio="${servicio.precio}"
                                                                                 th:text="${servicio.nombre}" ></option>                                                                    </select>
@@ -204,22 +208,22 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="usuario" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Veterinario:</label>
-                                                                    <select class="form-select" name="usuario" required>
+                                                                    <label for="usuario">Veterinario:</label>
+                                                                    <select class="form-select" name="usuario"  style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;" required>
                                                                         <option value="">Selecciona un veterinario...</option>
                                                                         <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nombre} + ' ' + ${usuario.apellido}">
                                                                     </select>                                                                        </div>
                                                             <div class="col">
                                                                 <br>
-                                                                    <label for="precio" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Precio:</label>
-                                                                    <input type="text" name="precio" class="form-control custom-border custom-bg-fondo" required readonly>
+                                                                    <label for="precio">Precio:</label>
+                                                                    <input type="text" name="precio" class="form-control w-100 custom-border custom-bg-fondo"  style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;" required readonly>
                                                                         <!-- El precio se autocompleta segun el servicio escogido -->
                                                                         </div>
                                                                         </div>
                                                                         <div class="row mt-3">
                                                                             <div class="col">
-                                                                                <label class="control-label" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;">Fecha</label>
-                                                                                <input type="datetime-local" name="inicio" id="fechaInicio" step="1800" class="form-control" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}" required />
+                                                                                <label class="control-label">Fecha</label>
+                                                                                <input type="datetime-local" name="inicio" id="fechaInicio" step="1800" class="form-control w-100" min="{{#temporal}}|format_date_time('yyyy-MM-ddTHH:mm'){{/temporal}}"  style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;" required />
                                                                             </div>
                                                                         </div>
                                                                         <div th:if="${error != null}" class="alert alert-danger mt-3" role="alert">
@@ -258,15 +262,15 @@
                                                                                 <table class="table table-striped table-hover text-start" id="tablaConsultar">
                                                                                     <thead>
                                                                                         <tr class="table-secondary">
-                                                                                            <th scope="col">N°</th>
-                                                                                            <th scope="col">Mascota</th>
-                                                                                            <th scope="col">Fecha</th>                                                                             
-                                                                                            <th scope="col">Tipo de cita</th>
-                                                                                            <th scope="col">Veterinario</th>
-                                                                                            <th scope="col">Estado</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">N°</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Mascota</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Fecha</th>                                                                             
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Tipo de cita</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Veterinario</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Estado</th>
                                                                                         </tr>
                                                                                     </thead>
-                                                                                    <tbody>
+                                                                                    <tbody style="font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;font-weight:400;" >
                                                                                         <tr th:each="cita, iterStat : ${citasPendientes}">
                                                                                             <td th:text="${iterStat.index + 1}"></td>
                                                                                             <td th:text="${cita.nombreMascota}"></td> <!-- Mostrar el nombre de la mascota -->
@@ -297,15 +301,15 @@
                                                                                 <table class="table table-striped table-hover text-start" id="tablaHistorial">
                                                                                     <thead>
                                                                                         <tr class="table-secondary">
-                                                                                            <th scope="col">N°</th>
-                                                                                            <th scope="col">Mascota</th>
-                                                                                            <th scope="col">Fecha</th>                                                                             
-                                                                                            <th scope="col">Tipo de cita</th>
-                                                                                            <th scope="col">Veterinario</th>
-                                                                                            <th scope="col">Estado</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">N°</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Mascota</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Fecha</th>                                                                             
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Tipo de cita</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Veterinario</th>
+                                                                                            <th style="font-weight:700; color:#444444;" scope="col">Estado</th>
                                                                                         </tr>
                                                                                     </thead>
-                                                                                    <tbody>
+                                                                                    <tbody style="font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;font-weight:400;" >
                                                                                         <tr th:each="cita, iterStat : ${citasEstado}">
                                                                                             <td th:text="${iterStat.index + 1}"></td>
                                                                                             <td th:text="${cita.nombreMascota}"></td> <!-- Mostrar el nombre de la mascota -->

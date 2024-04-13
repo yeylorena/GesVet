@@ -16,11 +16,11 @@
         </div><!-- End Logo -->
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
+                <a class="nav-link nav-icon" style="font-size: 28px;
+                   line-height:10px;" th:href="@{/principal}" title="Principal">
+                    <i class="bi bi-house-door"></i>
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
                 <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf" title="Manual de usuario">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
@@ -102,7 +102,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/verhome}">
                     <i class="bi bi-bag-plus"></i>
-                    <span>Productos y servicios</span>
+                    <span>Productos</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -138,10 +138,10 @@
 
                             <li class="nav-item">
                                 <button class="nav-link active" style="font-family: 'Montserrat', Arial, sans-serif;
-                            font-size: 16px;
-                            font-weight: 500;
-                            line-height: 20px;
-                            color: #000000;" data-bs-toggle="tab"
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        line-height: 20px;
+                                        color: #000000;" data-bs-toggle="tab"
                                         data-bs-target="#profile-overview">Editar</button>
                             </li>
                         </ul>
@@ -150,10 +150,10 @@
                                 <form id="editarMascotaForm" method="post" th:action="@{/mascotasUsuarios/update}" enctype="multipart/form-data">
                                     <input type="hidden" name="usuario.id" th:value="${usuarioMascota.id}"/>
                                     <input type="hidden" name="id" th:value="${mascotasEditar.id}" />
-                                    <div class="card">
+                                    <div>
                                         <div class="row mb-3">
-                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Imagen de
-                                                Mascota</label>
+                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagen de
+                                                mascota</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <img th:src="@{/images/{imageName}(imageName=${mascotasEditar.imagen})}" class="rounded-circle" alt="..." width="20%">
                                                     <div class="pt-2">
@@ -171,24 +171,24 @@
                                                                 <div class="form-group">
                                                                     <div class="row my-2">
                                                                         <div class="col-6 ">
-                                                                            <label for="nombre" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Nombre:</label>
-                                                                            <input type="text" name="nombre" field="" th:value="${mascotasEditar.nombre}" class="form-control" required autocomplete="off">
+                                                                            <label for="nombre">Nombre:</label>
+                                                                            <input type="text" name="nombre" field="" th:value="${mascotasEditar.nombre}" class="form-control w-100" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;" required autocomplete="off">
                                                                         </div>
                                                                         <div class="col-6 ">
-                                                                            <label for="color" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Color:</label>
-                                                                            <input type="text" name="color" field="" th:value="${mascotasEditar.color}" class="form-control" required autocomplete="off">
+                                                                            <label for="color">Color:</label>
+                                                                            <input type="text" name="color" field="" th:value="${mascotasEditar.color}" class="form-control w-100" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;" required autocomplete="off">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <div class="row my-2">
                                                                         <div class="col-6 ">
-                                                                            <label for="edad" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Edad:</label>
-                                                                            <input type="text" name="edad" field="" th:value="${mascotasEditar.edad}" class="form-control" required autocomplete="off">
+                                                                            <label for="edad">Edad:</label>
+                                                                            <input type="text" name="edad" field="" th:value="${mascotasEditar.edad}" class="form-control w-100" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;" required autocomplete="off">
                                                                         </div>
                                                                         <div class="col-6 ">
-                                                                            <label for="tiempo" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Tiempo:</label>
-                                                                            <select name="tiempo" class="form-select" th:value="${mascotasEditar.tiempo}" required>
+                                                                            <label for="tiempo">Tiempo:</label>
+                                                                            <select name="tiempo" class="form-select" th:value="${mascotasEditar.tiempo}" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;" required>
                                                                                 <option value="Meses" th:selected="${mascotasEditar.tiempo == 'Meses'}">Meses</option>
                                                                                 <option value="Años" th:selected="${mascotasEditar.tiempo == 'Años'}">Años</option>
                                                                             </select>
@@ -198,15 +198,15 @@
                                                                 <div class="form-group">
                                                                     <div class="row my-2">
                                                                         <div class="col-6 ">
-                                                                            <label for="genero" style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Género:</label>
-                                                                            <select name="genero" class="form-select" th:value="${mascotasEditar.genero}" >
+                                                                            <label for="genero">Género:</label>
+                                                                            <select name="genero" class="form-select" th:value="${mascotasEditar.genero}" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;" >
                                                                                 <option value="Macho" th:selected="${mascotasEditar.genero == 'Macho'}">Macho</option>
                                                                                 <option value="Hembra" th:selected="${mascotasEditar.genero == 'Hembra'}">Hembra</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-6">
-                                                                            <label for="especie" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Especie:</label>
-                                                                            <select name="especie" class="form-select" th:value="${mascotasEditar.especie}"  required>
+                                                                            <label for="especie">Especie:</label>
+                                                                            <select name="especie" class="form-select" th:value="${mascotasEditar.especie}" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;"  required>
                                                                                 <option th:each="especie : ${especies}" th:value="${especie.id}" th:text="${especie.nombre}" th:selected="${especie.id == mascotasEditar.especie.id}"></option>
                                                                             </select>
                                                                         </div>
@@ -215,20 +215,20 @@
                                                                 <div class="form-group">
                                                                     <div class="row my-2">
                                                                         <div class="col-6">
-                                                                            <label for="raza" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Raza:</label>
-                                                                            <select name="raza" class="form-select" th:value="${mascotasEditar.raza}"  required>
+                                                                            <label for="raza">Raza:</label>
+                                                                            <select name="raza" class="form-select" th:value="${mascotasEditar.raza}" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;"  required>
                                                                                 <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-6">
-                                                                            <label for="detalles" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;">Detalles:</label>
-                                                                            <input type="text" name="detalles" field="" th:value="${mascotasEditar.detalles}" class="form-control" required autocomplete="off">
+                                                                            <label for="detalles">Detalles:</label>
+                                                                            <input type="text" name="detalles" field="" th:value="${mascotasEditar.detalles}" class="form-control w-100" style="color: black; text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;" required autocomplete="off">
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
 
-                                                                <div class="box-footer">
+                                                                <div class="box-footer mt-4">
                                                                     <div class="row my-2">
                                                                         <div class="d-grid gap-2 col-6">
                                                                             <button type="submit" class="btn" style="background-color:#2FD6B4">Guardar</button>

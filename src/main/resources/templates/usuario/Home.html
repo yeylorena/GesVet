@@ -25,11 +25,11 @@
             </div><!-- End Logo -->
             <nav class="header-nav ms-auto">
                 <ul class="d-flex align-items-center">
-                    <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link nav-icon search-bar-toggle " href="#">
-                            <i class="bi bi-search"></i>
-                        </a>
-                    </li><!-- End Search Icon-->
+                    <a class="nav-link nav-icon" style="font-size: 28px;
+                       line-height:10px;" th:href="@{/principal}" title="Principal">
+                        <i class="bi bi-house-door"></i>
+                        <span class="badge bg-primary badge-number"></span>
+                    </a>
                     <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf" title="Manual de usuario">
                         <i class="bi bi-journal-bookmark-fill"></i>
                         <span class="badge bg-primary badge-number"></span>
@@ -111,7 +111,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" th:href="@{/verhome}">
                         <i class="bi bi-bag-plus"></i>
-                        <span>Productos y servicios</span>
+                        <span>Productos</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -137,7 +137,7 @@
         <main id="main" class="main" >
 
             <div class="pagetitle">
-                <h1 style="color: black;">Productos y Servicios</h1>
+                <h1 style="color: black;">Productos</h1>
 
             </div><!-- End Page Title -->
 
@@ -169,135 +169,135 @@
                                                     <div class="form-group">
                                                         <input type="text" name="palabra" placeholder="Buscar" id="palabra" autocomplete="off">
 
-                                                            
-                                                                </div>
 
-                                                                </form>
-                                                                </div>
-                                                                </div>
-                                                                <div class="row mt-5">
+                                                    </div>
 
-                                                                    <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}" th:if="${producto.activos}">
-                                                                        <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
-                                                                            <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
-                                                                                 alt="..." style="height: 180px;">
-                                                                                <div class="card-body">
-                                                                                    <h5 class="card-title text-center" th:text="${producto.categoria != null ? producto.categoria.nombre : 'N/A'}"></h5>
-                                                                                    <p class="card-text text-center" th:text="${producto.nombre}"> </p>
-                                                                                    <p class="precioProducto card-text text-center" th:text="${producto.precio}"></p>
-                                                                                    <p class="card-stock text-center">
-                                                                                        <!-- Usar expresión Thymeleaf para mostrar "Activo" o "Inactivo" -->
-                                                                                        <span th:if="${producto.activo}">Disponible</span>
-                                                                                        <span th:if="${not producto.activo}">Inactivo</span>
-                                                                                    </p>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-5">
 
-                                                                                    <div class="text-center">
-                                                                                        <a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-sm" style="background-color:#2FD6B4; color:#000000 ">
-                                                                                            Ver productos</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                        </div>
-                                                                    </div>
+                                            <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}" th:if="${producto.activos}">
+                                                <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
+                                                    <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
+                                                         alt="..." style="height: 180px;">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title text-center" th:text="${producto.categoria != null ? producto.categoria.nombre : 'N/A'}"></h5>
+                                                            <p class="card-text text-center" th:text="${producto.nombre}"> </p>
+                                                            <p class="precioProducto card-text text-center" th:text="${producto.precio}"></p>
+                                                            <p class="card-stock text-center">
+                                                                <!-- Usar expresión Thymeleaf para mostrar "Activo" o "Inactivo" -->
+                                                                <span th:if="${producto.activo}">Disponible</span>
+                                                                <span th:if="${not producto.activo}">Inactivo</span>
+                                                            </p>
 
-
+                                                            <div class="text-center">
+                                                                <a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-sm" style="background-color:#2FD6B4; color:#000000 ">
+                                                                    Ver productos</a>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
 
 
 
-                                                                </div>
-
-                                                                </div>
-
-                                                                </div>
-                                                                </div>
-                                                                </div>
-                                                                </div>
-                                                                </section>
-
-                                                                <div th:replace="Plantillas/usuario :: scripts"></div>
-                                                                <script th:if="${exitofacturauser != null}">
-                                                                    Swal.fire({
-                                                                        icon: 'success',
-                                                                        title: 'Compra efectuada con éxito.'
-
-                                                                    });
-                                                                </script>
-                                                                <script th:inline="javascript">
-                                                                    /*<![CDATA[*/
-                                                                    document.addEventListener("DOMContentLoaded", function () {
-                                                                        // Obtener todas las etiquetas <p> con la clase "precioProducto"
-                                                                        var precioProductoElements = document.querySelectorAll('.precioProducto');
-
-                                                                        // Iterar sobre cada etiqueta y aplicar el formateo
-                                                                        precioProductoElements.forEach(function (element) {
-                                                                            // Obtener el valor del precio del contenido de la etiqueta <p>
-                                                                            var valorPrecio = element.textContent.trim();
-
-                                                                            // Si el valor es válido, formatear y actualizar el contenido de la etiqueta <p>
-                                                                            if (!isNaN(valor)) {
-                                                                                var valorFormateado = valor.toLocaleString('es-CO', {
-                                                                                    style: 'decimal',
-                                                                                    minimumFractionDigits: 0,
-                                                                                    maximumFractionDigits: 0
-                                                                                });
-                                                                                element.textContent = valorFormateado;
-                                                                            }
-                                                                        });
-                                                                    });
-                                                                    /*]]>*/
-                                                                </script>
-                                                                <!-- Importa SweetAlert -->
-                                                                <link th:href="@{/webjars/sweetalert2/11.1.9/sweetalert2.min.css}" rel="stylesheet" />
-                                                                <script th:src="@{/webjars/sweetalert2/11.1.9/sweetalert2.all.min.js}"></script>
-
-                                                                <!-- En tu vista -->
-                                                                <script th:if="${mostrarAlerta}">
-                                                                    Swal.fire({
-                                                                        title: '¡Atención!',
-                                                                        text: 'Tus datos personales están incompletos. Por favor, edita tus datos para ofrecerte un mejor servicio.',
-                                                                        icon: 'warning',
-                                                                        showCancelButton: true,
-                                                                        confirmButtonText: 'Ir a modificar',
-                                                                        cancelButtonText: 'Más tarde'
-                                                                    }).then((result) => {
-                                                                        if (result.isConfirmed) {
-                                                                            window.location.href = '/perfil';
-                                                                        }
-                                                                    });
-                                                                </script>
-
-                                                                <script th:inline="javascript">
-                                                                    /*<![CDATA[*/
-                                                                    document.addEventListener("DOMContentLoaded", function () {
-                                                                        // Obtener todas las etiquetas <p> con la clase "precioProducto"
-                                                                        var precioProductoElements = document.querySelectorAll('.precioProducto');
-
-                                                                        // Iterar sobre cada etiqueta y aplicar el formateo
-                                                                        precioProductoElements.forEach(function (element) {
-                                                                            // Obtener el valor del precio del contenido de la etiqueta <p>
-                                                                            var valorPrecio = element.textContent.trim();
-
-                                                                            // Parsear el valor del precio a un número flotante
-                                                                            var valor = parseFloat(valorPrecio);
-
-                                                                            // Si el valor es válido, formatear y actualizar el contenido de la etiqueta <p>
-                                                                            if (!isNaN(valor)) {
-                                                                                var valorFormateado = valor.toLocaleString('es-CO', {
-                                                                                    style: 'decimal',
-                                                                                    minimumFractionDigits: 0,
-                                                                                    maximumFractionDigits: 0
-                                                                                });
-
-                                                                                // Agregar el signo $ al valor formateado
-                                                                                valorFormateado = '$' + valorFormateado;
-
-                                                                                element.textContent = valorFormateado;
-                                                                            }
-                                                                        });
-                                                                    });
-                                                                    /*]]>*/
-                                                                </script>
 
 
-                                                                </main><!-- End #main -->
-                                                                </body>
-                                                                </html>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+
+            <div th:replace="Plantillas/usuario :: scripts"></div>
+            <script th:if="${exitofacturauser != null}">
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Compra efectuada con éxito.'
+
+                });
+            </script>
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Obtener todas las etiquetas <p> con la clase "precioProducto"
+                    var precioProductoElements = document.querySelectorAll('.precioProducto');
+
+                    // Iterar sobre cada etiqueta y aplicar el formateo
+                    precioProductoElements.forEach(function (element) {
+                        // Obtener el valor del precio del contenido de la etiqueta <p>
+                        var valorPrecio = element.textContent.trim();
+
+                        // Si el valor es válido, formatear y actualizar el contenido de la etiqueta <p>
+                        if (!isNaN(valor)) {
+                            var valorFormateado = valor.toLocaleString('es-CO', {
+                                style: 'decimal',
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            });
+                            element.textContent = valorFormateado;
+                        }
+                    });
+                });
+                /*]]>*/
+            </script>
+            <!-- Importa SweetAlert -->
+            <link th:href="@{/webjars/sweetalert2/11.1.9/sweetalert2.min.css}" rel="stylesheet" />
+            <script th:src="@{/webjars/sweetalert2/11.1.9/sweetalert2.all.min.js}"></script>
+
+            <!-- En tu vista -->
+            <script th:if="${mostrarAlerta}">
+                Swal.fire({
+                    title: '¡Atención!',
+                    text: 'Tus datos personales están incompletos. Por favor, edita tus datos para ofrecerte un mejor servicio.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ir a modificar',
+                    cancelButtonText: 'Más tarde'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/perfil';
+                    }
+                });
+            </script>
+
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Obtener todas las etiquetas <p> con la clase "precioProducto"
+                    var precioProductoElements = document.querySelectorAll('.precioProducto');
+
+                    // Iterar sobre cada etiqueta y aplicar el formateo
+                    precioProductoElements.forEach(function (element) {
+                        // Obtener el valor del precio del contenido de la etiqueta <p>
+                        var valorPrecio = element.textContent.trim();
+
+                        // Parsear el valor del precio a un número flotante
+                        var valor = parseFloat(valorPrecio);
+
+                        // Si el valor es válido, formatear y actualizar el contenido de la etiqueta <p>
+                        if (!isNaN(valor)) {
+                            var valorFormateado = valor.toLocaleString('es-CO', {
+                                style: 'decimal',
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            });
+
+                            // Agregar el signo $ al valor formateado
+                            valorFormateado = '$' + valorFormateado;
+
+                            element.textContent = valorFormateado;
+                        }
+                    });
+                });
+                /*]]>*/
+            </script>
+
+
+        </main><!-- End #main -->
+    </body>
+</html>

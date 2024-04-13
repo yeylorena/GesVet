@@ -12,11 +12,11 @@
         </div><!-- End Logo -->
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
+                <a class="nav-link nav-icon" style="font-size: 28px;
+                   line-height:10px;" th:href="@{/principal}" title="Principal">
+                    <i class="bi bi-house-door"></i>
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
                 <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
@@ -133,7 +133,7 @@
         </ul>
     </aside>
     <main id="main" class="main">
-          <div class="pagetitle">
+        <div class="pagetitle">
             <h1>Gestión ventas</h1>
         </div><!-- End Page Title -->
         <section class="section profile">
@@ -179,7 +179,7 @@
                                                     </ul>
                                                     <!-- Botones -->
                                                     <div th:if="${producto.cantidad > 0}">
-                                                        <button type="submit" class="btn btn-dark">Agregar</button>
+                                                        <button type="submit" class="btn btn-dark">Agregar<i class="bi bi-cart-plus"></i></button>
                                                         <a class="btn btn-danger" href="/verhomeadmin">Cancelar</a>
                                                     </div>
                                                     <div th:unless="${producto.cantidad > 0}">
