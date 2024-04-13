@@ -1,5 +1,6 @@
 package com.example.gesvet.controller;
 
+import com.example.gesvet.dto.FacturaDTO;
 import com.example.gesvet.dto.UserDto;
 import com.example.gesvet.jwtUtil.JwtUtils;
 import com.example.gesvet.models.Categorias;
@@ -131,49 +132,55 @@ public class HomeControllerapi {
     }
 
     @GetMapping(value = "/productohomes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> productoHomes(@PathVariable Integer id, HttpServletRequest request) {
-        try {
-            // Extraer el token del encabezado de la solicitud
-            String jwtToken = extractTokenFromRequest(request);
+public ResponseEntity<Object> productoHomes(@PathVariable Integer id, HttpServletRequest request) {
+    try {
+        // Extraer el token del encabezado de la solicitud
+        String jwtToken = extractTokenFromRequest(request);
 
-            // Validar el token
-            if (jwtToken != null) {
-                // Obtener las reclamaciones del token
-                Claims claims = JwtUtils.extractClaims(jwtToken);
+        // Validar el token
+        if (jwtToken != null) {
+            // Obtener las reclamaciones del token
+            Claims claims = JwtUtils.extractClaims(jwtToken);
 
-                if (claims != null) {
-                    String username = claims.getSubject();
+            if (claims != null) {
+                String username = claims.getSubject();
 
-                    // Obtener la categoría por su ID
-                    Categorias categoria = categoriasservice.findById(id);
+                // Obtener la categoría por su ID
+                Categorias categoria = categoriasservice.findById(id);
 
-                    // Obtener los productos asociados a la categoría
-                    List<Productos> productos = productoService.findByCategoria(categoria);
+                // Obtener los productos asociados a la categoría
+                List<Productos> productos = productoService.findByCategoria(categoria);
 
-                    // Construir un objeto que contenga los datos que deseas devolver como JSON
-                    Map<String, Object> response = new HashMap<>();
-                    response.put("categoria", categoria);
-                    response.put("productos", productos);
+                // Filtrar los productos según el valor del campo "activos"
+                List<Productos> productosFiltrados = productos.stream()
+                    .filter(producto -> producto.isActivos()) // Filtrar solo los productos activos (activos = true)
+                    .collect(Collectors.toList());
 
-                    // Devolver la respuesta como JSON con un ResponseEntity
-                    return ResponseEntity.ok(response);
-                }
+                // Construir un objeto que contenga los datos que deseas devolver como JSON
+                Map<String, Object> response = new HashMap<>();
+                response.put("categoria", categoria);
+                response.put("productos", productosFiltrados); // Utiliza los productos filtrados
+
+                // Devolver la respuesta como JSON con un ResponseEntity
+                return ResponseEntity.ok(response);
             }
-            var respuesta = new respuesta(
-                    "error",
-                    "Usuario no autorizado"
-            );
-            // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
-        } catch (Exception e) {
-            var respuesta = new respuesta(
-                    "error",
-                    "Error al procesar la solicitud"
-            );
-            // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
+        var respuesta = new respuesta(
+                "error",
+                "Usuario no autorizado"
+        );
+        // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
+    } catch (Exception e) {
+        var respuesta = new respuesta(
+                "error",
+                "Error al procesar la solicitud"
+        );
+        // Manejar cualquier excepción y devolver una respuesta de error
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
     }
+}
+
 
     @GetMapping("/verproducto")
     public ResponseEntity<Object> verProductos(HttpServletRequest request, Authentication authentication) {
@@ -787,59 +794,68 @@ public class HomeControllerapi {
         return "usuario/home";
     }
 
-    /* detalles compras usuario */
-    @GetMapping("/comprasUser")
-    public ResponseEntity<Object> obtenerCompras(HttpServletRequest request) {
-        try {
-            // Extraer el token del encabezado de la solicitud
-            String jwtToken = extractTokenFromRequest(request);
+  
+    
+   @GetMapping("/facturaspru")
+public ResponseEntity<Object> obtenerFacturasUsuario(HttpServletRequest request) {
+    try {
+        // Extraer el token del encabezado de la solicitud
+        String jwtToken = extractTokenFromRequest(request);
 
-            // Validar el token
-            if (jwtToken != null) {
-                // Obtener las reclamaciones del token
-                Claims claims = JwtUtils.extractClaims(jwtToken);
+        // Validar el token
+        if (jwtToken != null) {
+            // Obtener las reclamaciones del token
+            Claims claims = JwtUtils.extractClaims(jwtToken);
 
-                if (claims != null) {
-                    String username = claims.getSubject();
+            if (claims != null) {
+                String username = claims.getSubject();
 
-                    // Buscar al usuario por su nombre de usuario
-                    User user = userService.findByUsername(username);
+                // Buscar al usuario por su nombre de usuario
+                User user = userService.findByUsername(username);
 
-                    // Verificar si el usuario existe
-                    if (user == null) {
-                        var respuesta = new respuesta(
-                                "error",
-                                "Usuario no encontrado"
-                        );
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
-                    }
-
+                // Verificar si el usuario existe
+                if (user != null) {
                     // Obtener las facturas del usuario
                     List<Factura> facturas = facturaService.findByUsuario(user);
 
-                    // Crear un objeto de respuesta que contenga los datos del usuario y las facturas
-                    Map<String, Object> responseData = new HashMap<>();
+                    // Convertir las entidades Factura en objetos FacturaDTO
+                    List<FacturaDTO> facturaDTOs = new ArrayList<>();
+                    for (Factura factura : facturas) {
+                        FacturaDTO facturaDTO = new FacturaDTO();
+                        facturaDTO.setId(factura.getId());
+                        facturaDTO.setNumero(factura.getNumero());
+                        facturaDTO.setEstadoPago(factura.getEstadoPago());
+                        facturaDTO.setEstadoEnvio(factura.getEstadoEnvio());
+                        facturaDTO.setFecha(factura.getFecha());
+                        facturaDTO.setTotal(factura.getTotal());
+                        // Agregar el objeto FacturaDTO a la lista
+                        facturaDTOs.add(facturaDTO);
+                    }
 
-                    responseData.put("facturas", facturas);
+                    // Crear un objeto de respuesta que contenga todas las facturas
+                    Map<String, Object> responseData = new HashMap<>();
+                    responseData.put("facturas", facturaDTOs);
 
                     return ResponseEntity.ok(responseData);
                 }
             }
-            var respuesta = new respuesta(
-                    "error",
-                    "Usuario no autorizado"
-            );
-            // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
-        } catch (Exception e) {
-            var respuesta = new respuesta(
-                    "error",
-                    "Error al procesar la solicitud"
-            );
-            // Manejar cualquier excepción y devolver una respuesta de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
+
+        var respuesta = new respuesta(
+                "error",
+                "Usuario no autorizado"
+        );
+        // Si el token es inválido o no se proporciona, devuelve una respuesta de no autorizado
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
+    } catch (Exception e) {
+        var respuesta = new respuesta(
+                "error",
+                "Error al procesar la solicitud"
+        );
+        // Manejar cualquier excepción y devolver una respuesta de error
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
     }
+}
 
     @GetMapping("/detalle/{id}")
     public ResponseEntity<Object> detalleCompra(@PathVariable Integer id, HttpServletRequest request) {

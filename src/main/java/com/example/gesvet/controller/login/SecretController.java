@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.List;
 import java.util.UUID;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,7 @@ public class SecretController {
                 userDto.setRole(user.getRole());
                 userDto.setAcercade(user.getAcercade());
                 userDto.setImagen(user.getImagen());
-
+                
                 // Devolver los detalles del usuario en la respuesta
                 return ResponseEntity.status(HttpStatus.OK).body(userDto);
             } else {
