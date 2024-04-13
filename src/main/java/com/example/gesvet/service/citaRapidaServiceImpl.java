@@ -77,4 +77,4 @@ public class citaRapidaServiceImpl implements citaRapidaService {
         return citaRapidaRepository.existsByMascotaAndInicio(mascota, inicio);
     }
 
-}
+    }

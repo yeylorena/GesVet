@@ -157,6 +157,9 @@
                 .tipo{
                     font-family: "Calibri Light", Arial, sans-serif;
                 }
+                .mm{
+                   color: #212519;
+                }
             }
         </style>
         <script th:src="@{/assets/js/main.js}"></script>
@@ -186,12 +189,60 @@
                                     <li class="nav-item">
                                         <a class="nav-link titulo" href="#contacto">Contacto</a>
                                     </li>
+                                    <li class="nav-item dropdown  pe-6" style="margin-left: 200px;" th:if="${isAdmin}">
+                                        <a class="nav-link  nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                                            <img th:src="${userDto.imagen}" th:alt="${userDto.imagen}" class="rounded-circle"
+                                                 style="width: 60px; height: 40px;" />
+                                            <span class="d-none d-md-block dropdown-toggle ps-2 tituloperfil" th:text="${userdetail.nombre}"></span>
+                                        </a><!-- End Profile Iamge Icon -->
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" style="width:200px;">
+                                            <li style="color: #212519;" class="dropdown-header mm">
+                                                <h6 class="" style="text-align: center;" th:text="${userdetail.nombre}"></h6>
+                                            </li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li>
+                                                <a style="color: #212519;" class="dropdown-item d-flex align-items-center mm" th:href="@{${redirectUrl}}">
+                                                    <i class="bi bi-person"></i>
+                                                    <span style="font-size: 0.9em;">Volver a la Sesión</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li>
+                                                <a style="color: #212519;" class="dropdown-item d-flex align-items-center mm" th:href="@{${perfilUrl}}">
+                                                    <i class="bi bi-person"></i>
+                                                    <span style="font-size: 0.9em;">Mi perfil</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li>
+                                                <a style="color: #212519;" class="dropdown-item d-flex align-items-center mm" th:href="@{${ayudaUrl}}">
+                                                    <i class="bi bi-question-circle"></i>
+                                                    <span style="font-size: 0.9em;">¿Necesitas ayuda?</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li>
+                                                <a style="color: #212519;" class="dropdown-item d-flex align-items-center mm" th:href="@{/logout}">
+                                                    <i class="bi bi-box-arrow-right"></i>
+                                                    <span style="font-size: 0.9em;" sec:authorize="isAuthenticated">Cerrar sesión</span>
+                                                </a>
+                                            </li>
+                                        </ul><!-- End Profile Dropdown Items -->
+                                    </li><!-- End Profile Nav -->
                                     <!-- First dropdown button -->
-                                    <li class="nav-item my-1" style="padding-left: 6rem;">
+                                    <li class="nav-item my-1" th:unless="${isAdmin}" style="padding-left: 6rem;">
                                         <a class="nav-link custom-btn botones text-center" th:href="@{/register}" role="button">REGÍSTRATE</a>
                                     </li>
                                     <!-- Second dropdown button -->
-                                    <li class="nav-item dropdown my-1">
+                                    <li class="nav-item dropdown my-1" th:unless="${isAdmin}">
                                         <a class="nav-link custom-btn botones text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">INGRESA YA</a>
                                         <ul class="dropdown-menu text-center" style="background-color: #39DBC1; border-radius: 8px; width: 150px; min-width: unset; top: 70%; font-size: 12px;">
                                             <li><a class="dropdown-item custom-btn text-center" style="height: 21px;" th:href="@{/login}">ADMINISTRADOR</a></li>
@@ -341,7 +392,7 @@
                                 <a class="btn btn-primary mt-auto text-dark titlecartasDos" th:href="@{/register}" style="background-color:#2FD6B5;
                                    border-radius: 8px;
                                    color: #000000;">
-                                    Baño
+                                    Aseo
                                 </a>
                             </div>
                         </div>

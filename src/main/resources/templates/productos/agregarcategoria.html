@@ -12,7 +12,11 @@
         </div><!-- End Logo -->
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
+                <a class="nav-link nav-icon" style="font-size: 28px;
+                   line-height:10px;" th:href="@{/principal}" title="Principal">
+                    <i class="bi bi-house-door"></i>
+                    <span class="badge bg-primary badge-number"></span>
+                </a>
                 <a class="nav-link nav-icon" href="manual-de-usuario.pdf" download="manual-de-usuario.pdf">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span class="badge bg-primary badge-number"></span>
@@ -153,53 +157,55 @@
                             </div>
                             <div class="container">
                                 <form th:action="@{/productos/savecategoria}" object="" method="post" enctype="multipart/form-data">
-                                    <div class="card">
+                                    <div>
                                         <div class="form-group">
                                             <div class="row my-2">
                                                 <div class="col-6 ">
-                                                    <label style="text-align: justify;
+                                                    <label>Nombre:</label>
+                                                    <input type="text" name="nombre" id="nombre" field="" class="form-control w-100"  style="text-align: justify;
                                                            font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" >Nombre:</label>
-                                                    <input type="text" name="nombre" id="nombre" field="" class="form-control" required>
+                                                           font-size: 16px;"  required>
                                                 </div>
                                                 <div class="col-6 ">
-                                                    <label style="text-align: justify;
+                                                    <label>Descripción:</label>
+                                                    <input type="text" name="descripcion" id="descripcion" field="" class="form-control w-100"  style="text-align: justify;
                                                            font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" >Descripción:</label>
-                                                    <input type="text" name="descripcion" id="descripcion" field="" class="form-control" required>
+                                                           font-size: 16px;"  required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="row my-2">
                                                 <div class="col-6 ">
-                                                    <label style="text-align: justify;
-                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" >Tipo Categoría:</label>
-                                                    <select name="tipocategoria.id" class="form-select">
+                                                    <label>Tipo Categoría:</label>
+                                                    <select name="tipocategoria.id" class="form-select"  style="text-align: justify;
+                                                            font-family: 'Calibri Light', Arial, sans-serif;
+                                                            font-size: 16px;" >
                                                         <option th:each="tipoCategoria : ${tipocategorias}" th:value="${tipoCategoria.id}" th:text="${tipoCategoria.nombre}"></option>
                                                     </select>
                                                 </div>
                                                 <div class="col-6 ">
-                                                    <label style="text-align: justify;
+                                                    <label>Imagen:</label>
+                                                    <input type="file" name="img" id="img" class="form-control w-100"  style="text-align: justify;
                                                            font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" >Imagen:</label>
-                                                    <input type="file" name="img" id="img" class="form-control"  onchange="validarArchivo(this);"  accept=".jpg, .jpeg, .png" >
+                                                           font-size: 16px;"   onchange="validarArchivo(this);"  accept=".jpg, .jpeg, .png" >
                                                         <h6 style="margin-top: 5px; font-size: 14px;">Tamaño máximo: 10 MB</h6>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="row my-2">
+                                                    <div class="row">
                                                         <div class="col-6">
-                                                            <label style="text-align: justify;
-                                                           font-family: 'Calibri Light', Arial, sans-serif;
-                                                           font-size: 16px;" class="form-label">Estado:</label><br>
+                                                            <label class="form-label">Estado:</label><br>
                                                                 <div class="form-check form-check-inline">
                                                                     <input class="form-check-input" type="radio" name="activo" value="true" checked>
-                                                                        <label class="form-check-label">Activo</label>
+                                                                        <label class="form-check-label"  style="text-align: justify;
+                                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                                               font-size: 16px;" >Activo</label>
                                                                 </div>
                                                                 <div class="form-check form-check-inline">
                                                                     <input class="form-check-input" type="radio" name="activo" value="false">
-                                                                        <label class="form-check-label">Inactivo</label>
+                                                                        <label class="form-check-label"  style="text-align: justify;
+                                                                               font-family: 'Calibri Light', Arial, sans-serif;
+                                                                               font-size: 16px;" >Inactivo</label>
                                                                 </div>
                                                         </div>
                                                     </div>   

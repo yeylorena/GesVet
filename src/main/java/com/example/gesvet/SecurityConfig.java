@@ -36,7 +36,10 @@ public class SecurityConfig {
 
         http.csrf(c -> c.disable())
                 .authorizeHttpRequests(request -> request.requestMatchers("/homes", "/perfil_admin", "/cliente", "/razas", "/citasRapidas", "/listado", "/productos", "/getCartadmin", "/verhomeadmin", "/ayuda", "/productohomeadmin", "/cartadmin", "/facturaadmin", "/detalleadmin", "/editarFactura")
-                .hasAuthority("ADMIN").requestMatchers("/home", "/perfil", "/mascotasUsuarios", "/citas", "/verhome", "/getCart", "/comprasUser", "/ayudausuario", "/productohome", "/factura", "/cart", "/productohomes", "/detalle").hasAuthority("USER")
+                .hasAuthority("ADMIN")
+                .requestMatchers("/home", "/perfil", "/mascotasUsuarios", "/citas", "/verhome", "/getCart", "/comprasUser", "/ayudausuario", "/productohome", "/factura", "/cart", "/productohomes", "/detalle")
+                .hasAuthority("USER")
+                .requestMatchers("/principal").permitAll()
                 .requestMatchers("/**").permitAll()
                 .requestMatchers("/img/imagenes_perfil/**").permitAll()
                 .requestMatchers("/register", "/reset-password").permitAll()
@@ -46,7 +49,7 @@ public class SecurityConfig {
                 .successHandler(customSuccessHandler).permitAll())
                 .logout(form -> form.invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout").permitAll());
+                .logoutSuccessUrl("/principal?logout").permitAll());
         http.exceptionHandling().accessDeniedPage("/error403");
 
         http.headers().cacheControl().disable();
