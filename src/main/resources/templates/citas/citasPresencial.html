@@ -193,7 +193,7 @@
                                                                              font-size: 16px; color: #000000;" name="servicio" id="servicio" class="form-select" required>
                                                                         <option value="">Selecciona un servicio</option>
                                                                         <option th:each="servicio : ${servicios}" th:value="${servicio.id}"  th:data-precio="${servicio.precio}"
-                                                                                th:text="${servicio.nombre}"></option>
+                                                                                th:text="${servicio.nombre}" th:if="${servicio.activos}" ></option>
                                                                     </select>
                                                             </div>
                                                             <div class="col">
@@ -220,7 +220,7 @@
                                                                             font-size: 16px; color: #000000;" required>
                                                                         <option value="">Selecciona una especie</option>
                                                                         <option th:each="especie : ${especies}" th:value="${especie.id}"
-                                                                                th:text="${especie.nombre}"></option>
+                                                                                th:text="${especie.nombre}" th:if="${especie.activo}"></option>
                                                                     </select>
                                                             </div>
                                                             <div class="col">

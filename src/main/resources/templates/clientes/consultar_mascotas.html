@@ -199,7 +199,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody style="font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px;font-weight:400;">
-                                                <tr th:each="mascota, iterStat : ${mascotas}">
+                                                <tr th:each="mascota, iterStat : ${mascotas}" th:if="${mascota.activo}">
                                                     <td th:text="${iterStat.index + 1}"></td>
                                                     <td>
                                                         <img th:src="@{'/images/' + ${mascota.imagen}}"

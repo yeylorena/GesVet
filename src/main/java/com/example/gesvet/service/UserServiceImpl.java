@@ -114,8 +114,8 @@ public class UserServiceImpl implements UserService {
         message.setSubject("Contraseña cambiada exitosamente");
         String contenidoMensaje = "Cordial saludo " + ",\n\n"
                 + "Te informamos que la contraseña de tu cuenta en Gesvet ha sido cambiada con éxito.\n"
-                + "Si realizaste esta acción, puedes ignorar este mensaje.\n\n"
-                + "¡Gracias por confiar en Gesvet!\n\n"
+                + "Si no realizaste esta acción, puedes ignorar este mensaje.\n\n"
+                + "¡Gracias por confiar en nuestros servicios!\n\n"
                 + "Atentamente,\n"
                 + "El equipo de Gesvet";
 

@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @AutoConfigureMockMvc
 class GesvetApplicationTests {
-    
+
 //    @Autowired
 //    private MockMvc mockMvc;
 //
@@ -51,7 +51,7 @@ class GesvetApplicationTests {
 //    @MockBean
 //    private EspecieService especieService;
 //
-//    //PRUEBAS AUTOMATIZADAS REGISTRO DE USUARIO
+    //PRUEBAS AUTOMATIZADAS REGISTRO DE USUARIO
 //    @Test
 //    public void testRegister() throws Exception {
 //        // Datos de prueba
@@ -126,7 +126,7 @@ class GesvetApplicationTests {
 //    public void testLogin() throws Exception {
 //        // Definir el cuerpo de la solicitud
 //        String requestBody = "{\"username\": \"yenescobar@gmail.com\", \"password\": \"Yeny.123\"}";
-//
+//        
 //        mockMvc.perform(post("/api/auth/login")
 //                .contentType(MediaType.APPLICATION_JSON)
 //                .content(requestBody))

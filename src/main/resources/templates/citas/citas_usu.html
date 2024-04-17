@@ -193,7 +193,7 @@
                                                                     <label for="mascota">Mascota:</label>
                                                                     <select class="form-select" name="mascota"  style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;" required>
                                                                         <option value="">Selecciona una mascota...</option>
-                                                                        <option th:each="mascota : ${mascotas}" th:value="${mascota.id}" th:data-imagen="${mascota.imagen}" th:text="${mascota.nombre}" ></option>
+                                                                        <option th:each="mascota : ${mascotas}" th:value="${mascota.id}" th:data-imagen="${mascota.imagen}" th:text="${mascota.nombre}" th:if="${mascota.activo}" ></option>
                                                                     </select>
                                                             </div>
                                                             <div class="col">
@@ -202,7 +202,7 @@
                                                                     <select class="form-select" name="servicio"  style="text-align: justify;font-family: 'Calibri Light', Arial, sans-serif;font-size: 16px; color: #000000;" required>
                                                                         <option value="">Selecciona un servicio...</option>
                                                                         <option th:each="servicio : ${servicios}" th:value="${servicio.id}" th:data-precio="${servicio.precio}"
-                                                                                th:text="${servicio.nombre}" ></option>                                                                    </select>
+                                                                                th:text="${servicio.nombre}" th:if="${servicio.activos}" ></option>                                                                    </select>
                                                             </div>
                                                         </div>
                                                         <div class="row">
