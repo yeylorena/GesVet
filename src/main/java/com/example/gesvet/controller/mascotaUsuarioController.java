@@ -99,47 +99,56 @@ public class mascotaUsuarioController {
         return "mascotasUsuario/misMascotas";
     }
 
-    @PostMapping("/saveM")
-    public String saveM(Mascota mascota, Model model, @RequestParam("file") MultipartFile imagen, int especie, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
+   @PostMapping("/saveM")
+public String saveM(Mascota mascota, Model model, @RequestParam("file") MultipartFile imagen, int especie, Authentication authentication, Principal principal, RedirectAttributes redirectAttributes) {
 
-        // Obtener el usuario actual
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = userService.findByUsername(userDetails.getUsername());
+    // Obtener el usuario actual
+    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    User user = userService.findByUsername(userDetails.getUsername());
 
-        //traer id de usuario
+    // Verificar cuántas mascotas tiene el usuario
+    List<Mascota> mascotasUsuario = user.getMascotas();
+    if (mascotasUsuario.size() >= 5) {
+        // El usuario ya tiene tres mascotas, mostrar un mensaje de error
+        redirectAttributes.addFlashAttribute("errormascota", "No puedes agregar más de tres mascotas. Por favor, contáctate con el soporte de Gesvet.");
+        return "redirect:/mascotasUsuarios";
+    }
+
+    // Si el usuario tiene menos de tres mascotas, permitir guardar la nueva mascota
+    try {
+        var objEspecie = especieService.get(especie);
+        mascota.setEspecie(objEspecie.get());
         mascota.setUsuario(user);
-        try {
-            var objEspecie = especieService.get(especie);
-            mascota.setEspecie(objEspecie.get());
-            // Manejar el archivo de imagen
-            if (!imagen.isEmpty()) {
-                // Realizar la escritura del archivo
-                byte[] bytesImg = imagen.getBytes();
-                Path directorioImgenes = Paths.get("images//"); // Ajustar según necesidades
-                String rutaAbsoluta = directorioImgenes.toFile().getAbsolutePath();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-                Files.write(rutaCompleta, bytesImg);
-                mascota.setImagen(imagen.getOriginalFilename());
-            }
 
-            // Guardar la mascota
-            mascotaService.save(mascota);
-            redirectAttributes.addFlashAttribute("success", true);
-
-            // Obtener todas las mascotas nuevamente
-            List<Mascota> mascotasActualizadas = mascotaService.findAll();
-            model.addAttribute("mascotas", mascotasActualizadas);
-
-            // Redirigir a la página de "Mis mascotas"
-            return "redirect:/mascotasUsuarios";
-        } catch (IOException e) {
-            // Manejar cualquier excepción de E/S (Input/Output) que pueda ocurrir al guardar la imagen
-            e.printStackTrace();
-
-            return "errorPage"; // Reemplaza con la página de error adecuada
+        // Manejar el archivo de imagen
+        if (!imagen.isEmpty()) {
+            // Realizar la escritura del archivo
+            byte[] bytesImg = imagen.getBytes();
+            Path directorioImgenes = Paths.get("images//"); // Ajustar según necesidades
+            String rutaAbsoluta = directorioImgenes.toFile().getAbsolutePath();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+            Files.write(rutaCompleta, bytesImg);
+            mascota.setImagen(imagen.getOriginalFilename());
         }
 
+        // Guardar la mascota
+        mascotaService.save(mascota);
+        redirectAttributes.addFlashAttribute("success", true);
+
+        // Obtener todas las mascotas nuevamente
+        List<Mascota> mascotasActualizadas = mascotaService.findAll();
+        model.addAttribute("mascotas", mascotasActualizadas);
+
+        // Redirigir a la página de "Mis mascotas"
+        return "redirect:/mascotasUsuarios";
+    } catch (IOException e) {
+        // Manejar cualquier excepción de E/S (Input/Output) que pueda ocurrir al guardar la imagen
+        e.printStackTrace();
+
+        return "errorPage"; // Reemplaza con la página de error adecuada
     }
+
+}
 
     // metodo para editar la mascota 
     @GetMapping("/editarMascota/{id}")

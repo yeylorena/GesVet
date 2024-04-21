@@ -134,6 +134,14 @@ public class mascotaUsuarioControllerapi {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
             }
 
+            // Verificar cuántas mascotas tiene el usuario
+            List<Mascota> mascotasUsuario = user.getMascotas();
+            if (mascotasUsuario.size() >= 5) {
+                // El usuario ya tiene cinco mascotas, devolver una respuesta de error
+                var respuestaError = new respuesta("error", "No puedes agregar más de cinco mascotas. Por favor, contáctate con el soporte de Gesvet.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuestaError);
+            }
+
             try {
                 // Crear una nueva instancia de Mascota con los datos recibidos
                 Mascota mascota = new Mascota();

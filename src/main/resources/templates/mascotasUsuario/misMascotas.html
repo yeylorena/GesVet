@@ -736,5 +736,14 @@
                                                                     }
                                                                 }
                                                             </script>
+
+                                                            <script th:if="${errormascota != null}">
+                                                                Swal.fire({
+                                                                    icon: 'error',
+                                                                    title: 'No puedes agregar más de cinco mascotas. Por favor, contáctate con el soporte de GesVet.',
+                                                                    html: 'Correo de soporte: <a href="mailto:soportegesvet@gmail.com">soportegesvet@gmail.com</a>'
+                                                                });
+                                                            </script>
+
                                                             </body>
                                                             </html>
