@@ -182,7 +182,7 @@
                                                          alt="..." style="height: 180px;">
                                                         <div class="card-body">
                                                             <h5 class="card-title text-center" th:text="${categoria.tipocategoria != null ? categoria.tipocategoria.nombre : 'N/A'}"></h5>
-                                                            <p class="card-text text-center" th:text="${categoria.nombre}"> </p>
+                                                            <p class="card-text text-center" th:text="${categoria.nombre}" style="margin-bottom: 5px;"> </p>
                                                             <p class="card-stock text-center">
                                                                 <!-- Usar expresión Thymeleaf para mostrar "Activo" o "Inactivo" -->
                                                                 <span th:if="${categoria.activo}">Disponible</span>

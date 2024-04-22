@@ -158,7 +158,7 @@
                     font-family: "Calibri Light", Arial, sans-serif;
                 }
                 .mm{
-                   color: #212519;
+                    color: #212519;
                 }
             }
         </style>
@@ -243,13 +243,7 @@
                                     </li>
                                     <!-- Second dropdown button -->
                                     <li class="nav-item dropdown my-1" th:unless="${isAdmin}">
-                                        <a class="nav-link custom-btn botones text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">INGRESA YA</a>
-                                        <ul class="dropdown-menu text-center" style="background-color: #39DBC1; border-radius: 8px; width: 150px; min-width: unset; top: 70%; font-size: 12px;">
-                                            <li><a class="dropdown-item custom-btn text-center" style="height: 21px;" th:href="@{/login}">ADMINISTRADOR</a></li>
-                                            <!-- Agregar separador -->
-                                            <div class="dropdown-divider"></div>
-                                            <li><a class="dropdown-item custom-btn text-center " style="height: 21px;" th:href="@{/login}">USUARIO</a></li>
-                                        </ul>
+                                        <a class="nav-link custom-btn botones text-center" th:href="@{/login}" role="button">INGRESA YA</a>
                                     </li>
                                 </ul>
                             </div>

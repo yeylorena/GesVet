@@ -179,25 +179,26 @@
 
                                             <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center" th:each="producto: ${productos}" th:if="${producto.activos}">
                                                 <div class="alimentos card m-4 m-md-4 m-lg-2" style="width: 20rem;">
-                                                    <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
-                                                         alt="..." style="height: 180px;">
+                                                    <img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top" alt="..." style="height: 180px;">
                                                         <div class="card-body">
                                                             <h5 class="card-title text-center" th:text="${producto.categoria != null ? producto.categoria.nombre : 'N/A'}"></h5>
-                                                            <p class="card-text text-center" th:text="${producto.nombre}"> </p>
-                                                            <p class="precioProducto card-text text-center" th:text="${producto.precio}"></p>
-                                                            <p class="card-stock text-center">
+                                                            <p class="card-text text-center" th:text="${producto.nombre}" style="margin-bottom: 5px;"></p>
+                                                            <p class="precioProducto card-text text-center" th:text="${producto.precio}" style="margin-bottom: 5px;"></p>
+                                                            <p class="card-stock text-center" style="margin-bottom: 5px;"> <!-- Ajusta el espacio inferior aquí -->
                                                                 <!-- Usar expresión Thymeleaf para mostrar "Activo" o "Inactivo" -->
                                                                 <span th:if="${producto.activo}">Disponible</span>
                                                                 <span th:if="${not producto.activo}">Inactivo</span>
                                                             </p>
 
                                                             <div class="text-center">
-                                                                <a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-sm" style="background-color:#2FD6B4; color:#000000 ">
-                                                                    Ver detalles</a>
+                                                                <a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-sm" style="background-color:#2FD6B4; color:#000000;">
+                                                                    Ver detalles
+                                                                </a>
                                                             </div>
                                                         </div>
                                                 </div>
                                             </div>
+
 
 
 
