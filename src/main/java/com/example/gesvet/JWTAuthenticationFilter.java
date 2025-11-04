@@ -24,17 +24,17 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
 
     @Override
-protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-    // Fetch token from request
-    var jwtTokenOptional = getTokenFromRequest(request);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // Fetch token from request
+        var jwtTokenOptional = getTokenFromRequest(request);
 
-    // Validate jwt token -> JWT utils
-    jwtTokenOptional.ifPresent(jwtToken -> {
-        if (JwtUtils.validateToken(jwtToken)) {
-            // Get username from jwt token
-            var usernameOptional = JwtUtils.getUsernameFromToken(jwtToken);
+        // Validate jwt token -> JWT utils
+        jwtTokenOptional.ifPresent(jwtToken -> {
+            if (JwtUtils.validateToken(jwtToken)) {
+                // Get username from jwt token
+                var usernameOptional = JwtUtils.getUsernameFromToken(jwtToken);
 
-            usernameOptional.ifPresent(username -> {
+                usernameOptional.ifPresent(username -> {
                     // Fetch user details with the help of username
                     var userDetails = userDetailsService.loadUserByUsername(username);
 
@@ -45,13 +45,13 @@ protected void doFilterInternal(HttpServletRequest request, HttpServletResponse 
                     // Set authentication token to Security Context
                     SecurityContextHolder.getContext()
                             .setAuthentication(authenticationToken);
-            });
-        }
-    });
+                });
+            }
+        });
 
-    // Pass request and response to next filter
-    filterChain.doFilter(request, response);
-}
+        // Pass request and response to next filter
+        filterChain.doFilter(request, response);
+    }
 
     private Optional<String> getTokenFromRequest(HttpServletRequest request) {
         // Extract authentication header
@@ -65,7 +65,7 @@ protected void doFilterInternal(HttpServletRequest request, HttpServletResponse 
         return Optional.empty();
     }
     
-      // Método para simular la revocación del token
+    // Método para simular la revocación del token
     public void revokeToken(String token) {
         // No hacemos nada aquí, simplemente ignoramos el token revocado
         // No es necesario almacenar ni mantener una lista negra
