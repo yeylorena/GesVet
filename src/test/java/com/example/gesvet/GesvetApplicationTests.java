@@ -36,37 +36,37 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class GesvetApplicationTests {
 
-//    @Autowired
-//    private MockMvc mockMvc;
-//
-//    @MockBean
-//    private UserService userService;
-//
-//    @MockBean
-//    private MascotaService mascotaService;
-//
-//    @MockBean
-//    private RazaService razaService;
-//
-//    @MockBean
-//    private EspecieService especieService;
-//
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private MascotaService mascotaService;
+
+    @MockBean
+    private RazaService razaService;
+
+    @MockBean
+    private EspecieService especieService;
+
     //PRUEBAS AUTOMATIZADAS REGISTRO DE USUARIO
-//    @Test
-//    public void testRegister() throws Exception {
-//        // Datos de prueba
-//        UserDto userDto = new UserDto();
-//        userDto.setUsername("yenescobar@gmail.com");
-//        userDto.setPassword("Yeny.123");
-//        userDto.setConfirmPassword("Yeny.123");
-//
-//        // Realizar la solicitud POST para registrar un usuario
-//        mockMvc.perform(post("/api/register")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(asJsonString(userDto)))
-//                .andExpect(status().isOk()) // Verificar que el código de estado sea 200 OK
-//                .andDo(result -> System.out.println("Código de estado: " + result.getResponse().getStatus()));
-//    }
+    @Test
+    public void testRegister() throws Exception {
+        // Datos de prueba
+        UserDto userDto = new UserDto();
+        userDto.setUsername("yenescobar@gmail.com");
+        userDto.setPassword("Yeny.123");
+        userDto.setConfirmPassword("Yeny.123");
+
+        // Realizar la solicitud POST para registrar un usuario
+        mockMvc.perform(post("/api/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(userDto)))
+                .andExpect(status().isOk()) // Verificar que el código de estado sea 200 OK
+                .andDo(result -> System.out.println("Código de estado: " + result.getResponse().getStatus()));
+    }
 //    @Test
 //    public void testconfirmarmal() throws Exception {
 //        // Datos de prueba
