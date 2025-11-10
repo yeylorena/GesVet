@@ -2,6 +2,7 @@ package com.example.gesvet.repository;
 
 import com.example.gesvet.models.Factura;
 import com.example.gesvet.models.User;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -53,7 +54,9 @@ public interface IFacturaRepository extends JpaRepository<Factura, Integer> {
             + "JOIN df.factura f "
             + "JOIN df.productos p "
             + "WHERE f.estadoPago = 'aprobado' "
-            + "AND f.fecha >= CURRENT_DATE "
-            + "AND f.fecha < CURRENT_DATE + 1")
-    List<Object[]> findDetallesFactura();
+            + "AND f.fecha >= :startDate "
+            + "AND f.fecha < :endDate")
+    List<Object[]> findDetallesFactura(@Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate);
+
 }

@@ -3,6 +3,8 @@ package com.example.gesvet.service;
 import com.example.gesvet.models.Factura;
 import com.example.gesvet.models.User;
 import com.example.gesvet.repository.IFacturaRepository;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,38 +28,29 @@ public class FacturaServiceImpl implements IFacturaService {
     }
 
     public String generarNumFactura() {
-
-        //Se crean dos variables. Uno para int y otro para string
         int numero = 0;
         String numeroConcatenado = "";
 
-        //Se crea lista para almacenar facturas
         List<Factura> facturas = findAll();
+        List<Integer> numeros = new ArrayList<>();
 
-        //Se crea lista para almacenar números
-        List<Integer> numeros = new ArrayList<Integer>();
-
-        //Método para recorrer lista factura y adicionar el numero de cada una en la lista numeros, haciendo el debido parseo
         facturas.stream().forEach(o -> numeros.add(Integer.parseInt(o.getNumero())));
 
         if (facturas.isEmpty()) {
             numero = 1;
         } else {
-            //Método para extraer el número mayor de factura y almacenarlo en la lista números
             numero = numeros.stream().max(Integer::compare).get();
-
-            //El último número se incrementa el valor
             numero++;
         }
 
-        if (numero < 10) { //0000001000
-            numeroConcatenado = "000000000" + String.valueOf(numero);
+        if (numero < 10) {
+            numeroConcatenado = "000000000" + numero;
         } else if (numero < 100) {
-            numeroConcatenado = "00000000" + String.valueOf(numero);
+            numeroConcatenado = "00000000" + numero;
         } else if (numero < 1000) {
-            numeroConcatenado = "0000000" + String.valueOf(numero);
+            numeroConcatenado = "0000000" + numero;
         } else if (numero < 10000) {
-            numeroConcatenado = "0000000" + String.valueOf(numero);
+            numeroConcatenado = "000000" + numero;
         }
 
         return numeroConcatenado;
@@ -95,9 +88,6 @@ public class FacturaServiceImpl implements IFacturaService {
 
     @Override
     public List<Factura> findByUsuarioAndEstadoPago(User usuario, String estadoPago) {
-        // Lógica para buscar facturas por usuario y estado de pago
-        // Puedes utilizar el repositorio de facturas o realizar una lógica personalizada aquí
-        // Por ejemplo, si estás utilizando Spring Data JPA:
         return facturaRepository.findByUsuarioAndEstadoPago(usuario, estadoPago);
     }
 
@@ -113,6 +103,11 @@ public class FacturaServiceImpl implements IFacturaService {
 
     @Override
     public List<Object[]> findDetallesFactura() {
-        return facturaRepository.findDetallesFactura();
+        // Rango de fechas para hoy
+        LocalDate today = LocalDate.now();
+        LocalDateTime startOfDay = today.atStartOfDay();
+        LocalDateTime endOfDay = today.plusDays(1).atStartOfDay();
+
+        return facturaRepository.findDetallesFactura(startOfDay, endOfDay);
     }
 }
