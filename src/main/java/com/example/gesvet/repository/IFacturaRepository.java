@@ -48,11 +48,12 @@ public interface IFacturaRepository extends JpaRepository<Factura, Integer> {
 
 //esta es para el total de Facturacion diaria que correponde a las ventas que se hallan hecho en el dia 
 //esta es para el total de Ventas que correponde a las ventas que halla hecho el adminitrador
-    @Query(value = "SELECT p.nombre, df.cantidad, p.precio, df.cantidad * p.precio as total "
+    @Query("SELECT p.nombre, df.cantidad, p.precio, df.cantidad * p.precio as total "
             + "FROM DetalleFactura df "
             + "JOIN df.factura f "
             + "JOIN df.productos p "
             + "WHERE f.estadoPago = 'aprobado' "
-            + "AND DATE(f.fecha) = CURRENT_DATE")
+            + "AND f.fecha >= CURRENT_DATE "
+            + "AND f.fecha < CURRENT_DATE + 1")
     List<Object[]> findDetallesFactura();
 }
